@@ -26,8 +26,8 @@ const BlogPage = (props) => {
       </Head>
       <Header />
       <main>
-        <div className="prose mx-auto">
-          <h1 className="m-8 text-center text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl">
+        <div className="prose prose-lg mx-auto">
+          <h1 className="m-8 text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl">
             {data.post.title}
           </h1>
           <ContentSection content={data.post.body}></ContentSection>
@@ -101,9 +101,9 @@ const components = {
 const ContentSection = ({ content }) => {
   return (
     <>
-      <div className="relative overflow-hidden bg-white py-16">
+      <div className="relative overflow-hidden bg-white pb-16">
         <div className="relative px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-prose text-lg">
+          <div className="mx-auto text-lg">
             <TinaMarkdown components={components} content={content} />
           </div>
         </div>
