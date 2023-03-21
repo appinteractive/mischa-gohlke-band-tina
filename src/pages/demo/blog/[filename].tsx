@@ -6,6 +6,7 @@ import { useTina } from 'tinacms/dist/react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import client from '@/.tina/__generated__/client'
 import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer'
 
 const BlogPage = (props) => {
   const { data } = useTina({
@@ -25,17 +26,13 @@ const BlogPage = (props) => {
       </Head>
       <Header />
       <main>
-        <div
-          style={{
-            textAlign: 'center',
-          }}
-        >
+        <div className="prose mx-auto">
           <h1 className="m-8 text-center text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl">
             {data.post.title}
           </h1>
           <ContentSection content={data.post.body}></ContentSection>
         </div>
-        <div className="bg-green-100 text-center">
+        {/* <div className="bg-green-100 text-center">
           Lost and looking for a place to start?
           <a
             href="https://tina.io/guides/tina-cloud/getting-started/overview/"
@@ -45,8 +42,9 @@ const BlogPage = (props) => {
             Check out this guide
           </a>{' '}
           to see how add TinaCMS to an existing Next.js site.
-        </div>
+        </div> */}
       </main>
+      <Footer />
     </>
   )
 }
