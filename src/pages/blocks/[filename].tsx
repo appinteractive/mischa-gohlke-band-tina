@@ -2,11 +2,10 @@
 // This is a demo file once you have tina setup feel free to delete this file
 
 import Head from 'next/head'
-import React from 'react'
-
 import { useTina } from 'tinacms/dist/react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import client from '@/.tina/__generated__/client'
+import React from 'react'
 
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -15,7 +14,7 @@ import { Hero } from '@/components/Hero'
 import { PrimaryFeatures } from '@/components/PrimaryFeatures'
 import { SecondaryFeatures } from '@/components/SecondaryFeatures'
 
-const BlogPage = (props) => {
+const Page = (props) => {
   const { data } = useTina({
     query: props.query,
     variables: props.variables,
@@ -33,37 +32,36 @@ const BlogPage = (props) => {
       </Head>
       <Header />
       <main>
-        <div>
-          <h1 className="prose prose-lg m-8 mx-auto text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl">
+        <div className="mx-auto">
+          {/* <h1 className="m-8 text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl">
             {data.post.title}
-          </h1>
-          <pre key={data.post.blocks.map((d) => `${d.__typename}`).join('-')}>
-            {JSON.stringify(data.post.blocks, null, 2)}
-          </pre>
-          <pre key={data.post.blocks.map((d) => `${d.__typename}-1`).join('-')}>
-            {data.post.blocks.length}
-          </pre>
-          {data.post?.blocks?.length > 0
-            ? data.post.blocks.map(function (block, i) {
+          </h1> */}
+          {/* <ContentSection content={data.post.body}></ContentSection> */}
+          {/* <div className="prose mx-auto ">
+            <pre
+              key={data.page.blocks.map((d) => `${d.__typename}-1`).join('-')}
+            >
+              {JSON.stringify(data.page.blocks, null, 2)}
+            </pre>
+          </div> */}
+          {data.page?.blocks?.length > 0
+            ? data.page.blocks.map(function (block, i) {
                 switch (block.__typename) {
-                  case 'PostBlocksContent':
+                  case 'PageBlocksHero':
                     return (
                       <React.Fragment key={i + block.__typename}>
-                        <h1>Hello</h1>
+                        <Hero headline={block.headline} text={block.text} />
+                      </React.Fragment>
+                    )
+                  case 'PageBlocksContent':
+                    return (
+                      <React.Fragment key={i + block.__typename}>
                         <PrimaryFeatures />
                       </React.Fragment>
                     )
-                  case 'PostBlocksHero':
+                  case 'PageBlocksFeatures':
                     return (
                       <React.Fragment key={i + block.__typename}>
-                        <h1>Hello</h1>
-                        <Hero />
-                      </React.Fragment>
-                    )
-                  case 'PostBlocksFeatures':
-                    return (
-                      <React.Fragment key={i + block.__typename}>
-                        <h1>Hello</h1>
                         <SecondaryFeatures />
                       </React.Fragment>
                     )
@@ -72,9 +70,6 @@ const BlogPage = (props) => {
                 }
               })
             : null}
-          <div className="prose prose-lg mx-auto">
-            <ContentSection content={data.post.body}></ContentSection>
-          </div>
         </div>
       </main>
       <Footer />
@@ -87,7 +82,7 @@ export const getStaticProps = async ({ params }) => {
   let query = {}
   let variables = { relativePath: `${params.filename}.md` }
   try {
-    const res = await client.queries.post(variables)
+    const res = await client.queries.page(variables)
     query = res.query
     data = res.data
     variables = res.variables
@@ -106,23 +101,23 @@ export const getStaticProps = async ({ params }) => {
 }
 
 export const getStaticPaths = async () => {
-  const postsListData = await client.queries.postConnection()
+  const pagesListData = await client.queries.pageConnection()
 
   return {
-    paths: postsListData.data.postConnection.edges.map((post) => ({
-      params: { filename: post.node._sys.filename },
+    paths: pagesListData.data.pageConnection.edges.map((page) => ({
+      params: { filename: page.node._sys.filename },
     })),
     fallback: false,
   }
 }
 
-export default BlogPage
+export default Page
 
 const PageSection = (props) => {
   return (
     <>
-      <h2>{props.heading}</h2>
-      <p>{props.content}</p>
+      {/* <h2>{props.heading}</h2> */}
+      {/* <p>{props.content}</p> */}
     </>
   )
 }

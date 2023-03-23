@@ -1,5 +1,11 @@
 ---
 title: Hallo du
+blocks:
+  - headline: This Big Text is Totally Awesome
+    text: >-
+      Phasellus scelerisque, libero eu finibus rutrum, risus risus accumsan
+      libero, nec molestie urna dui a leo.
+    _template: hero
 ---
 
 ## Lets beginn…
