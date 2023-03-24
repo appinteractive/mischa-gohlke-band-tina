@@ -5,7 +5,6 @@ export const heroBlock: Template = {
   label: 'Hero',
   ui: {
     defaultItem: {
-      tagline: "Here's some text above the other text",
       headline: 'This Big Text is Totally Awesome',
       text: 'Phasellus scelerisque, libero eu finibus rutrum, risus risus accumsan libero, nec molestie urna dui a leo.',
     },
@@ -13,13 +12,13 @@ export const heroBlock: Template = {
   fields: [
     {
       type: 'string',
-      label: 'Headline',
+      label: 'Überschrift',
       name: 'headline',
     },
     {
       type: 'rich-text',
       isBody: true,
-      label: 'Text',
+      label: 'Beschreibung',
       name: 'text',
     },
   ],
@@ -55,15 +54,16 @@ export const contentBlock: Template = {
   label: 'Content',
   ui: {
     defaultItem: {
-      body: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede.',
+      body: 'Sit dolor mollit irure.',
     },
   },
   fields: [
     {
-      type: 'string',
+      type: 'rich-text',
       ui: {
         component: 'textarea',
       },
+      isBody: true,
       label: 'Body',
       name: 'body',
     },
