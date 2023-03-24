@@ -1,8 +1,8 @@
 ---
-title: Testseite
+title: Hello Du
 _template: blocks
 blocks:
-  - headline: Jennifer Rach
+  - headline: Aktivitäten test
     text: >-
       Coaching ist ein kraftvolles Werkzeug, das Menschen dabei unterstützt,
       ihre Ziele zu erreichen, ihr Potenzial zu entfalten und ihr Leben in die

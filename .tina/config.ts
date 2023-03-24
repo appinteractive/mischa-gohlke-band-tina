@@ -24,58 +24,62 @@ export default defineConfig({
         name: 'page',
         label: 'Seiten',
         path: 'content/pages',
-        fields: [
+        templates: [
           {
-            type: 'string',
-            name: 'title',
-            label: 'Title',
-            isTitle: true,
-            required: true,
+            name: 'simple',
+            label: 'Einfach',
+            fields: [
+              {
+                type: 'string',
+                name: 'title',
+                label: 'Titel',
+                isTitle: true,
+                required: true,
+              },
+              {
+                type: 'string',
+                name: 'description',
+                label: 'Beschreibung',
+              },
+              {
+                type: 'rich-text',
+                name: 'body',
+                label: 'Inhalt',
+                isBody: true,
+              },
+            ],
           },
           {
-            type: 'object',
-            list: true,
             name: 'blocks',
-            label: 'Sections',
-            ui: {
-              visualSelector: true,
-            },
-            templates: [heroBlock, featureBlock, contentBlock],
+            label: 'Blöcke',
+            fields: [
+              {
+                type: 'string',
+                name: 'title',
+                label: 'Titel',
+                isTitle: true,
+                required: true,
+              },
+              {
+                type: 'string',
+                name: 'description',
+                label: 'Beschreibung',
+              },
+              {
+                type: 'object',
+                list: true,
+                name: 'blocks',
+                label: 'Sections',
+                ui: {
+                  visualSelector: true,
+                },
+                templates: [heroBlock, featureBlock, contentBlock],
+              },
+            ],
           },
         ],
         ui: {
-          router: ({ document }) => `/blocks/${document._sys.filename}`,
-        },
-      },
-      {
-        name: 'post',
-        label: 'Posts',
-        path: 'content/posts',
-        fields: [
-          {
-            type: 'string',
-            name: 'title',
-            label: 'Title',
-            isTitle: true,
-            required: true,
-          },
-          {
-            type: 'rich-text',
-            name: 'body',
-            label: 'Body',
-            isBody: true,
-          },
-          {
-            type: 'object',
-            list: true,
-            name: 'blocks',
-            label: 'Sections',
-            templates: [heroBlock, featureBlock, contentBlock],
-          },
-        ],
-        ui: {
-          // This is an DEMO router. You can remove this to fit your site
-          router: ({ document }) => `/demo/blog/${document._sys.filename}`,
+          router: ({ document }) => `/${document._sys.breadcrumbs.join('/')}`,
         },
       },
     ],
