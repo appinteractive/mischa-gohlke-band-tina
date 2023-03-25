@@ -37,7 +37,7 @@ const Page = (props) => {
           {data.page._sys.breadcrumbs.length > 1 && (
             <Breadcrumbs
               items={data.page._sys.breadcrumbs}
-              className="max-w-7xl"
+              className="mx-auto max-w-6xl"
             />
           )}
           {/* <h1 className="m-8 text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl">
