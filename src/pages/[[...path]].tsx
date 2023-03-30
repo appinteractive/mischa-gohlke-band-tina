@@ -15,11 +15,8 @@ import { PrimaryFeatures } from '@/components/PrimaryFeatures'
 import { SecondaryFeatures } from '@/components/SecondaryFeatures'
 import Breadcrumbs from '@/components/layout/Breadcrumbs'
 import Image from 'next/image'
-
-import { encode } from 'blurhash'
-import { promises as fs } from 'fs'
-import sizeOf from 'image-size'
 import { BlurhashCanvas } from 'react-blurhash'
+import { addBlurHash } from '@/utils/blurhash'
 
 const Page = (props) => {
   const { data } = useTina({
@@ -208,11 +205,6 @@ const queryByPath = async (path: string[] = ['index']): Promise<any> => {
 
     relativePath = breadcrumbs.join('/') + extensions[i]
 
-    /* console.log('queryByPath', {
-      path,
-      breadcrumbs,
-      relativePath,
-    }) */
     try {
       const res = await client.queries.page({ relativePath })
       page = res?.data?.page
@@ -234,66 +226,6 @@ const queryByPath = async (path: string[] = ['index']): Promise<any> => {
 
 export const getStaticProps = async ({ params }) => {
   const res = await queryByPath(params.path)
-  // console.log(JSON.stringify(res, null, 2))
-
-  // iterate recursively through all props.data.page.body.children.. until you find a { type: 'img' }
-  // then add blurDataURL to 'LEHLk~WB2yk8pyo0adR*.7kCMdnj'
-  // iterate async
-
-  const generateBlurHash = async (url: string) => {
-    // if (typeof window === 'undefined') return
-
-    try {
-      // get path to public folder
-      const path = require('path')
-      const filePath = path.join(process.cwd(), 'public', url)
-      // console.log('url', filePath)
-
-      // get Uint8ClampedArray image data from file path
-      const file = await fs.readFile(filePath)
-
-      // Get image dimensions using image-size module
-      const { width, height } = await sizeOf(file)
-      const resizeFactor = 0.1
-      const newWidth = Math.round(width * resizeFactor)
-      const newHeight = Math.round(height * resizeFactor)
-
-      const sharp = require('sharp')
-      // get size of image under filePath
-      const { data, info } = await sharp(filePath)
-        .resize(newWidth, newHeight)
-        .raw()
-        .ensureAlpha()
-        .toBuffer({ resolveWithObject: true })
-
-      // Check if the resized image dimensions match the expected dimensions
-      if (info.width !== newWidth || info.height !== newHeight) {
-        console.error('Unexpected image dimensions')
-        return
-      }
-
-      // Encode the pixel data array into a blurhash
-      const blurhash = encode(data, newWidth, newHeight, 4, 3)
-
-      return blurhash
-    } catch (err) {
-      console.error(err)
-    }
-
-    return null
-  }
-
-  const addBlurHash = async (node) => {
-    if (node.type === 'img') {
-      const blurDataURL = await generateBlurHash(node.url)
-      node.blurDataURL = blurDataURL
-    } else if (node.children) {
-      for (const child of node.children) {
-        await addBlurHash(child)
-      }
-    }
-    return node
-  }
 
   if (
     typeof window === 'undefined' &&
