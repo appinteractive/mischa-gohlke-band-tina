@@ -5,7 +5,7 @@ import Head from 'next/head'
 import { useTina } from 'tinacms/dist/react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import client from '@/.tina/__generated__/client'
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
@@ -14,6 +14,12 @@ import { Hero } from '@/components/Hero'
 import { PrimaryFeatures } from '@/components/PrimaryFeatures'
 import { SecondaryFeatures } from '@/components/SecondaryFeatures'
 import Breadcrumbs from '@/components/layout/Breadcrumbs'
+import Image from 'next/image'
+
+import { encode } from 'blurhash'
+import { promises as fs } from 'fs'
+import sizeOf from 'image-size'
+import { BlurhashCanvas } from 'react-blurhash'
 
 const Page = (props) => {
   const { data } = useTina({
@@ -24,6 +30,12 @@ const Page = (props) => {
 
   return (
     <>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/beams-home@95.jpg"
+        alt=""
+        className="absolute -top-[1rem] left-1/2 z-0 -ml-[40rem] w-[163.125rem] max-w-none sm:-ml-[67.5rem]"
+      />
       <Head>
         <title>TaxPal - Accounting made simple for small businesses</title>
         <meta
@@ -32,7 +44,7 @@ const Page = (props) => {
         />
       </Head>
       <Header />
-      <main>
+      <main className="relative">
         <div className="mx-auto">
           {data.page._sys.breadcrumbs.length > 1 && (
             <Breadcrumbs
@@ -73,9 +85,14 @@ const Page = (props) => {
               }
             })
           ) : (
-            <div className="prose mx-auto py-40">
+            <div className="prose mx-auto max-w-3xl py-40">
               <h1>{data.page.title}</h1>
-              <TinaMarkdown content={data.page.body} />
+              <span className="prose-h1:hidden">
+                <TinaMarkdown
+                  content={data.page.body}
+                  components={components}
+                />
+              </span>
             </div>
           )}
         </div>
@@ -83,6 +100,86 @@ const Page = (props) => {
       <Footer />
     </>
   )
+}
+
+const ResponsiveImage = (props) => {
+  const title = props.title?.trim()
+  const alt = props.alt?.trim()
+  const caption = props.caption?.trim() ?? title ?? alt
+
+  const hasInfos = title || alt || caption
+
+  return (
+    <figure className="not-prose aspect-w-16 aspect-h-9 relative my-5 flex items-center justify-center overflow-hidden rounded-md">
+      <BlurhashCanvas
+        hash={props.blurDataURL}
+        punch={1}
+        width={768}
+        height={432}
+        className="absolute inset-0 top-0 left-0 !h-full !w-full"
+      />
+      <Image
+        src={props.url}
+        alt={props.alt}
+        // set sizes to 100vw when the screen is smaller than 768px and 768px when it's larger
+        sizes="(max-width: 768px) 100vw, (min-width: 768px) 768"
+        fill
+        blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGZpbGw9IiMwMDAiIGQ9Ik0wIDBoMTAwdjEwMEgwVjB6Ii8+PC9zdmc+"
+        className="prose-no bg-transparent object-contain"
+      />
+      {/* {hasInfos && (
+        <figcaption className="absolute bottom-0 flex w-full shrink grow-0 flex-col bg-black bg-opacity-50 p-3">
+          <span className="font-semibold text-white">{alt}</span>
+          {title && <span className="text-xs text-gray-200">{title}</span>}
+        </figcaption>
+      )} */}
+    </figure>
+  )
+}
+
+const isImage = (url: string): boolean => {
+  return /\.(gif|jpe?g|png|webp|bmp)$/i.test(url) != null
+}
+
+const components = {
+  // disable h1 tags as we use the page title for SEO
+  h1: () => null,
+  // convert all div tags to spans
+  div: (props) => {
+    return <span {...props}>{props.children}</span>
+  },
+  // do not render figure inside p tags
+  p: (props) => {
+    // if children contains a img tag
+    const hasImage =
+      props?.children?.props?.content?.find(
+        (child) => child.type == 'a' && isImage(child.url)
+      ) != null
+
+    if (hasImage) {
+      return <span {...props}>{props.children}</span>
+    } else {
+      return <p {...props}>{props.children}</p>
+    }
+  },
+  // stop linking images to themselves
+  a: (props) => {
+    // is image check when url includes .jpg, jpeg, .png, .svg, .gif, .webp
+    if (isImage(props.url)) {
+      // return children directly when url is an image
+      return <>{props.children}</>
+    } else {
+      return <a {...props}>{props.children}</a>
+    }
+  },
+  img: (props) => {
+    return (
+      <span>
+        <span>blurDataURL: {JSON.stringify(props)}</span>
+        <ResponsiveImage {...props} />
+      </span>
+    )
+  },
 }
 
 const queryByPath = async (path: string[] = ['index']): Promise<any> => {
@@ -136,7 +233,78 @@ const queryByPath = async (path: string[] = ['index']): Promise<any> => {
 }
 
 export const getStaticProps = async ({ params }) => {
-  return await queryByPath(params.path)
+  const res = await queryByPath(params.path)
+  // console.log(JSON.stringify(res, null, 2))
+
+  // iterate recursively through all props.data.page.body.children.. until you find a { type: 'img' }
+  // then add blurDataURL to 'LEHLk~WB2yk8pyo0adR*.7kCMdnj'
+  // iterate async
+
+  const generateBlurHash = async (url: string) => {
+    // if (typeof window === 'undefined') return
+
+    try {
+      // get path to public folder
+      const path = require('path')
+      const filePath = path.join(process.cwd(), 'public', url)
+      // console.log('url', filePath)
+
+      // get Uint8ClampedArray image data from file path
+      const file = await fs.readFile(filePath)
+
+      // Get image dimensions using image-size module
+      const { width, height } = await sizeOf(file)
+      const resizeFactor = 0.1
+      const newWidth = Math.round(width * resizeFactor)
+      const newHeight = Math.round(height * resizeFactor)
+
+      const sharp = require('sharp')
+      // get size of image under filePath
+      const { data, info } = await sharp(filePath)
+        .resize(newWidth, newHeight)
+        .raw()
+        .ensureAlpha()
+        .toBuffer({ resolveWithObject: true })
+
+      // Check if the resized image dimensions match the expected dimensions
+      if (info.width !== newWidth || info.height !== newHeight) {
+        console.error('Unexpected image dimensions')
+        return
+      }
+
+      // Encode the pixel data array into a blurhash
+      const blurhash = encode(data, newWidth, newHeight, 4, 3)
+
+      return blurhash
+    } catch (err) {
+      console.error(err)
+    }
+
+    return null
+  }
+
+  const addBlurHash = async (node) => {
+    if (node.type === 'img') {
+      const blurDataURL = await generateBlurHash(node.url)
+      node.blurDataURL = blurDataURL
+    } else if (node.children) {
+      for (const child of node.children) {
+        await addBlurHash(child)
+      }
+    }
+    return node
+  }
+
+  if (
+    typeof window === 'undefined' &&
+    res.props?.data?.page?.body?.children?.length
+  ) {
+    for (const node of res.props.data.page.body.children) {
+      await addBlurHash(node)
+    }
+  }
+
+  return res
 }
 
 const preparePath = (relativePath: string): string[] => {

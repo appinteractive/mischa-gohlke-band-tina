@@ -14,7 +14,7 @@ export default defineConfig({
   },
   media: {
     tina: {
-      mediaRoot: '',
+      mediaRoot: 'media',
       publicFolder: 'public',
     },
   },
@@ -24,6 +24,7 @@ export default defineConfig({
         name: 'page',
         label: 'Seiten',
         path: 'content/pages',
+        format: 'mdx',
         templates: [
           {
             name: 'simple',
@@ -46,6 +47,24 @@ export default defineConfig({
                 name: 'body',
                 label: 'Inhalt',
                 isBody: true,
+                /* templates: [
+                  {
+                    name: 'img',
+                    label: 'Image',
+                    fields: [
+                      {
+                        name: 'children',
+                        label: 'CTA',
+                        type: 'rich-text',
+                      },
+                      {
+                        name: 'buttonText',
+                        label: 'Button Text',
+                        type: 'string',
+                      },
+                    ],
+                  },
+                ], */
               },
             ],
           },
