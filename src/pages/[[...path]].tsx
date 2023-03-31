@@ -14,9 +14,9 @@ import { Hero } from '@/components/Hero'
 import { PrimaryFeatures } from '@/components/PrimaryFeatures'
 import { SecondaryFeatures } from '@/components/SecondaryFeatures'
 import Breadcrumbs from '@/components/layout/Breadcrumbs'
-import Image from 'next/image'
-import { BlurhashCanvas } from 'react-blurhash'
 import { addBlurHash } from '@/utils/blurhash'
+
+import { ResponsiveImage } from '@/components/embeds/ResponsiveImage'
 
 const Page = (props) => {
   const { data } = useTina({
@@ -99,59 +99,31 @@ const Page = (props) => {
   )
 }
 
-const ResponsiveImage = (props) => {
-  const title = props.title?.trim()
-  const alt = props.alt?.trim()
-  const caption = props.caption?.trim() ?? title ?? alt
-
-  const hasInfos = title || alt || caption
-
-  return (
-    <figure className="not-prose aspect-w-16 aspect-h-9 relative my-5 flex items-center justify-center overflow-hidden rounded-md">
-      <BlurhashCanvas
-        hash={props.blurDataURL}
-        punch={1}
-        width={768}
-        height={432}
-        className="absolute inset-0 top-0 left-0 !h-full !w-full"
-      />
-      <Image
-        src={props.url}
-        alt={props.alt}
-        // set sizes to 100vw when the screen is smaller than 768px and 768px when it's larger
-        sizes="(max-width: 768px) 100vw, (min-width: 768px) 768"
-        fill
-        blurDataURL="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGZpbGw9IiMwMDAiIGQ9Ik0wIDBoMTAwdjEwMEgwVjB6Ii8+PC9zdmc+"
-        className="prose-no bg-transparent object-contain"
-      />
-      {/* {hasInfos && (
-        <figcaption className="absolute bottom-0 flex w-full shrink grow-0 flex-col bg-black bg-opacity-50 p-3">
-          <span className="font-semibold text-white">{alt}</span>
-          {title && <span className="text-xs text-gray-200">{title}</span>}
-        </figcaption>
-      )} */}
-    </figure>
-  )
-}
-
-const isImage = (url: string): boolean => {
+const isImage = (url?: string): boolean => {
+  if (!url || url.length < 3) return false
   return /\.(gif|jpe?g|png|webp|bmp)$/i.test(url) != null
 }
 
 const components = {
   // disable h1 tags as we use the page title for SEO
-  h1: () => null,
+  h1: () => <span className="hidden" />,
   // convert all div tags to spans
   div: (props) => {
     return <span {...props}>{props.children}</span>
   },
   // do not render figure inside p tags
   p: (props) => {
+    if (isImage(props.url) === true) {
+      // return children directly when url is an image
+      console.log('P ELEMENT IS AN IMAGE', props.url)
+      return <TinaMarkdown {...props} content={props} components={components} />
+    }
     // if children contains a img tag
     const hasImage =
-      props?.children?.props?.content?.find(
-        (child) => child.type == 'a' && isImage(child.url)
-      ) != null
+      props?.children?.props?.content?.find((child) => isImage(child.url)) !=
+      null
+
+    // console.log('hasImage', hasImage)
 
     if (hasImage) {
       return <span {...props}>{props.children}</span>
@@ -162,7 +134,7 @@ const components = {
   // stop linking images to themselves
   a: (props) => {
     // is image check when url includes .jpg, jpeg, .png, .svg, .gif, .webp
-    if (isImage(props.url)) {
+    if (isImage(props.url) === true) {
       // return children directly when url is an image
       return <>{props.children}</>
     } else {
@@ -170,12 +142,7 @@ const components = {
     }
   },
   img: (props) => {
-    return (
-      <span>
-        <span>blurDataURL: {JSON.stringify(props)}</span>
-        <ResponsiveImage {...props} />
-      </span>
-    )
+    return <ResponsiveImage {...props} />
   },
 }
 

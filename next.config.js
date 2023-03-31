@@ -4,6 +4,9 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
+  images: {
+    domains: ['assets.tina.io'],
+  },
 }
 
 module.exports = nextConfig
