@@ -19,8 +19,6 @@ import { addBlurHash } from '@/utils/blurhash'
 import { ResponsiveImage } from '@/components/embeds/ResponsiveImage'
 
 const Page = (props) => {
-  const { edit, setEdit } = useEditState()
-
   const { data } = useTina({
     query: props.query,
     variables: props.variables,

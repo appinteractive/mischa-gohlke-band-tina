@@ -4,7 +4,41 @@ import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
 import { NavLink } from '@/components/NavLink'
 
+import { useEffect, useState } from 'react'
+import Router from 'next/router'
+import { useEditState } from 'tinacms/dist/react'
+
 export function Footer() {
+  // add e reactive state with current path
+  // add e reactive state with edit
+  // if edit is false, prefix current url with /admin#/~
+  // if edit is true, remove /admin#/~ from current url
+  // current url is path + query
+
+  const { edit } = useEditState()
+  const isClient = typeof window !== 'undefined'
+  const [currentPath, setCurrentPath] = useState(
+    isClient ? window.location.pathname + window.location.search : ''
+  )
+  const [editToggleUrl, setEditToggleUrl] = useState(
+    edit ? currentPath.replace('/admin#/~', '') : `/admin#/~${currentPath}`
+  )
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      setCurrentPath(url)
+      setEdit(edit)
+      setEditToggleUrl(
+        isEdit ? url.replace('/admin#/~', '') : `/admin#/~${url}`
+      )
+    }
+
+    Router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      Router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [edit])
+
   return (
     <footer className="bg-slate-50">
       <Container>
@@ -45,10 +79,26 @@ export function Footer() {
               </svg>
             </Link>
           </div>
-          <p className="mt-6 text-sm text-slate-500 sm:mt-0">
-            Copyright &copy; {new Date().getFullYear()} TaxPal. All rights
-            reserved.
-          </p>
+          <div className="flex justify-between">
+            <p className="mt-6 text-sm text-slate-500 sm:mt-0">
+              Copyright &copy; {new Date().getFullYear()} TaxPal. All rights
+              reserved.
+            </p>
+            {!edit && (
+              <Link
+                href={editToggleUrl}
+                className="ml-6 text-sm text-slate-500 sm:mt-0"
+              >
+                {!edit ? 'Bearbeiten' : 'Bearbeiten Abbrechen'}
+              </Link>
+            )}
+            {/* <button
+              className="ml-6 text-sm text-slate-500 sm:mt-0"
+              onClick={() => toggleEdit()}
+            >
+              Bearbeiten
+            </button> */}
+          </div>
         </div>
       </Container>
     </footer>
