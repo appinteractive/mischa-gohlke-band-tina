@@ -32,14 +32,14 @@ const menuItem = {
     type: 'string',
     name: 'alias',
     label: 'Alter URL',
-    // description: 'Umleitung von alter URL, beginnend mit Slash: /aktuelles/…',
+    description: 'Umleitung von alter URL, beginnend mit Slash: /aktuelles/…',
   },
   accessible: {
     type: 'string',
     name: 'accessible',
     label: 'Leichte Sprache',
-    /* description:
-      'URL der Seite in leichter Sprach, beginnend mit Slash: /aktuelles/…', */
+    description:
+      'URL der Seite in leichter Sprach, beginnend mit Slash: /aktuelles/…',
   },
 } as any
 
@@ -74,33 +74,11 @@ export default defineConfig({
               menuItem.teaser,
               menuItem.alias,
               menuItem.accessible,
-              /* {
-                type: 'object',
-                name: 'meta',
-                label: 'SEO',
-                ui: {
-                  component: 'group',
-                },
-                fields: [
-                  {
-                    type: 'string',
-                    name: 'description',
-                    label: 'Beschreibung',
-                    ui: {
-                      component: 'textarea',
-                    },
-                  },
-                  {
-                    type: 'image',
-                    name: 'image',
-                    label: 'Beitragsbild',
-                  },
-                ],
-              }, */
               {
                 type: 'rich-text',
                 name: 'body',
                 label: 'Inhalt',
+                templates: [],
                 isBody: true,
                 /* templates: [
                   {
@@ -145,9 +123,11 @@ export default defineConfig({
             ],
           },
         ],
-        /*  ui: {
-          router: ({ document }) => `/${document._sys.breadcrumbs.join('/')}`,
-        }, */
+        ui: {
+          router: ({ document }) => {
+            return `/${document._sys.breadcrumbs.join('/')}`
+          },
+        },
       },
       {
         name: 'navigation',
