@@ -1,3 +1,4 @@
+import { useReferenceSelect } from '../components/ReferenceSelect'
 import { uiUseTitle } from './utils'
 
 const menu: any = {
@@ -18,11 +19,29 @@ const menuItem = {
     isTitle: true,
     required: true,
   },
+  description: {
+    type: 'string',
+    name: 'description',
+    label: 'Optionale Beschreibung die unter dem Menüpunkt erscheint',
+  },
+  disabled: {
+    type: 'boolean',
+    name: 'disabled',
+    label: 'Deaktiviert',
+  },
+  showInMainNavigation: {
+    type: 'boolean',
+    name: 'showInMainNavigation',
+    label: 'Beschreibung',
+  },
   page: {
     type: 'reference',
     name: 'page',
     label: 'Seite',
     collections: ['page'],
+    ui: {
+      component: useReferenceSelect,
+    },
   },
 }
 
@@ -49,6 +68,7 @@ export const main: any = {
               nameOverride: 'mainTitle2',
             },
             { ...menuItem.page, nameOverride: 'mainPage2' },
+            { ...menuItem.disabled, nameOverride: 'mainDisabled2' },
             {
               ...menu,
               nameOverride: 'mainChildren2',

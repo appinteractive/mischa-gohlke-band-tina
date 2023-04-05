@@ -15,7 +15,7 @@ export function Footer() {
   // if edit is true, remove /admin#/~ from current url
   // current url is path + query
 
-  const { edit } = useEditState()
+  /* const { edit } = useEditState()
   const isClient = typeof window !== 'undefined'
   const [currentPath, setCurrentPath] = useState(
     isClient ? window.location.pathname + window.location.search : ''
@@ -36,7 +36,7 @@ export function Footer() {
     return () => {
       Router.events.off('routeChangeComplete', handleRouteChange)
     }
-  }, [edit])
+  }, [edit]) */
 
   return (
     <footer className="bg-slate-50">

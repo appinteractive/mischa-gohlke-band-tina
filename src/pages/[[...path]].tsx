@@ -27,12 +27,14 @@ const Page = (props) => {
 
   return (
     <>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/beams-home@95.jpg"
-        alt=""
-        className="absolute -top-[1rem] left-1/2 z-0 -ml-[40rem] w-[163.125rem] max-w-none sm:-ml-[67.5rem]"
-      />
+      <div className="relative w-screen overflow-hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/beams-home@95.jpg"
+          alt=""
+          className="absolute -top-[1rem] left-1/2 z-0 -ml-[40rem] w-[163.125rem] max-w-none sm:-ml-[67.5rem]"
+        />
+      </div>
       <Head>
         <title>TaxPal - Accounting made simple for small businesses</title>
         <meta
@@ -53,9 +55,9 @@ const Page = (props) => {
               {data.post.title}
             </h1> */}
           {/* <ContentSection content={data.post.body}></ContentSection> */}
-          <div className="prose mx-auto ">
+          {/* <div className="prose mx-auto ">
             <pre>{JSON.stringify(data.nav, null, 2)}</pre>
-          </div>
+          </div> */}
           {data.page?.blocks?.length > 0 ? (
             data.page.blocks.map(function (block, i) {
               switch (block.__typename) {
@@ -154,7 +156,7 @@ const queryByPath = async (path: string[] = ['index']): Promise<any> => {
   let breadcrumbs = [...path]
   let relativePath = breadcrumbs.join('/')
 
-  let extensions = ['', '.mdx', '/index', '/index.mdx']
+  let extensions = [/* '', */ '.mdx', /* '/index', */ '/index.mdx']
 
   // console.log('queryByPath', extensions, breadcrumbs, relativePath)
 
@@ -215,7 +217,7 @@ export const getStaticProps = async ({ params }) => {
 
 const preparePath = (relativePath: string): string[] => {
   // replace extensions and "index" from relativePath
-  const path = relativePath.replace(/\.(md|mdx)$/, '').replace(/index$/, '')
+  const path = relativePath.replace(/\.(mdx)$/, '').replace(/index$/, '')
   return path.split('/')
 }
 
