@@ -6,6 +6,43 @@ import { main } from './collections/nav-main'
 // Your hosting provider likely exposes this as an environment variable
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || 'main'
 
+const menuItem = {
+  title: {
+    type: 'string',
+    name: 'title',
+    label: 'Titel',
+    isTitle: true,
+    required: true,
+  },
+  description: {
+    type: 'string',
+    name: 'description',
+    label: 'Beschreibung',
+    ui: {
+      component: 'textarea',
+    },
+    // required: true,
+  },
+  teaser: {
+    type: 'image',
+    name: 'teaser',
+    label: 'Beitragsbild',
+  },
+  alias: {
+    type: 'string',
+    name: 'alias',
+    label: 'Alter URL',
+    // description: 'Umleitung von alter URL, beginnend mit Slash: /aktuelles/…',
+  },
+  accessible: {
+    type: 'string',
+    name: 'accessible',
+    label: 'Leichte Sprache',
+    /* description:
+      'URL der Seite in leichter Sprach, beginnend mit Slash: /aktuelles/…', */
+  },
+} as any
+
 export default defineConfig({
   branch,
   clientId: 'fada5bbf-afba-44c3-9820-739cae10698c', // Get this from tina.io
@@ -32,18 +69,34 @@ export default defineConfig({
             name: 'simple',
             label: 'Einfach',
             fields: [
-              {
-                type: 'string',
-                name: 'title',
-                label: 'Titel',
-                isTitle: true,
-                required: true,
-              },
-              {
-                type: 'string',
-                name: 'description',
-                label: 'Beschreibung',
-              },
+              menuItem.title,
+              menuItem.description,
+              menuItem.teaser,
+              menuItem.alias,
+              menuItem.accessible,
+              /* {
+                type: 'object',
+                name: 'meta',
+                label: 'SEO',
+                ui: {
+                  component: 'group',
+                },
+                fields: [
+                  {
+                    type: 'string',
+                    name: 'description',
+                    label: 'Beschreibung',
+                    ui: {
+                      component: 'textarea',
+                    },
+                  },
+                  {
+                    type: 'image',
+                    name: 'image',
+                    label: 'Beitragsbild',
+                  },
+                ],
+              }, */
               {
                 type: 'rich-text',
                 name: 'body',
@@ -74,18 +127,11 @@ export default defineConfig({
             name: 'blocks',
             label: 'Blöcke',
             fields: [
-              {
-                type: 'string',
-                name: 'title',
-                label: 'Titel',
-                isTitle: true,
-                required: true,
-              },
-              {
-                type: 'string',
-                name: 'description',
-                label: 'Beschreibung',
-              },
+              menuItem.title,
+              menuItem.description,
+              menuItem.teaser,
+              menuItem.alias,
+              menuItem.accessible,
               {
                 type: 'object',
                 list: true,
@@ -99,9 +145,9 @@ export default defineConfig({
             ],
           },
         ],
-        ui: {
+        /*  ui: {
           router: ({ document }) => `/${document._sys.breadcrumbs.join('/')}`,
-        },
+        }, */
       },
       {
         name: 'navigation',

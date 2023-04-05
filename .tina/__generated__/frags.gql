@@ -1,0 +1,304 @@
+fragment PageParts on Page {
+  ... on PageSimple {
+    title
+    description
+    teaser
+    alias
+    accessible
+    body
+  }
+  ... on PageBlocks {
+    title
+    description
+    teaser
+    alias
+    accessible
+    blocks {
+      __typename
+      ... on PageBlocksBlocksHero {
+        headline
+        text
+      }
+      ... on PageBlocksBlocksFeatures {
+        items {
+          __typename
+          title
+          text
+        }
+      }
+      ... on PageBlocksBlocksContent {
+        body
+      }
+    }
+  }
+}
+
+fragment NavigationParts on Navigation {
+  ... on NavigationFooter {
+    footerMenu {
+      __typename
+      title
+      children {
+        __typename
+        title
+        page {
+          ... on Page {
+            ... on PageSimple {
+              title
+              description
+              teaser
+              alias
+              accessible
+              body
+            }
+            ... on PageBlocks {
+              title
+              description
+              teaser
+              alias
+              accessible
+              blocks {
+                __typename
+                ... on PageBlocksBlocksHero {
+                  headline
+                  text
+                }
+                ... on PageBlocksBlocksFeatures {
+                  items {
+                    __typename
+                    title
+                    text
+                  }
+                }
+                ... on PageBlocksBlocksContent {
+                  body
+                }
+              }
+            }
+          }
+          ... on Document {
+            id
+          }
+        }
+      }
+    }
+  }
+  ... on NavigationMainNav {
+    menu {
+      __typename
+      title
+      page {
+        ... on Page {
+          ... on PageSimple {
+            title
+            description
+            teaser
+            alias
+            accessible
+            body
+          }
+          ... on PageBlocks {
+            title
+            description
+            teaser
+            alias
+            accessible
+            blocks {
+              __typename
+              ... on PageBlocksBlocksHero {
+                headline
+                text
+              }
+              ... on PageBlocksBlocksFeatures {
+                items {
+                  __typename
+                  title
+                  text
+                }
+              }
+              ... on PageBlocksBlocksContent {
+                body
+              }
+            }
+          }
+        }
+        ... on Document {
+          id
+        }
+      }
+      children {
+        __typename
+        title
+        page {
+          ... on Page {
+            ... on PageSimple {
+              title
+              description
+              teaser
+              alias
+              accessible
+              body
+            }
+            ... on PageBlocks {
+              title
+              description
+              teaser
+              alias
+              accessible
+              blocks {
+                __typename
+                ... on PageBlocksBlocksHero {
+                  headline
+                  text
+                }
+                ... on PageBlocksBlocksFeatures {
+                  items {
+                    __typename
+                    title
+                    text
+                  }
+                }
+                ... on PageBlocksBlocksContent {
+                  body
+                }
+              }
+            }
+          }
+          ... on Document {
+            id
+          }
+        }
+        disabled
+        children {
+          __typename
+          title
+          page {
+            ... on Page {
+              ... on PageSimple {
+                title
+                description
+                teaser
+                alias
+                accessible
+                body
+              }
+              ... on PageBlocks {
+                title
+                description
+                teaser
+                alias
+                accessible
+                blocks {
+                  __typename
+                  ... on PageBlocksBlocksHero {
+                    headline
+                    text
+                  }
+                  ... on PageBlocksBlocksFeatures {
+                    items {
+                      __typename
+                      title
+                      text
+                    }
+                  }
+                  ... on PageBlocksBlocksContent {
+                    body
+                  }
+                }
+              }
+            }
+            ... on Document {
+              id
+            }
+          }
+          children {
+            __typename
+            title
+            page {
+              ... on Page {
+                ... on PageSimple {
+                  title
+                  description
+                  teaser
+                  alias
+                  accessible
+                  body
+                }
+                ... on PageBlocks {
+                  title
+                  description
+                  teaser
+                  alias
+                  accessible
+                  blocks {
+                    __typename
+                    ... on PageBlocksBlocksHero {
+                      headline
+                      text
+                    }
+                    ... on PageBlocksBlocksFeatures {
+                      items {
+                        __typename
+                        title
+                        text
+                      }
+                    }
+                    ... on PageBlocksBlocksContent {
+                      body
+                    }
+                  }
+                }
+              }
+              ... on Document {
+                id
+              }
+            }
+            children {
+              __typename
+              title
+              page {
+                ... on Page {
+                  ... on PageSimple {
+                    title
+                    description
+                    teaser
+                    alias
+                    accessible
+                    body
+                  }
+                  ... on PageBlocks {
+                    title
+                    description
+                    teaser
+                    alias
+                    accessible
+                    blocks {
+                      __typename
+                      ... on PageBlocksBlocksHero {
+                        headline
+                        text
+                      }
+                      ... on PageBlocksBlocksFeatures {
+                        items {
+                          __typename
+                          title
+                          text
+                        }
+                      }
+                      ... on PageBlocksBlocksContent {
+                        body
+                      }
+                    }
+                  }
+                }
+                ... on Document {
+                  id
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

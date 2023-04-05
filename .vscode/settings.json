@@ -1,0 +1,24 @@
+{
+  "files.exclude": {
+    "**/.git": false,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/vendor/**": true,
+    "**/_output/**": true,
+    "**/.idea/**": true,
+    "**/.tmp/**": true,
+    "**/cache/**": true,
+    ".dart_tool": true,
+    "build": true,
+    ".fvm": true,
+    "**/*.ast.gql.dart": true,
+    "**/*.req.gql.dart": true,
+    "**/*.data.gql.dart": true,
+    "**/*.var.gql.dart": true,
+    "**/*.gql.g.dart": true,
+    "**/node_modules": true
+  }
+}

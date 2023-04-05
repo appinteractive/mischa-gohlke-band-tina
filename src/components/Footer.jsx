@@ -4,9 +4,9 @@ import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
 import { NavLink } from '@/components/NavLink'
 
-import { useEffect, useState } from 'react'
+/* import { useEffect, useState } from 'react'
 import Router from 'next/router'
-import { useEditState } from 'tinacms/dist/react'
+import { useEditState, useCMS } from 'tinacms/dist/react' */
 
 export function Footer() {
   // add e reactive state with current path
@@ -14,6 +14,8 @@ export function Footer() {
   // if edit is false, prefix current url with /admin#/~
   // if edit is true, remove /admin#/~ from current url
   // current url is path + query
+
+  // const cms = useCMS()
 
   /* const { edit } = useEditState()
   const isClient = typeof window !== 'undefined'
@@ -84,13 +86,13 @@ export function Footer() {
               reserved.
             </p>
             {/* TODO: fix issues with the toggle url */}
-            {/* {!edit && editToggleUrl && (
-              <Link
+            {/* {!cms.enabled && (
+              <button
                 href={editToggleUrl}
                 className="ml-6 text-sm text-slate-500 sm:mt-0"
               >
                 {!edit ? 'Bearbeiten' : 'Bearbeiten Abbrechen'}
-              </Link>
+              </button>
             )} */}
           </div>
         </div>

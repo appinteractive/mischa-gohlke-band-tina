@@ -7,7 +7,7 @@ import {
   LinkIcon,
 } from '@heroicons/react/20/solid'
 
-function classNames(...classes) {
+const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ')
 }
 
@@ -138,7 +138,7 @@ export const useReferenceSelect = wrapFieldsWithMeta(
     useEffect(() => {
       if (optionSets?.length < 1) return
 
-      console.log('SELECT', input.value)
+      // console.log('SELECT', input.value)
       setSelected(input.value)
       // find input.value in optionSets
       try {
