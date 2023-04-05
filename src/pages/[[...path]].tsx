@@ -196,6 +196,7 @@ const queryByPath = async (path: string[] = ['index']): Promise<any> => {
     props: {
       variables: { relativePath },
       data: data,
+      query: query,
     },
   }
 }
