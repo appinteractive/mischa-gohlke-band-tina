@@ -21,16 +21,15 @@ export function Footer() {
     isClient ? window.location.pathname + window.location.search : ''
   )
   const [editToggleUrl, setEditToggleUrl] = useState(
-    edit ? currentPath.replace('/admin#/~', '') : `/admin#/~${currentPath}`
+    edit
+      ? (currentPath ?? '/').replace('/admin#/~', '')
+      : `/admin#/~${currentPath}`
   )
 
   useEffect(() => {
     const handleRouteChange = (url) => {
       setCurrentPath(url)
-      setEdit(edit)
-      setEditToggleUrl(
-        isEdit ? url.replace('/admin#/~', '') : `/admin#/~${url}`
-      )
+      setEditToggleUrl(edit ? url.replace('/admin#/~', '') : `/admin#/~${url}`)
     }
 
     Router.events.on('routeChangeComplete', handleRouteChange)
@@ -84,20 +83,15 @@ export function Footer() {
               Copyright &copy; {new Date().getFullYear()} TaxPal. All rights
               reserved.
             </p>
-            {!edit && (
+            {/* TODO: fix issues with the toggle url */}
+            {/* {!edit && editToggleUrl && (
               <Link
                 href={editToggleUrl}
                 className="ml-6 text-sm text-slate-500 sm:mt-0"
               >
                 {!edit ? 'Bearbeiten' : 'Bearbeiten Abbrechen'}
               </Link>
-            )}
-            {/* <button
-              className="ml-6 text-sm text-slate-500 sm:mt-0"
-              onClick={() => toggleEdit()}
-            >
-              Bearbeiten
-            </button> */}
+            )} */}
           </div>
         </div>
       </Container>

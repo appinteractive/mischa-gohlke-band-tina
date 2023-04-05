@@ -1,5 +1,7 @@
-import { defineConfig } from 'tinacms'
+import { Field, defineConfig } from 'tinacms'
 import { heroBlock, featureBlock, contentBlock } from './blocks/blocks'
+import { footer } from './collections/nav-footer'
+import { main } from './collections/nav-main'
 
 // Your hosting provider likely exposes this as an environment variable
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || 'main'
@@ -100,6 +102,13 @@ export default defineConfig({
         ui: {
           router: ({ document }) => `/${document._sys.breadcrumbs.join('/')}`,
         },
+      },
+      {
+        name: 'navigation',
+        label: 'Navigation',
+        path: 'config/navigation',
+        format: 'json',
+        templates: [footer, main],
       },
     ],
   },

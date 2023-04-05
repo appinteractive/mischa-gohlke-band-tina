@@ -43,7 +43,7 @@ const Page = (props) => {
       <Header />
       <main className="relative">
         <div className="mx-auto">
-          {data.page._sys.breadcrumbs.length > 1 && (
+          {data?.page?._sys?.breadcrumbs?.length > 1 && (
             <Breadcrumbs
               items={data.page._sys.breadcrumbs}
               className="mx-auto max-w-6xl"
@@ -53,9 +53,9 @@ const Page = (props) => {
               {data.post.title}
             </h1> */}
           {/* <ContentSection content={data.post.body}></ContentSection> */}
-          {/* <div className="prose mx-auto ">
-            <pre>{JSON.stringify(data.page, null, 2)}</pre>
-          </div> */}
+          <div className="prose mx-auto ">
+            <pre>{JSON.stringify(data.nav, null, 2)}</pre>
+          </div>
           {data.page?.blocks?.length > 0 ? (
             data.page.blocks.map(function (block, i) {
               switch (block.__typename) {
@@ -83,10 +83,10 @@ const Page = (props) => {
             })
           ) : (
             <div className="prose mx-auto max-w-3xl py-40">
-              <h1>{data.page.title}</h1>
+              <h1>{data?.page?.title}</h1>
               <span className="prose-h1:hidden">
                 <TinaMarkdown
-                  content={data.page.body}
+                  content={data?.page?.body}
                   components={components}
                 />
               </span>
@@ -115,7 +115,7 @@ const components = {
   p: (props) => {
     if (isImage(props.url) === true) {
       // return children directly when url is an image
-      console.log('P ELEMENT IS AN IMAGE', props.url)
+      // console.log('P ELEMENT IS AN IMAGE', props.url)
       return <TinaMarkdown {...props} content={props} components={components} />
     }
     // if children contains a img tag
@@ -147,16 +147,16 @@ const components = {
 }
 
 const queryByPath = async (path: string[] = ['index']): Promise<any> => {
-  console.log('>>>>queryByPath', path)
+  // console.log('>>>>queryByPath', path)
   let page: any
   let query = {}
   let data = {}
   let breadcrumbs = [...path]
   let relativePath = breadcrumbs.join('/')
 
-  let extensions = ['', '.md', '.mdx', '/index', '/index.md', '/index.mdx']
+  let extensions = ['', '.mdx', '/index', '/index.mdx']
 
-  console.log('queryByPath', extensions, breadcrumbs, relativePath)
+  // console.log('queryByPath', extensions, breadcrumbs, relativePath)
 
   // query path.join('/') + [.md, .mdx] until a page is found
   // async loop through extensions until a page is found
@@ -166,7 +166,7 @@ const queryByPath = async (path: string[] = ['index']): Promise<any> => {
     i++
   ) {
     if (page != null) {
-      console.log('continue')
+      // console.log('continue')
       continue
     }
 
@@ -182,11 +182,18 @@ const queryByPath = async (path: string[] = ['index']): Promise<any> => {
       // swallow errors related to document creation
     }
   }
+
+  // TODO: move navigation query to layout level
+  const resNav = await client.queries.nav()
+  data['nav'] = {
+    footer: resNav?.data.navigationConnection.edges[0]?.node,
+    main: resNav?.data.navigationConnection.edges[1]?.node,
+  }
+
   return {
     props: {
       variables: { relativePath },
       data: data,
-      query: query,
     },
   }
 }
@@ -221,10 +228,10 @@ export const getStaticPaths = async () => {
     },
   }))
 
-  console.log(
+  /* console.log(
     'paths',
     paths.map((p) => p.params.path.join('/'))
-  )
+  ) */
 
   return {
     paths,

@@ -1,0 +1,39 @@
+{
+  "_template": "footer",
+  "menu": [
+    {
+      "title": "Rechtliches",
+      "children": [
+        {
+          "title": "Impressum",
+          "page": "content/pages/impressum.mdx"
+        },
+        {
+          "title": "Datenschutz",
+          "page": "content/pages/datenschutz.mdx"
+        },
+        {
+          "title": "Kontakt",
+          "page": "content/pages/kontakt.mdx"
+        }
+      ]
+    },
+    {
+      "title": "Grenzen sind relativ e.V.",
+      "children": [
+        {
+          "title": "Mitmachen",
+          "page": "content/pages/mitmachen.mdx"
+        },
+        {
+          "title": "Spenden",
+          "page": "content/pages/spenden.mdx"
+        },
+        {
+          "title": "Stellenausschreibung",
+          "page": "content/pages/stellenausschreibung.mdx"
+        }
+      ]
+    }
+  ]
+}
