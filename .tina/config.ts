@@ -38,8 +38,7 @@ const menuItem = {
     type: 'string',
     name: 'accessible',
     label: 'Leichte Sprache',
-    description:
-      'URL der Seite in leichter Sprach, beginnend mit Slash: /aktuelles/…',
+    description: 'URL der Seite in leichter Sprach, beginnend mit Slash',
   },
 } as any
 

@@ -144,9 +144,11 @@ export const useReferenceSelect = wrapFieldsWithMeta(
   ({ field, input, meta }) => {
     const cms = useCMS()
     const { optionSets, loading } = useGetOptionSets(cms, ['page'])
+    const [isMounted, setMounted] = React.useState(true)
 
     const [selected, setSelected] = React.useState()
     useEffect(() => {
+      if (!isMounted) return
       if (optionSets?.length < 1) return
 
       setSelected(input.value)
@@ -158,6 +160,10 @@ export const useReferenceSelect = wrapFieldsWithMeta(
         )!.node._internalSys.title as any
         setSelected(title as any)
       } catch (e) {}
+
+      return () => {
+        setMounted(false)
+      }
     }, [input.value, loading])
 
     if (loading === true) {
