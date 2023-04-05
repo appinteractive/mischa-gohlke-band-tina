@@ -7,6 +7,8 @@ import {
   LinkIcon,
 } from '@heroicons/react/20/solid'
 
+/* @vite-ignore */
+
 const classNames = (...classes) => {
   return classes.filter(Boolean).join(' ')
 }
@@ -108,13 +110,22 @@ const useGetOptionSets = (cms: TinaCMS, collections: string[]) => {
       )
 
       setOptionSets(optionSets)
+
+      // save optionSets to localStorage
+      localStorage.setItem('optionSets', JSON.stringify(optionSets, null, 2))
+
+      setLoading(false)
+      return
+    }
+    // set optionSets from localStorage
+    const cache = localStorage.getItem('optionSets')
+    if (!optionSets?.length && cache) {
+      setOptionSets(JSON.parse(cache))
       setLoading(false)
     }
 
     if (cms && collections.length > 0) {
       fetchOptionSets()
-    } else {
-      setOptionSets([])
     }
   }, [cms, collections])
 
@@ -138,8 +149,8 @@ export const useReferenceSelect = wrapFieldsWithMeta(
     useEffect(() => {
       if (optionSets?.length < 1) return
 
-      // console.log('SELECT', input.value)
       setSelected(input.value)
+
       // find input.value in optionSets
       try {
         const title = optionSets[0].edges.find(
@@ -148,9 +159,6 @@ export const useReferenceSelect = wrapFieldsWithMeta(
         setSelected(title as any)
       } catch (e) {}
     }, [input.value, loading])
-    const setItem = (item: any) => {
-      input.onChange(item)
-    }
 
     if (loading === true) {
       return (
