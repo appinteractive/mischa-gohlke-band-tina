@@ -22,17 +22,23 @@ const menuItem = {
   description: {
     type: 'string',
     name: 'description',
-    label: 'Optionale Beschreibung die unter dem Menüpunkt erscheint',
+    label: 'Beschreibung',
+    description: 'Optionale Beschreibung die unter dem Menüpunkt erscheint',
+    ui: {
+      component: 'textarea',
+    },
   },
   disabled: {
     type: 'boolean',
     name: 'disabled',
-    label: 'Deaktiviert',
+    label: 'Ausblenden',
+    description: 'Menüpunkt vollständig ausblenden',
   },
   showInMainNavigation: {
     type: 'boolean',
     name: 'showInMainNavigation',
-    label: 'Beschreibung',
+    label: 'In Hauptnavigation anzeigen',
+    description: 'Sollen die Unterseiten in der Hauptnavigation erscheinen?',
   },
   page: {
     type: 'reference',
@@ -56,6 +62,11 @@ export const main: any = {
       fields: [
         { ...menuItem.title, nameOverride: 'mainTitle1' },
         { ...menuItem.page, nameOverride: 'mainPage1' },
+        { ...menuItem.disabled, nameOverride: 'mainDisabled1' },
+        {
+          ...menuItem.showInMainNavigation,
+          nameOverride: 'mainShowInMainNavigation1',
+        },
         {
           ...menu,
           nameOverride: 'mainChildren1',
@@ -70,6 +81,10 @@ export const main: any = {
             { ...menuItem.page, nameOverride: 'mainPage2' },
             { ...menuItem.disabled, nameOverride: 'mainDisabled2' },
             {
+              ...menuItem.showInMainNavigation,
+              nameOverride: 'mainShowInMainNavigation2',
+            },
+            {
               ...menu,
               nameOverride: 'mainChildren2',
               fields: [
@@ -80,6 +95,12 @@ export const main: any = {
                 {
                   ...menuItem.page,
                   nameOverride: 'mainPage3',
+                },
+                { ...menuItem.description, nameOverride: 'mainDescription3' },
+                { ...menuItem.disabled, nameOverride: 'mainDisabled3' },
+                {
+                  ...menuItem.showInMainNavigation,
+                  nameOverride: 'mainShowInMainNavigation3',
                 },
                 {
                   ...menu,

@@ -251,6 +251,9 @@ type NavigationMainNavMenuChildrenChildrenChildren {
 type NavigationMainNavMenuChildrenChildren {
   title: String!
   page: NavigationMainNavMenuChildrenChildrenPage
+  description: String
+  disabled: Boolean
+  showInMainNavigation: Boolean
   children: [NavigationMainNavMenuChildrenChildrenChildren]
 }
 
@@ -258,12 +261,15 @@ type NavigationMainNavMenuChildren {
   title: String!
   page: NavigationMainNavMenuChildrenPage
   disabled: Boolean
+  showInMainNavigation: Boolean
   children: [NavigationMainNavMenuChildrenChildren]
 }
 
 type NavigationMainNavMenu {
   title: String!
   page: NavigationMainNavMenuPage
+  disabled: Boolean
+  showInMainNavigation: Boolean
   children: [NavigationMainNavMenuChildren]
 }
 
@@ -298,13 +304,13 @@ input NavigationMainNavMenuPageFilter {
   page: PageFilter
 }
 
-input NavigationMainNavMenuChildrenPageFilter {
-  page: PageFilter
-}
-
 input BooleanFilter {
   eq: Boolean
   exists: Boolean
+}
+
+input NavigationMainNavMenuChildrenPageFilter {
+  page: PageFilter
 }
 
 input NavigationMainNavMenuChildrenChildrenPageFilter {
@@ -333,6 +339,9 @@ input NavigationMainNavMenuChildrenChildrenChildrenFilter {
 input NavigationMainNavMenuChildrenChildrenFilter {
   title: StringFilter
   page: NavigationMainNavMenuChildrenChildrenPageFilter
+  description: StringFilter
+  disabled: BooleanFilter
+  showInMainNavigation: BooleanFilter
   children: NavigationMainNavMenuChildrenChildrenChildrenFilter
 }
 
@@ -340,12 +349,15 @@ input NavigationMainNavMenuChildrenFilter {
   title: StringFilter
   page: NavigationMainNavMenuChildrenPageFilter
   disabled: BooleanFilter
+  showInMainNavigation: BooleanFilter
   children: NavigationMainNavMenuChildrenChildrenFilter
 }
 
 input NavigationMainNavMenuFilter {
   title: StringFilter
   page: NavigationMainNavMenuPageFilter
+  disabled: BooleanFilter
+  showInMainNavigation: BooleanFilter
   children: NavigationMainNavMenuChildrenFilter
 }
 
@@ -466,6 +478,9 @@ input NavigationMainNavMenuChildrenChildrenChildrenMutation {
 input NavigationMainNavMenuChildrenChildrenMutation {
   title: String
   page: String
+  description: String
+  disabled: Boolean
+  showInMainNavigation: Boolean
   children: [NavigationMainNavMenuChildrenChildrenChildrenMutation]
 }
 
@@ -473,12 +488,15 @@ input NavigationMainNavMenuChildrenMutation {
   title: String
   page: String
   disabled: Boolean
+  showInMainNavigation: Boolean
   children: [NavigationMainNavMenuChildrenChildrenMutation]
 }
 
 input NavigationMainNavMenuMutation {
   title: String
   page: String
+  disabled: Boolean
+  showInMainNavigation: Boolean
   children: [NavigationMainNavMenuChildrenMutation]
 }
 

@@ -134,6 +134,13 @@ export default defineConfig({
         path: 'config/navigation',
         format: 'json',
         templates: [footer, main],
+        ui: {
+          global: true,
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
+        },
       },
     ],
   },

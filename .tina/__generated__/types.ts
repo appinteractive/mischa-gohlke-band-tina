@@ -354,6 +354,9 @@ export type NavigationMainNavMenuChildrenChildren = {
   __typename?: 'NavigationMainNavMenuChildrenChildren';
   title: Scalars['String'];
   page?: Maybe<NavigationMainNavMenuChildrenChildrenPage>;
+  description?: Maybe<Scalars['String']>;
+  disabled?: Maybe<Scalars['Boolean']>;
+  showInMainNavigation?: Maybe<Scalars['Boolean']>;
   children?: Maybe<Array<Maybe<NavigationMainNavMenuChildrenChildrenChildren>>>;
 };
 
@@ -362,6 +365,7 @@ export type NavigationMainNavMenuChildren = {
   title: Scalars['String'];
   page?: Maybe<NavigationMainNavMenuChildrenPage>;
   disabled?: Maybe<Scalars['Boolean']>;
+  showInMainNavigation?: Maybe<Scalars['Boolean']>;
   children?: Maybe<Array<Maybe<NavigationMainNavMenuChildrenChildren>>>;
 };
 
@@ -369,6 +373,8 @@ export type NavigationMainNavMenu = {
   __typename?: 'NavigationMainNavMenu';
   title: Scalars['String'];
   page?: Maybe<NavigationMainNavMenuPage>;
+  disabled?: Maybe<Scalars['Boolean']>;
+  showInMainNavigation?: Maybe<Scalars['Boolean']>;
   children?: Maybe<Array<Maybe<NavigationMainNavMenuChildren>>>;
 };
 
@@ -404,13 +410,13 @@ export type NavigationMainNavMenuPageFilter = {
   page?: InputMaybe<PageFilter>;
 };
 
-export type NavigationMainNavMenuChildrenPageFilter = {
-  page?: InputMaybe<PageFilter>;
-};
-
 export type BooleanFilter = {
   eq?: InputMaybe<Scalars['Boolean']>;
   exists?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type NavigationMainNavMenuChildrenPageFilter = {
+  page?: InputMaybe<PageFilter>;
 };
 
 export type NavigationMainNavMenuChildrenChildrenPageFilter = {
@@ -439,6 +445,9 @@ export type NavigationMainNavMenuChildrenChildrenChildrenFilter = {
 export type NavigationMainNavMenuChildrenChildrenFilter = {
   title?: InputMaybe<StringFilter>;
   page?: InputMaybe<NavigationMainNavMenuChildrenChildrenPageFilter>;
+  description?: InputMaybe<StringFilter>;
+  disabled?: InputMaybe<BooleanFilter>;
+  showInMainNavigation?: InputMaybe<BooleanFilter>;
   children?: InputMaybe<NavigationMainNavMenuChildrenChildrenChildrenFilter>;
 };
 
@@ -446,12 +455,15 @@ export type NavigationMainNavMenuChildrenFilter = {
   title?: InputMaybe<StringFilter>;
   page?: InputMaybe<NavigationMainNavMenuChildrenPageFilter>;
   disabled?: InputMaybe<BooleanFilter>;
+  showInMainNavigation?: InputMaybe<BooleanFilter>;
   children?: InputMaybe<NavigationMainNavMenuChildrenChildrenFilter>;
 };
 
 export type NavigationMainNavMenuFilter = {
   title?: InputMaybe<StringFilter>;
   page?: InputMaybe<NavigationMainNavMenuPageFilter>;
+  disabled?: InputMaybe<BooleanFilter>;
+  showInMainNavigation?: InputMaybe<BooleanFilter>;
   children?: InputMaybe<NavigationMainNavMenuChildrenFilter>;
 };
 
@@ -626,6 +638,9 @@ export type NavigationMainNavMenuChildrenChildrenChildrenMutation = {
 export type NavigationMainNavMenuChildrenChildrenMutation = {
   title?: InputMaybe<Scalars['String']>;
   page?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  disabled?: InputMaybe<Scalars['Boolean']>;
+  showInMainNavigation?: InputMaybe<Scalars['Boolean']>;
   children?: InputMaybe<Array<InputMaybe<NavigationMainNavMenuChildrenChildrenChildrenMutation>>>;
 };
 
@@ -633,12 +648,15 @@ export type NavigationMainNavMenuChildrenMutation = {
   title?: InputMaybe<Scalars['String']>;
   page?: InputMaybe<Scalars['String']>;
   disabled?: InputMaybe<Scalars['Boolean']>;
+  showInMainNavigation?: InputMaybe<Scalars['Boolean']>;
   children?: InputMaybe<Array<InputMaybe<NavigationMainNavMenuChildrenChildrenMutation>>>;
 };
 
 export type NavigationMainNavMenuMutation = {
   title?: InputMaybe<Scalars['String']>;
   page?: InputMaybe<Scalars['String']>;
+  disabled?: InputMaybe<Scalars['Boolean']>;
+  showInMainNavigation?: InputMaybe<Scalars['Boolean']>;
   children?: InputMaybe<Array<InputMaybe<NavigationMainNavMenuChildrenMutation>>>;
 };
 
@@ -664,7 +682,7 @@ export type PagePartsFragment = PageParts_PageSimple_Fragment | PageParts_PageBl
 
 type NavigationParts_NavigationFooter_Fragment = { __typename?: 'NavigationFooter', footerMenu?: Array<{ __typename: 'NavigationFooterFooterMenu', title: string, children?: Array<{ __typename: 'NavigationFooterFooterMenuChildren', title: string, page: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } } | null> | null } | null> | null };
 
-type NavigationParts_NavigationMainNav_Fragment = { __typename?: 'NavigationMainNav', menu?: Array<{ __typename: 'NavigationMainNavMenu', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildren', title: string, disabled?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null } | null> | null } | null> | null } | null> | null } | null> | null } | null> | null };
+type NavigationParts_NavigationMainNav_Fragment = { __typename?: 'NavigationMainNav', menu?: Array<{ __typename: 'NavigationMainNavMenu', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildren', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildren', title: string, description?: string | null, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null } | null> | null } | null> | null } | null> | null } | null> | null } | null> | null };
 
 export type NavigationPartsFragment = NavigationParts_NavigationFooter_Fragment | NavigationParts_NavigationMainNav_Fragment;
 
@@ -692,7 +710,7 @@ export type NavigationQueryVariables = Exact<{
 }>;
 
 
-export type NavigationQuery = { __typename?: 'Query', navigation: { __typename?: 'NavigationFooter', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, footerMenu?: Array<{ __typename: 'NavigationFooterFooterMenu', title: string, children?: Array<{ __typename: 'NavigationFooterFooterMenuChildren', title: string, page: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } } | null> | null } | null> | null } | { __typename?: 'NavigationMainNav', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, menu?: Array<{ __typename: 'NavigationMainNavMenu', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildren', title: string, disabled?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null } | null> | null } | null> | null } | null> | null } | null> | null } | null> | null } };
+export type NavigationQuery = { __typename?: 'Query', navigation: { __typename?: 'NavigationFooter', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, footerMenu?: Array<{ __typename: 'NavigationFooterFooterMenu', title: string, children?: Array<{ __typename: 'NavigationFooterFooterMenuChildren', title: string, page: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } } | null> | null } | null> | null } | { __typename?: 'NavigationMainNav', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, menu?: Array<{ __typename: 'NavigationMainNavMenu', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildren', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildren', title: string, description?: string | null, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null } | null> | null } | null> | null } | null> | null } | null> | null } | null> | null } };
 
 export type NavigationConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']>;
@@ -704,7 +722,7 @@ export type NavigationConnectionQueryVariables = Exact<{
 }>;
 
 
-export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename?: 'NavigationFooter', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, footerMenu?: Array<{ __typename: 'NavigationFooterFooterMenu', title: string, children?: Array<{ __typename: 'NavigationFooterFooterMenuChildren', title: string, page: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } } | null> | null } | null> | null } | { __typename?: 'NavigationMainNav', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, menu?: Array<{ __typename: 'NavigationMainNavMenu', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildren', title: string, disabled?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null } | null> | null } | null> | null } | null> | null } | null> | null } | null> | null } | null } | null> | null } };
+export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename?: 'NavigationFooter', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, footerMenu?: Array<{ __typename: 'NavigationFooterFooterMenu', title: string, children?: Array<{ __typename: 'NavigationFooterFooterMenuChildren', title: string, page: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } } | null> | null } | null> | null } | { __typename?: 'NavigationMainNav', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, menu?: Array<{ __typename: 'NavigationMainNavMenu', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildren', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildren', title: string, description?: string | null, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null } | null> | null } | null> | null } | null> | null } | null> | null } | null> | null } | null } | null> | null } };
 
 export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
@@ -836,6 +854,8 @@ export const NavigationPartsFragmentDoc = gql`
           id
         }
       }
+      disabled
+      showInMainNavigation
       children {
         __typename
         title
@@ -879,6 +899,7 @@ export const NavigationPartsFragmentDoc = gql`
           }
         }
         disabled
+        showInMainNavigation
         children {
           __typename
           title
@@ -921,6 +942,9 @@ export const NavigationPartsFragmentDoc = gql`
               id
             }
           }
+          description
+          disabled
+          showInMainNavigation
           children {
             __typename
             title

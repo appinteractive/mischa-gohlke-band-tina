@@ -126,6 +126,8 @@ fragment NavigationParts on Navigation {
           id
         }
       }
+      disabled
+      showInMainNavigation
       children {
         __typename
         title
@@ -169,6 +171,7 @@ fragment NavigationParts on Navigation {
           }
         }
         disabled
+        showInMainNavigation
         children {
           __typename
           title
@@ -211,6 +214,9 @@ fragment NavigationParts on Navigation {
               id
             }
           }
+          description
+          disabled
+          showInMainNavigation
           children {
             __typename
             title
