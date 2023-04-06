@@ -24,12 +24,13 @@ const Page = (props) => {
 
   return (
     <>
-      <div className="relative w-screen overflow-hidden">
+      <div className="absolute inset-0 -top-[40rem] z-0 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/beams-home@95.jpg"
           alt=""
-          className="absolute -top-[1rem] left-1/2 z-0 -ml-[40rem] w-[163.125rem] max-w-none sm:-ml-[67.5rem]"
+          className="-ml-[40rem] w-[163.125rem] max-w-none sm:-ml-[67.5rem]"
+          // className="absolute -top-[1rem] left-1/2 z-0 -ml-[40rem] w-[163.125rem] max-w-none sm:-ml-[67.5rem]"
         />
       </div>
       <Head>
@@ -40,58 +41,56 @@ const Page = (props) => {
         />
       </Head>
       <Header items={props.data?.nav?.main?.menu ?? []} />
-      <main className="relative">
-        <div className="mx-auto">
-          {data?.page?._sys?.breadcrumbs?.length > 1 && (
-            <Breadcrumbs
-              items={data.page._sys.breadcrumbs}
-              className="mx-auto max-w-6xl"
-            />
-          )}
-          {/* <h1 className="m-8 text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl">
+      <main className="relative mx-auto px-6">
+        {data?.page?._sys?.breadcrumbs?.length > 1 && (
+          <Breadcrumbs
+            items={data.page._sys.breadcrumbs}
+            className="mx-auto max-w-6xl"
+          />
+        )}
+        {/* <h1 className="m-8 text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl">
               {data.post.title}
             </h1> */}
-          {/* <ContentSection content={data.post.body}></ContentSection> */}
-          {/* <div className="prose mx-auto ">
+        {/* <ContentSection content={data.post.body}></ContentSection> */}
+        {/* <div className="prose mx-auto ">
             <pre>{JSON.stringify(data.nav, null, 2)}</pre>
           </div> */}
-          {data.page?.blocks?.length > 0 ? (
-            data.page.blocks.map(function (block, i) {
-              switch (block.__typename) {
-                case 'PageBlocksBlocksHero':
-                  return (
-                    <React.Fragment key={i + block.__typename}>
-                      <Hero headline={block.headline} text={block.text} />
-                    </React.Fragment>
-                  )
-                case 'PageBlocksBlocksContent':
-                  return (
-                    <React.Fragment key={i + block.__typename}>
-                      <PrimaryFeatures />
-                    </React.Fragment>
-                  )
-                case 'PageBlocksBlocksFeatures':
-                  return (
-                    <React.Fragment key={i + block.__typename}>
-                      <SecondaryFeatures />
-                    </React.Fragment>
-                  )
-                default:
-                  return null
-              }
-            })
-          ) : (
-            <div className="prose mx-auto max-w-3xl py-40">
-              <h1>{data?.page?.title}</h1>
-              <span className="prose-h1:hidden">
-                <TinaMarkdown
-                  content={data?.page?.body}
-                  components={components}
-                />
-              </span>
-            </div>
-          )}
-        </div>
+        {data.page?.blocks?.length > 0 ? (
+          data.page.blocks.map(function (block, i) {
+            switch (block.__typename) {
+              case 'PageBlocksBlocksHero':
+                return (
+                  <React.Fragment key={i + block.__typename}>
+                    <Hero headline={block.headline} text={block.text} />
+                  </React.Fragment>
+                )
+              case 'PageBlocksBlocksContent':
+                return (
+                  <React.Fragment key={i + block.__typename}>
+                    <PrimaryFeatures />
+                  </React.Fragment>
+                )
+              case 'PageBlocksBlocksFeatures':
+                return (
+                  <React.Fragment key={i + block.__typename}>
+                    <SecondaryFeatures />
+                  </React.Fragment>
+                )
+              default:
+                return null
+            }
+          })
+        ) : (
+          <div className="prose mx-auto max-w-3xl py-40">
+            <h1>{data?.page?.title}</h1>
+            <span className="prose-h1:hidden">
+              <TinaMarkdown
+                content={data?.page?.body}
+                components={components}
+              />
+            </span>
+          </div>
+        )}
       </main>
       <Footer items={props.data?.nav?.footer?.footerMenu ?? []} />
     </>

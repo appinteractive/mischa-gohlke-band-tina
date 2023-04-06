@@ -101,7 +101,7 @@ export function Header({ items }) {
               <Logo className="h-10 w-auto" />
             </Link>
           </div>
-          <div className="hidden items-center font-semibold text-gray-900 sm:flex md:flex md:gap-x-6">
+          <div className="hidden items-center font-semibold text-gray-900 md:flex md:gap-x-2">
             {items.map((item) => {
               if (item.disabled) return null
 
@@ -145,7 +145,6 @@ export function Header({ items }) {
             </div>
           </div>
         </nav>
-        {/* <pre>{JSON.stringify(items[0], null, 2)}</pre> */}
       </Container>
     </header>
   )
