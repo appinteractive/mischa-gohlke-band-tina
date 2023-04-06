@@ -50,13 +50,16 @@ type Query {
   document(collection: String, relativePath: String): DocumentNode!
   page(relativePath: String): Page!
   pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
-  navigation(relativePath: String): Navigation!
-  navigationConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NavigationFilter): NavigationConnection!
+  navMain(relativePath: String): NavMain!
+  navMainConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NavMainFilter): NavMainConnection!
+  navFooter(relativePath: String): NavFooter!
+  navFooterConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NavFooterFilter): NavFooterConnection!
 }
 
 input DocumentFilter {
   page: PageFilter
-  navigation: NavigationFilter
+  navMain: NavMainFilter
+  navFooter: NavFooterFilter
 }
 
 type DocumentConnectionEdges {
@@ -82,7 +85,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter): DocumentConnection!
 }
 
-union DocumentNode = PageSimple | PageBlocks | NavigationFooter | NavigationMainNav
+union DocumentNode = PageSimple | PageBlocks | NavMainMainNav | NavFooterFooter
 
 type PageSimple implements Node & Document {
   title: String!
@@ -208,99 +211,62 @@ type PageConnection implements Connection {
   edges: [PageConnectionEdges]
 }
 
-union NavigationFooterFooterMenuChildrenPage = PageSimple | PageBlocks
+union NavMainMainNavMenuPage = PageSimple | PageBlocks
 
-type NavigationFooterFooterMenuChildren {
+union NavMainMainNavMenuChildrenPage = PageSimple | PageBlocks
+
+union NavMainMainNavMenuChildrenChildrenPage = PageSimple | PageBlocks
+
+union NavMainMainNavMenuChildrenChildrenChildrenPage = PageSimple | PageBlocks
+
+union NavMainMainNavMenuChildrenChildrenChildrenChildrenPage = PageSimple | PageBlocks
+
+type NavMainMainNavMenuChildrenChildrenChildrenChildren {
   title: String!
-  page: NavigationFooterFooterMenuChildrenPage!
+  page: NavMainMainNavMenuChildrenChildrenChildrenChildrenPage
 }
 
-type NavigationFooterFooterMenu {
+type NavMainMainNavMenuChildrenChildrenChildren {
   title: String!
-  children: [NavigationFooterFooterMenuChildren]
+  page: NavMainMainNavMenuChildrenChildrenChildrenPage
+  children: [NavMainMainNavMenuChildrenChildrenChildrenChildren]
 }
 
-type NavigationFooter implements Node & Document {
-  footerMenu: [NavigationFooterFooterMenu]
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-union NavigationMainNavMenuPage = PageSimple | PageBlocks
-
-union NavigationMainNavMenuChildrenPage = PageSimple | PageBlocks
-
-union NavigationMainNavMenuChildrenChildrenPage = PageSimple | PageBlocks
-
-union NavigationMainNavMenuChildrenChildrenChildrenPage = PageSimple | PageBlocks
-
-union NavigationMainNavMenuChildrenChildrenChildrenChildrenPage = PageSimple | PageBlocks
-
-type NavigationMainNavMenuChildrenChildrenChildrenChildren {
+type NavMainMainNavMenuChildrenChildren {
   title: String!
-  page: NavigationMainNavMenuChildrenChildrenChildrenChildrenPage
-}
-
-type NavigationMainNavMenuChildrenChildrenChildren {
-  title: String!
-  page: NavigationMainNavMenuChildrenChildrenChildrenPage
-  children: [NavigationMainNavMenuChildrenChildrenChildrenChildren]
-}
-
-type NavigationMainNavMenuChildrenChildren {
-  title: String!
-  page: NavigationMainNavMenuChildrenChildrenPage
+  page: NavMainMainNavMenuChildrenChildrenPage
   description: String
   disabled: Boolean
   showInMainNavigation: Boolean
-  children: [NavigationMainNavMenuChildrenChildrenChildren]
+  children: [NavMainMainNavMenuChildrenChildrenChildren]
 }
 
-type NavigationMainNavMenuChildren {
+type NavMainMainNavMenuChildren {
   title: String!
-  page: NavigationMainNavMenuChildrenPage
+  page: NavMainMainNavMenuChildrenPage
   disabled: Boolean
   showInMainNavigation: Boolean
-  children: [NavigationMainNavMenuChildrenChildren]
+  children: [NavMainMainNavMenuChildrenChildren]
 }
 
-type NavigationMainNavMenu {
+type NavMainMainNavMenu {
   title: String!
-  page: NavigationMainNavMenuPage
+  page: NavMainMainNavMenuPage
   disabled: Boolean
   showInMainNavigation: Boolean
-  children: [NavigationMainNavMenuChildren]
+  children: [NavMainMainNavMenuChildren]
 }
 
-type NavigationMainNav implements Node & Document {
-  menu: [NavigationMainNavMenu]
+type NavMainMainNav implements Node & Document {
+  menu: [NavMainMainNavMenu]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
-union Navigation = NavigationFooter | NavigationMainNav
+union NavMain = NavMainMainNav
 
-input NavigationFooterFooterMenuChildrenPageFilter {
-  page: PageFilter
-}
-
-input NavigationFooterFooterMenuChildrenFilter {
-  title: StringFilter
-  page: NavigationFooterFooterMenuChildrenPageFilter
-}
-
-input NavigationFooterFooterMenuFilter {
-  title: StringFilter
-  children: NavigationFooterFooterMenuChildrenFilter
-}
-
-input NavigationFooterFilter {
-  footerMenu: NavigationFooterFooterMenuFilter
-}
-
-input NavigationMainNavMenuPageFilter {
+input NavMainMainNavMenuPageFilter {
   page: PageFilter
 }
 
@@ -309,76 +275,129 @@ input BooleanFilter {
   exists: Boolean
 }
 
-input NavigationMainNavMenuChildrenPageFilter {
+input NavMainMainNavMenuChildrenPageFilter {
   page: PageFilter
 }
 
-input NavigationMainNavMenuChildrenChildrenPageFilter {
+input NavMainMainNavMenuChildrenChildrenPageFilter {
   page: PageFilter
 }
 
-input NavigationMainNavMenuChildrenChildrenChildrenPageFilter {
+input NavMainMainNavMenuChildrenChildrenChildrenPageFilter {
   page: PageFilter
 }
 
-input NavigationMainNavMenuChildrenChildrenChildrenChildrenPageFilter {
+input NavMainMainNavMenuChildrenChildrenChildrenChildrenPageFilter {
   page: PageFilter
 }
 
-input NavigationMainNavMenuChildrenChildrenChildrenChildrenFilter {
+input NavMainMainNavMenuChildrenChildrenChildrenChildrenFilter {
   title: StringFilter
-  page: NavigationMainNavMenuChildrenChildrenChildrenChildrenPageFilter
+  page: NavMainMainNavMenuChildrenChildrenChildrenChildrenPageFilter
 }
 
-input NavigationMainNavMenuChildrenChildrenChildrenFilter {
+input NavMainMainNavMenuChildrenChildrenChildrenFilter {
   title: StringFilter
-  page: NavigationMainNavMenuChildrenChildrenChildrenPageFilter
-  children: NavigationMainNavMenuChildrenChildrenChildrenChildrenFilter
+  page: NavMainMainNavMenuChildrenChildrenChildrenPageFilter
+  children: NavMainMainNavMenuChildrenChildrenChildrenChildrenFilter
 }
 
-input NavigationMainNavMenuChildrenChildrenFilter {
+input NavMainMainNavMenuChildrenChildrenFilter {
   title: StringFilter
-  page: NavigationMainNavMenuChildrenChildrenPageFilter
+  page: NavMainMainNavMenuChildrenChildrenPageFilter
   description: StringFilter
   disabled: BooleanFilter
   showInMainNavigation: BooleanFilter
-  children: NavigationMainNavMenuChildrenChildrenChildrenFilter
+  children: NavMainMainNavMenuChildrenChildrenChildrenFilter
 }
 
-input NavigationMainNavMenuChildrenFilter {
+input NavMainMainNavMenuChildrenFilter {
   title: StringFilter
-  page: NavigationMainNavMenuChildrenPageFilter
+  page: NavMainMainNavMenuChildrenPageFilter
   disabled: BooleanFilter
   showInMainNavigation: BooleanFilter
-  children: NavigationMainNavMenuChildrenChildrenFilter
+  children: NavMainMainNavMenuChildrenChildrenFilter
 }
 
-input NavigationMainNavMenuFilter {
+input NavMainMainNavMenuFilter {
   title: StringFilter
-  page: NavigationMainNavMenuPageFilter
+  page: NavMainMainNavMenuPageFilter
   disabled: BooleanFilter
   showInMainNavigation: BooleanFilter
-  children: NavigationMainNavMenuChildrenFilter
+  children: NavMainMainNavMenuChildrenFilter
 }
 
-input NavigationMainNavFilter {
-  menu: NavigationMainNavMenuFilter
+input NavMainMainNavFilter {
+  menu: NavMainMainNavMenuFilter
 }
 
-input NavigationFilter {
-  footer: NavigationFooterFilter
-  mainNav: NavigationMainNavFilter
+input NavMainFilter {
+  mainNav: NavMainMainNavFilter
 }
 
-type NavigationConnectionEdges {
+type NavMainConnectionEdges {
   cursor: String!
-  node: Navigation
+  node: NavMain
 }
 
-type NavigationConnection implements Connection {
+type NavMainConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
-  edges: [NavigationConnectionEdges]
+  edges: [NavMainConnectionEdges]
+}
+
+union NavFooterFooterFooterMenuChildrenPage = PageSimple | PageBlocks
+
+type NavFooterFooterFooterMenuChildren {
+  title: String!
+  page: NavFooterFooterFooterMenuChildrenPage!
+}
+
+type NavFooterFooterFooterMenu {
+  title: String!
+  children: [NavFooterFooterFooterMenuChildren]
+}
+
+type NavFooterFooter implements Node & Document {
+  footerMenu: [NavFooterFooterFooterMenu]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+union NavFooter = NavFooterFooter
+
+input NavFooterFooterFooterMenuChildrenPageFilter {
+  page: PageFilter
+}
+
+input NavFooterFooterFooterMenuChildrenFilter {
+  title: StringFilter
+  page: NavFooterFooterFooterMenuChildrenPageFilter
+}
+
+input NavFooterFooterFooterMenuFilter {
+  title: StringFilter
+  children: NavFooterFooterFooterMenuChildrenFilter
+}
+
+input NavFooterFooterFilter {
+  footerMenu: NavFooterFooterFooterMenuFilter
+}
+
+input NavFooterFilter {
+  footer: NavFooterFooterFilter
+}
+
+type NavFooterConnectionEdges {
+  cursor: String!
+  node: NavFooter
+}
+
+type NavFooterConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [NavFooterConnectionEdges]
 }
 
 type Mutation {
@@ -388,19 +407,23 @@ type Mutation {
   createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
   updatePage(relativePath: String!, params: PageMutation!): Page!
   createPage(relativePath: String!, params: PageMutation!): Page!
-  updateNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
-  createNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
+  updateNavMain(relativePath: String!, params: NavMainMutation!): NavMain!
+  createNavMain(relativePath: String!, params: NavMainMutation!): NavMain!
+  updateNavFooter(relativePath: String!, params: NavFooterMutation!): NavFooter!
+  createNavFooter(relativePath: String!, params: NavFooterMutation!): NavFooter!
 }
 
 input DocumentUpdateMutation {
   page: PageMutation
-  navigation: NavigationMutation
+  navMain: NavMainMutation
+  navFooter: NavFooterMutation
   relativePath: String
 }
 
 input DocumentMutation {
   page: PageMutation
-  navigation: NavigationMutation
+  navMain: NavMainMutation
+  navFooter: NavFooterMutation
 }
 
 input PageSimpleMutation {
@@ -450,63 +473,66 @@ input PageMutation {
   blocks: PageBlocksMutation
 }
 
-input NavigationFooterFooterMenuChildrenMutation {
+input NavMainMainNavMenuChildrenChildrenChildrenChildrenMutation {
   title: String
   page: String
 }
 
-input NavigationFooterFooterMenuMutation {
-  title: String
-  children: [NavigationFooterFooterMenuChildrenMutation]
-}
-
-input NavigationFooterMutation {
-  footerMenu: [NavigationFooterFooterMenuMutation]
-}
-
-input NavigationMainNavMenuChildrenChildrenChildrenChildrenMutation {
+input NavMainMainNavMenuChildrenChildrenChildrenMutation {
   title: String
   page: String
+  children: [NavMainMainNavMenuChildrenChildrenChildrenChildrenMutation]
 }
 
-input NavigationMainNavMenuChildrenChildrenChildrenMutation {
-  title: String
-  page: String
-  children: [NavigationMainNavMenuChildrenChildrenChildrenChildrenMutation]
-}
-
-input NavigationMainNavMenuChildrenChildrenMutation {
+input NavMainMainNavMenuChildrenChildrenMutation {
   title: String
   page: String
   description: String
   disabled: Boolean
   showInMainNavigation: Boolean
-  children: [NavigationMainNavMenuChildrenChildrenChildrenMutation]
+  children: [NavMainMainNavMenuChildrenChildrenChildrenMutation]
 }
 
-input NavigationMainNavMenuChildrenMutation {
+input NavMainMainNavMenuChildrenMutation {
   title: String
   page: String
   disabled: Boolean
   showInMainNavigation: Boolean
-  children: [NavigationMainNavMenuChildrenChildrenMutation]
+  children: [NavMainMainNavMenuChildrenChildrenMutation]
 }
 
-input NavigationMainNavMenuMutation {
+input NavMainMainNavMenuMutation {
   title: String
   page: String
   disabled: Boolean
   showInMainNavigation: Boolean
-  children: [NavigationMainNavMenuChildrenMutation]
+  children: [NavMainMainNavMenuChildrenMutation]
 }
 
-input NavigationMainNavMutation {
-  menu: [NavigationMainNavMenuMutation]
+input NavMainMainNavMutation {
+  menu: [NavMainMainNavMenuMutation]
 }
 
-input NavigationMutation {
-  footer: NavigationFooterMutation
-  mainNav: NavigationMainNavMutation
+input NavMainMutation {
+  mainNav: NavMainMainNavMutation
+}
+
+input NavFooterFooterFooterMenuChildrenMutation {
+  title: String
+  page: String
+}
+
+input NavFooterFooterFooterMenuMutation {
+  title: String
+  children: [NavFooterFooterFooterMenuChildrenMutation]
+}
+
+input NavFooterFooterMutation {
+  footerMenu: [NavFooterFooterFooterMenuMutation]
+}
+
+input NavFooterMutation {
+  footer: NavFooterFooterMutation
 }
 
 schema {

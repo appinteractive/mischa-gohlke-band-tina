@@ -96,7 +96,7 @@ const Page = (props) => {
           )}
         </div>
       </main>
-      <Footer />
+      <Footer items={props.data?.nav?.footer?.footerMenu ?? []} />
     </>
   )
 }
@@ -185,13 +185,6 @@ const queryByPath = async (path: string[] = ['index']): Promise<any> => {
     }
   }
 
-  // TODO: move navigation query to layout level
-  const resNav = await client.queries.nav()
-  data['nav'] = {
-    footer: resNav?.data.navigationConnection.edges[0]?.node,
-    main: resNav?.data.navigationConnection.edges[1]?.node,
-  }
-
   return {
     props: {
       variables: { relativePath },
@@ -211,6 +204,21 @@ export const getStaticProps = async ({ params }) => {
     for (const node of res.props.data.page.body.children) {
       await addBlurHash(node)
     }
+  }
+
+  // TODO: move navigation query to layout level
+  const resNav = await client.queries.nav()
+  // console.log('resNav', resNav)
+  /* res?.props?.data['nav'] = {
+    footer: resNav?.data.navFooterConnection.edges[0]?.node._values,
+    main: resNav?.data.navMainConnection.edges[0]?.node._values,
+  }
+  console.log(''); */
+
+  // add res.nav.data to res.props.data
+  res.props.data['nav'] = {
+    footer: resNav?.data.navFooterConnection.edges[0]?.node._values,
+    main: resNav?.data.navMainConnection.edges[0]?.node._values,
   }
 
   return res

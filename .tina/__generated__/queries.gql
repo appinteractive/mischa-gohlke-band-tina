@@ -51,8 +51,8 @@ query pageConnection($before: String, $after: String, $first: Float, $last: Floa
   }
 }
 
-query navigation($relativePath: String!) {
-  navigation(relativePath: $relativePath) {
+query navMain($relativePath: String!) {
+  navMain(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -64,12 +64,12 @@ query navigation($relativePath: String!) {
       }
       id
     }
-    ...NavigationParts
+    ...NavMainParts
   }
 }
 
-query navigationConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: NavigationFilter) {
-  navigationConnection(
+query navMainConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: NavMainFilter) {
+  navMainConnection(
     before: $before
     after: $after
     first: $first
@@ -98,7 +98,60 @@ query navigationConnection($before: String, $after: String, $first: Float, $last
           }
           id
         }
-        ...NavigationParts
+        ...NavMainParts
+      }
+    }
+  }
+}
+
+query navFooter($relativePath: String!) {
+  navFooter(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...NavFooterParts
+  }
+}
+
+query navFooterConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: NavFooterFilter) {
+  navFooterConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...NavFooterParts
       }
     }
   }

@@ -75,8 +75,10 @@ export type Query = {
   document: DocumentNode;
   page: Page;
   pageConnection: PageConnection;
-  navigation: Navigation;
-  navigationConnection: NavigationConnection;
+  navMain: NavMain;
+  navMainConnection: NavMainConnection;
+  navFooter: NavFooter;
+  navFooterConnection: NavFooterConnection;
 };
 
 
@@ -116,23 +118,39 @@ export type QueryPageConnectionArgs = {
 };
 
 
-export type QueryNavigationArgs = {
+export type QueryNavMainArgs = {
   relativePath?: InputMaybe<Scalars['String']>;
 };
 
 
-export type QueryNavigationConnectionArgs = {
+export type QueryNavMainConnectionArgs = {
   before?: InputMaybe<Scalars['String']>;
   after?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Float']>;
   last?: InputMaybe<Scalars['Float']>;
   sort?: InputMaybe<Scalars['String']>;
-  filter?: InputMaybe<NavigationFilter>;
+  filter?: InputMaybe<NavMainFilter>;
+};
+
+
+export type QueryNavFooterArgs = {
+  relativePath?: InputMaybe<Scalars['String']>;
+};
+
+
+export type QueryNavFooterConnectionArgs = {
+  before?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Float']>;
+  last?: InputMaybe<Scalars['Float']>;
+  sort?: InputMaybe<Scalars['String']>;
+  filter?: InputMaybe<NavFooterFilter>;
 };
 
 export type DocumentFilter = {
   page?: InputMaybe<PageFilter>;
-  navigation?: InputMaybe<NavigationFilter>;
+  navMain?: InputMaybe<NavMainFilter>;
+  navFooter?: InputMaybe<NavFooterFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -171,7 +189,7 @@ export type CollectionDocumentsArgs = {
   filter?: InputMaybe<DocumentFilter>;
 };
 
-export type DocumentNode = PageSimple | PageBlocks | NavigationFooter | NavigationMainNav;
+export type DocumentNode = PageSimple | PageBlocks | NavMainMainNav | NavFooterFooter;
 
 export type PageSimple = Node & Document & {
   __typename?: 'PageSimple';
@@ -305,108 +323,68 @@ export type PageConnection = Connection & {
   edges?: Maybe<Array<Maybe<PageConnectionEdges>>>;
 };
 
-export type NavigationFooterFooterMenuChildrenPage = PageSimple | PageBlocks;
+export type NavMainMainNavMenuPage = PageSimple | PageBlocks;
 
-export type NavigationFooterFooterMenuChildren = {
-  __typename?: 'NavigationFooterFooterMenuChildren';
+export type NavMainMainNavMenuChildrenPage = PageSimple | PageBlocks;
+
+export type NavMainMainNavMenuChildrenChildrenPage = PageSimple | PageBlocks;
+
+export type NavMainMainNavMenuChildrenChildrenChildrenPage = PageSimple | PageBlocks;
+
+export type NavMainMainNavMenuChildrenChildrenChildrenChildrenPage = PageSimple | PageBlocks;
+
+export type NavMainMainNavMenuChildrenChildrenChildrenChildren = {
+  __typename?: 'NavMainMainNavMenuChildrenChildrenChildrenChildren';
   title: Scalars['String'];
-  page: NavigationFooterFooterMenuChildrenPage;
+  page?: Maybe<NavMainMainNavMenuChildrenChildrenChildrenChildrenPage>;
 };
 
-export type NavigationFooterFooterMenu = {
-  __typename?: 'NavigationFooterFooterMenu';
+export type NavMainMainNavMenuChildrenChildrenChildren = {
+  __typename?: 'NavMainMainNavMenuChildrenChildrenChildren';
   title: Scalars['String'];
-  children?: Maybe<Array<Maybe<NavigationFooterFooterMenuChildren>>>;
+  page?: Maybe<NavMainMainNavMenuChildrenChildrenChildrenPage>;
+  children?: Maybe<Array<Maybe<NavMainMainNavMenuChildrenChildrenChildrenChildren>>>;
 };
 
-export type NavigationFooter = Node & Document & {
-  __typename?: 'NavigationFooter';
-  footerMenu?: Maybe<Array<Maybe<NavigationFooterFooterMenu>>>;
-  id: Scalars['ID'];
-  _sys: SystemInfo;
-  _values: Scalars['JSON'];
-};
-
-export type NavigationMainNavMenuPage = PageSimple | PageBlocks;
-
-export type NavigationMainNavMenuChildrenPage = PageSimple | PageBlocks;
-
-export type NavigationMainNavMenuChildrenChildrenPage = PageSimple | PageBlocks;
-
-export type NavigationMainNavMenuChildrenChildrenChildrenPage = PageSimple | PageBlocks;
-
-export type NavigationMainNavMenuChildrenChildrenChildrenChildrenPage = PageSimple | PageBlocks;
-
-export type NavigationMainNavMenuChildrenChildrenChildrenChildren = {
-  __typename?: 'NavigationMainNavMenuChildrenChildrenChildrenChildren';
+export type NavMainMainNavMenuChildrenChildren = {
+  __typename?: 'NavMainMainNavMenuChildrenChildren';
   title: Scalars['String'];
-  page?: Maybe<NavigationMainNavMenuChildrenChildrenChildrenChildrenPage>;
-};
-
-export type NavigationMainNavMenuChildrenChildrenChildren = {
-  __typename?: 'NavigationMainNavMenuChildrenChildrenChildren';
-  title: Scalars['String'];
-  page?: Maybe<NavigationMainNavMenuChildrenChildrenChildrenPage>;
-  children?: Maybe<Array<Maybe<NavigationMainNavMenuChildrenChildrenChildrenChildren>>>;
-};
-
-export type NavigationMainNavMenuChildrenChildren = {
-  __typename?: 'NavigationMainNavMenuChildrenChildren';
-  title: Scalars['String'];
-  page?: Maybe<NavigationMainNavMenuChildrenChildrenPage>;
+  page?: Maybe<NavMainMainNavMenuChildrenChildrenPage>;
   description?: Maybe<Scalars['String']>;
   disabled?: Maybe<Scalars['Boolean']>;
   showInMainNavigation?: Maybe<Scalars['Boolean']>;
-  children?: Maybe<Array<Maybe<NavigationMainNavMenuChildrenChildrenChildren>>>;
+  children?: Maybe<Array<Maybe<NavMainMainNavMenuChildrenChildrenChildren>>>;
 };
 
-export type NavigationMainNavMenuChildren = {
-  __typename?: 'NavigationMainNavMenuChildren';
+export type NavMainMainNavMenuChildren = {
+  __typename?: 'NavMainMainNavMenuChildren';
   title: Scalars['String'];
-  page?: Maybe<NavigationMainNavMenuChildrenPage>;
+  page?: Maybe<NavMainMainNavMenuChildrenPage>;
   disabled?: Maybe<Scalars['Boolean']>;
   showInMainNavigation?: Maybe<Scalars['Boolean']>;
-  children?: Maybe<Array<Maybe<NavigationMainNavMenuChildrenChildren>>>;
+  children?: Maybe<Array<Maybe<NavMainMainNavMenuChildrenChildren>>>;
 };
 
-export type NavigationMainNavMenu = {
-  __typename?: 'NavigationMainNavMenu';
+export type NavMainMainNavMenu = {
+  __typename?: 'NavMainMainNavMenu';
   title: Scalars['String'];
-  page?: Maybe<NavigationMainNavMenuPage>;
+  page?: Maybe<NavMainMainNavMenuPage>;
   disabled?: Maybe<Scalars['Boolean']>;
   showInMainNavigation?: Maybe<Scalars['Boolean']>;
-  children?: Maybe<Array<Maybe<NavigationMainNavMenuChildren>>>;
+  children?: Maybe<Array<Maybe<NavMainMainNavMenuChildren>>>;
 };
 
-export type NavigationMainNav = Node & Document & {
-  __typename?: 'NavigationMainNav';
-  menu?: Maybe<Array<Maybe<NavigationMainNavMenu>>>;
+export type NavMainMainNav = Node & Document & {
+  __typename?: 'NavMainMainNav';
+  menu?: Maybe<Array<Maybe<NavMainMainNavMenu>>>;
   id: Scalars['ID'];
   _sys: SystemInfo;
   _values: Scalars['JSON'];
 };
 
-export type Navigation = NavigationFooter | NavigationMainNav;
+export type NavMain = NavMainMainNav;
 
-export type NavigationFooterFooterMenuChildrenPageFilter = {
-  page?: InputMaybe<PageFilter>;
-};
-
-export type NavigationFooterFooterMenuChildrenFilter = {
-  title?: InputMaybe<StringFilter>;
-  page?: InputMaybe<NavigationFooterFooterMenuChildrenPageFilter>;
-};
-
-export type NavigationFooterFooterMenuFilter = {
-  title?: InputMaybe<StringFilter>;
-  children?: InputMaybe<NavigationFooterFooterMenuChildrenFilter>;
-};
-
-export type NavigationFooterFilter = {
-  footerMenu?: InputMaybe<NavigationFooterFooterMenuFilter>;
-};
-
-export type NavigationMainNavMenuPageFilter = {
+export type NavMainMainNavMenuPageFilter = {
   page?: InputMaybe<PageFilter>;
 };
 
@@ -415,78 +393,136 @@ export type BooleanFilter = {
   exists?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type NavigationMainNavMenuChildrenPageFilter = {
+export type NavMainMainNavMenuChildrenPageFilter = {
   page?: InputMaybe<PageFilter>;
 };
 
-export type NavigationMainNavMenuChildrenChildrenPageFilter = {
+export type NavMainMainNavMenuChildrenChildrenPageFilter = {
   page?: InputMaybe<PageFilter>;
 };
 
-export type NavigationMainNavMenuChildrenChildrenChildrenPageFilter = {
+export type NavMainMainNavMenuChildrenChildrenChildrenPageFilter = {
   page?: InputMaybe<PageFilter>;
 };
 
-export type NavigationMainNavMenuChildrenChildrenChildrenChildrenPageFilter = {
+export type NavMainMainNavMenuChildrenChildrenChildrenChildrenPageFilter = {
   page?: InputMaybe<PageFilter>;
 };
 
-export type NavigationMainNavMenuChildrenChildrenChildrenChildrenFilter = {
+export type NavMainMainNavMenuChildrenChildrenChildrenChildrenFilter = {
   title?: InputMaybe<StringFilter>;
-  page?: InputMaybe<NavigationMainNavMenuChildrenChildrenChildrenChildrenPageFilter>;
+  page?: InputMaybe<NavMainMainNavMenuChildrenChildrenChildrenChildrenPageFilter>;
 };
 
-export type NavigationMainNavMenuChildrenChildrenChildrenFilter = {
+export type NavMainMainNavMenuChildrenChildrenChildrenFilter = {
   title?: InputMaybe<StringFilter>;
-  page?: InputMaybe<NavigationMainNavMenuChildrenChildrenChildrenPageFilter>;
-  children?: InputMaybe<NavigationMainNavMenuChildrenChildrenChildrenChildrenFilter>;
+  page?: InputMaybe<NavMainMainNavMenuChildrenChildrenChildrenPageFilter>;
+  children?: InputMaybe<NavMainMainNavMenuChildrenChildrenChildrenChildrenFilter>;
 };
 
-export type NavigationMainNavMenuChildrenChildrenFilter = {
+export type NavMainMainNavMenuChildrenChildrenFilter = {
   title?: InputMaybe<StringFilter>;
-  page?: InputMaybe<NavigationMainNavMenuChildrenChildrenPageFilter>;
+  page?: InputMaybe<NavMainMainNavMenuChildrenChildrenPageFilter>;
   description?: InputMaybe<StringFilter>;
   disabled?: InputMaybe<BooleanFilter>;
   showInMainNavigation?: InputMaybe<BooleanFilter>;
-  children?: InputMaybe<NavigationMainNavMenuChildrenChildrenChildrenFilter>;
+  children?: InputMaybe<NavMainMainNavMenuChildrenChildrenChildrenFilter>;
 };
 
-export type NavigationMainNavMenuChildrenFilter = {
+export type NavMainMainNavMenuChildrenFilter = {
   title?: InputMaybe<StringFilter>;
-  page?: InputMaybe<NavigationMainNavMenuChildrenPageFilter>;
+  page?: InputMaybe<NavMainMainNavMenuChildrenPageFilter>;
   disabled?: InputMaybe<BooleanFilter>;
   showInMainNavigation?: InputMaybe<BooleanFilter>;
-  children?: InputMaybe<NavigationMainNavMenuChildrenChildrenFilter>;
+  children?: InputMaybe<NavMainMainNavMenuChildrenChildrenFilter>;
 };
 
-export type NavigationMainNavMenuFilter = {
+export type NavMainMainNavMenuFilter = {
   title?: InputMaybe<StringFilter>;
-  page?: InputMaybe<NavigationMainNavMenuPageFilter>;
+  page?: InputMaybe<NavMainMainNavMenuPageFilter>;
   disabled?: InputMaybe<BooleanFilter>;
   showInMainNavigation?: InputMaybe<BooleanFilter>;
-  children?: InputMaybe<NavigationMainNavMenuChildrenFilter>;
+  children?: InputMaybe<NavMainMainNavMenuChildrenFilter>;
 };
 
-export type NavigationMainNavFilter = {
-  menu?: InputMaybe<NavigationMainNavMenuFilter>;
+export type NavMainMainNavFilter = {
+  menu?: InputMaybe<NavMainMainNavMenuFilter>;
 };
 
-export type NavigationFilter = {
-  footer?: InputMaybe<NavigationFooterFilter>;
-  mainNav?: InputMaybe<NavigationMainNavFilter>;
+export type NavMainFilter = {
+  mainNav?: InputMaybe<NavMainMainNavFilter>;
 };
 
-export type NavigationConnectionEdges = {
-  __typename?: 'NavigationConnectionEdges';
+export type NavMainConnectionEdges = {
+  __typename?: 'NavMainConnectionEdges';
   cursor: Scalars['String'];
-  node?: Maybe<Navigation>;
+  node?: Maybe<NavMain>;
 };
 
-export type NavigationConnection = Connection & {
-  __typename?: 'NavigationConnection';
+export type NavMainConnection = Connection & {
+  __typename?: 'NavMainConnection';
   pageInfo: PageInfo;
   totalCount: Scalars['Float'];
-  edges?: Maybe<Array<Maybe<NavigationConnectionEdges>>>;
+  edges?: Maybe<Array<Maybe<NavMainConnectionEdges>>>;
+};
+
+export type NavFooterFooterFooterMenuChildrenPage = PageSimple | PageBlocks;
+
+export type NavFooterFooterFooterMenuChildren = {
+  __typename?: 'NavFooterFooterFooterMenuChildren';
+  title: Scalars['String'];
+  page: NavFooterFooterFooterMenuChildrenPage;
+};
+
+export type NavFooterFooterFooterMenu = {
+  __typename?: 'NavFooterFooterFooterMenu';
+  title: Scalars['String'];
+  children?: Maybe<Array<Maybe<NavFooterFooterFooterMenuChildren>>>;
+};
+
+export type NavFooterFooter = Node & Document & {
+  __typename?: 'NavFooterFooter';
+  footerMenu?: Maybe<Array<Maybe<NavFooterFooterFooterMenu>>>;
+  id: Scalars['ID'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON'];
+};
+
+export type NavFooter = NavFooterFooter;
+
+export type NavFooterFooterFooterMenuChildrenPageFilter = {
+  page?: InputMaybe<PageFilter>;
+};
+
+export type NavFooterFooterFooterMenuChildrenFilter = {
+  title?: InputMaybe<StringFilter>;
+  page?: InputMaybe<NavFooterFooterFooterMenuChildrenPageFilter>;
+};
+
+export type NavFooterFooterFooterMenuFilter = {
+  title?: InputMaybe<StringFilter>;
+  children?: InputMaybe<NavFooterFooterFooterMenuChildrenFilter>;
+};
+
+export type NavFooterFooterFilter = {
+  footerMenu?: InputMaybe<NavFooterFooterFooterMenuFilter>;
+};
+
+export type NavFooterFilter = {
+  footer?: InputMaybe<NavFooterFooterFilter>;
+};
+
+export type NavFooterConnectionEdges = {
+  __typename?: 'NavFooterConnectionEdges';
+  cursor: Scalars['String'];
+  node?: Maybe<NavFooter>;
+};
+
+export type NavFooterConnection = Connection & {
+  __typename?: 'NavFooterConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float'];
+  edges?: Maybe<Array<Maybe<NavFooterConnectionEdges>>>;
 };
 
 export type Mutation = {
@@ -497,8 +533,10 @@ export type Mutation = {
   createDocument: DocumentNode;
   updatePage: Page;
   createPage: Page;
-  updateNavigation: Navigation;
-  createNavigation: Navigation;
+  updateNavMain: NavMain;
+  createNavMain: NavMain;
+  updateNavFooter: NavFooter;
+  createNavFooter: NavFooter;
 };
 
 
@@ -541,26 +579,40 @@ export type MutationCreatePageArgs = {
 };
 
 
-export type MutationUpdateNavigationArgs = {
+export type MutationUpdateNavMainArgs = {
   relativePath: Scalars['String'];
-  params: NavigationMutation;
+  params: NavMainMutation;
 };
 
 
-export type MutationCreateNavigationArgs = {
+export type MutationCreateNavMainArgs = {
   relativePath: Scalars['String'];
-  params: NavigationMutation;
+  params: NavMainMutation;
+};
+
+
+export type MutationUpdateNavFooterArgs = {
+  relativePath: Scalars['String'];
+  params: NavFooterMutation;
+};
+
+
+export type MutationCreateNavFooterArgs = {
+  relativePath: Scalars['String'];
+  params: NavFooterMutation;
 };
 
 export type DocumentUpdateMutation = {
   page?: InputMaybe<PageMutation>;
-  navigation?: InputMaybe<NavigationMutation>;
+  navMain?: InputMaybe<NavMainMutation>;
+  navFooter?: InputMaybe<NavFooterMutation>;
   relativePath?: InputMaybe<Scalars['String']>;
 };
 
 export type DocumentMutation = {
   page?: InputMaybe<PageMutation>;
-  navigation?: InputMaybe<NavigationMutation>;
+  navMain?: InputMaybe<NavMainMutation>;
+  navFooter?: InputMaybe<NavFooterMutation>;
 };
 
 export type PageSimpleMutation = {
@@ -610,69 +662,72 @@ export type PageMutation = {
   blocks?: InputMaybe<PageBlocksMutation>;
 };
 
-export type NavigationFooterFooterMenuChildrenMutation = {
+export type NavMainMainNavMenuChildrenChildrenChildrenChildrenMutation = {
   title?: InputMaybe<Scalars['String']>;
   page?: InputMaybe<Scalars['String']>;
 };
 
-export type NavigationFooterFooterMenuMutation = {
-  title?: InputMaybe<Scalars['String']>;
-  children?: InputMaybe<Array<InputMaybe<NavigationFooterFooterMenuChildrenMutation>>>;
-};
-
-export type NavigationFooterMutation = {
-  footerMenu?: InputMaybe<Array<InputMaybe<NavigationFooterFooterMenuMutation>>>;
-};
-
-export type NavigationMainNavMenuChildrenChildrenChildrenChildrenMutation = {
+export type NavMainMainNavMenuChildrenChildrenChildrenMutation = {
   title?: InputMaybe<Scalars['String']>;
   page?: InputMaybe<Scalars['String']>;
+  children?: InputMaybe<Array<InputMaybe<NavMainMainNavMenuChildrenChildrenChildrenChildrenMutation>>>;
 };
 
-export type NavigationMainNavMenuChildrenChildrenChildrenMutation = {
-  title?: InputMaybe<Scalars['String']>;
-  page?: InputMaybe<Scalars['String']>;
-  children?: InputMaybe<Array<InputMaybe<NavigationMainNavMenuChildrenChildrenChildrenChildrenMutation>>>;
-};
-
-export type NavigationMainNavMenuChildrenChildrenMutation = {
+export type NavMainMainNavMenuChildrenChildrenMutation = {
   title?: InputMaybe<Scalars['String']>;
   page?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   disabled?: InputMaybe<Scalars['Boolean']>;
   showInMainNavigation?: InputMaybe<Scalars['Boolean']>;
-  children?: InputMaybe<Array<InputMaybe<NavigationMainNavMenuChildrenChildrenChildrenMutation>>>;
+  children?: InputMaybe<Array<InputMaybe<NavMainMainNavMenuChildrenChildrenChildrenMutation>>>;
 };
 
-export type NavigationMainNavMenuChildrenMutation = {
+export type NavMainMainNavMenuChildrenMutation = {
   title?: InputMaybe<Scalars['String']>;
   page?: InputMaybe<Scalars['String']>;
   disabled?: InputMaybe<Scalars['Boolean']>;
   showInMainNavigation?: InputMaybe<Scalars['Boolean']>;
-  children?: InputMaybe<Array<InputMaybe<NavigationMainNavMenuChildrenChildrenMutation>>>;
+  children?: InputMaybe<Array<InputMaybe<NavMainMainNavMenuChildrenChildrenMutation>>>;
 };
 
-export type NavigationMainNavMenuMutation = {
+export type NavMainMainNavMenuMutation = {
   title?: InputMaybe<Scalars['String']>;
   page?: InputMaybe<Scalars['String']>;
   disabled?: InputMaybe<Scalars['Boolean']>;
   showInMainNavigation?: InputMaybe<Scalars['Boolean']>;
-  children?: InputMaybe<Array<InputMaybe<NavigationMainNavMenuChildrenMutation>>>;
+  children?: InputMaybe<Array<InputMaybe<NavMainMainNavMenuChildrenMutation>>>;
 };
 
-export type NavigationMainNavMutation = {
-  menu?: InputMaybe<Array<InputMaybe<NavigationMainNavMenuMutation>>>;
+export type NavMainMainNavMutation = {
+  menu?: InputMaybe<Array<InputMaybe<NavMainMainNavMenuMutation>>>;
 };
 
-export type NavigationMutation = {
-  footer?: InputMaybe<NavigationFooterMutation>;
-  mainNav?: InputMaybe<NavigationMainNavMutation>;
+export type NavMainMutation = {
+  mainNav?: InputMaybe<NavMainMainNavMutation>;
+};
+
+export type NavFooterFooterFooterMenuChildrenMutation = {
+  title?: InputMaybe<Scalars['String']>;
+  page?: InputMaybe<Scalars['String']>;
+};
+
+export type NavFooterFooterFooterMenuMutation = {
+  title?: InputMaybe<Scalars['String']>;
+  children?: InputMaybe<Array<InputMaybe<NavFooterFooterFooterMenuChildrenMutation>>>;
+};
+
+export type NavFooterFooterMutation = {
+  footerMenu?: InputMaybe<Array<InputMaybe<NavFooterFooterFooterMenuMutation>>>;
+};
+
+export type NavFooterMutation = {
+  footer?: InputMaybe<NavFooterFooterMutation>;
 };
 
 export type NavQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type NavQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', edges?: Array<{ __typename?: 'NavigationConnectionEdges', node?: { __typename?: 'NavigationFooter', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, footer?: Array<{ __typename?: 'NavigationFooterFooterMenu', title: string, children?: Array<{ __typename?: 'NavigationFooterFooterMenuChildren', title: string, page: { __typename?: 'PageSimple', id: string, _sys: { __typename?: 'SystemInfo', breadcrumbs: Array<string> } } | { __typename?: 'PageBlocks', id: string, _sys: { __typename?: 'SystemInfo', breadcrumbs: Array<string> } } } | null> | null } | null> | null } | { __typename?: 'NavigationMainNav', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, main?: Array<{ __typename?: 'NavigationMainNavMenu', title: string, page?: { __typename?: 'PageSimple', id: string, _sys: { __typename?: 'SystemInfo', breadcrumbs: Array<string> } } | { __typename?: 'PageBlocks', id: string, _sys: { __typename?: 'SystemInfo', breadcrumbs: Array<string> } } | null, children?: Array<{ __typename?: 'NavigationMainNavMenuChildren', title: string, page?: { __typename?: 'PageSimple', id: string, _sys: { __typename?: 'SystemInfo', breadcrumbs: Array<string> } } | { __typename?: 'PageBlocks', id: string, _sys: { __typename?: 'SystemInfo', breadcrumbs: Array<string> } } | null, children?: Array<{ __typename?: 'NavigationMainNavMenuChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string, _sys: { __typename?: 'SystemInfo', breadcrumbs: Array<string> } } | { __typename?: 'PageBlocks', id: string, _sys: { __typename?: 'SystemInfo', breadcrumbs: Array<string> } } | null, children?: Array<{ __typename?: 'NavigationMainNavMenuChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string, _sys: { __typename?: 'SystemInfo', breadcrumbs: Array<string> } } | { __typename?: 'PageBlocks', id: string, _sys: { __typename?: 'SystemInfo', breadcrumbs: Array<string> } } | null, children?: Array<{ __typename?: 'NavigationMainNavMenuChildrenChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string, _sys: { __typename?: 'SystemInfo', breadcrumbs: Array<string> } } | { __typename?: 'PageBlocks', id: string, _sys: { __typename?: 'SystemInfo', breadcrumbs: Array<string> } } | null } | null> | null } | null> | null } | null> | null } | null> | null } | null> | null } | null } | null> | null } };
+export type NavQuery = { __typename?: 'Query', navFooterConnection: { __typename?: 'NavFooterConnection', edges?: Array<{ __typename?: 'NavFooterConnectionEdges', node?: { __typename?: 'NavFooterFooter', _values: any } | null } | null> | null }, navMainConnection: { __typename?: 'NavMainConnection', edges?: Array<{ __typename?: 'NavMainConnectionEdges', node?: { __typename?: 'NavMainMainNav', _values: any } | null } | null> | null } };
 
 type PageParts_PageSimple_Fragment = { __typename?: 'PageSimple', title: string, description?: string | null, teaser?: string | null, alias?: string | null, accessible?: string | null, body?: any | null };
 
@@ -680,11 +735,9 @@ type PageParts_PageBlocks_Fragment = { __typename?: 'PageBlocks', title: string,
 
 export type PagePartsFragment = PageParts_PageSimple_Fragment | PageParts_PageBlocks_Fragment;
 
-type NavigationParts_NavigationFooter_Fragment = { __typename?: 'NavigationFooter', footerMenu?: Array<{ __typename: 'NavigationFooterFooterMenu', title: string, children?: Array<{ __typename: 'NavigationFooterFooterMenuChildren', title: string, page: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } } | null> | null } | null> | null };
+export type NavMainPartsFragment = { __typename?: 'NavMainMainNav', menu?: Array<{ __typename: 'NavMainMainNavMenu', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavMainMainNavMenuChildren', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavMainMainNavMenuChildrenChildren', title: string, description?: string | null, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavMainMainNavMenuChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavMainMainNavMenuChildrenChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null } | null> | null } | null> | null } | null> | null } | null> | null } | null> | null };
 
-type NavigationParts_NavigationMainNav_Fragment = { __typename?: 'NavigationMainNav', menu?: Array<{ __typename: 'NavigationMainNavMenu', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildren', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildren', title: string, description?: string | null, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null } | null> | null } | null> | null } | null> | null } | null> | null } | null> | null };
-
-export type NavigationPartsFragment = NavigationParts_NavigationFooter_Fragment | NavigationParts_NavigationMainNav_Fragment;
+export type NavFooterPartsFragment = { __typename?: 'NavFooterFooter', footerMenu?: Array<{ __typename: 'NavFooterFooterFooterMenu', title: string, children?: Array<{ __typename: 'NavFooterFooterFooterMenuChildren', title: string, page: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } } | null> | null } | null> | null };
 
 export type PageQueryVariables = Exact<{
   relativePath: Scalars['String'];
@@ -705,24 +758,43 @@ export type PageConnectionQueryVariables = Exact<{
 
 export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename?: 'PageSimple', id: string, title: string, description?: string | null, teaser?: string | null, alias?: string | null, accessible?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | { __typename?: 'PageBlocks', id: string, title: string, description?: string | null, teaser?: string | null, alias?: string | null, accessible?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, blocks?: Array<{ __typename: 'PageBlocksBlocksHero', headline?: string | null, text?: any | null } | { __typename: 'PageBlocksBlocksFeatures', items?: Array<{ __typename: 'PageBlocksBlocksFeaturesItems', title?: string | null, text?: string | null } | null> | null } | { __typename: 'PageBlocksBlocksContent', body?: any | null } | null> | null } | null } | null> | null } };
 
-export type NavigationQueryVariables = Exact<{
+export type NavMainQueryVariables = Exact<{
   relativePath: Scalars['String'];
 }>;
 
 
-export type NavigationQuery = { __typename?: 'Query', navigation: { __typename?: 'NavigationFooter', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, footerMenu?: Array<{ __typename: 'NavigationFooterFooterMenu', title: string, children?: Array<{ __typename: 'NavigationFooterFooterMenuChildren', title: string, page: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } } | null> | null } | null> | null } | { __typename?: 'NavigationMainNav', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, menu?: Array<{ __typename: 'NavigationMainNavMenu', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildren', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildren', title: string, description?: string | null, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null } | null> | null } | null> | null } | null> | null } | null> | null } | null> | null } };
+export type NavMainQuery = { __typename?: 'Query', navMain: { __typename?: 'NavMainMainNav', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, menu?: Array<{ __typename: 'NavMainMainNavMenu', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavMainMainNavMenuChildren', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavMainMainNavMenuChildrenChildren', title: string, description?: string | null, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavMainMainNavMenuChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavMainMainNavMenuChildrenChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null } | null> | null } | null> | null } | null> | null } | null> | null } | null> | null } };
 
-export type NavigationConnectionQueryVariables = Exact<{
+export type NavMainConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']>;
   after?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Float']>;
   last?: InputMaybe<Scalars['Float']>;
   sort?: InputMaybe<Scalars['String']>;
-  filter?: InputMaybe<NavigationFilter>;
+  filter?: InputMaybe<NavMainFilter>;
 }>;
 
 
-export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename?: 'NavigationFooter', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, footerMenu?: Array<{ __typename: 'NavigationFooterFooterMenu', title: string, children?: Array<{ __typename: 'NavigationFooterFooterMenuChildren', title: string, page: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } } | null> | null } | null> | null } | { __typename?: 'NavigationMainNav', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, menu?: Array<{ __typename: 'NavigationMainNavMenu', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildren', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildren', title: string, description?: string | null, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavigationMainNavMenuChildrenChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null } | null> | null } | null> | null } | null> | null } | null> | null } | null> | null } | null } | null> | null } };
+export type NavMainConnectionQuery = { __typename?: 'Query', navMainConnection: { __typename?: 'NavMainConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavMainConnectionEdges', cursor: string, node?: { __typename?: 'NavMainMainNav', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, menu?: Array<{ __typename: 'NavMainMainNavMenu', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavMainMainNavMenuChildren', title: string, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavMainMainNavMenuChildrenChildren', title: string, description?: string | null, disabled?: boolean | null, showInMainNavigation?: boolean | null, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavMainMainNavMenuChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null, children?: Array<{ __typename: 'NavMainMainNavMenuChildrenChildrenChildrenChildren', title: string, page?: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } | null } | null> | null } | null> | null } | null> | null } | null> | null } | null> | null } | null } | null> | null } };
+
+export type NavFooterQueryVariables = Exact<{
+  relativePath: Scalars['String'];
+}>;
+
+
+export type NavFooterQuery = { __typename?: 'Query', navFooter: { __typename?: 'NavFooterFooter', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, footerMenu?: Array<{ __typename: 'NavFooterFooterFooterMenu', title: string, children?: Array<{ __typename: 'NavFooterFooterFooterMenuChildren', title: string, page: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } } | null> | null } | null> | null } };
+
+export type NavFooterConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Float']>;
+  last?: InputMaybe<Scalars['Float']>;
+  sort?: InputMaybe<Scalars['String']>;
+  filter?: InputMaybe<NavFooterFilter>;
+}>;
+
+
+export type NavFooterConnectionQuery = { __typename?: 'Query', navFooterConnection: { __typename?: 'NavFooterConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavFooterConnectionEdges', cursor: string, node?: { __typename?: 'NavFooterFooter', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, footerMenu?: Array<{ __typename: 'NavFooterFooterFooterMenu', title: string, children?: Array<{ __typename: 'NavFooterFooterFooterMenuChildren', title: string, page: { __typename?: 'PageSimple', id: string } | { __typename?: 'PageBlocks', id: string } } | null> | null } | null> | null } | null } | null> | null } };
 
 export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
@@ -760,58 +832,9 @@ export const PagePartsFragmentDoc = gql`
   }
 }
     `;
-export const NavigationPartsFragmentDoc = gql`
-    fragment NavigationParts on Navigation {
-  ... on NavigationFooter {
-    footerMenu {
-      __typename
-      title
-      children {
-        __typename
-        title
-        page {
-          ... on Page {
-            ... on PageSimple {
-              title
-              description
-              teaser
-              alias
-              accessible
-              body
-            }
-            ... on PageBlocks {
-              title
-              description
-              teaser
-              alias
-              accessible
-              blocks {
-                __typename
-                ... on PageBlocksBlocksHero {
-                  headline
-                  text
-                }
-                ... on PageBlocksBlocksFeatures {
-                  items {
-                    __typename
-                    title
-                    text
-                  }
-                }
-                ... on PageBlocksBlocksContent {
-                  body
-                }
-              }
-            }
-          }
-          ... on Document {
-            id
-          }
-        }
-      }
-    }
-  }
-  ... on NavigationMainNav {
+export const NavMainPartsFragmentDoc = gql`
+    fragment NavMainParts on NavMain {
+  ... on NavMainMainNav {
     menu {
       __typename
       title
@@ -1037,102 +1060,75 @@ export const NavigationPartsFragmentDoc = gql`
   }
 }
     `;
+export const NavFooterPartsFragmentDoc = gql`
+    fragment NavFooterParts on NavFooter {
+  ... on NavFooterFooter {
+    footerMenu {
+      __typename
+      title
+      children {
+        __typename
+        title
+        page {
+          ... on Page {
+            ... on PageSimple {
+              title
+              description
+              teaser
+              alias
+              accessible
+              body
+            }
+            ... on PageBlocks {
+              title
+              description
+              teaser
+              alias
+              accessible
+              blocks {
+                __typename
+                ... on PageBlocksBlocksHero {
+                  headline
+                  text
+                }
+                ... on PageBlocksBlocksFeatures {
+                  items {
+                    __typename
+                    title
+                    text
+                  }
+                }
+                ... on PageBlocksBlocksContent {
+                  body
+                }
+              }
+            }
+          }
+          ... on Document {
+            id
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 export const NavDocument = gql`
     query nav {
-  navigationConnection {
+  navFooterConnection {
     edges {
       node {
         ... on Document {
-          _sys {
-            filename
-            basename
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
+          _values
         }
-        ... on NavigationFooter {
-          footer: footerMenu {
-            title
-            children {
-              title
-              page {
-                ... on Page {
-                  ... on PageSimple {
-                    title
-                  }
-                  ... on PageBlocks {
-                    title
-                  }
-                }
-                ... on Document {
-                  id
-                  _sys {
-                    breadcrumbs
-                  }
-                }
-              }
-            }
-          }
-        }
-        ... on NavigationMainNav {
-          main: menu {
-            title
-            page {
-              ... on Document {
-                id
-                _sys {
-                  breadcrumbs
-                }
-              }
-            }
-            children {
-              title
-              page {
-                ... on Document {
-                  id
-                  _sys {
-                    breadcrumbs
-                  }
-                }
-              }
-              children {
-                title
-                page {
-                  ... on Document {
-                    id
-                    _sys {
-                      breadcrumbs
-                    }
-                  }
-                }
-                children {
-                  title
-                  page {
-                    ... on Document {
-                      id
-                      _sys {
-                        breadcrumbs
-                      }
-                    }
-                  }
-                  children {
-                    title
-                    page {
-                      ... on Document {
-                        id
-                        _sys {
-                          breadcrumbs
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+      }
+    }
+  }
+  navMainConnection {
+    edges {
+      node {
+        ... on Document {
+          _values
         }
       }
     }
@@ -1194,9 +1190,9 @@ export const PageConnectionDocument = gql`
   }
 }
     ${PagePartsFragmentDoc}`;
-export const NavigationDocument = gql`
-    query navigation($relativePath: String!) {
-  navigation(relativePath: $relativePath) {
+export const NavMainDocument = gql`
+    query navMain($relativePath: String!) {
+  navMain(relativePath: $relativePath) {
     ... on Document {
       _sys {
         filename
@@ -1208,13 +1204,13 @@ export const NavigationDocument = gql`
       }
       id
     }
-    ...NavigationParts
+    ...NavMainParts
   }
 }
-    ${NavigationPartsFragmentDoc}`;
-export const NavigationConnectionDocument = gql`
-    query navigationConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: NavigationFilter) {
-  navigationConnection(
+    ${NavMainPartsFragmentDoc}`;
+export const NavMainConnectionDocument = gql`
+    query navMainConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: NavMainFilter) {
+  navMainConnection(
     before: $before
     after: $after
     first: $first
@@ -1243,12 +1239,67 @@ export const NavigationConnectionDocument = gql`
           }
           id
         }
-        ...NavigationParts
+        ...NavMainParts
       }
     }
   }
 }
-    ${NavigationPartsFragmentDoc}`;
+    ${NavMainPartsFragmentDoc}`;
+export const NavFooterDocument = gql`
+    query navFooter($relativePath: String!) {
+  navFooter(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...NavFooterParts
+  }
+}
+    ${NavFooterPartsFragmentDoc}`;
+export const NavFooterConnectionDocument = gql`
+    query navFooterConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: NavFooterFilter) {
+  navFooterConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...NavFooterParts
+      }
+    }
+  }
+}
+    ${NavFooterPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -1261,11 +1312,17 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
     pageConnection(variables?: PageConnectionQueryVariables, options?: C): Promise<{data: PageConnectionQuery, variables: PageConnectionQueryVariables, query: string}> {
         return requester<{data: PageConnectionQuery, variables: PageConnectionQueryVariables, query: string}, PageConnectionQueryVariables>(PageConnectionDocument, variables, options);
       },
-    navigation(variables: NavigationQueryVariables, options?: C): Promise<{data: NavigationQuery, variables: NavigationQueryVariables, query: string}> {
-        return requester<{data: NavigationQuery, variables: NavigationQueryVariables, query: string}, NavigationQueryVariables>(NavigationDocument, variables, options);
+    navMain(variables: NavMainQueryVariables, options?: C): Promise<{data: NavMainQuery, variables: NavMainQueryVariables, query: string}> {
+        return requester<{data: NavMainQuery, variables: NavMainQueryVariables, query: string}, NavMainQueryVariables>(NavMainDocument, variables, options);
       },
-    navigationConnection(variables?: NavigationConnectionQueryVariables, options?: C): Promise<{data: NavigationConnectionQuery, variables: NavigationConnectionQueryVariables, query: string}> {
-        return requester<{data: NavigationConnectionQuery, variables: NavigationConnectionQueryVariables, query: string}, NavigationConnectionQueryVariables>(NavigationConnectionDocument, variables, options);
+    navMainConnection(variables?: NavMainConnectionQueryVariables, options?: C): Promise<{data: NavMainConnectionQuery, variables: NavMainConnectionQueryVariables, query: string}> {
+        return requester<{data: NavMainConnectionQuery, variables: NavMainConnectionQueryVariables, query: string}, NavMainConnectionQueryVariables>(NavMainConnectionDocument, variables, options);
+      },
+    navFooter(variables: NavFooterQueryVariables, options?: C): Promise<{data: NavFooterQuery, variables: NavFooterQueryVariables, query: string}> {
+        return requester<{data: NavFooterQuery, variables: NavFooterQueryVariables, query: string}, NavFooterQueryVariables>(NavFooterDocument, variables, options);
+      },
+    navFooterConnection(variables?: NavFooterConnectionQueryVariables, options?: C): Promise<{data: NavFooterConnectionQuery, variables: NavFooterConnectionQueryVariables, query: string}> {
+        return requester<{data: NavFooterConnectionQuery, variables: NavFooterConnectionQueryVariables, query: string}, NavFooterConnectionQueryVariables>(NavFooterConnectionDocument, variables, options);
       }
     };
   }

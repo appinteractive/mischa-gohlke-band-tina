@@ -1,98 +1,18 @@
 query nav {
-  navigationConnection {
+  navFooterConnection {
     edges {
       node {
         ... on Document {
-          _sys {
-            filename
-            basename
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
+          _values
         }
-        ... on NavigationFooter {
-          footer: footerMenu {
-            title
-            children {
-              title
-              page {
-                ... on Page {
-                  ... on PageSimple {
-                    title
-                  }
-                  ... on PageBlocks {
-                    title
-                  }
-                }
-                ... on Document {
-                  id
-                  _sys {
-                    breadcrumbs
-                  }
-                }
-              }
-            }
-          }
-        }
-        ... on NavigationMainNav {
-          main: menu {
-            title
-            page {
-              ... on Document {
-                id
-                _sys {
-                  breadcrumbs
-                }
-              }
-            }
-            children {
-              title
-              page {
-                ... on Document {
-                  id
-                  _sys {
-                    breadcrumbs
-                  }
-                }
-              }
-              children {
-                title
-                page {
-                  ... on Document {
-                    id
-                    _sys {
-                      breadcrumbs
-                    }
-                  }
-                }
-                children {
-                  title
-                  page {
-                    ... on Document {
-                      id
-                      _sys {
-                        breadcrumbs
-                      }
-                    }
-                  }
-                  children {
-                    title
-                    page {
-                      ... on Document {
-                        id
-                        _sys {
-                          breadcrumbs
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
+      }
+    }
+  }
+  navMainConnection {
+    edges {
+      node {
+        ... on Document {
+          _values
         }
       }
     }

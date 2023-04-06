@@ -33,57 +33,8 @@ fragment PageParts on Page {
   }
 }
 
-fragment NavigationParts on Navigation {
-  ... on NavigationFooter {
-    footerMenu {
-      __typename
-      title
-      children {
-        __typename
-        title
-        page {
-          ... on Page {
-            ... on PageSimple {
-              title
-              description
-              teaser
-              alias
-              accessible
-              body
-            }
-            ... on PageBlocks {
-              title
-              description
-              teaser
-              alias
-              accessible
-              blocks {
-                __typename
-                ... on PageBlocksBlocksHero {
-                  headline
-                  text
-                }
-                ... on PageBlocksBlocksFeatures {
-                  items {
-                    __typename
-                    title
-                    text
-                  }
-                }
-                ... on PageBlocksBlocksContent {
-                  body
-                }
-              }
-            }
-          }
-          ... on Document {
-            id
-          }
-        }
-      }
-    }
-  }
-  ... on NavigationMainNav {
+fragment NavMainParts on NavMain {
+  ... on NavMainMainNav {
     menu {
       __typename
       title
@@ -302,6 +253,58 @@ fragment NavigationParts on Navigation {
                 }
               }
             }
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment NavFooterParts on NavFooter {
+  ... on NavFooterFooter {
+    footerMenu {
+      __typename
+      title
+      children {
+        __typename
+        title
+        page {
+          ... on Page {
+            ... on PageSimple {
+              title
+              description
+              teaser
+              alias
+              accessible
+              body
+            }
+            ... on PageBlocks {
+              title
+              description
+              teaser
+              alias
+              accessible
+              blocks {
+                __typename
+                ... on PageBlocksBlocksHero {
+                  headline
+                  text
+                }
+                ... on PageBlocksBlocksFeatures {
+                  items {
+                    __typename
+                    title
+                    text
+                  }
+                }
+                ... on PageBlocksBlocksContent {
+                  body
+                }
+              }
+            }
+          }
+          ... on Document {
+            id
           }
         }
       }

@@ -6,6 +6,7 @@ import {
   ChevronUpDownIcon,
   LinkIcon,
 } from '@heroicons/react/20/solid'
+import { cleanPath } from '../../src/lib/utils'
 
 /* @vite-ignore */
 
@@ -130,11 +131,6 @@ const useGetOptionSets = (cms: TinaCMS, collections: string[]) => {
   }, [cms, collections])
 
   return { optionSets, loading }
-}
-
-const cleanPath = (path: string) => {
-  // replace ^content/pages/ and .mdx$
-  return path.replace(/^content\/pages/, '').replace(/\.mdx$/, '')
 }
 
 const selectClasses =

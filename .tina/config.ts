@@ -128,12 +128,46 @@ export default defineConfig({
           },
         },
       },
-      {
+      /* {
         name: 'navigation',
         label: 'Navigation',
         path: 'config/navigation',
         format: 'json',
         templates: [footer, main],
+        ui: {
+          global: true,
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
+        },
+      }, */
+      {
+        name: 'navMain',
+        label: 'Hauptnavigation',
+        path: 'config/navigation',
+        format: 'json',
+        templates: [main],
+        match: {
+          include: 'main',
+        },
+        ui: {
+          global: true,
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
+        },
+      },
+      {
+        name: 'navFooter',
+        label: 'Footer',
+        path: 'config/navigation',
+        format: 'json',
+        templates: [footer],
+        match: {
+          include: 'footer',
+        },
         ui: {
           global: true,
           allowedActions: {

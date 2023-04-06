@@ -1,5 +1,5 @@
 import { useReferenceSelect } from '../components/ReferenceSelect'
-import { uiUseTitle } from './utils'
+import { uiUseTitle } from '../../src/lib/utils'
 
 export const footer: any = {
   name: 'footer',
