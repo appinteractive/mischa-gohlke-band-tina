@@ -4,7 +4,12 @@ export const uiUseTitle =
     label: item.title,
   })
 
-export const cleanPath = (path: string) => {
+export const cleanPath = (path: string = '') => {
   // replace ^content/pages/ and .mdx$
-  return path.replace(/^content\/pages/, '').replace(/\.mdx$/, '')
+  if (path?.trim() === '') return ''
+  try {
+    return path.replace(/^content\/pages/, '').replace(/\.mdx$/, '')
+  } catch {
+    return ''
+  }
 }

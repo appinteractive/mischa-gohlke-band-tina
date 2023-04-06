@@ -1,690 +1,650 @@
 {
-  "_template": "mainNav",
   "menu": [
     {
-      "title": "Aktivitäten",
-      "children": [
+      "mainTitle1": "Aktivitäten",
+      "mainShowInMainNavigation1": true,
+      "mainChildren1": [
         {
-          "title": "Veranstaltungsformate",
-          "children": [
+          "mainTitle2": "Veranstaltungsformate",
+          "mainPage2": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/infos-veranstaltungsformate-fur-dein-event.mdx",
+          "mainShowInMainNavigation2": true,
+          "mainChildren2": [
             {
-              "title": "Grenzen sind relativ e.V. Veranstaltungsformate - Eine Übersicht",
-              "description": "Für Kultur- & Sportevents, Festivals, Stadtfeste, Kongresse, Schulen, Universitäten, etc.",
-              "children": [],
-              "disabled": false,
-              "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/infos-veranstaltungsformate-fur-dein-event.mdx",
-              "showInMainNavigation": true
+              "mainTitle3": "Grenzen sind relativ e.V. Veranstaltungsformate - Eine Übersicht",
+              "mainPage3": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/infos-veranstaltungsformate-fur-dein-event.mdx",
+              "mainDescription3": "Für Kultur- & Sportevents, Festivals, Stadtfeste, Kongresse, Schulen, Universitäten, etc.",
+              "mainDisabled3": false,
+              "mainShowInMainNavigation3": true,
+              "mainChildren3": []
             },
             {
-              "title": "GSR e.V. Public Events",
-              "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/support-inklusion.mdx",
-              "description": "Interdisziplinäre Kulturevents auf Festivals, Stadtfesten, Sport- & Kulturveranstaltungen und öffentlichen Plätzen",
-              "children": [
+              "mainTitle3": "GSR e.V. Public Events",
+              "mainPage3": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/support-inklusion.mdx",
+              "mainDescription3": "Interdisziplinäre Kulturevents auf Festivals, Stadtfesten, Sport- & Kulturveranstaltungen und öffentlichen Plätzen",
+              "mainChildren3": [
                 {
-                  "title": "Allgemeine Infos",
-                  "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/support-inklusion.mdx"
+                  "mainTitle4": "Allgemeine Infos",
+                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/support-inklusion.mdx"
                 },
                 {
-                  "title": "\"Kultur ALIVE - Grenzen sind relativ\" // Sa. 01.10.22 Spielbudenplatz (Reeperbahn Hamburg)",
-                  "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/kultur-alive-grenzen-sind-relativ-sa.1.10.22-spielbudenplatz-reeperbahn-hamburg.mdx"
+                  "mainTitle4": "\"Kultur ALIVE - Grenzen sind relativ\" // Sa. 01.10.22 Spielbudenplatz (Reeperbahn Hamburg)",
+                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/kultur-alive-grenzen-sind-relativ-sa.1.10.22-spielbudenplatz-reeperbahn-hamburg.mdx"
                 },
                 {
-                  "title": "Review Grenzen sind relativ Festivals 2017-2019 (Fabrik Hamburg)",
-                  "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/review-grenzen-sind-relativ-festivals-2017-2019.mdx"
+                  "mainTitle4": "Review Grenzen sind relativ Festivals 2017-2019 (Fabrik Hamburg)",
+                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/review-grenzen-sind-relativ-festivals-2017-2019.mdx"
                 }
               ]
             },
             {
-              "title": "Celebrate the music ",
-              "description": "Eine Veranstaltungsreihe mit Workshops, Begegnungen und Konzerten. ",
-              "children": [
+              "mainTitle3": "Celebrate the music ",
+              "mainDescription3": "Eine Veranstaltungsreihe mit Workshops, Begegnungen und Konzerten. ",
+              "mainDisabled3": false,
+              "mainChildren3": [
                 {
-                  "title": "Allgemeine Infos",
-                  "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/celebrate-the-music/allgemeine-infos-erlebnistage-inklusion.mdx"
+                  "mainTitle4": "Allgemeine Infos",
+                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/celebrate-the-music/allgemeine-infos-erlebnistage-inklusion.mdx"
                 },
                 {
-                  "title": "Dozenten-Team ",
-                  "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/celebrate-the-music/dozenten-team-workshops.mdx",
-                  "disabled": false
+                  "mainTitle4": "Dozenten-Team ",
+                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/celebrate-the-music/dozenten-team-workshops.mdx"
                 },
                 {
-                  "title": "Workshops",
-                  "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/celebrate-the-music/workshops.mdx"
+                  "mainTitle4": "Workshops",
+                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/celebrate-the-music/workshops.mdx"
                 },
                 {
-                  "title": "Review Celebrate the music 2022 Hamburg",
-                  "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/celebrate-the-music/review-celebrate-the-music-2022-hamburg.mdx"
+                  "mainTitle4": "Review Celebrate the music 2022 Hamburg",
+                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/celebrate-the-music/review-celebrate-the-music-2022-hamburg.mdx"
                 }
-              ],
-              "external": false,
-              "disabled": false
+              ]
             },
             {
-              "title": "Spektralkombüse",
-              "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/spektralkombuese.mdx",
-              "description": "Erfahrbare Inklusion durch Musik, Tanz und Kabarett"
+              "mainTitle3": "Spektralkombüse",
+              "mainPage3": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/spektralkombuese.mdx",
+              "mainDescription3": "Erfahrbare Inklusion durch Musik, Tanz und Kabarett"
             },
             {
-              "title": "Konzert, Workshops & Talk mit der Mischa Gohlke Band",
-              "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/konzert-workshops-talk-von-mit-der-mischa-gohlke-band.mdx",
-              "description": "Mit Live-Musik, spannenden Workshops und interaktiver Begegnung ",
-              "disabled": false
+              "mainTitle3": "Konzert, Workshops & Talk mit der Mischa Gohlke Band",
+              "mainPage3": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/konzert-workshops-talk-von-mit-der-mischa-gohlke-band.mdx",
+              "mainDescription3": "Mit Live-Musik, spannenden Workshops und interaktiver Begegnung ",
+              "mainDisabled3": false
             }
-          ],
-          "showInMainNavigation": true,
-          "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/infos-veranstaltungsformate-fur-dein-event.mdx"
+          ]
         },
         {
-          "title": "Kampagnen-Musikvideos",
-          "children": [
+          "mainTitle2": "Kampagnen-Musikvideos",
+          "mainShowInMainNavigation2": true,
+          "mainChildren2": [
             {
-              "title": "AndersSein vereint - Inklusionssong für Deutschland",
-              "description": "1 Musikvideo, 3 Festivals und diverse Folgeprojekte für die \"gesamtgesellschaftliche Inklusion\".",
-              "children": [
+              "mainTitle3": "AndersSein vereint - Inklusionssong für Deutschland",
+              "mainPage3": "content/pages/aktivitaeten/kampagnen-musikvideos/anderssein-vereint/asv-projektinfo.mdx",
+              "mainDescription3": "1 Musikvideo, 3 Festivals und diverse Folgeprojekte für die \"gesamtgesellschaftliche Inklusion\".",
+              "mainChildren3": [
                 {
-                  "title": "Worum geht es?",
-                  "page": "content/pages/aktivitaeten/kampagnen-musikvideos/anderssein-vereint/asv-worum-geht-es.mdx"
+                  "mainTitle4": "Worum geht es?",
+                  "mainPage4": "content/pages/aktivitaeten/kampagnen-musikvideos/anderssein-vereint/asv-worum-geht-es.mdx"
                 },
                 {
-                  "title": "Projektinfo",
-                  "page": "content/pages/aktivitaeten/kampagnen-musikvideos/anderssein-vereint/asv-projektinfo.mdx"
+                  "mainTitle4": "Projektinfo",
+                  "mainPage4": "content/pages/aktivitaeten/kampagnen-musikvideos/anderssein-vereint/asv-projektinfo.mdx"
                 },
                 {
-                  "title": "Akteure: Band, Gastsänger & Protagonisten",
-                  "page": "content/pages/aktivitaeten/kampagnen-musikvideos/anderssein-vereint/asv-akteure.mdx"
+                  "mainTitle4": "Akteure: Band, Gastsänger & Protagonisten",
+                  "mainPage4": "content/pages/aktivitaeten/kampagnen-musikvideos/anderssein-vereint/asv-akteure.mdx"
                 },
                 {
-                  "title": "Videos & Fotos",
-                  "page": "content/pages/aktivitaeten/kampagnen-musikvideos/anderssein-vereint/asv-videos-fotos.mdx"
+                  "mainTitle4": "Videos & Fotos",
+                  "mainPage4": "content/pages/aktivitaeten/kampagnen-musikvideos/anderssein-vereint/asv-videos-fotos.mdx"
                 },
                 {
-                  "title": "Review & Erfolge",
-                  "page": "content/pages/aktivitaeten/kampagnen-musikvideos/anderssein-vereint/asv-review-erfolge.mdx"
+                  "mainTitle4": "Review & Erfolge",
+                  "mainPage4": "content/pages/aktivitaeten/kampagnen-musikvideos/anderssein-vereint/asv-review-erfolge.mdx"
                 },
                 {
-                  "title": "AndersSein vereint Festivals",
-                  "page": "content/pages/aktivitaeten/kampagnen-musikvideos/anderssein-vereint/asv-anderssein-vereint-festivals.mdx"
+                  "mainTitle4": "AndersSein vereint Festivals",
+                  "mainPage4": "content/pages/aktivitaeten/kampagnen-musikvideos/anderssein-vereint/asv-anderssein-vereint-festivals.mdx"
                 }
               ]
             },
             {
-              "title": "2. Inklusions- & Friedenssong (Arbeitstitel)",
-              "description": "Eine (r)evolutionäre Kampagne für eine Beziehungskultur mit allem was dazu gehört!",
-              "children": [
+              "mainTitle3": "2. Inklusions- & Friedenssong (Arbeitstitel)",
+              "mainPage3": "content/pages/aktivitaeten/kampagnen-musikvideos/inklusions-und-friedenskampagnensong/allgemeine-infos-2-inklusion-friedenssong.mdx",
+              "mainDescription3": "Eine (r)evolutionäre Kampagne für eine Beziehungskultur mit allem was dazu gehört!",
+              "mainChildren3": [
                 {
-                  "title": "Allgemeine Infos",
-                  "page": "content/pages/aktivitaeten/kampagnen-musikvideos/inklusions-und-friedenskampagnensong/allgemeine-infos-2-inklusion-friedenssong.mdx"
+                  "mainTitle4": "Allgemeine Infos",
+                  "mainPage4": "content/pages/aktivitaeten/kampagnen-musikvideos/inklusions-und-friedenskampagnensong/allgemeine-infos-2-inklusion-friedenssong.mdx"
                 }
               ]
             }
-          ],
-          "showInMainNavigation": true
+          ]
         },
         {
-          "title": "Musikunterricht, Workshops & Coaching",
-          "page": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/musikunterricht-fuer-hoergeschaedigte/worum-geht-es-musikunterricht-fur-horgeschadigte.mdx",
-          "children": [
+          "mainTitle2": "Musikunterricht, Workshops & Coaching",
+          "mainPage2": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/musikunterricht-fuer-hoergeschaedigte/worum-geht-es-musikunterricht-fur-horgeschadigte.mdx",
+          "mainShowInMainNavigation2": true,
+          "mainChildren2": [
             {
-              "title": "Musikunterricht für Hörgeschädigte",
-              "description": "Musikunterricht, der alle Sinne, Wahrnehmungen & Empfindungen mit einbezieht und alle Menschen anspricht.",
-              "children": [
+              "mainTitle3": "Musikunterricht für Hörgeschädigte",
+              "mainPage3": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/musikunterricht-fuer-hoergeschaedigte/worum-geht-es-musikunterricht-fur-horgeschadigte.mdx",
+              "mainDescription3": "Musikunterricht, der alle Sinne, Wahrnehmungen & Empfindungen mit einbezieht und alle Menschen anspricht.",
+              "mainChildren3": [
                 {
-                  "title": "Worum geht es?",
-                  "page": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/musikunterricht-fuer-hoergeschaedigte/worum-geht-es-musikunterricht-fur-horgeschadigte.mdx"
+                  "mainTitle4": "Worum geht es?",
+                  "mainPage4": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/musikunterricht-fuer-hoergeschaedigte/worum-geht-es-musikunterricht-fur-horgeschadigte.mdx"
                 },
                 {
-                  "title": "Kiel",
-                  "page": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/musikunterricht-fuer-hoergeschaedigte/musikunterricht-kiel.mdx"
+                  "mainTitle4": "Kiel",
+                  "mainPage4": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/musikunterricht-fuer-hoergeschaedigte/musikunterricht-kiel.mdx"
                 },
                 {
-                  "title": "Hamburg",
-                  "page": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/musikunterricht-fuer-hoergeschaedigte/musikunterricht-hamburg.mdx"
+                  "mainTitle4": "Hamburg",
+                  "mainPage4": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/musikunterricht-fuer-hoergeschaedigte/musikunterricht-hamburg.mdx"
                 },
                 {
-                  "title": "Bundesweit",
-                  "page": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/musikunterricht-fuer-hoergeschaedigte/musikunterricht-bundesweit.mdx"
-                }
-              ],
-              "page": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/musikunterricht-fuer-hoergeschaedigte/worum-geht-es-musikunterricht-fur-horgeschadigte.mdx"
-            },
-            {
-              "title": "Bandcamps",
-              "description": "Ob inklusiv, interkulturell oder/und finanziell-beeinträchtigt. Musik ist für alle da und rockt!",
-              "children": [
-                {
-                  "title": "Allgemeine Infos",
-                  "page": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/allgemeine-infos-bands.mdx"
-                }
-              ],
-              "disabled": true
-            },
-            {
-              "title": "Workshops, Seminare & Vorträge",
-              "description": "Themen: Inklusiver Musikunterricht, Projekt- & Veranstaltungsmanagement, Inklusion, uvam.",
-              "children": [
-                {
-                  "title": "Allgemeine Infos",
-                  "page": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/workshops-seminare-vortraege/allgemeine-infos-workshops-seminare-vortrage.mdx"
-                },
-                {
-                  "title": "Referent",
-                  "page": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/workshops-seminare-vortraege/referent.mdx"
-                },
-                {
-                  "title": "WS \"Grenzen sind relativ - Musik, Kulturarbeit, systemische Inklusion & Beziehungskultur(en)\"",
-                  "page": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/workshops-seminare-vortraege/ws-grenzen-sind-relativ-musik-systemische-inklusion-beziehungskultur-en.mdx"
-                },
-                {
-                  "title": "WS \"Grenzen sind relativ - Musikunterricht für Hörgeschädigte\"",
-                  "page": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/workshops-seminare-vortraege/ws-grenzen-sind-relativ-musikunterricht-fur-horgeschadigte.mdx"
+                  "mainTitle4": "Bundesweit",
+                  "mainPage4": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/musikunterricht-fuer-hoergeschaedigte/musikunterricht-bundesweit.mdx"
                 }
               ]
             },
             {
-              "title": "Workshops, Talk & Konzert von/mit der Mischa Gohlke Band",
-              "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/konzert-workshops-talk-von-mit-der-mischa-gohlke-band.mdx",
-              "description": "Grenzen sind relativ. Mit Live-Musik, spannenden Workshops und interaktiver Begegnung wird es praktisch erfahrbar."
+              "mainTitle3": "Bandcamps",
+              "mainDescription3": "Ob inklusiv, interkulturell oder/und finanziell-beeinträchtigt. Musik ist für alle da und rockt!",
+              "mainDisabled3": true,
+              "mainChildren3": [
+                {
+                  "mainTitle4": "Allgemeine Infos",
+                  "mainPage4": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/allgemeine-infos-bands.mdx"
+                }
+              ]
             },
             {
-              "title": "Beratung & Coaching",
-              "description": "Für Vereine, Schulen, Universitäten, Unternehmen, Kulturschaffende, Künstler, Agenturen, usw.",
-              "children": [],
-              "page": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/beratung-und-coaching.mdx",
-              "showInMainNavigation": true
+              "mainTitle3": "Workshops, Seminare & Vorträge",
+              "mainDescription3": "Themen: Inklusiver Musikunterricht, Projekt- & Veranstaltungsmanagement, Inklusion, uvam.",
+              "mainChildren3": [
+                {
+                  "mainTitle4": "Allgemeine Infos",
+                  "mainPage4": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/workshops-seminare-vortraege/allgemeine-infos-workshops-seminare-vortrage.mdx"
+                },
+                {
+                  "mainTitle4": "Referent",
+                  "mainPage4": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/workshops-seminare-vortraege/referent.mdx"
+                },
+                {
+                  "mainTitle4": "WS \"Grenzen sind relativ - Musik, Kulturarbeit, systemische Inklusion & Beziehungskultur(en)\"",
+                  "mainPage4": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/workshops-seminare-vortraege/ws-grenzen-sind-relativ-musik-systemische-inklusion-beziehungskultur-en.mdx"
+                },
+                {
+                  "mainTitle4": "WS \"Grenzen sind relativ - Musikunterricht für Hörgeschädigte\"",
+                  "mainPage4": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/workshops-seminare-vortraege/ws-grenzen-sind-relativ-musikunterricht-fur-horgeschadigte.mdx"
+                }
+              ]
+            },
+            {
+              "mainTitle3": "Workshops, Talk & Konzert von/mit der Mischa Gohlke Band",
+              "mainPage3": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/konzert-workshops-talk-von-mit-der-mischa-gohlke-band.mdx",
+              "mainDescription3": "Grenzen sind relativ. Mit Live-Musik, spannenden Workshops und interaktiver Begegnung wird es praktisch erfahrbar."
+            },
+            {
+              "mainTitle3": "Beratung & Coaching",
+              "mainPage3": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/beratung-und-coaching.mdx",
+              "mainDescription3": "Für Vereine, Schulen, Universitäten, Unternehmen, Kulturschaffende, Künstler, Agenturen, usw.",
+              "mainShowInMainNavigation3": true,
+              "mainChildren3": []
             }
-          ],
-          "showInMainNavigation": true,
-          "description": " "
+          ]
         },
         {
-          "title": "Netzwerk- & Öffentlichkeitsarbeit",
-          "children": [
+          "mainTitle2": "Netzwerk- & Öffentlichkeitsarbeit",
+          "mainPage2": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/allgemeine-infos.mdx",
+          "mainShowInMainNavigation2": true,
+          "mainChildren2": [
             {
-              "title": "Öffentlichkeitsarbeit & Bewusstseinsbildung",
-              "page": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/allgemeine-infos.mdx",
-              "description": "Interdisziplinäre Kultur, gesamtgesellschaftliche Inklusion, Frieden, Dialog & Miteinander, integrales Bewusstsein"
+              "mainTitle3": "Öffentlichkeitsarbeit & Bewusstseinsbildung",
+              "mainPage3": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/allgemeine-infos.mdx",
+              "mainDescription3": "Interdisziplinäre Kultur, gesamtgesellschaftliche Inklusion, Frieden, Dialog & Miteinander, integrales Bewusstsein"
             },
             {
-              "title": "Interdisziplinäre Kulturarbeit",
-              "description": "Wissenstransfer, Vernetzung und Kooperationsvorhaben",
-              "page": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/interdisziplinaere-kulturarbeit/interdisziplinare-kulturarbeit.mdx",
-              "children": [
+              "mainTitle3": "Interdisziplinäre Kulturarbeit",
+              "mainPage3": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/interdisziplinaere-kulturarbeit/interdisziplinare-kulturarbeit.mdx",
+              "mainDescription3": "Wissenstransfer, Vernetzung und Kooperationsvorhaben",
+              "mainChildren3": [
                 {
-                  "title": "Allgemeine Infos",
-                  "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/interdisziplinaere-kulturarbeit/allgemein.mdx"
+                  "mainTitle4": "Allgemeine Infos",
+                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/interdisziplinaere-kulturarbeit/allgemein.mdx"
                 },
                 {
-                  "title": "#diskurskultur - die 7teilige Filmreihe",
-                  "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/interdisziplinaere-kulturarbeit/filmproduktionen-kultur-von-allen.mdx"
+                  "mainTitle4": "#diskurskultur - die 7teilige Filmreihe",
+                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/interdisziplinaere-kulturarbeit/filmproduktionen-kultur-von-allen.mdx"
                 }
               ]
             },
             {
-              "title": "Come together Partys - Grenzen sind relativ e.V. & Friends ",
-              "page": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/come-together-partys-grenzen-sind-relativ-e.v.friends.mdx",
-              "description": "Monatliche Netzwerkveranstaltungen mit Live Musik, Jam Session und interaktiven Aktionen"
+              "mainTitle3": "Come together Partys - Grenzen sind relativ e.V. & Friends ",
+              "mainPage3": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/come-together-partys-grenzen-sind-relativ-e.v.friends.mdx",
+              "mainDescription3": "Monatliche Netzwerkveranstaltungen mit Live Musik, Jam Session und interaktiven Aktionen"
             },
             {
-              "title": "Vermittlungsbörse",
-              "description": "Vermittlung von Künstlern, Dozenten, Filmern, Designern, Promotern, usw.",
-              "page": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/vermittlungsborse.mdx"
+              "mainTitle3": "Vermittlungsbörse",
+              "mainPage3": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/vermittlungsborse.mdx",
+              "mainDescription3": "Vermittlung von Künstlern, Dozenten, Filmern, Designern, Promotern, usw."
             },
             {
-              "title": "Kooperationsprojekte",
-              "description": "Zusammen mit Vereinen, Institutionen, Initiativen, etc.",
-              "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/kooperationsprojekte/allgemeine-infos-kooperationsprojekte.mdx",
-              "children": [
+              "mainTitle3": "Kooperationsprojekte",
+              "mainPage3": "content/pages/aktivitaeten/projekte-und-veranstaltungen/kooperationsprojekte/allgemeine-infos-kooperationsprojekte.mdx",
+              "mainDescription3": "Zusammen mit Vereinen, Institutionen, Initiativen, etc.",
+              "mainChildren3": [
                 {
-                  "title": "Allgemeine Infos",
-                  "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/kooperationsprojekte/allgemeine-infos-kooperationsprojekte.mdx"
+                  "mainTitle4": "Allgemeine Infos",
+                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/kooperationsprojekte/allgemeine-infos-kooperationsprojekte.mdx"
                 },
                 {
-                  "title": "Kultur Digital Barrierefrei - Eine Initiative von handiclapped e.V. und MusicTech Germany",
-                  "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/kooperationsprojekte/kultur-digital-barrierefrei-eine-initiative-von-handiclapped-e.v.und-musictech-germany.mdx"
+                  "mainTitle4": "Kultur Digital Barrierefrei - Eine Initiative von handiclapped e.V. und MusicTech Germany",
+                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/kooperationsprojekte/kultur-digital-barrierefrei-eine-initiative-von-handiclapped-e.v.und-musictech-germany.mdx"
                 },
                 {
-                  "title": "Filmfest Hamburg: Kommunikationskooperation \"Sound of Metal\"",
-                  "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/kooperationsprojekte/filmfest-hamburg-kommunikationskooperation-sound-of-metal.mdx"
+                  "mainTitle4": "Filmfest Hamburg: Kommunikationskooperation \"Sound of Metal\"",
+                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/kooperationsprojekte/filmfest-hamburg-kommunikationskooperation-sound-of-metal.mdx"
                 }
               ]
             },
             {
-              "title": "Gesamtgesellschaftliches Aktionsbündnis",
-              "page": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/gemeinschaftliches-aktionsbundnis.mdx",
-              "disabled": true
+              "mainTitle3": "Gesamtgesellschaftliches Aktionsbündnis",
+              "mainPage3": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/gemeinschaftliches-aktionsbundnis.mdx",
+              "mainDisabled3": true
             }
-          ],
-          "showInMainNavigation": true,
-          "description": "Wir bringen verschiedenste Akteure zusammen und setzen uns für eine inklusive, integrale und friedliche Gesellschaft ein.",
-          "page": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/allgemeine-infos.mdx"
+          ]
         },
         {
-          "title": "GSR Medienportal",
-          "description": "Willkommen auf unserem neuen multipolaren Medienportal! ",
-          "page": "content/pages/aktivitaeten/gsr-medienportal/gsr-medienportal.mdx",
-          "children": [
+          "mainTitle2": "GSR Medienportal",
+          "mainPage2": "content/pages/aktivitaeten/gsr-medienportal/gsr-medienportal.mdx",
+          "mainDisabled2": false,
+          "mainShowInMainNavigation2": true,
+          "mainChildren2": [
             {
-              "title": "GSR Medienportal",
-              "description": "Willkommen auf unserem neuen multipolaren Medienportal!",
-              "page": "content/pages/aktivitaeten/gsr-medienportal/gsr-medienportal.mdx",
-              "children": [
+              "mainTitle3": "GSR Medienportal",
+              "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/gsr-medienportal.mdx",
+              "mainDescription3": "Willkommen auf unserem neuen multipolaren Medienportal!",
+              "mainShowInMainNavigation3": true,
+              "mainChildren3": [
                 {
-                  "children": [
+                  "mainTitle4": "Blog",
+                  "mainPage4": "content/pages/media/blog/grenzen-sind-relativ-musik-horen-und-inklusion.mdx",
+                  "mainChildren4": [
                     {
-                      "title": "Grenzen sind relativ – Musik, Hören und Inklusion",
-                      "page": "content/pages/media/blog/grenzen-sind-relativ-musik-horen-und-inklusion.mdx"
+                      "mainTitle5": "Grenzen sind relativ – Musik, Hören und Inklusion",
+                      "mainPage5": "content/pages/media/blog/grenzen-sind-relativ-musik-horen-und-inklusion.mdx"
                     },
                     {
-                      "title": "Auf in eine neue Beziehungskultur!",
-                      "page": "content/pages/media/blog/auf-in-eine-neue-beziehungskultur.mdx"
+                      "mainTitle5": "Auf in eine neue Beziehungskultur!",
+                      "mainPage5": "content/pages/media/blog/auf-in-eine-neue-beziehungskultur.mdx"
                     }
-                  ],
-                  "title": "Blog",
-                  "page": "content/pages/media/blog/grenzen-sind-relativ-musik-horen-und-inklusion.mdx",
-                  "showInMainNavigation": false
+                  ]
                 },
                 {
-                  "title": "#diskurskultur",
-                  "page": "content/pages/aktivitaeten/projekte-und-veranstaltungen/interdisziplinaere-kulturarbeit/filmproduktionen-kultur-von-allen.mdx",
-                  "showInMainNavigation": false
-                }
-              ],
-              "showInMainNavigation": true
-            },
-            {
-              "title": "#diskurskultur - die 7teilige Filmreihe",
-              "page": "content/pages/aktivitaeten/gsr-medienportal/diskurskultur.mdx",
-              "description": ""
-            },
-            {
-              "title": "grenzenlos vernetzt von a-z",
-              "page": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/grenzenlos-vernetzt.mdx",
-              "description": "",
-              "showInMainNavigation": false,
-              "children": [
-                {
-                  "title": "Projektinfo",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/grenzenlos-vernetzt.mdx"
-                },
-                {
-                  "title": "p- probe",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/p-probe.mdx",
-                  "disabled": false,
-                  "showInMainNavigation": true
-                },
-                {
-                  "title": "q - quō Ohrenkuss",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/q-quo-ohrenkuss.mdx",
-                  "showInMainNavigation": true
-                },
-                {
-                  "title": "r- rahmen",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/r-rahmen-mental-das-festival-zu-schizophrenie.mdx",
-                  "showInMainNavigation": true
-                },
-                {
-                  "title": "s-synchronität",
-                  "external": false,
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/s-synchronitat.mdx"
-                },
-                {
-                  "title": "t- tasttanz",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/z-zugabe-copy.mdx"
-                },
-                {
-                  "title": "u-ubuntu",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/v-virtuelle-strassen-copy.mdx"
-                },
-                {
-                  "title": "v - virtuelle straßen",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/v-virtuelle-strassen.mdx"
-                },
-                {
-                  "external": false,
-                  "showInMainNavigation": false,
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/w-wind.mdx",
-                  "title": "w- wind"
-                },
-                {
-                  "title": "y - yallah",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/y-yallah.mdx"
-                },
-                {
-                  "title": "z - zugabe",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/z-zugabe.mdx"
+                  "mainTitle4": "#diskurskultur",
+                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/interdisziplinaere-kulturarbeit/filmproduktionen-kultur-von-allen.mdx"
                 }
               ]
             },
             {
-              "children": [
-                {
-                  "title": "Studie Kindheit",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/studie-zeigt-kindheit-1.mdx",
-                  "showInMainNavigation": true
-                },
-                {
-                  "title": "Info news.oder.fake",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/news.oder.fake.mdx"
-                },
-                {
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/sozialer-aufstieg-in-deutschland-fur-jeden-machbar.mdx",
-                  "title": "Sozialer Aufstieg in Deutschland für jeden machbar"
-                },
-                {
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/begrenzte-ressourcen.mdx",
-                  "title": "Begrenzte Ressourcen"
-                },
-                {
-                  "title": "Politisch inkorrekt, aber erfolgreich",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/begrenzte-ressourcen-copy.mdx",
-                  "showInMainNavigation": true
-                },
-                {
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/unabhangig-vom-gas.mdx",
-                  "showInMainNavigation": true,
-                  "title": "Unabhängig vom Gas"
-                },
-                {
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/universalgrammatik.mdx",
-                  "title": "Universalgrammatik",
-                  "disabled": false,
-                  "showInMainNavigation": true
-                },
-                {
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/wunder-gibt-es-immer-wieder.mdx",
-                  "title": "Wunder gibt es immer wieder",
-                  "showInMainNavigation": true
-                },
-                {
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/inklusive-arbeitsstatten.mdx",
-                  "title": "Inklusive Arbeitsstätten",
-                  "showInMainNavigation": true
-                },
-                {
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/gutes-signal-trotz-corona.mdx",
-                  "title": "Gutes Signal trotz Corona",
-                  "showInMainNavigation": true
-                },
-                {
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/aufklarung-und-enttabuisierung-wirken.mdx",
-                  "title": "Aufklärung und Enttabuisierung wirken",
-                  "showInMainNavigation": true
-                }
-              ],
-              "title": "news.oder.fake",
-              "page": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/news.oder.fake.mdx"
+              "mainTitle3": "#diskurskultur - die 7teilige Filmreihe",
+              "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/diskurskultur.mdx",
+              "mainDescription3": ""
             },
             {
-              "title": "Blog",
-              "children": [
+              "mainTitle3": "grenzenlos vernetzt von a-z",
+              "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/grenzenlos-vernetzt.mdx",
+              "mainDescription3": "",
+              "mainShowInMainNavigation3": false,
+              "mainChildren3": [
                 {
-                  "title": "Grenzen sind relativ – Musik, Hören und Inklusion",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/blog/grenzen-sind-relativ-musik-horen-und-inklusion.mdx",
-                  "showInMainNavigation": true
+                  "mainTitle4": "Projektinfo",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/grenzenlos-vernetzt.mdx"
                 },
                 {
-                  "title": "Auf in eine neue Beziehungskultur",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/blog/medienportal-auf-in-eine-neue-beziehungskultur.mdx",
-                  "showInMainNavigation": true
+                  "mainTitle4": "p- probe",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/p-probe.mdx"
                 },
                 {
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/blog/you-can-not-be-what-you-cannot-see.mdx",
-                  "external": false,
-                  "title": "„You can not be what you cannot see!“"
+                  "mainTitle4": "q - quō Ohrenkuss",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/q-quo-ohrenkuss.mdx"
+                },
+                {
+                  "mainTitle4": "r- rahmen",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/r-rahmen-mental-das-festival-zu-schizophrenie.mdx"
+                },
+                {
+                  "mainTitle4": "s-synchronität",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/s-synchronitat.mdx"
+                },
+                {
+                  "mainTitle4": "t- tasttanz",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/z-zugabe-copy.mdx"
+                },
+                {
+                  "mainTitle4": "u-ubuntu",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/v-virtuelle-strassen-copy.mdx"
+                },
+                {
+                  "mainTitle4": "v - virtuelle straßen",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/v-virtuelle-strassen.mdx"
+                },
+                {
+                  "mainTitle4": "w- wind",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/w-wind.mdx"
+                },
+                {
+                  "mainTitle4": "y - yallah",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/y-yallah.mdx"
+                },
+                {
+                  "mainTitle4": "z - zugabe",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/z-zugabe.mdx"
                 }
               ]
             },
             {
-              "title": "GSR e.V. Impressions",
-              "page": "content/pages/aktivitaeten/gsr-medienportal/gsr-e.v.impressions.mdx"
-            },
-            {
-              "title": "Support your crowd",
-              "page": "content/pages/aktivitaeten/gsr-medienportal/support-your-crowd/info-support-y-our-crowd.mdx",
-              "showInMainNavigation": true,
-              "children": [
+              "mainTitle3": "news.oder.fake",
+              "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/news.oder.fake.mdx",
+              "mainChildren3": [
                 {
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/support-your-crowd/eucrea.mdx",
-                  "title": "EUCREA e.V."
+                  "mainTitle4": "Studie Kindheit",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/studie-zeigt-kindheit-1.mdx"
                 },
                 {
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/support-your-crowd/lebenshilfe-norderstedt-e.v.mdx",
-                  "title": "Lebenshilfe Norderstedt e.V.",
-                  "disabled": false,
-                  "showInMainNavigation": true
+                  "mainTitle4": "Info news.oder.fake",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/news.oder.fake.mdx"
                 },
                 {
-                  "title": "sense the steps e.V.",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/support-your-crowd/sense-the-steps-e.v.mdx",
-                  "disabled": false,
-                  "showInMainNavigation": true
+                  "mainTitle4": "Sozialer Aufstieg in Deutschland für jeden machbar",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/sozialer-aufstieg-in-deutschland-fur-jeden-machbar.mdx"
                 },
                 {
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/support-your-crowd/rock-und-pop-schule-kiel.mdx",
-                  "title": "Rock und Pop Schule Kiel",
-                  "disabled": false,
-                  "showInMainNavigation": true
+                  "mainTitle4": "Begrenzte Ressourcen",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/begrenzte-ressourcen.mdx"
                 },
                 {
-                  "title": "Sommerblut Kulturfestival",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/support-your-crowd/sommerblut-kulturfestival.mdx",
-                  "showInMainNavigation": true
+                  "mainTitle4": "Politisch inkorrekt, aber erfolgreich",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/begrenzte-ressourcen-copy.mdx"
                 },
                 {
-                  "title": "Stiftung Generationen-Zusammenhalt",
-                  "page": "content/pages/aktivitaeten/gsr-medienportal/support-your-crowd/stiftung-generationen-zusammenhalt.mdx",
-                  "showInMainNavigation": true
-                }
-              ],
-              "disabled": false
-            },
-            {
-              "title": "Events \"Celebrate analog life\"",
-              "page": "content/pages/aktivitaeten/gsr-medienportal/events-celebrate-analog-life.mdx"
-            },
-            {
-              "title": "Selbstverständnis",
-              "page": "content/pages/aktivitaeten/gsr-medienportal/selbstverstandnis.mdx"
-            }
-          ],
-          "showInMainNavigation": true,
-          "disabled": false
-        }
-      ],
-      "showInMainNavigation": true,
-      "external": false
-    },
-    {
-      "title": "Mitmachen",
-      "page": "content/pages/mitmachen.mdx"
-    },
-    {
-      "title": "Über uns",
-      "children": [
-        {
-          "title": "Mission & Vision",
-          "page": "content/pages/ueber-uns/mission-und-vision.mdx"
-        },
-        {
-          "title": "Grenzen sind relativ e.V. - Aktionsbüro für Kultur, Gesellschaft, Inklusion & Frieden",
-          "page": "content/pages/ueber-uns/info.mdx"
-        },
-        {
-          "title": "Übersicht Aktivitäten",
-          "page": "content/pages/ueber-uns/ubersicht-aktivitaten.mdx",
-          "disabled": true
-        },
-        {
-          "title": "Das Team",
-          "page": "content/pages/ueber-uns/das-team/alle.mdx",
-          "children": [
-            {
-              "title": "Aktionsbüro",
-              "children": [
-                {
-                  "title": "Mischa Gohlke",
-                  "page": "content/pages/ueber-uns/das-team/aktionsbuero/mischa-gohlke.mdx"
+                  "mainTitle4": "Unabhängig vom Gas",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/unabhangig-vom-gas.mdx"
                 },
                 {
-                  "title": "Fabia Mekus",
-                  "page": "content/pages/ueber-uns/das-team/aktionsbuero/fabia-mekus.mdx"
+                  "mainTitle4": "Universalgrammatik",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/universalgrammatik.mdx"
                 },
                 {
-                  "title": "Tjorven Malin Steinmeyer",
-                  "page": "content/pages/ueber-uns/das-team/aktionsbuero/tjorven-malin-steinmeyer.mdx"
+                  "mainTitle4": "Wunder gibt es immer wieder",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/wunder-gibt-es-immer-wieder.mdx"
                 },
                 {
-                  "title": "Grzegorz Leoniec",
-                  "page": "content/pages/ueber-uns/das-team/aktionsbuero/grzegorz-leoniec.mdx",
-                  "disabled": true
+                  "mainTitle4": "Inklusive Arbeitsstätten",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/inklusive-arbeitsstatten.mdx"
                 },
                 {
-                  "title": "Thorsten Hesse",
-                  "page": "content/pages/ueber-uns/das-team/aktionsbuero/thorsten-hesse.mdx",
-                  "disabled": true
+                  "mainTitle4": "Gutes Signal trotz Corona",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/gutes-signal-trotz-corona.mdx"
+                },
+                {
+                  "mainTitle4": "Aufklärung und Enttabuisierung wirken",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/aufklarung-und-enttabuisierung-wirken.mdx"
                 }
               ]
             },
             {
-              "title": "Filmproduktion",
-              "children": [
+              "mainTitle3": "Blog",
+              "mainChildren3": [
                 {
-                  "title": "Fabian Köhler",
-                  "page": "content/pages/ueber-uns/das-team/filmproduktion/fabian-koehler.mdx"
+                  "mainTitle4": "Grenzen sind relativ – Musik, Hören und Inklusion",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/blog/grenzen-sind-relativ-musik-horen-und-inklusion.mdx"
                 },
                 {
-                  "title": "Andreas 'Rudi' Dutschke",
-                  "page": "content/pages/ueber-uns/das-team/filmproduktion/andreas-rudi-dutschke.mdx"
+                  "mainTitle4": "Auf in eine neue Beziehungskultur",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/blog/medienportal-auf-in-eine-neue-beziehungskultur.mdx"
                 },
                 {
-                  "title": "Björn Lingner",
-                  "page": "content/pages/ueber-uns/das-team/filmproduktion/bjoern-lingner.mdx",
-                  "disabled": true
-                },
-                {
-                  "title": "Hervé Dieu",
-                  "page": "content/pages/ueber-uns/das-team/filmproduktion/herve-dieu.mdx",
-                  "disabled": true
-                },
-                {
-                  "title": "Jannis Raasch",
-                  "page": "content/pages/ueber-uns/das-team/filmproduktion/jannis-raasch.mdx",
-                  "disabled": true
+                  "mainTitle4": "„You can not be what you cannot see!“",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/blog/you-can-not-be-what-you-cannot-see.mdx"
                 }
               ]
             },
             {
-              "title": "Vorstand",
-              "children": [
+              "mainTitle3": "GSR e.V. Impressions",
+              "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/gsr-e.v.impressions.mdx"
+            },
+            {
+              "mainTitle3": "Support your crowd",
+              "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/support-your-crowd/info-support-y-our-crowd.mdx",
+              "mainDisabled3": false,
+              "mainShowInMainNavigation3": true,
+              "mainChildren3": [
                 {
-                  "title": "Markus Riemann",
-                  "page": "content/pages/ueber-uns/das-team/vorstand/markus-riemann.mdx"
+                  "mainTitle4": "EUCREA e.V.",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/support-your-crowd/eucrea.mdx"
                 },
                 {
-                  "title": "Jan Clasen",
-                  "page": "content/pages/ueber-uns/das-team/vorstand/jan-clasen.mdx"
+                  "mainTitle4": "Lebenshilfe Norderstedt e.V.",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/support-your-crowd/lebenshilfe-norderstedt-e.v.mdx"
                 },
                 {
-                  "title": "Jason Foley",
-                  "page": "content/pages/ueber-uns/das-team/vorstand/jason-foley.mdx"
+                  "mainTitle4": "sense the steps e.V.",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/support-your-crowd/sense-the-steps-e.v.mdx"
+                },
+                {
+                  "mainTitle4": "Rock und Pop Schule Kiel",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/support-your-crowd/rock-und-pop-schule-kiel.mdx"
+                },
+                {
+                  "mainTitle4": "Sommerblut Kulturfestival",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/support-your-crowd/sommerblut-kulturfestival.mdx"
+                },
+                {
+                  "mainTitle4": "Stiftung Generationen-Zusammenhalt",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/support-your-crowd/stiftung-generationen-zusammenhalt.mdx"
                 }
               ]
             },
             {
-              "title": "Beirat",
-              "children": [
-                {
-                  "title": "Raul Krauthausen",
-                  "page": "content/pages/ueber-uns/das-team/beirat/raul-krauthausen.mdx"
-                },
-                {
-                  "title": "Rolf Emmerich",
-                  "page": "content/pages/ueber-uns/das-team/beirat/rolf-emmerich.mdx"
-                },
-                {
-                  "title": "Inés Zahmoul",
-                  "page": "content/pages/ueber-uns/das-team/beirat/ines-zahmoul.mdx"
-                },
-                {
-                  "title": "Anja Teubert",
-                  "page": "content/pages/ueber-uns/das-team/beirat/anja-teubert.mdx"
-                },
-                {
-                  "title": "Hörbie Schmidt",
-                  "page": "content/pages/ueber-uns/das-team/beirat/hoerbie-schmidt.mdx",
-                  "disabled": true
-                }
-              ]
+              "mainTitle3": "Events \"Celebrate analog life\"",
+              "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/events-celebrate-analog-life.mdx"
             },
             {
-              "title": "Streetteam",
-              "children": [
-                {
-                  "title": "Barbara Wetzer",
-                  "page": "content/pages/ueber-uns/das-team/streetteam/barbara-wetzer.mdx"
-                }
-              ],
-              "disabled": true
+              "mainTitle3": "Selbstverständnis",
+              "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/selbstverstandnis.mdx"
             }
           ]
+        }
+      ]
+    },
+    {
+      "mainTitle1": "Mitmachen",
+      "mainPage1": "content/pages/mitmachen.mdx"
+    },
+    {
+      "mainTitle1": "Über uns",
+      "mainShowInMainNavigation1": true,
+      "mainChildren1": [
+        {
+          "mainTitle2": "Mission & Vision",
+          "mainPage2": "content/pages/ueber-uns/mission-und-vision.mdx"
         },
         {
-          "title": "Audiovisuelle Impressionen & Medienberichte",
-          "page": null,
-          "children": [
+          "mainTitle2": "Grenzen sind relativ e.V. - Aktionsbüro für Kultur, Gesellschaft, Inklusion & Frieden",
+          "mainPage2": "content/pages/ueber-uns/info.mdx"
+        },
+        {
+          "mainTitle2": "Übersicht Aktivitäten",
+          "mainPage2": "content/pages/ueber-uns/ubersicht-aktivitaten.mdx",
+          "mainDisabled2": true
+        },
+        {
+          "mainTitle2": "Das Team",
+          "mainPage2": "content/pages/ueber-uns/das-team/alle.mdx",
+          "mainChildren2": [
             {
-              "title": "Videos",
-              "page": "content/pages/media/videos.mdx"
-            },
-            {
-              "title": "Fotogalerien",
-              "page": "content/pages/media/fotogalerien.mdx"
-            },
-            {
-              "title": "Pressespiegel",
-              "children": [],
-              "page": "content/pages/media/pressespiegel-kompakt.mdx"
-            },
-            {
-              "title": "Blog",
-              "children": [
+              "mainTitle3": "Aktionsbüro",
+              "mainChildren3": [
                 {
-                  "title": "Grenzen sind relativ – Musik, Hören und Inklusion ",
-                  "page": "content/pages/media/blog/grenzen-sind-relativ-musik-horen-und-inklusion.mdx"
+                  "mainTitle4": "Mischa Gohlke",
+                  "mainPage4": "content/pages/ueber-uns/das-team/aktionsbuero/mischa-gohlke.mdx"
                 },
                 {
-                  "title": "Auf in eine neue Beziehungskultur!",
-                  "page": "content/pages/media/blog/auf-in-eine-neue-beziehungskultur.mdx"
+                  "mainTitle4": "Fabia Mekus",
+                  "mainPage4": "content/pages/ueber-uns/das-team/aktionsbuero/fabia-mekus.mdx"
+                },
+                {
+                  "mainTitle4": "Tjorven Malin Steinmeyer",
+                  "mainPage4": "content/pages/ueber-uns/das-team/aktionsbuero/tjorven-malin-steinmeyer.mdx"
+                },
+                {
+                  "mainTitle4": "Grzegorz Leoniec",
+                  "mainPage4": "content/pages/ueber-uns/das-team/aktionsbuero/grzegorz-leoniec.mdx"
+                },
+                {
+                  "mainTitle4": "Thorsten Hesse",
+                  "mainPage4": "content/pages/ueber-uns/das-team/aktionsbuero/thorsten-hesse.mdx"
+                }
+              ]
+            },
+            {
+              "mainTitle3": "Filmproduktion",
+              "mainChildren3": [
+                {
+                  "mainTitle4": "Fabian Köhler",
+                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/fabian-koehler.mdx"
+                },
+                {
+                  "mainTitle4": "Andreas 'Rudi' Dutschke",
+                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/andreas-rudi-dutschke.mdx"
+                },
+                {
+                  "mainTitle4": "Björn Lingner",
+                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/bjoern-lingner.mdx"
+                },
+                {
+                  "mainTitle4": "Hervé Dieu",
+                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/herve-dieu.mdx"
+                },
+                {
+                  "mainTitle4": "Jannis Raasch",
+                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/jannis-raasch.mdx"
+                }
+              ]
+            },
+            {
+              "mainTitle3": "Vorstand",
+              "mainChildren3": [
+                {
+                  "mainTitle4": "Markus Riemann",
+                  "mainPage4": "content/pages/ueber-uns/das-team/vorstand/markus-riemann.mdx"
+                },
+                {
+                  "mainTitle4": "Jan Clasen",
+                  "mainPage4": "content/pages/ueber-uns/das-team/vorstand/jan-clasen.mdx"
+                },
+                {
+                  "mainTitle4": "Jason Foley",
+                  "mainPage4": "content/pages/ueber-uns/das-team/vorstand/jason-foley.mdx"
+                }
+              ]
+            },
+            {
+              "mainTitle3": "Beirat",
+              "mainChildren3": [
+                {
+                  "mainTitle4": "Raul Krauthausen",
+                  "mainPage4": "content/pages/ueber-uns/das-team/beirat/raul-krauthausen.mdx"
+                },
+                {
+                  "mainTitle4": "Rolf Emmerich",
+                  "mainPage4": "content/pages/ueber-uns/das-team/beirat/rolf-emmerich.mdx"
+                },
+                {
+                  "mainTitle4": "Inés Zahmoul",
+                  "mainPage4": "content/pages/ueber-uns/das-team/beirat/ines-zahmoul.mdx"
+                },
+                {
+                  "mainTitle4": "Anja Teubert",
+                  "mainPage4": "content/pages/ueber-uns/das-team/beirat/anja-teubert.mdx"
+                },
+                {
+                  "mainTitle4": "Hörbie Schmidt",
+                  "mainPage4": "content/pages/ueber-uns/das-team/beirat/hoerbie-schmidt.mdx"
+                }
+              ]
+            },
+            {
+              "mainTitle3": "Streetteam",
+              "mainDisabled3": true,
+              "mainChildren3": [
+                {
+                  "mainTitle4": "Barbara Wetzer",
+                  "mainPage4": "content/pages/ueber-uns/das-team/streetteam/barbara-wetzer.mdx"
                 }
               ]
             }
           ]
         },
         {
-          "title": "Zitate",
-          "page": "content/pages/ueber-uns/zitate.mdx"
+          "mainTitle2": "Audiovisuelle Impressionen & Medienberichte",
+          "mainPage2": null,
+          "mainChildren2": [
+            {
+              "mainTitle3": "Videos",
+              "mainPage3": "content/pages/media/videos.mdx"
+            },
+            {
+              "mainTitle3": "Fotogalerien",
+              "mainPage3": "content/pages/media/fotogalerien.mdx"
+            },
+            {
+              "mainTitle3": "Pressespiegel",
+              "mainPage3": "content/pages/media/pressespiegel-kompakt.mdx",
+              "mainChildren3": []
+            },
+            {
+              "mainTitle3": "Blog",
+              "mainChildren3": [
+                {
+                  "mainTitle4": "Grenzen sind relativ – Musik, Hören und Inklusion ",
+                  "mainPage4": "content/pages/media/blog/grenzen-sind-relativ-musik-horen-und-inklusion.mdx"
+                },
+                {
+                  "mainTitle4": "Auf in eine neue Beziehungskultur!",
+                  "mainPage4": "content/pages/media/blog/auf-in-eine-neue-beziehungskultur.mdx"
+                }
+              ]
+            }
+          ]
         },
         {
-          "title": "Kontakt",
-          "page": "content/pages/kontakt.mdx"
+          "mainTitle2": "Zitate",
+          "mainPage2": "content/pages/ueber-uns/zitate.mdx"
         },
         {
-          "title": "Identität & Positionierung",
-          "page": "content/pages/ueber-uns/identitat-positionierung.mdx",
-          "disabled": true
+          "mainTitle2": "Kontakt",
+          "mainPage2": "content/pages/kontakt.mdx"
         },
         {
-          "title": "Manifest ",
-          "page": "content/pages/ueber-uns/manifest.mdx",
-          "disabled": true
+          "mainTitle2": "Identität & Positionierung",
+          "mainPage2": "content/pages/ueber-uns/identitat-positionierung.mdx",
+          "mainDisabled2": true
+        },
+        {
+          "mainTitle2": "Manifest ",
+          "mainPage2": "content/pages/ueber-uns/manifest.mdx",
+          "mainDisabled2": true
         }
-      ],
-      "showInMainNavigation": true
+      ]
     },
     {
-      "title": "Spenden",
-      "button": true,
-      "page": "content/pages/spenden.mdx"
+      "mainTitle1": "Spenden",
+      "mainPage1": "content/pages/spenden.mdx"
     }
-  ]
+  ],
+  "_template": "mainNav"
 }

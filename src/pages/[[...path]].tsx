@@ -1,6 +1,3 @@
-// THIS FILE HAS BEEN GENERATED WITH THE TINA CLI.
-// This is a demo file once you have tina setup feel free to delete this file
-
 import Head from 'next/head'
 import { useTina } from 'tinacms/dist/react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
@@ -36,13 +33,13 @@ const Page = (props) => {
         />
       </div>
       <Head>
-        <title>TaxPal - Accounting made simple for small businesses</title>
+        <title>Grenzen sind relativ e.V.</title>
         <meta
           name="description"
           content="Most bookkeeping software is accurate, but hard to use. We make the opposite trade-off, and hope you don’t get audited."
         />
       </Head>
-      <Header />
+      <Header items={props.data?.nav?.main?.menu ?? []} />
       <main className="relative">
         <div className="mx-auto">
           {data?.page?._sys?.breadcrumbs?.length > 1 && (

@@ -7,6 +7,8 @@ import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
 import { NavLink } from '@/components/NavLink'
+import MenuPopover from './layout/MenuPopover'
+import { cleanPath } from '@/lib/utils'
 
 function MobileNavLink({ href, children }) {
   return (
@@ -89,26 +91,53 @@ function MobileNavigation() {
   )
 }
 
-export function Header() {
+export function Header({ items }) {
   return (
     <header className="py-10">
       <Container>
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
-            <Link href="#" aria-label="Home">
+            <Link href="/" aria-label="Home">
               <Logo className="h-10 w-auto" />
             </Link>
           </div>
-          <div className="hidden md:flex md:gap-x-6">
-            <NavLink href="#features">Aktivitäten</NavLink>
-            <NavLink href="#testimonials">Mitmachen</NavLink>
-            <NavLink href="#pricing">Über uns</NavLink>
+          <div className="hidden items-center font-semibold text-gray-900 sm:flex md:flex md:gap-x-6">
+            {items.map((item) => {
+              if (item.disabled) return null
+
+              // check if any item has children with showInMainNavigation === true
+              const isMultiLevel = item.children?.some((item) => {
+                if (item.children) {
+                  return item.children.some(
+                    (child) => child.showInMainNavigation === true
+                  )
+                }
+                return false
+              })
+
+              if (item.children?.length) {
+                return (
+                  <MenuPopover
+                    key={item.title}
+                    label={item.title}
+                    items={item.children}
+                    showFooter={item.showFooter}
+                    isMultiLevel={isMultiLevel}
+                  />
+                )
+              }
+              return (
+                <NavLink key={item.title} href={cleanPath(item.page)}>
+                  {item.title}
+                </NavLink>
+              )
+            })}
           </div>
           <div className="flex items-center gap-x-5 md:gap-x-8">
             {/* <div className="hidden md:block">
               <NavLink href="/login">Sign in</NavLink>
             </div> */}
-            <Button href="/register" color="blue">
+            <Button href="/spenden" color="blue">
               <span>Spenden</span>
             </Button>
             <div className="-mr-1 md:hidden">
@@ -116,6 +145,7 @@ export function Header() {
             </div>
           </div>
         </nav>
+        {/* <pre>{JSON.stringify(items[0], null, 2)}</pre> */}
       </Container>
     </header>
   )
