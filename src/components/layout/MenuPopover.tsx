@@ -34,7 +34,9 @@ export default function MenuPopover({ label, items, isMultiLevel = false }) {
       <Popover.Button className="inline-flex items-center gap-x-1 px-3 py-3 text-sm font-semibold leading-6 text-slate-700 [&:not(:focus-visible)]:focus:outline-none">
         {({ open }) => (
           <>
-            <span className={open && 'text-indigo-700'}>{label}</span>
+            <span className={classNames(open ? 'text-indigo-700' : '')}>
+              {label}
+            </span>
             <ChevronDownIcon
               className={classNames('h-5 w-5', open && 'text-indigo-700')}
               aria-hidden="true"
