@@ -42,30 +42,6 @@ export function Footer({ items }) {
   }, [edit]) */
 
   const navigation = {
-    solutions: [
-      { name: 'Marketing', href: '#' },
-      { name: 'Analytics', href: '#' },
-      { name: 'Commerce', href: '#' },
-      { name: 'Insights', href: '#' },
-    ],
-    support: [
-      { name: 'Pricing', href: '#' },
-      { name: 'Documentation', href: '#' },
-      { name: 'Guides', href: '#' },
-      { name: 'API Status', href: '#' },
-    ],
-    company: [
-      { name: 'About', href: '#' },
-      { name: 'Blog', href: '#' },
-      { name: 'Jobs', href: '#' },
-      { name: 'Press', href: '#' },
-      { name: 'Partners', href: '#' },
-    ],
-    legal: [
-      { name: 'Claim', href: '#' },
-      { name: 'Privacy', href: '#' },
-      { name: 'Terms', href: '#' },
-    ],
     social: [
       {
         name: 'YouTube',
@@ -119,7 +95,10 @@ export function Footer({ items }) {
   }
 
   return (
-    <footer className="bg-slate-50" aria-labelledby="footer-heading">
+    <footer
+      className="border-t border-slate-200 bg-slate-50"
+      aria-labelledby="footer-heading"
+    >
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
@@ -132,7 +111,7 @@ export function Footer({ items }) {
                   <h3 className="text-sm font-semibold leading-6 text-gray-900">
                     {category.title}
                   </h3>
-                  <ul role="list" className="mt-6 space-y-4">
+                  <ul role="list" className="mt-6 space-y-2">
                     {category.children.map((item) => (
                       <li key={item.title}>
                         <Link
@@ -197,7 +176,7 @@ export function Footer({ items }) {
             </form>
           </div> */}
         </div>
-        <div className="mt-16 border-t border-gray-900/10 pt-8 sm:mt-20 md:flex md:items-center md:justify-between lg:mt-24">
+        <div className="mt-12 border-t border-gray-900/10 py-8 md:flex md:items-center md:justify-between">
           <div className="flex space-x-6 md:order-2">
             {navigation.social.map((item) => (
               <a

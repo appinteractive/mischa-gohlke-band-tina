@@ -42,12 +42,12 @@ const Page = (props) => {
       </Head>
       <Header items={props.data?.nav?.main?.menu ?? []} />
       <main className="relative mx-auto px-6">
-        {data?.page?._sys?.breadcrumbs?.length > 1 && (
+        {/* {data?.page?._sys?.breadcrumbs?.length > 1 && (
           <Breadcrumbs
             items={data.page._sys.breadcrumbs}
             className="mx-auto max-w-6xl"
           />
-        )}
+        )} */}
         {/* <h1 className="m-8 text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl">
               {data.post.title}
             </h1> */}
@@ -99,7 +99,7 @@ const Page = (props) => {
 
 const isImage = (url?: string): boolean => {
   if (!url || url.length < 3) return false
-  return /\.(gif|jpe?g|png|webp|bmp)$/i.test(url) != null
+  return !!/\.(gif|jpe?g|png|webp|bmp)$/i.test(url)
 }
 
 const components = {
@@ -130,15 +130,19 @@ const components = {
     }
   },
   // stop linking images to themselves
-  a: (props) => {
+  /* a: (props) => {
     // is image check when url includes .jpg, jpeg, .png, .svg, .gif, .webp
     if (isImage(props.url) === true) {
       // return children directly when url is an image
       return <>{props.children}</>
     } else {
-      return <a {...props}>{props.children}</a>
+      return (
+        <a {...props}>
+          {props.children}
+        </a>
+      )
     }
-  },
+  }, */
   img: (props) => {
     return <ResponsiveImage {...props} />
   },
