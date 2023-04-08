@@ -13,3 +13,22 @@ export const cleanPath = (path: string = '') => {
     return ''
   }
 }
+
+export const getYoutubeVideoId = (url: string) => {
+  const regexList = [
+    /^https?:\/\/(?:www\.)?youtube\.com\/watch\?v=([\w-]{11})/,
+    /^https?:\/\/(?:www\.)?youtu\.be\/([\w-]{11})/,
+    /^https?:\/\/(?:www\.)?youtube\.com\/embed\/([\w-]{11})/,
+    /^https?:\/\/(?:www\.)?youtube-nocookie\.com\/embed\/([\w-]{11})/,
+  ]
+  try {
+    for (let i = 0; i < regexList.length; i++) {
+      const match = url.match(regexList[i])
+      if (match) {
+        return match[1]
+      }
+    }
+  } catch (e) {}
+
+  return null
+}

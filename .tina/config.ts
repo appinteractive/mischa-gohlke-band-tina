@@ -2,6 +2,7 @@ import { Field, defineConfig } from 'tinacms'
 import { heroBlock, featureBlock, contentBlock } from './blocks/blocks'
 import { footer } from './collections/nav-footer'
 import { main } from './collections/nav-main'
+import { VideoPlayerTemplate } from './embeds/video-player'
 
 // Your hosting provider likely exposes this as an environment variable
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || 'main'
@@ -11,6 +12,7 @@ const menuItem = {
     type: 'string',
     name: 'title',
     label: 'Titel',
+    description: 'Titel der Seite (erscheint im Browser-Tab)',
     isTitle: true,
     required: true,
   },
@@ -18,6 +20,7 @@ const menuItem = {
     type: 'string',
     name: 'description',
     label: 'Beschreibung',
+    description: 'Kurze Beschreibung für Suchmaschinen',
     ui: {
       component: 'textarea',
     },
@@ -27,11 +30,12 @@ const menuItem = {
     type: 'image',
     name: 'teaser',
     label: 'Beitragsbild',
+    description: 'Bild für Teaser und Social Media',
   },
   alias: {
     type: 'string',
     name: 'alias',
-    label: 'Alter URL',
+    label: 'Alte URL',
     description: 'Umleitung von alter URL, beginnend mit Slash: /aktuelles/…',
   },
   accessible: {
@@ -77,8 +81,8 @@ export default defineConfig({
                 type: 'rich-text',
                 name: 'body',
                 label: 'Inhalt',
-                templates: [],
                 isBody: true,
+                templates: [VideoPlayerTemplate],
                 /* templates: [
                   {
                     name: 'img',

@@ -257,10 +257,19 @@ export type ImageFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type RichTextFilter = {
-  startsWith?: InputMaybe<Scalars['String']>;
-  eq?: InputMaybe<Scalars['String']>;
-  exists?: InputMaybe<Scalars['Boolean']>;
+export type PageSimpleBodyVideoPlayerVideosFilter = {
+  url?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  poster?: InputMaybe<StringFilter>;
+  duration?: InputMaybe<StringFilter>;
+};
+
+export type PageSimpleBodyVideoPlayerFilter = {
+  videos?: InputMaybe<PageSimpleBodyVideoPlayerVideosFilter>;
+};
+
+export type PageSimpleBodyFilter = {
+  VideoPlayer?: InputMaybe<PageSimpleBodyVideoPlayerFilter>;
 };
 
 export type PageSimpleFilter = {
@@ -269,7 +278,13 @@ export type PageSimpleFilter = {
   teaser?: InputMaybe<ImageFilter>;
   alias?: InputMaybe<StringFilter>;
   accessible?: InputMaybe<StringFilter>;
-  body?: InputMaybe<RichTextFilter>;
+  body?: InputMaybe<PageSimpleBodyFilter>;
+};
+
+export type RichTextFilter = {
+  startsWith?: InputMaybe<Scalars['String']>;
+  eq?: InputMaybe<Scalars['String']>;
+  exists?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type PageBlocksBlocksHeroFilter = {

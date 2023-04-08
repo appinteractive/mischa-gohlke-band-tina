@@ -13,29 +13,74 @@ _template: simple
 
 Willkommen auf unserem neuen multipolaren Medienportal! Hier findet Du von uns produzierte Medien-Formate, einen Einblick in unsere laufenden Aktivitäten sowie weitere spannende Beiträge. Das Portal schafft Raum, um gesamtgesellschaftliche Themen, Prozesse, Akteure und Netzwerke näher zusammen zu bringen. So let´s start!
 
-***
-
 ## Aktuelle Empfehlungen
 
-<slideshow :max="2" name="gsr-medienportal-aktuelle-empfehlungen"></slideshow>
-
-***
+<slideshow max="2" name="gsr-medienportal-aktuelle-empfehlungen" />
 
 ## [#diskurskultur](https://www.grenzensindrelativ.de/aktivitaeten/gsr-medienportal/diskurskultur)
 
 Im Rahmen unseres Projektes ["Interdisziplinäre Kulturarbeit im Kontext der gesamtgesellschaftlichen Entwicklung von Kunst & Kultur"](https://www.grenzensindrelativ.de/aktivitaeten/projekte-und-veranstaltungen/interdisziplinaere-kulturarbeit/allgemein) ist die 7teilige Filmreihe [#diskurskultur](https://www.youtube.com/hashtag/diskurskultur) entstanden. Auch wenn die Filme lediglich einige Facetten vom Ganzen wiedergeben können, ist es eines klar: Kultur braucht Diskurs!
 
-<video-gallery name="media-diskurskultur"></video-gallery>
-
-***
+<VideoPlayer
+  videos={[
+    {
+      url: "https://www.youtube-nocookie.com/embed/VKxCBFXKZOY?feature=oembed&autoplay=1&rel=0",
+      poster: "https://i.ytimg.com/vi/VKxCBFXKZOY/maxresdefault.jpg",
+      duration: "4:52",
+      title: "#diskurskultur 1 - Prolog: Was bisher geschah..."
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/Xdhdr10AO6Q?feature=oembed&autoplay=1&rel=0",
+      poster:
+        "https://i.ytimg.com/vi/Xdhdr10AO6Q/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGH8gWSgTMA8=&rs=AOn4CLCdy8_SoU_tGb_9uaWIMgLe-Kh77w",
+      duration: "4:31",
+      title:
+        "#diskurskultur 2 - Interdisziplinäre Kulturarbeit - Theorie & Praxis"
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/QGOo1m6fGLU?feature=oembed&autoplay=1&rel=0",
+      poster:
+        "https://i.ytimg.com/vi/QGOo1m6fGLU/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgXihKMA8=&rs=AOn4CLAWGFCW6B3JwGW89rM-n87GhqJLJg",
+      duration: "5:57",
+      title: "#diskurskultur 3 - Kultur, Kohle & Kapitalismus"
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/rC-9cXXhD4Y?feature=oembed&autoplay=1&rel=0",
+      poster:
+        "https://i.ytimg.com/vi/rC-9cXXhD4Y/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgTSg9MA8=&rs=AOn4CLASgVKkRThZHK-JVCRn2ThbvKofPw",
+      duration: "5:48",
+      title: "#diskurskultur 4  - Kultur, Digitalisierung & Demokratie"
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/Zubj2YHsJN0?feature=oembed&autoplay=1&rel=0",
+      poster:
+        "https://i.ytimg.com/vi/Zubj2YHsJN0/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGBMgNih_MA8=&rs=AOn4CLDy1hF-pAjWIs6wG1aTtXOPeBTc4g",
+      duration: "5:24",
+      title:
+        "#diskurskultur 5 - Kultur kann Gesellschaft: Essenz von Kunst & Kultur?"
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/brMqgFVN6so?feature=oembed&autoplay=1&rel=0",
+      poster:
+        "https://i.ytimg.com/vi/brMqgFVN6so/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGEUgZShlMA8=&rs=AOn4CLCK_UKdEpCm__XVVqwyPoMbJLUYDw",
+      duration: "5:10",
+      title: "#diskurskultur 6 - Agenda 2030"
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/uqhJqAByS3Y?feature=oembed&autoplay=1&rel=0",
+      poster:
+        "https://i.ytimg.com/vi/uqhJqAByS3Y/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGFggZShlMA8=&rs=AOn4CLBHDIXs-N8FN85F4bcNGaHHHiu1SA",
+      duration: "4:31",
+      title: "#diskurskultur 7 - Epilog: Wohin geht die Reise?"
+    }
+  ]}
+/>
 
 ## [grenzenlos vernetzt von a-z](https://www.grenzensindrelativ.de/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/grenzenlos-vernetzt)
 
-Auf dem Weg in eine neue Beziehungskultur braucht es Netzwerke und Kooperationen. Um diese zu ermöglichen, bringt dieses Portraitformat Projekte und ihre Akteur:innen sozialer, kultureller und politischer Gesellschaftsbereiche zusammen. Ihr Engagement, ihre gesellschaftliche Relevanz und ihre progressiven Ideen werden in innere Prozesse und äußere Herausforderungen eingebettet und in einem künstlerischen Portrait in Bild und Schrift eingefangen. Zwischen den einzelnen Portraits, von A-Z, webt das Alphabet ein Netz, das durch gemeinsame Werte und Wünsche gehalten wird. Das Portraitprojekt wurde von der Künstlerin [Anika Krbetschek](www.anikakrb.com) und dem Fotografen [Maximilian Gödecke](www.max-goedecke.de) zusammen mit Grenzen sind relativ e.V. geschaffen.
+Auf dem Weg in eine neue Beziehungskultur braucht es Netzwerke und Kooperationen. Um diese zu ermöglichen, bringt dieses Portraitformat Projekte und ihre Akteur\:innen sozialer, kultureller und politischer Gesellschaftsbereiche zusammen. Ihr Engagement, ihre gesellschaftliche Relevanz und ihre progressiven Ideen werden in innere Prozesse und äußere Herausforderungen eingebettet und in einem künstlerischen Portrait in Bild und Schrift eingefangen. Zwischen den einzelnen Portraits, von A-Z, webt das Alphabet ein Netz, das durch gemeinsame Werte und Wünsche gehalten wird. Das Portraitprojekt wurde von der Künstlerin [Anika Krbetschek](www.anikakrb.com) und dem Fotografen [Maximilian Gödecke](www.max-goedecke.de) zusammen mit Grenzen sind relativ e.V. geschaffen.
 
-<slideshow :max="2" name="gsr-medienportal-grenzenlosvernetzt"></slideshow>
-
-***
+<slideshow max="2" name="gsr-medienportal-grenzenlosvernetzt" />
 
 ## [news.oder.fake](https://www.grenzensindrelativ.de/aktivitaeten/gsr-medienportal/news.oder.fake/news.oder.fake)
 
@@ -43,37 +88,142 @@ Die Verbreitung von Desinformation über die Medien ist ein weltweites Problem. 
 
 Gemeinsam mit unserem Kooperationspartner der [news.oder.fake](https://www.facebook.com/newsoderfake)-App, die sich mit ihrem Newsgame, für mehr Medien- und Quellenkompetenz, eigenes Abwägen, die Fähigkeit zum Perspektivwechsel und mehr sachliche Diskussion, einsetzt, wollen wir dieser Entwicklung ein Stück entgegenwirken.
 
-<slideshow :max="2" name="gsr-medienportal-news.oder.fake"></slideshow>
-
-***
+<slideshow max="2" name="gsr-medienportal-news.oder.fake" />
 
 ## [Blog](https://www.grenzensindrelativ.de/aktivitaeten/gsr-medienportal/blog/grenzen-sind-relativ-musik-horen-und-inklusion)
 
-<slideshow :max="2" name="media-blog"></slideshow>
+<slideshow max="2" name="media-blog" />
 
-***
-
-## [GSR e.V. Impressions](https://www.grenzensindrelativ.de/aktivitaeten/gsr-medienportal/gsr-e.v.impressions)
+### [GSR e.V. Impressions](https://www.grenzensindrelativ.de/aktivitaeten/gsr-medienportal/gsr-e.v.impressions)
 
 Hier findest Du einige audiovisuelle Einblicke in unsere aktuellen und vergangenen Aktivitäten in Form von Aftermovies, Musikvideos, Talkshows, TV-Berichten, Teasern und Snippets.
 
-<video-gallery name="gsr-medienportal-impressions"></video-gallery>
-
-***
+<VideoPlayer
+  videos={[
+    {
+      url: "https://www.youtube-nocookie.com/embed/D649Q4QQsME?feature=oembed&autoplay=1&rel=0",
+      poster: "https://i.ytimg.com/vi/D649Q4QQsME/maxresdefault.jpg",
+      duration: "7:01",
+      title: "Celebrate the music - Der Film"
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/p-UH3iPq8TY?feature=oembed&autoplay=1&rel=0",
+      poster: "https://i.ytimg.com/vi/p-UH3iPq8TY/maxresdefault.jpg",
+      duration: "0:43",
+      title: 'Teaser "GSR e.V. Public Events" (ab 2023 bundesweit)'
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/mJsl1Hwu7B0?feature=oembed&autoplay=1&rel=0",
+      poster:
+        "https://i.ytimg.com/vi/mJsl1Hwu7B0/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGFIgXShlMA8=&rs=AOn4CLCSqhtfm2y6Uui3kr0stzvc1jVvkw",
+      duration: "1:52",
+      title:
+        '"Celebrate the music" // 11.09.2022 "Sportiv - Inklusiv - Aktiv dabei sein"'
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/x8POp5okdqk?feature=oembed&autoplay=1&rel=0",
+      poster:
+        "https://i.ytimg.com/vi/x8POp5okdqk/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgWShKMA8=&rs=AOn4CLDelmSJPEFExsI-cE7xPGEJTbXyrg",
+      duration: "1:57",
+      title: '"Celebrate the music" // 12.05.2022 Nelson Mandela Schule'
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/iKk9QSiuOF4?feature=oembed&autoplay=1&rel=0",
+      poster: "https://i.ytimg.com/vi/iKk9QSiuOF4/maxresdefault.jpg",
+      duration: "1:36",
+      title: '"Celebrate the music" // 05.05.22 ReBBZ'
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/yaepk0pOa8c?feature=oembed&autoplay=1&rel=0",
+      poster: "https://i.ytimg.com/vi/yaepk0pOa8c/maxresdefault.jpg",
+      duration: "1:12",
+      title: '"Celebrate the music" // 06.05.22 Grundschule Bindfeldweg'
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/V_nazdyh-uU?feature=oembed&autoplay=1&rel=0",
+      poster: "https://i.ytimg.com/vi/V_nazdyh-uU/maxresdefault.jpg",
+      duration: "0:32",
+      title:
+        'Teaser "Kultur ALIVE - Grenzen sind relativ" // Sa. 01.10.2022 Spielbudenplatz (Reeperbahn Hamburg)'
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/82fHM8mKbRU?feature=oembed&autoplay=1&rel=0",
+      poster: "https://i.ytimg.com/vi/82fHM8mKbRU/maxresdefault.jpg",
+      duration: "8:17",
+      title:
+        'Aftermovie "3. Grenzen sind relativ Festival 2019" // Fabrik Hamburg Altona'
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/Xdhdr10AO6Q?feature=oembed&autoplay=1&rel=0",
+      poster:
+        "https://i.ytimg.com/vi/Xdhdr10AO6Q/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGH8gWSgTMA8=&rs=AOn4CLCdy8_SoU_tGb_9uaWIMgLe-Kh77w",
+      duration: "4:31",
+      title:
+        "#diskurskultur 2 - Interdisziplinäre Kulturarbeit - Theorie & Praxis"
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/KPi9ZNp-YJQ?feature=oembed&autoplay=1&rel=0",
+      poster: "https://i.ytimg.com/vi/KPi9ZNp-YJQ/maxresdefault.jpg",
+      duration: "5:52",
+      title: "AndersSein vereint - Inklusionssong für Deutschland"
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/BPQpJT0kyMw?feature=oembed&autoplay=1&rel=0",
+      poster: "https://i.ytimg.com/vi/BPQpJT0kyMw/maxresdefault.jpg",
+      duration: "4:13",
+      title: "NDR DAS! Magazin - Ein Inklusionssong für Deutschland"
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/7RohEwmDdXY?feature=oembed&autoplay=1&rel=0",
+      poster: "https://i.ytimg.com/vi/7RohEwmDdXY/hqdefault.jpg",
+      duration: "6:27",
+      title: 'NDR SH-Magazin "Mischa Gohlke - Musiker ohne Gehör"'
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/XCACmrTMky8?feature=oembed&autoplay=1&rel=0",
+      poster: "https://i.ytimg.com/vi/XCACmrTMky8/maxresdefault.jpg",
+      duration: "17:26",
+      title:
+        'Portrait "Mischa Gohlke - Grenzen sind relativ" // BR3 Sehen statt Hören 16.11.2013'
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/tfQJfC9bmmU?feature=oembed&autoplay=1&rel=0",
+      poster: "https://i.ytimg.com/vi/tfQJfC9bmmU/maxresdefault.jpg",
+      duration: "8:25",
+      title:
+        'Aftermovie "2. Grenzen sind relativ Festival 2018" // Fabrik Hamburg Altona'
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/YtkNIEK4zEs?feature=oembed&autoplay=1&rel=0",
+      poster: "https://i.ytimg.com/vi/YtkNIEK4zEs/maxresdefault.jpg",
+      duration: "11:04",
+      title:
+        "Aftermovie „AndersSein vereint Festival“ // 25.06.2015 Knust Hamburg"
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/YXwlsITaGBo?feature=oembed&autoplay=1&rel=0",
+      poster: "https://i.ytimg.com/vi/YXwlsITaGBo/maxresdefault.jpg",
+      duration: "11:12",
+      title: "Amelinde.de Interview mit Mischa Gohlke"
+    },
+    {
+      url: "https://www.youtube-nocookie.com/embed/HdGdU3JdKVQ?feature=oembed&autoplay=1&rel=0",
+      poster: "https://i.ytimg.com/vi/HdGdU3JdKVQ/maxresdefault.jpg",
+      duration: "27:54",
+      title: "Celebrate the music - Der Film"
+    }
+  ]}
+/>
 
 ## [Support (y)our crowd](https://www.grenzensindrelativ.de/aktivitaeten/gsr-medienportal/support-your-crowd/info-support-y-our-crowd)
 
-Mit unserem neuen Format “Support (y)our Crowd” wollen wir verschiedene Vereine, Institutionen, Initiativen, Künstler*innen u.w.m. auf unseren Kanälen sichtbar machen und Impulse für die Multipolarkultur freisetzen. Wir sind viele und gemeinsam sind wir stark! :)
+Mit unserem neuen Format “Support (y)our Crowd” wollen wir verschiedene Vereine, Institutionen, Initiativen, Künstler\*innen u.w.m. auf unseren Kanälen sichtbar machen und Impulse für die Multipolarkultur freisetzen. Wir sind viele und gemeinsam sind wir stark! :)
 
-<slideshow :max="2" name="support-your-crowd"></slideshow>
+<slideshow max="2" name="support-your-crowd" />
 
-***
+## [Events "Celebrate analog live"](https://www.grenzensindrelativ.de/aktivitaeten/gsr-medienportal/events-celebrate-analog-life)
 
-## [Events "Celebrate analog life"](https://www.grenzensindrelativ.de/aktivitaeten/gsr-medienportal/events-celebrate-analog-life)
-
-<slideshow :max="2" name="gsr-medienportal-celebrate-analog-life"></slideshow>
-
-***
+<slideshow max="2" name="gsr-medienportal-celebrate-analog-life" />
 
 ## [Selbstverständnis](https://www.grenzensindrelativ.de/aktivitaeten/gsr-medienportal/selbstverstandnis)
 

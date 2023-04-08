@@ -14,6 +14,7 @@ import Breadcrumbs from '@/components/layout/Breadcrumbs'
 import { addBlurHash } from '@/utils/blurhash'
 
 import { ResponsiveImage } from '@/components/embeds/ResponsiveImage'
+import VideoPlayer from '@/components/embeds/VideoPlayer'
 
 const Page = (props) => {
   const { data } = useTina({
@@ -129,6 +130,7 @@ const components = {
       return <p {...props}>{props.children}</p>
     }
   },
+  VideoPlayer: (props) => <VideoPlayer {...props} />,
   // stop linking images to themselves
   /* a: (props) => {
     // is image check when url includes .jpg, jpeg, .png, .svg, .gif, .webp

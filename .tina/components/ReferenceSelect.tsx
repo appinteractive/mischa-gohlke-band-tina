@@ -165,7 +165,10 @@ export const useReferenceSelect = wrapFieldsWithMeta(
     if (loading === true) {
       return (
         <div
-          className={`${selectClasses} cursor-wait !bg-gray-100 text-gray-400`}
+          className={classNames(
+            selectClasses,
+            'cursor-wait !bg-gray-100 text-gray-400'
+          )}
         >
           bitte warten...
         </div>

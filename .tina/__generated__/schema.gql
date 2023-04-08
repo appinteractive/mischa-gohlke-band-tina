@@ -147,10 +147,19 @@ input ImageFilter {
   in: [String]
 }
 
-input RichTextFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
+input PageSimpleBodyVideoPlayerVideosFilter {
+  url: StringFilter
+  title: StringFilter
+  poster: StringFilter
+  duration: StringFilter
+}
+
+input PageSimpleBodyVideoPlayerFilter {
+  videos: PageSimpleBodyVideoPlayerVideosFilter
+}
+
+input PageSimpleBodyFilter {
+  VideoPlayer: PageSimpleBodyVideoPlayerFilter
 }
 
 input PageSimpleFilter {
@@ -159,7 +168,13 @@ input PageSimpleFilter {
   teaser: ImageFilter
   alias: StringFilter
   accessible: StringFilter
-  body: RichTextFilter
+  body: PageSimpleBodyFilter
+}
+
+input RichTextFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
 }
 
 input PageBlocksBlocksHeroFilter {
