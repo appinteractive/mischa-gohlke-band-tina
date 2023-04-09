@@ -15,6 +15,7 @@ import { addBlurHash } from '@/utils/blurhash'
 
 import { ResponsiveImage } from '@/components/embeds/ResponsiveImage'
 import VideoPlayer from '@/components/embeds/VideoPlayer'
+import { isImage } from '@/lib/utils'
 
 const Page = (props) => {
   const { data } = useTina({
@@ -25,7 +26,7 @@ const Page = (props) => {
 
   return (
     <>
-      <div className="absolute inset-0 -top-[40rem] z-0 overflow-hidden">
+      <div className="absolute inset-0 -top-[40rem] -z-[1] overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/beams-home@95.jpg"
@@ -96,11 +97,6 @@ const Page = (props) => {
       <Footer items={props.data?.nav?.footer?.footerMenu ?? []} />
     </>
   )
-}
-
-const isImage = (url?: string): boolean => {
-  if (!url || url.length < 3) return false
-  return !!/\.(gif|jpe?g|png|webp|bmp)$/i.test(url)
 }
 
 const components = {

@@ -32,3 +32,8 @@ export const getYoutubeVideoId = (url: string) => {
 
   return null
 }
+
+export const isImage = (url?: string): boolean => {
+  if (!url || url.length < 3) return false
+  return !!/\.(gif|jpe?g|png|webp|bmp)$/i.test(url)
+}
