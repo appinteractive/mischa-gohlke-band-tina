@@ -42,7 +42,7 @@ export const VideoPlayerTemplate: any = {
               meta: any,
               field: any
             ) => {
-              console.log('validate', value, allValues, meta, field)
+              // console.log('validate', value, allValues, meta, field)
               if (!value) return 'Bitte gebe eine Video URL ein.'
 
               // NOTE: add support for other video providers?
