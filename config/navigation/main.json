@@ -462,7 +462,8 @@
     },
     {
       "mainTitle1": "Mitmachen",
-      "mainPage1": "content/pages/mitmachen.mdx"
+      "mainPage1": "content/pages/mitmachen.mdx",
+      "mainShowInMainNavigation1": true
     },
     {
       "mainTitle1": "Über uns",
