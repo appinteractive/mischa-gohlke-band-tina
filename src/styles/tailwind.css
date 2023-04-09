@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 #__next {
-  min-height: 100%;
+  @apply h-full flex flex-col;
 }

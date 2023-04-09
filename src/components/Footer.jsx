@@ -1,8 +1,5 @@
 import Link from 'next/link'
 
-import { Container } from '@/components/Container'
-import { Logo } from '@/components/Logo'
-import { NavLink } from '@/components/NavLink'
 import { cleanPath } from '@/lib/utils'
 
 /* import { useEffect, useState } from 'react'
@@ -96,7 +93,7 @@ export function Footer({ items }) {
 
   return (
     <footer
-      className="border-t border-slate-200 bg-slate-50"
+      className="isolate z-10 border-t border-slate-200 bg-slate-50"
       aria-labelledby="footer-heading"
     >
       <h2 id="footer-heading" className="sr-only">

@@ -42,7 +42,7 @@ const Page = (props) => {
         />
       </Head>
       <Header items={props.data?.nav?.main?.menu ?? []} />
-      <main className="relative mx-auto px-6">
+      <main className="relative mx-auto grow px-6">
         {/* {data?.page?._sys?.breadcrumbs?.length > 1 && (
           <Breadcrumbs
             items={data.page._sys.breadcrumbs}
