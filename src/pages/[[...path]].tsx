@@ -10,7 +10,6 @@ import { Footer } from '@/components/Footer'
 import { Hero } from '@/components/Hero'
 import { PrimaryFeatures } from '@/components/PrimaryFeatures'
 import { SecondaryFeatures } from '@/components/SecondaryFeatures'
-import Breadcrumbs from '@/components/layout/Breadcrumbs'
 import { addBlurHash } from '@/utils/blurhash'
 
 import { ResponsiveImage } from '@/components/embeds/ResponsiveImage'
@@ -32,7 +31,6 @@ const Page = (props) => {
           src="/beams-home@95.jpg"
           alt=""
           className="-ml-[40rem] w-[163.125rem] max-w-none sm:-ml-[67.5rem]"
-          // className="absolute -top-[1rem] left-1/2 z-0 -ml-[40rem] w-[163.125rem] max-w-none sm:-ml-[67.5rem]"
         />
       </div>
       <Head>
@@ -146,41 +144,19 @@ const components = {
   },
 }
 
-const queryByPath = async (path: string[] = ['index']): Promise<any> => {
-  // console.log('>>>>queryByPath', path)
+const queryByPath = async (relativePath: string): Promise<any> => {
   let page: any
   let query = {}
   let data = {}
-  let breadcrumbs = [...path]
-  let relativePath = breadcrumbs.join('/')
 
-  let extensions = [/* '', */ '.mdx', /* '/index', */ '/index.mdx']
-
-  // console.log('queryByPath', extensions, breadcrumbs, relativePath)
-
-  // query path.join('/') + [.md, .mdx] until a page is found
-  // async loop through extensions until a page is found
-  for (
-    let i = 0;
-    !page?.id && i < extensions.length && breadcrumbs.length > 0;
-    i++
-  ) {
-    if (page != null) {
-      // console.log('continue')
-      continue
-    }
-
-    relativePath = breadcrumbs.join('/') + extensions[i]
-
-    try {
-      const res = await client.queries.page({ relativePath })
-      page = res?.data?.page
-      query = res?.query
-      data = res?.data
-    } catch (err) {
-      // console.error(err)
-      // swallow errors related to document creation
-    }
+  try {
+    const res = await client.queries.page({ relativePath })
+    page = res?.data?.page
+    query = res?.query
+    data = res?.data
+  } catch (err) {
+    // console.error(err)
+    // swallow errors related to document creation
   }
 
   return {
@@ -193,8 +169,12 @@ const queryByPath = async (path: string[] = ['index']): Promise<any> => {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const res = await queryByPath(params.path)
+  const path = params?.path ?? ['index']
 
+  const [res, resNav] = await Promise.all([
+    queryByPath(path.join('/') + '.mdx'),
+    client.queries.nav(),
+  ])
   if (
     typeof window === 'undefined' &&
     res.props?.data?.page?.body?.children?.length
@@ -203,15 +183,6 @@ export const getStaticProps = async ({ params }) => {
       await addBlurHash(node)
     }
   }
-
-  // TODO: move navigation query to layout level
-  const resNav = await client.queries.nav()
-  // console.log('resNav', resNav)
-  /* res?.props?.data['nav'] = {
-    footer: resNav?.data.navFooterConnection.edges[0]?.node._values,
-    main: resNav?.data.navMainConnection.edges[0]?.node._values,
-  }
-  console.log(''); */
 
   // add res.nav.data to res.props.data
   res.props.data['nav'] = {
@@ -222,29 +193,37 @@ export const getStaticProps = async ({ params }) => {
   return res
 }
 
-const preparePath = (relativePath: string): string[] => {
-  // replace extensions and "index" from relativePath
-  const path = relativePath.replace(/\.(mdx)$/, '').replace(/index$/, '')
-  return path.split('/')
-}
-
 export const getStaticPaths = async () => {
-  const pagesListData = await client.queries.pageConnection()
+  const response = await client.request({
+    query: `#graphql
+      query ($collection: String!) {
+        collection(collection: $collection) {
+          documents(first: -1) {
+            edges {
+              node {
+                ...on Document {
+                  _sys {
+                    breadcrumbs,
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: { collection: 'page' },
+  })
 
-  const paths = pagesListData.data.pageConnection.edges.map((page) => ({
+  const paths = response.data.collection.documents.edges.map((page) => ({
     params: {
-      path: preparePath(page.node._sys.relativePath),
+      path: page.node._sys.breadcrumbs?.filter((x) => x !== 'index') ?? [],
     },
   }))
 
-  /* console.log(
-    'paths',
-    paths.map((p) => p.params.path.join('/'))
-  ) */
-
   return {
     paths,
-    fallback: 'blocking',
+    fallback: false,
   }
 }
 

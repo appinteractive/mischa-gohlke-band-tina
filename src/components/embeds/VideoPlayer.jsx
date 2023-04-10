@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { useState, useEffect, Fragment } from 'react'
+import { useState, useEffect, Fragment, Suspense } from 'react'
 import VideoPlayerList from './VideoPlayerList'
 import { classNames } from 'tinacms'
 import { Transition } from '@headlessui/react'
@@ -59,15 +59,38 @@ export default function VideoPlayer({ type, ...props }) {
             controls={true}
             height="100%"
             width="100%"
-            playIcon={<VideoPlayButton />}
+            playIcon={<span className="hidden" />}
           />
         )}
+        <Transition show={!isPlaying || isInitial} as={Fragment}>
+          <Transition.Child
+            as={Fragment}
+            enter="transition duration-[200ms]"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transform duration-200 transition ease-in-out"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div
+              className="absolute inset-0 backdrop-blur-sm"
+              onClick={() => {
+                setTimeout(() => {
+                  setLight(null)
+                  setIsPlaying(true)
+                }, 100)
+              }}
+            >
+              <VideoPlayButton className="h-full w-full" />
+            </div>
+          </Transition.Child>
+        </Transition>
 
         <div
           className="pointer-events-none absolute inset-0 overflow-hidden"
           aria-hidden
         >
-          <div
+          {/* <div
             className={classNames(
               'duration-250 absolute inset-0 overflow-hidden rounded-lg bg-black/50 transition-all ease-in-out',
               isPlaying || isInitial
@@ -77,7 +100,7 @@ export default function VideoPlayer({ type, ...props }) {
                 ? 'pointer-events-none'
                 : 'pointer-events-auto'
             )}
-          ></div>
+          ></div> */}
           {props?.videos?.length > 1 && (
             <Transition
               show={!isPlaying || isInitial}

@@ -104,6 +104,7 @@ export function Header({ items }) {
           <div className="hidden items-center font-semibold text-gray-900 md:flex md:gap-x-2">
             {items.map((item) => {
               if (item.disabled) return null
+              if (item.showInMainNavigation === false) return null
 
               // check if any item has children with showInMainNavigation === true
               const isMultiLevel = item.children?.some((item) => {

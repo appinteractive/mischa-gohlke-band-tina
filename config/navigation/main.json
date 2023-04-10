@@ -644,7 +644,8 @@
     },
     {
       "mainTitle1": "Spenden",
-      "mainPage1": "content/pages/spenden.mdx"
+      "mainPage1": "content/pages/spenden.mdx",
+      "mainShowInMainNavigation1": false
     }
   ],
   "_template": "mainNav"
