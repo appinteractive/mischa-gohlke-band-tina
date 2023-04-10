@@ -5,12 +5,12 @@ import sizeOf from 'image-size'
 export const generateBlurHash = async (url: string) => {
   try {
     // get path to public folder
-    const path = require('path')
+    let path = require('path')
     const filePath = path.join(process.cwd(), 'public', url)
     // console.log('url', filePath)
 
     // get Uint8ClampedArray image data from file path
-    const file = await fs.readFile(filePath)
+    let file = await fs.readFile(filePath)
 
     // Get image dimensions using image-size module
     const { width, height } = await sizeOf(file)
@@ -18,9 +18,9 @@ export const generateBlurHash = async (url: string) => {
     const newWidth = Math.round(width * resizeFactor)
     const newHeight = Math.round(height * resizeFactor)
 
-    const sharp = require('sharp')
+    let sharp = require('sharp')
     // get size of image under filePath
-    const { data, info } = await sharp(filePath)
+    let { data, info } = await sharp(filePath)
       .resize(newWidth, newHeight)
       .raw()
       .ensureAlpha()
@@ -34,6 +34,9 @@ export const generateBlurHash = async (url: string) => {
 
     // Encode the pixel data array into a blurhash
     const blurhash = encode(data, newWidth, newHeight, 4, 3)
+
+    // Clean up
+    data = info = sharp = file = path = null
 
     return blurhash
   } catch (err) {

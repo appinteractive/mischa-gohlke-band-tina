@@ -11,7 +11,7 @@ export const ResponsiveImage = (props) => {
   const hasInfos = title || caption
 
   return (
-    <figure className="not-prose aspect-w-16 aspect-h-9 relative my-5 flex items-center justify-end overflow-hidden rounded-md">
+    <figure className="not-prose aspect-h-9 aspect-w-16 relative my-5 flex items-center justify-end overflow-hidden rounded-md">
       <span>
         {props.blurDataURL && (
           <BlurhashCanvas
@@ -19,7 +19,7 @@ export const ResponsiveImage = (props) => {
             punch={1}
             width={768}
             height={432}
-            className="absolute inset-0 top-0 left-0 !h-full !w-full"
+            className="absolute inset-0 left-0 top-0 !h-full !w-full"
           />
         )}
         <Image
@@ -47,3 +47,5 @@ export const ResponsiveImage = (props) => {
     </figure>
   )
 }
+
+export default ResponsiveImage

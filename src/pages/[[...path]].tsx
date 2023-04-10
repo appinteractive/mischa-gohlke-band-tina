@@ -12,9 +12,14 @@ import { PrimaryFeatures } from '@/components/PrimaryFeatures'
 import { SecondaryFeatures } from '@/components/SecondaryFeatures'
 import { addBlurHash } from '@/utils/blurhash'
 
-import { ResponsiveImage } from '@/components/embeds/ResponsiveImage'
 import VideoPlayer from '@/components/embeds/VideoPlayer'
 import { isImage } from '@/lib/utils'
+import dynamic from 'next/dynamic'
+
+const ResponsiveImage = dynamic(
+  () => import('@/components/embeds/ResponsiveImage'),
+  { ssr: false }
+)
 
 const Page = (props) => {
   const { data } = useTina({
@@ -175,14 +180,16 @@ export const getStaticProps = async ({ params }) => {
     queryByPath(path.join('/') + '.mdx'),
     client.queries.nav(),
   ])
-  if (
+
+  // TODO: find a way to generate blur hashes on build or on upload
+  /* if (
     typeof window === 'undefined' &&
     res.props?.data?.page?.body?.children?.length
   ) {
     for (const node of res.props.data.page.body.children) {
       await addBlurHash(node)
     }
-  }
+  } */
 
   // add res.nav.data to res.props.data
   res.props.data['nav'] = {

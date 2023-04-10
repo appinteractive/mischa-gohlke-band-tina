@@ -4,9 +4,21 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
-  /* images: {
+  images: {
     domains: ['assets.tina.io'],
-  }, */
+  },
+  async rewrites() {
+    return [
+      /* {
+        source: "/",
+        destination: "/home",
+      }, */
+      {
+        source: '/admin',
+        destination: '/admin/index.html',
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

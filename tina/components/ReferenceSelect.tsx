@@ -265,6 +265,7 @@ export const useReferenceSelect = wrapFieldsWithMeta(
                               <a
                                 href={cleanPath(id)}
                                 target="_blank"
+                                rel="noopener noreferrer"
                                 title="Öffne in neuem Tab"
                                 className={classNames(
                                   selected ? '' : 'hidden',
