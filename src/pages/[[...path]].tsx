@@ -86,7 +86,7 @@ const Page = (props) => {
             }
           })
         ) : (
-          <div className="prose mx-auto max-w-3xl py-40">
+          <div className="prose mx-auto max-w-3xl py-12 md:py-40">
             <h1>{data?.page?.title}</h1>
             <span className="prose-h1:hidden">
               <TinaMarkdown

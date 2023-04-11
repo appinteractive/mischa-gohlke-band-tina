@@ -10,9 +10,16 @@ import { NavLink } from '@/components/NavLink'
 import MenuPopover from './layout/MenuPopover'
 import { cleanPath } from '@/lib/utils'
 
-function MobileNavLink({ href, children }) {
+function MobileNavLink({ href, children, level = 1 }) {
   return (
-    <Popover.Button as={Link} href={href} className="block w-full p-2">
+    <Popover.Button
+      as={Link}
+      href={href}
+      className={clsx(
+        'block w-full p-2',
+        level > 1 && 'py-1.5 pl-4 text-base text-slate-500'
+      )}
+    >
       {children}
     </Popover.Button>
   )
@@ -45,7 +52,7 @@ function MobileNavIcon({ open }) {
   )
 }
 
-function MobileNavigation() {
+function MobileNavigation({ items }) {
   return (
     <Popover>
       <Popover.Button
@@ -77,13 +84,45 @@ function MobileNavigation() {
         >
           <Popover.Panel
             as="div"
-            className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-2xl bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5"
+            className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-lg bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5"
           >
-            <MobileNavLink href="#features">Features</MobileNavLink>
+            {items.map((item, index) => {
+              if (item.disabled) return null
+              if (item.showInMainNavigation === false) return null
+              const isMultiLevel = item.children?.some((item) => {
+                if (item.children) {
+                  return item.children.some(
+                    (child) => child.showInMainNavigation === true
+                  )
+                }
+                return false
+              })
+
+              return (
+                <>
+                  <MobileNavLink key={index} href={cleanPath(item.page)}>
+                    {item.title}
+                  </MobileNavLink>
+                  {isMultiLevel &&
+                    item.children.map((itm, idx) => {
+                      return (
+                        <MobileNavLink
+                          key={`${index}${idx}`}
+                          href={cleanPath(itm.page)}
+                          level={2}
+                        >
+                          {itm.title}
+                        </MobileNavLink>
+                      )
+                    })}
+                </>
+              )
+            })}
+            {/* <hr className="m-2 border-slate-300/40" />
+            <MobileNavLink href="/spenden">Spenden</MobileNavLink> */}
+            {/* <MobileNavLink href="#features">Features</MobileNavLink>
             <MobileNavLink href="#testimonials">Testimonials</MobileNavLink>
-            <MobileNavLink href="#pricing">Pricing</MobileNavLink>
-            <hr className="m-2 border-slate-300/40" />
-            <MobileNavLink href="/login">Sign in</MobileNavLink>
+            <MobileNavLink href="#pricing">Pricing</MobileNavLink>*/}
           </Popover.Panel>
         </Transition.Child>
       </Transition.Root>
@@ -142,7 +181,7 @@ export function Header({ items }) {
               <span>Spenden</span>
             </Button>
             <div className="-mr-1 md:hidden">
-              <MobileNavigation />
+              <MobileNavigation items={items} />
             </div>
           </div>
         </nav>

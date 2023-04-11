@@ -20,5 +20,6 @@
     "**/*.var.gql.dart": true,
     "**/*.gql.g.dart": true,
     "**/node_modules": true
-  }
+  },
+  "cSpell.words": ["clsx"]
 }
