@@ -114,6 +114,7 @@ export const main: any = {
                       ...menuItem.page,
                       nameOverride: 'mainPage4',
                     },
+                    { ...menuItem.disabled, nameOverride: 'mainDisabled4' },
                     {
                       ...menu,
                       nameOverride: 'mainChildren4',
@@ -126,6 +127,8 @@ export const main: any = {
                           ...menuItem.page,
                           nameOverride: 'mainPage5',
                         },
+
+                        { ...menuItem.disabled, nameOverride: 'mainDisabled5' },
                       ],
                     },
                   ] as any,

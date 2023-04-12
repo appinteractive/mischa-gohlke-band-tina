@@ -503,7 +503,8 @@
                 },
                 {
                   "mainTitle4": "Grzegorz Leoniec",
-                  "mainPage4": "content/pages/ueber-uns/das-team/aktionsbuero/grzegorz-leoniec.mdx"
+                  "mainPage4": "content/pages/ueber-uns/das-team/aktionsbuero/grzegorz-leoniec.mdx",
+                  "mainDisabled4": true
                 },
                 {
                   "mainTitle4": "Thorsten Hesse",
@@ -524,15 +525,18 @@
                 },
                 {
                   "mainTitle4": "Björn Lingner",
-                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/bjoern-lingner.mdx"
+                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/bjoern-lingner.mdx",
+                  "mainDisabled4": true
                 },
                 {
                   "mainTitle4": "Hervé Dieu",
-                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/herve-dieu.mdx"
+                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/herve-dieu.mdx",
+                  "mainDisabled4": true
                 },
                 {
                   "mainTitle4": "Jannis Raasch",
-                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/jannis-raasch.mdx"
+                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/jannis-raasch.mdx",
+                  "mainDisabled4": true
                 }
               ]
             },
@@ -574,7 +578,8 @@
                 },
                 {
                   "mainTitle4": "Hörbie Schmidt",
-                  "mainPage4": "content/pages/ueber-uns/das-team/beirat/hoerbie-schmidt.mdx"
+                  "mainPage4": "content/pages/ueber-uns/das-team/beirat/hoerbie-schmidt.mdx",
+                  "mainDisabled4": true
                 }
               ]
             },
