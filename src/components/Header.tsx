@@ -8,7 +8,19 @@ import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
 import { NavLink } from '@/components/NavLink'
 import MenuPopover from './layout/MenuPopover'
-import { cleanPath } from '@/lib/utils'
+import { cleanPath, isMultiLevel } from '@/lib/utils'
+
+export type MainNavItem = {
+  title: string
+  page: string
+  disabled?: boolean
+  showInMainNavigation?: boolean
+  children?: MainNavItem[]
+}
+
+type Props = {
+  items: MainNavItem[]
+}
 
 function MobileNavLink({ href, children, level = 1 }) {
   return (
@@ -52,7 +64,7 @@ function MobileNavIcon({ open }) {
   )
 }
 
-function MobileNavigation({ items }) {
+function MobileNavigation({ items }: Props) {
   return (
     <Popover>
       <Popover.Button
@@ -71,7 +83,7 @@ function MobileNavigation({ items }) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Popover.Overlay className="fixed inset-0 bg-slate-300/50" />
+          <Popover.Overlay className="fixed inset-0 bg-slate-700/50 backdrop-blur-sm" />
         </Transition.Child>
         <Transition.Child
           as={Fragment}
@@ -89,22 +101,27 @@ function MobileNavigation({ items }) {
             {items.map((item, index) => {
               if (item.disabled) return null
               if (item.showInMainNavigation === false) return null
-              const isMultiLevel = item.children?.some((item) => {
-                if (item.children) {
-                  return item.children.some(
-                    (child) => child.showInMainNavigation === true
-                  )
-                }
-                return false
-              })
+
+              /* const isMultiLevel =
+                item.children?.length &&
+                item.children.some((item) => {
+                  if (item.children?.length) {
+                    return item.children.some(
+                      (child) =>
+                        child.children?.length &&
+                        child.showInMainNavigation !== false
+                    )
+                  }
+                  return false
+                }) */
 
               return (
                 <>
                   <MobileNavLink key={index} href={cleanPath(item.page)}>
                     {item.title}
                   </MobileNavLink>
-                  {isMultiLevel &&
-                    item.children.map((itm, idx) => {
+                  {isMultiLevel(item) &&
+                    item.children?.map((itm, idx) => {
                       return (
                         <MobileNavLink
                           key={`${index}${idx}`}
@@ -133,7 +150,7 @@ function MobileNavigation({ items }) {
 export function Header({ items }) {
   return (
     <header className="py-10">
-      <Container>
+      <Container className="">
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
             <Link href="/" aria-label="Home">
@@ -141,28 +158,17 @@ export function Header({ items }) {
             </Link>
           </div>
           <div className="hidden items-center font-semibold text-gray-900 md:flex md:gap-x-2">
-            {items.map((item) => {
+            {items?.map((item) => {
               if (item.disabled) return null
               if (item.showInMainNavigation === false) return null
-
-              // check if any item has children with showInMainNavigation === true
-              const isMultiLevel = item.children?.some((item) => {
-                if (item.children) {
-                  return item.children.some(
-                    (child) => child.showInMainNavigation === true
-                  )
-                }
-                return false
-              })
 
               if (item.children?.length) {
                 return (
                   <MenuPopover
                     key={item.title}
                     label={item.title}
-                    items={item.children}
-                    showFooter={item.showFooter}
-                    isMultiLevel={isMultiLevel}
+                    items={item.children ?? []}
+                    isMultiLevel={isMultiLevel(item)}
                   />
                 )
               }
@@ -177,7 +183,7 @@ export function Header({ items }) {
             {/* <div className="hidden md:block">
               <NavLink href="/login">Sign in</NavLink>
             </div> */}
-            <Button href="/spenden" color="blue">
+            <Button className="" href="/spenden" color="blue">
               <span>Spenden</span>
             </Button>
             <div className="-mr-1 md:hidden">

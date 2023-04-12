@@ -25,9 +25,9 @@ const richText = (text) => {
   )
 }
 
-export function Hero({ headline, text, ...props }) {
+export default function Hero({ headline, text, ...props }) {
   return (
-    <Container className="pt-20 pb-16 text-center lg:pt-32">
+    <Container className="pb-16 pt-20 text-center lg:pt-32">
       <h1
         className="mx-auto max-w-4xl font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl"
         data-tinafield="headline"

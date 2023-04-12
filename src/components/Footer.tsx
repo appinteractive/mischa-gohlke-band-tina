@@ -1,12 +1,23 @@
 import Link from 'next/link'
 
 import { cleanPath } from '@/lib/utils'
+import { NormalizedNavItem } from '@/lib/breadcrumbs'
 
 /* import { useEffect, useState } from 'react'
 import Router from 'next/router'
 import { useEditState, useCMS } from 'tinacms/dist/react' */
 
-export function Footer({ items }) {
+export type FooterNavItem = {
+  title: string
+  page: string
+  children?: FooterNavItem[]
+}
+
+type Props = {
+  items: NormalizedNavItem[]
+}
+
+export function Footer({ items }: Props) {
   // add e reactive state with current path
   // add e reactive state with edit
   // if edit is false, prefix current url with /admin#/~

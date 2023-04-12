@@ -4,22 +4,32 @@ import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import client from '@/tina/__generated__/client'
 import React, { Suspense, useEffect, useState } from 'react'
 
-import { Header } from '@/components/Header'
-import { Footer } from '@/components/Footer'
+import Layout from '@/layouts/default'
 
-import { Hero } from '@/components/Hero'
-import { PrimaryFeatures } from '@/components/PrimaryFeatures'
-import { SecondaryFeatures } from '@/components/SecondaryFeatures'
 import { addBlurHash } from '@/utils/blurhash'
 
-import VideoPlayer from '@/components/embeds/VideoPlayer'
 import { isImage } from '@/lib/utils'
 import dynamic from 'next/dynamic'
+import { findNodeByUrl, getSubNavigation } from '@/lib/breadcrumbs'
+import { useRouter } from 'next/router'
+import { MainNavItem } from '@/components/Header'
+import { Nav, normalizeNavigation } from '@/lib/nav-model'
+import clsx from 'clsx'
+import Link from 'next/link'
+import subNav from '@/components/layout/SubNav'
+import Breadcrumbs from '@/components/layout/Breadcrumbs'
 
+const Hero = dynamic(() => import('@/components/Hero'))
+const PrimaryFeatures = dynamic(() => import('@/components/PrimaryFeatures'))
+const SecondaryFeatures = dynamic(
+  () => import('@/components/SecondaryFeatures')
+)
+const VideoPlayer = dynamic(() => import('@/components/embeds/VideoPlayer'))
 const ResponsiveImage = dynamic(
   () => import('@/components/embeds/ResponsiveImage'),
   { ssr: false }
 )
+const SubNav = dynamic(() => import('@/components/layout/SubNav'))
 
 const Page = (props) => {
   const { data } = useTina({
@@ -28,16 +38,20 @@ const Page = (props) => {
     data: props.data,
   })
 
+  const currentUrl = useRouter().asPath
+  const navigation = normalizeNavigation({ ...props.data.nav })
+  const subNavigation = getSubNavigation(navigation.main, currentUrl)
+
+  // check if subNav has more than one item or if that item has children
+  const hasSubNav = subNavigation?.length > 1 || subNavigation[0]?.children
+
+  const cmsComponents = useCmsComponents({ hasSubNav })
+
+  const subNav =
+    subNavigation?.length > 0 ? <SubNav items={subNavigation} /> : null
+
   return (
     <>
-      <div className="absolute inset-0 -top-[40rem] -z-[1] overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/beams-home@95.jpg"
-          alt=""
-          className="-ml-[40rem] w-[163.125rem] max-w-none sm:-ml-[67.5rem]"
-        />
-      </div>
       <Head>
         <title>Grenzen sind relativ e.V.</title>
         <meta
@@ -45,8 +59,7 @@ const Page = (props) => {
           content="Most bookkeeping software is accurate, but hard to use. We make the opposite trade-off, and hope you don’t get audited."
         />
       </Head>
-      <Header items={props.data?.nav?.main?.menu ?? []} />
-      <main className="relative mx-auto grow px-6">
+      <Layout navigation={navigation} subNav={hasSubNav ? subNav : null}>
         {/* {data?.page?._sys?.breadcrumbs?.length > 1 && (
           <Breadcrumbs
             items={data.page._sys.breadcrumbs}
@@ -57,9 +70,36 @@ const Page = (props) => {
               {data.post.title}
             </h1> */}
         {/* <ContentSection content={data.post.body}></ContentSection> */}
-        {/* <div className="prose mx-auto ">
-            <pre>{JSON.stringify(data.nav, null, 2)}</pre>
-          </div> */}
+        <div className={clsx('prose relative mx-auto')}>
+          {/* <pre>{JSON.stringify(navigation.main, null, 2)}</pre> */}
+
+          {/* <pre>
+            {JSON.stringify(
+              getSubNavigation(navigation.main, currentUrl),
+              null,
+              2
+            )}
+          </pre> */}
+          {/* <pre>{JSON.stringify(subNavigation, null, 2)}</pre> */}
+
+          {/* <pre>{currentUrl}</pre>
+          <pre>
+            {JSON.stringify(
+              findNavigationItem(currentUrl, navigation.main as any),
+              null,
+              2
+            )}
+          </pre>
+          <pre>{JSON.stringify(subNavigation, null, 2)}</pre> */}
+          {/* <pre>
+            {JSON.stringify(
+              getParentAndChildren(navigation.main as any, currentUrl),
+              null,
+              2
+            )}
+          </pre> */}
+          {/* <pre>{JSON.stringify(navigation, null, 2)}</pre> */}
+        </div>
         {data.page?.blocks?.length > 0 ? (
           data.page.blocks.map(function (block, i) {
             switch (block.__typename) {
@@ -86,67 +126,70 @@ const Page = (props) => {
             }
           })
         ) : (
-          <div className="prose mx-auto max-w-3xl py-12 md:py-40">
-            <h1>{data?.page?.title}</h1>
-            <span className="prose-h1:hidden">
+          <div className="prose mx-auto max-w-3xl">
+            {/* <h1>{data?.page?.title}</h1> */}
+            <span>
               <TinaMarkdown
                 content={data?.page?.body}
-                components={components}
+                components={cmsComponents}
               />
             </span>
           </div>
         )}
-      </main>
-      <Footer items={props.data?.nav?.footer?.footerMenu ?? []} />
+      </Layout>
     </>
   )
 }
 
-const components = {
-  // disable h1 tags as we use the page title for SEO
-  h1: () => <span className="hidden" />,
-  // convert all div tags to spans
-  div: (props) => {
-    return <span {...props}>{props.children}</span>
-  },
-  // do not render figure inside p tags
-  p: (props) => {
-    if (isImage(props.url) === true) {
-      // return children directly when url is an image
-      // console.log('P ELEMENT IS AN IMAGE', props.url)
-      return <TinaMarkdown {...props} content={props} components={components} />
-    }
-    // if children contains a img tag
-    const hasImage =
-      props?.children?.props?.content?.find((child) => isImage(child.url)) !=
-      null
-
-    // console.log('hasImage', hasImage)
-
-    if (hasImage) {
+function useCmsComponents({ hasSubNav }) {
+  return {
+    // disable h1 tags as we use the page title for SEO
+    // h1: () => <span className="hidden" />,
+    // convert all div tags to spans
+    div: (props) => {
       return <span {...props}>{props.children}</span>
-    } else {
-      return <p {...props}>{props.children}</p>
-    }
-  },
-  VideoPlayer: (props) => <VideoPlayer {...props} />,
-  // stop linking images to themselves
-  /* a: (props) => {
-    // is image check when url includes .jpg, jpeg, .png, .svg, .gif, .webp
-    if (isImage(props.url) === true) {
-      // return children directly when url is an image
-      return <>{props.children}</>
-    } else {
-      return (
-        <a {...props}>
-          {props.children}
-        </a>
-      )
-    }
-  }, */
-  img: (props) => {
-    return <ResponsiveImage {...props} />
-  },
+    },
+    // do not render figure inside p tags
+    p: (props) => {
+      if (isImage(props.url) === true) {
+        // return children directly when url is an image
+        // console.log('P ELEMENT IS AN IMAGE', props.url)
+        return (
+          <TinaMarkdown {...props} content={props} components={components} />
+        )
+      }
+      // if children contains a img tag
+      const hasImage =
+        props?.children?.props?.content?.find((child) => isImage(child.url)) !=
+        null
+
+      // console.log('hasImage', hasImage)
+
+      if (hasImage) {
+        return <span {...props}>{props.children}</span>
+      } else {
+        return <p {...props}>{props.children}</p>
+      }
+    },
+    VideoPlayer: (props) => <VideoPlayer hasSubNav={hasSubNav} {...props} />,
+    // stop linking images to themselves
+    /* a: (props) => {
+      // is image check when url includes .jpg, jpeg, .png, .svg, .gif, .webp
+      if (isImage(props.url) === true) {
+        // return children directly when url is an image
+        return <>{props.children}</>
+      } else {
+        return (
+          <a {...props}>
+            {props.children}
+          </a>
+        )
+      }
+    }, */
+    img: (props) => {
+      return <ResponsiveImage {...props} />
+    },
+  }
 }
 
 const queryByPath = async (relativePath: string): Promise<any> => {

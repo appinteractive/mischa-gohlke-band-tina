@@ -7,7 +7,10 @@ export const ResponsiveImage = (props) => {
 
   const hasAlt = alt && alt !== ''
   const title = hasAlt ? alt : props.caption?.trim()
+
+  if (caption === title) caption = null
   if (!hasAlt) caption = null
+
   const hasInfos = title || caption
 
   return (

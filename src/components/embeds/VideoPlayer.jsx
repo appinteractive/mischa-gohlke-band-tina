@@ -4,12 +4,13 @@ import VideoPlayerList from './VideoPlayerList'
 import { classNames } from 'tinacms'
 import { Transition } from '@headlessui/react'
 import { PlayCircleIcon } from '@heroicons/react/20/solid'
+import clsx from 'clsx'
 
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false })
 
 // TODO: Add support and layout for multiple videos
 
-export default function VideoPlayer({ type, ...props }) {
+export default function VideoPlayer({ type, hasSubNav, ...props }) {
   const [isPlaying, setIsPlaying] = useState(true)
   const [isInitial, setIsInitial] = useState(true)
   const [current, setCurrent] = useState(
@@ -30,7 +31,12 @@ export default function VideoPlayer({ type, ...props }) {
   }, [props?.videos])
 
   return (
-    <div className="not-prose relative max-w-7xl rounded-lg border bg-black lg:-mx-[10vw]">
+    <div
+      className={clsx(
+        'not-prose relative max-w-7xl rounded-lg border bg-black',
+        hasSubNav ? 'lg:-mr-[8vw]' : 'lg:-mx-[10vw]'
+      )}
+    >
       <div className="aspect-h-9 aspect-w-16 w-full">
         {current?.url && (
           <ReactPlayer

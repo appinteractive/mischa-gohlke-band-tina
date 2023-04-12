@@ -1,0 +1,161 @@
+export type NormalizedNavItem =
+  | {
+      title: string
+      url?: string
+      page?: string
+      disabled?: boolean
+      showInMainNavigation?: boolean
+      children?: NormalizedNavItem[]
+      siblings?: NormalizedNavItem[]
+    }
+  | undefined
+
+// get url from page path
+const urlByPath = (path: string) => {
+  return path.replace(/content\/pages(.+)\.mdx/, '$1')
+}
+
+// normalize urls
+export function normalizeUrls(items: NormalizedNavItem[]): NormalizedNavItem[] {
+  const output = [...items.filter((item) => !item.disabled)]
+
+  output.forEach((item) => {
+    if (item.disabled === true) {
+      item.disabled = true // add disabled if true
+    } else {
+      delete item.disabled // remove disabled if false
+    }
+    if (item.disabled || item.showInMainNavigation === false) {
+      item.showInMainNavigation = false // remove showInMainNavigation if false
+    } else {
+      delete item.showInMainNavigation // remove showInMainNavigation if true
+    }
+    if (item.page) {
+      item.url = urlByPath(item.page) // add url from page
+    }
+    if (item.children && item.children.length > 0) {
+      const children = normalizeUrls([...item.children])
+      // put url before children
+      delete item.children
+      item.children = children
+    } else {
+      delete item.children
+    }
+  })
+
+  return output.filter((item) => !item.disabled)
+}
+
+type SubNav = {
+  parent: NormalizedNavItem | null
+  current: NormalizedNavItem
+}
+
+export function getSubNavigation(
+  nav: NormalizedNavItem[],
+  url: string
+): NavNode[] {
+  for (const item of nav) {
+    const foundNode = findNodeByUrl(item as any, url)
+    if (foundNode) {
+      return foundNode as any
+    }
+  }
+  return []
+}
+
+interface NavNode {
+  title: string
+  url: string
+  active?: boolean
+  parentActive?: boolean
+  children?: NavNode[]
+}
+
+function cleanNode(node: NavNode, removeChildren = false): NavNode {
+  return {
+    title: node.title,
+    url: node.url ?? node.children?.[0]?.url,
+    active: node.active ?? undefined,
+    children:
+      removeChildren || !node.children?.length
+        ? undefined
+        : node.children.map((x) => cleanNode(x)),
+  }
+}
+
+export function findNodeByUrl(
+  root: NavNode,
+  url: string,
+  parent?: NavNode
+): NavNode[] | null {
+  if (root.url === url) {
+    root.active = true
+    if (parent?.children) {
+      return [
+        {
+          ...cleanNode(root),
+          active: true,
+          children: root.children?.map((x) => {
+            return { ...cleanNode(x), active: x.url === url ?? undefined }
+          }),
+        },
+      ]
+    } else {
+      return [{ ...root, active: true }]
+    }
+  }
+
+  if (!root.children) return null
+
+  for (const child of root.children) {
+    const foundNode = findNodeByUrl(child, url, { ...root })
+    if (foundNode) {
+      root.active = true
+      return (child.children ?? root.children ?? []).map((x) => {
+        if (x.url === url) {
+          return cleanNode({
+            ...x,
+            active: true,
+            children: cleanEmptyNodes(
+              x.children?.map((y) => {
+                return { ...cleanNode(y), active: y.url === url ?? undefined }
+              })
+            ),
+          })
+        }
+        const item = cleanNode(x)
+        return {
+          ...item,
+          children: cleanEmptyNodes(item.children),
+        }
+      })
+    }
+  }
+
+  return null
+}
+
+function cleanEmptyNodes(nodes: NavNode[], keep = false): NavNode[] {
+  const hasActive = nodes?.some((x) => x.active)
+  return nodes?.filter((node) => {
+    if (node.children) {
+      node.children = cleanEmptyNodes(node.children, keep || node.active)
+    }
+    return hasActive || keep
+  })
+}
+
+function findNodeChildren(node: NavNode, children: NavNode[] = []): NavNode[] {
+  if (!node) {
+    return []
+  }
+
+  const newChildren = [...children, ...node.children]
+
+  for (const child of node.children) {
+    newChildren.push(...findNodeChildren(child, newChildren))
+  }
+
+  return newChildren
+}

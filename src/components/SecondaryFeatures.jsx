@@ -206,12 +206,12 @@ function FeaturesDesktop() {
   )
 }
 
-export function SecondaryFeatures() {
+export default function SecondaryFeatures() {
   return (
     <section
       id="secondary-features"
       aria-label="Features for simplifying everyday business tasks"
-      className="pt-20 pb-14 sm:pb-20 sm:pt-32 lg:pb-32"
+      className="pb-14 pt-20 sm:pb-20 sm:pt-32 lg:pb-32"
     >
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">
