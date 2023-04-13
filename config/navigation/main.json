@@ -3,6 +3,7 @@
     {
       "mainTitle1": "Aktivitäten",
       "mainShowInMainNavigation1": true,
+      "isMultiLevel": true,
       "mainChildren1": [
         {
           "mainTitle2": "Veranstaltungsformate",
@@ -140,7 +141,8 @@
                 },
                 {
                   "mainTitle4": "Hamburg",
-                  "mainPage4": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/musikunterricht-fuer-hoergeschaedigte/musikunterricht-hamburg.mdx"
+                  "mainPage4": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/musikunterricht-fuer-hoergeschaedigte/musikunterricht-hamburg.mdx",
+                  "mainDisabled4": true
                 },
                 {
                   "mainTitle4": "Bundesweit",
@@ -271,6 +273,7 @@
                 {
                   "mainTitle4": "Blog",
                   "mainPage4": "content/pages/media/blog/grenzen-sind-relativ-musik-horen-und-inklusion.mdx",
+                  "mainDisabled4": true,
                   "mainChildren4": [
                     {
                       "mainTitle5": "Grenzen sind relativ – Musik, Hören und Inklusion",
@@ -284,7 +287,8 @@
                 },
                 {
                   "mainTitle4": "#diskurskultur",
-                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/interdisziplinaere-kulturarbeit/filmproduktionen-kultur-von-allen.mdx"
+                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/interdisziplinaere-kulturarbeit/filmproduktionen-kultur-von-allen.mdx",
+                  "mainDisabled4": true
                 }
               ]
             },
@@ -350,12 +354,12 @@
               "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/news.oder.fake.mdx",
               "mainChildren3": [
                 {
-                  "mainTitle4": "Studie Kindheit",
-                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/studie-zeigt-kindheit-1.mdx"
-                },
-                {
                   "mainTitle4": "Info news.oder.fake",
                   "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/news.oder.fake.mdx"
+                },
+                {
+                  "mainTitle4": "Studie Kindheit",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/studie-zeigt-kindheit-1.mdx"
                 },
                 {
                   "mainTitle4": "Sozialer Aufstieg in Deutschland für jeden machbar",
@@ -508,7 +512,8 @@
                 },
                 {
                   "mainTitle4": "Thorsten Hesse",
-                  "mainPage4": "content/pages/ueber-uns/das-team/aktionsbuero/thorsten-hesse.mdx"
+                  "mainPage4": "content/pages/ueber-uns/das-team/aktionsbuero/thorsten-hesse.mdx",
+                  "mainDisabled4": true
                 }
               ]
             },

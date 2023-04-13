@@ -15,7 +15,9 @@ const urlByPath = (path: string) => {
   return path.replace(/content\/pages(.+)\.mdx/, '$1')
 }
 
-// normalize urls
+/**
+ * normalize navigation tree
+ */
 export function normalizeUrls(items: NormalizedNavItem[]): NormalizedNavItem[] {
   const output = [...items.filter((item) => !item.disabled)]
 
@@ -23,13 +25,16 @@ export function normalizeUrls(items: NormalizedNavItem[]): NormalizedNavItem[] {
     if (item.disabled === true) {
       item.disabled = true // add disabled if true
     } else {
-      delete item.disabled // remove disabled if false
+      delete item.disabled // remove disabled if not true
     }
     if (item.disabled || item.showInMainNavigation === false) {
-      item.showInMainNavigation = false // remove showInMainNavigation if false
+      item.showInMainNavigation = false // add showInMainNavigation if false or disabled
     } else {
-      delete item.showInMainNavigation // remove showInMainNavigation if true
+      delete item.showInMainNavigation // remove showInMainNavigation if not true
     }
+    /* if (!item.page && item.children) {
+      item.page = item.children[0].page // add page from first child
+    } */
     if (item.page) {
       item.url = urlByPath(item.page) // add url from page
     }
@@ -46,11 +51,9 @@ export function normalizeUrls(items: NormalizedNavItem[]): NormalizedNavItem[] {
   return output.filter((item) => !item.disabled)
 }
 
-type SubNav = {
-  parent: NormalizedNavItem | null
-  current: NormalizedNavItem
-}
-
+/**
+ * get sub navigation for a given url form a normalized navigation tree
+ */
 export function getSubNavigation(
   nav: NormalizedNavItem[],
   url: string
@@ -72,6 +75,9 @@ interface NavNode {
   children?: NavNode[]
 }
 
+/**
+ * ony keep title, url, active and children (if not empty or removeChildren is not true)
+ */
 function cleanNode(node: NavNode, removeChildren = false): NavNode {
   return {
     title: node.title,
@@ -84,6 +90,9 @@ function cleanNode(node: NavNode, removeChildren = false): NavNode {
   }
 }
 
+/**
+ * find navigation tree node by url
+ */
 export function findNodeByUrl(
   root: NavNode,
   url: string,
@@ -117,10 +126,11 @@ export function findNodeByUrl(
           return cleanNode({
             ...x,
             active: true,
-            children: cleanEmptyNodes(
-              x.children?.map((y) => {
+            /* cleanEmptyNodes( */
+            children: x.children?.map(
+              (y) => {
                 return { ...cleanNode(y), active: y.url === url ?? undefined }
-              })
+              } /* ) */
             ),
           })
         }
@@ -136,6 +146,9 @@ export function findNodeByUrl(
   return null
 }
 
+/**
+ * removes nodes without active children
+ */
 function cleanEmptyNodes(nodes: NavNode[], keep = false): NavNode[] {
   const hasActive = nodes?.some((x) => x.active)
   return nodes?.filter((node) => {
@@ -144,18 +157,4 @@ function cleanEmptyNodes(nodes: NavNode[], keep = false): NavNode[] {
     }
     return hasActive || keep
   })
-}
-
-function findNodeChildren(node: NavNode, children: NavNode[] = []): NavNode[] {
-  if (!node) {
-    return []
-  }
-
-  const newChildren = [...children, ...node.children]
-
-  for (const child of node.children) {
-    newChildren.push(...findNodeChildren(child, newChildren))
-  }
-
-  return newChildren
 }

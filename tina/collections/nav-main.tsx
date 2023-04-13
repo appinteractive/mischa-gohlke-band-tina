@@ -1,5 +1,5 @@
 import { useReferenceSelect } from '../components/ReferenceSelect'
-import { uiUseTitle } from '../../src/lib/utils'
+import { uiUseTitle, uiUseValidation } from '../../src/lib/utils'
 
 const menu: any = {
   type: 'object',
@@ -18,6 +18,9 @@ const menuItem = {
     label: 'Titel',
     isTitle: true,
     required: true,
+    ui: {
+      validate: uiUseValidation({ label: 'Titel', max: 60 }),
+    },
   },
   description: {
     type: 'string',
@@ -26,6 +29,7 @@ const menuItem = {
     description: 'Optionale Beschreibung die unter dem Menüpunkt erscheint',
     ui: {
       component: 'textarea',
+      validate: uiUseValidation({ label: 'Beschreibung', min: null, max: 160 }),
     },
   },
   disabled: {
@@ -66,6 +70,13 @@ export const main: any = {
         {
           ...menuItem.showInMainNavigation,
           nameOverride: 'mainShowInMainNavigation1',
+        },
+        {
+          type: 'boolean',
+          name: 'isMultiLevel',
+          label: 'Großes Menü',
+          description:
+            'Sollen die Unterseiten in der Hauptnavigation erscheinen?',
         },
         {
           ...menu,

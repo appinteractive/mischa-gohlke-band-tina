@@ -8,7 +8,7 @@ import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
 import { NavLink } from '@/components/NavLink'
 import MenuPopover from './layout/MenuPopover'
-import { cleanPath, isMultiLevel } from '@/lib/utils'
+import { cleanPath } from '@/lib/utils'
 
 export type MainNavItem = {
   title: string
@@ -120,18 +120,17 @@ function MobileNavigation({ items }: Props) {
                   <MobileNavLink key={index} href={cleanPath(item.page)}>
                     {item.title}
                   </MobileNavLink>
-                  {isMultiLevel(item) &&
-                    item.children?.map((itm, idx) => {
-                      return (
-                        <MobileNavLink
-                          key={`${index}${idx}`}
-                          href={cleanPath(itm.page)}
-                          level={2}
-                        >
-                          {itm.title}
-                        </MobileNavLink>
-                      )
-                    })}
+                  {item.children?.map((itm, idx) => {
+                    return (
+                      <MobileNavLink
+                        key={`${index}${idx}`}
+                        href={cleanPath(itm.page)}
+                        level={2}
+                      >
+                        {itm.title}
+                      </MobileNavLink>
+                    )
+                  })}
                 </>
               )
             })}
@@ -168,7 +167,7 @@ export function Header({ items }) {
                     key={item.title}
                     label={item.title}
                     items={item.children ?? []}
-                    isMultiLevel={isMultiLevel(item)}
+                    isMultiLevel={item.isMultiLevel}
                   />
                 )
               }
