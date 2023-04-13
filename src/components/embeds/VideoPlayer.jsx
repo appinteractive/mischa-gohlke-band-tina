@@ -34,7 +34,7 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
     <div
       className={clsx(
         'not-prose relative max-w-7xl rounded-lg border bg-black',
-        hasSubNav ? 'lg:-mr-[8vw]' : 'lg:-mx-[10vw]'
+        hasSubNav ? 'xl:-mr-[8vw]' : 'xl:-mx-[10vw]'
       )}
     >
       <div className="aspect-h-9 aspect-w-16 w-full">
