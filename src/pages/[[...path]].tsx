@@ -37,7 +37,8 @@ const Page = (props) => {
     data: props.data,
   })
 
-  const currentUrl = useRouter().asPath
+  const router = useRouter()
+  const currentUrl = router.asPath
   const navigation = normalizeNavigation({ ...props.data.nav })
   const subNavigation = getSubNavigation(navigation.main, currentUrl)
 
@@ -55,11 +56,24 @@ const Page = (props) => {
   return (
     <>
       <Head>
-        <title>Grenzen sind relativ e.V.</title>
+        <title>{data.page?.title} | Grenzen sind relativ e.V.</title>
+        <meta name="description" content={data.page?.description} />
         <meta
-          name="description"
-          content="Most bookkeeping software is accurate, but hard to use. We make the opposite trade-off, and hope you don’t get audited."
+          property="og:title"
+          content={`${data.page?.title} | Grenzen sind relativ e.V.`}
         />
+        <meta property="og:description" content={data.page?.description} />
+        <meta
+          property="og:image"
+          content={data.page?.image?.teaser ?? '/media/teaser.jpg'}
+        />
+        <meta property="og:locale" content="de_DE" />
+        <meta property="og:type" content="website" />
+        <meta name="robots" content="index, follow" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        ></meta>
       </Head>
       <Layout navigation={navigation} subNav={hasSubNav ? subNav : null}>
         {/* {data?.page?._sys?.breadcrumbs?.length > 1 && (
