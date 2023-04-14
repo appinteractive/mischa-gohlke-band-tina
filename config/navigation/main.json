@@ -22,6 +22,7 @@
               "mainTitle3": "GSR e.V. Public Events",
               "mainPage3": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/support-inklusion.mdx",
               "mainDescription3": "Interdisziplinäre Kulturevents auf Festivals, Stadtfesten, Sport- & Kulturveranstaltungen und öffentlichen Plätzen",
+              "mainShowInMainNavigation3": true,
               "mainChildren3": [
                 {
                   "mainTitle4": "Allgemeine Infos",
@@ -41,6 +42,7 @@
               "mainTitle3": "Celebrate the music ",
               "mainDescription3": "Eine Veranstaltungsreihe mit Workshops, Begegnungen und Konzerten. ",
               "mainDisabled3": false,
+              "mainShowInMainNavigation3": true,
               "mainChildren3": [
                 {
                   "mainTitle4": "Allgemeine Infos",
@@ -81,6 +83,7 @@
               "mainTitle3": "AndersSein vereint - Inklusionssong für Deutschland",
               "mainPage3": "content/pages/aktivitaeten/kampagnen-musikvideos/anderssein-vereint/asv-projektinfo.mdx",
               "mainDescription3": "1 Musikvideo, 3 Festivals und diverse Folgeprojekte für die \"gesamtgesellschaftliche Inklusion\".",
+              "showInMainNavigation3": true,
               "mainChildren3": [
                 {
                   "mainTitle4": "Worum geht es?",
@@ -112,6 +115,7 @@
               "mainTitle3": "2. Inklusions- & Friedenssong (Arbeitstitel)",
               "mainPage3": "content/pages/aktivitaeten/kampagnen-musikvideos/inklusions-und-friedenskampagnensong/allgemeine-infos-2-inklusion-friedenssong.mdx",
               "mainDescription3": "Eine (r)evolutionäre Kampagne für eine Beziehungskultur mit allem was dazu gehört!",
+              "showInMainNavigation3": true,
               "mainChildren3": [
                 {
                   "mainTitle4": "Allgemeine Infos",
@@ -130,6 +134,7 @@
               "mainTitle3": "Musikunterricht für Hörgeschädigte",
               "mainPage3": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/musikunterricht-fuer-hoergeschaedigte/worum-geht-es-musikunterricht-fur-horgeschadigte.mdx",
               "mainDescription3": "Musikunterricht, der alle Sinne, Wahrnehmungen & Empfindungen mit einbezieht und alle Menschen anspricht.",
+              "mainShowInMainNavigation3": true,
               "mainChildren3": [
                 {
                   "mainTitle4": "Worum geht es?",
@@ -154,6 +159,7 @@
               "mainTitle3": "Bandcamps",
               "mainDescription3": "Ob inklusiv, interkulturell oder/und finanziell-beeinträchtigt. Musik ist für alle da und rockt!",
               "mainDisabled3": true,
+              "mainShowInMainNavigation3": true,
               "mainChildren3": [
                 {
                   "mainTitle4": "Allgemeine Infos",
@@ -164,6 +170,7 @@
             {
               "mainTitle3": "Workshops, Seminare & Vorträge",
               "mainDescription3": "Themen: Inklusiver Musikunterricht, Projekt- & Veranstaltungsmanagement, Inklusion, uvam.",
+              "mainShowInMainNavigation3": true,
               "mainChildren3": [
                 {
                   "mainTitle4": "Allgemeine Infos",
@@ -186,7 +193,8 @@
             {
               "mainTitle3": "Workshops, Talk & Konzert von/mit der Mischa Gohlke Band",
               "mainPage3": "content/pages/aktivitaeten/projekte-und-veranstaltungen/veranstaltungsformate-fuer-dein-event/konzert-workshops-talk-von-mit-der-mischa-gohlke-band.mdx",
-              "mainDescription3": "Grenzen sind relativ. Mit Live-Musik, spannenden Workshops und interaktiver Begegnung wird es praktisch erfahrbar."
+              "mainDescription3": "Grenzen sind relativ. Mit Live-Musik, spannenden Workshops und interaktiver Begegnung wird es praktisch erfahrbar.",
+              "mainShowInMainNavigation3": true
             },
             {
               "mainTitle3": "Beratung & Coaching",
@@ -205,12 +213,14 @@
             {
               "mainTitle3": "Öffentlichkeitsarbeit & Bewusstseinsbildung",
               "mainPage3": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/allgemeine-infos.mdx",
-              "mainDescription3": "Interdisziplinäre Kultur, gesamtgesellschaftliche Inklusion, Frieden, Dialog & Miteinander, integrales Bewusstsein"
+              "mainDescription3": "Interdisziplinäre Kultur, gesamtgesellschaftliche Inklusion, Frieden, Dialog & Miteinander, integrales Bewusstsein",
+              "mainShowInMainNavigation3": true
             },
             {
               "mainTitle3": "Interdisziplinäre Kulturarbeit",
               "mainPage3": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/interdisziplinaere-kulturarbeit/interdisziplinare-kulturarbeit.mdx",
               "mainDescription3": "Wissenstransfer, Vernetzung und Kooperationsvorhaben",
+              "mainShowInMainNavigation3": true,
               "mainChildren3": [
                 {
                   "mainTitle4": "Allgemeine Infos",
@@ -225,17 +235,20 @@
             {
               "mainTitle3": "Come together Partys - Grenzen sind relativ e.V. & Friends ",
               "mainPage3": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/come-together-partys-grenzen-sind-relativ-e.v.friends.mdx",
-              "mainDescription3": "Monatliche Netzwerkveranstaltungen mit Live Musik, Jam Session und interaktiven Aktionen"
+              "mainDescription3": "Monatliche Netzwerkveranstaltungen mit Live Musik, Jam Session und interaktiven Aktionen",
+              "mainShowInMainNavigation3": true
             },
             {
               "mainTitle3": "Vermittlungsbörse",
               "mainPage3": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/vermittlungsborse.mdx",
-              "mainDescription3": "Vermittlung von Künstlern, Dozenten, Filmern, Designern, Promotern, usw."
+              "mainDescription3": "Vermittlung von Künstlern, Dozenten, Filmern, Designern, Promotern, usw.",
+              "mainShowInMainNavigation3": true
             },
             {
               "mainTitle3": "Kooperationsprojekte",
               "mainPage3": "content/pages/aktivitaeten/projekte-und-veranstaltungen/kooperationsprojekte/allgemeine-infos-kooperationsprojekte.mdx",
               "mainDescription3": "Zusammen mit Vereinen, Institutionen, Initiativen, etc.",
+              "mainShowInMainNavigation3": true,
               "mainChildren3": [
                 {
                   "mainTitle4": "Allgemeine Infos",
@@ -254,7 +267,8 @@
             {
               "mainTitle3": "Gesamtgesellschaftliches Aktionsbündnis",
               "mainPage3": "content/pages/aktivitaeten/netzwerk-und-oeffentlichkeitsarbeit/gemeinschaftliches-aktionsbundnis.mdx",
-              "mainDisabled3": true
+              "mainDisabled3": true,
+              "mainShowInMainNavigation3": true
             }
           ]
         },
@@ -295,7 +309,8 @@
             {
               "mainTitle3": "#diskurskultur - die 7teilige Filmreihe",
               "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/diskurskultur.mdx",
-              "mainDescription3": ""
+              "mainDescription3": "",
+              "mainShowInMainNavigation3": true
             },
             {
               "mainTitle3": "grenzenlos vernetzt von a-z",
@@ -352,6 +367,7 @@
             {
               "mainTitle3": "news.oder.fake",
               "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/news.oder.fake/news.oder.fake.mdx",
+              "mainShowInMainNavigation3": true,
               "mainChildren3": [
                 {
                   "mainTitle4": "Info news.oder.fake",
@@ -401,6 +417,8 @@
             },
             {
               "mainTitle3": "Blog",
+              "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/blog/grenzen-sind-relativ-musik-horen-und-inklusion.mdx",
+              "mainShowInMainNavigation3": true,
               "mainChildren3": [
                 {
                   "mainTitle4": "Grenzen sind relativ – Musik, Hören und Inklusion",
@@ -418,7 +436,8 @@
             },
             {
               "mainTitle3": "GSR e.V. Impressions",
-              "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/gsr-e.v.impressions.mdx"
+              "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/gsr-e.v.impressions.mdx",
+              "mainShowInMainNavigation3": true
             },
             {
               "mainTitle3": "Support your crowd",
@@ -454,11 +473,13 @@
             },
             {
               "mainTitle3": "Events \"Celebrate analog life\"",
-              "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/events-celebrate-analog-life.mdx"
+              "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/events-celebrate-analog-life.mdx",
+              "mainShowInMainNavigation3": true
             },
             {
               "mainTitle3": "Selbstverständnis",
-              "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/selbstverstandnis.mdx"
+              "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/selbstverstandnis.mdx",
+              "mainShowInMainNavigation3": true
             }
           ]
         }

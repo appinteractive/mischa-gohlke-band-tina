@@ -10,14 +10,10 @@ import { addBlurHash } from '@/utils/blurhash'
 
 import { isImage } from '@/lib/utils'
 import dynamic from 'next/dynamic'
-import { findNodeByUrl, getSubNavigation } from '@/lib/breadcrumbs'
+import { getSubNavigation } from '@/lib/breadcrumbs'
 import { useRouter } from 'next/router'
-import { MainNavItem } from '@/components/Header'
-import { Nav, normalizeNavigation } from '@/lib/nav-model'
+import { normalizeNavigation } from '@/lib/nav-model'
 import clsx from 'clsx'
-import Link from 'next/link'
-import subNav from '@/components/layout/SubNav'
-import Breadcrumbs from '@/components/layout/Breadcrumbs'
 
 const Hero = dynamic(() => import('@/components/Hero'))
 const PrimaryFeatures = dynamic(() => import('@/components/PrimaryFeatures'))
@@ -43,12 +39,15 @@ const Page = (props) => {
   const subNavigation = getSubNavigation(navigation.main, currentUrl)
 
   // check if subNav has more than one item or if that item has children
-  const hasSubNav = subNavigation?.length > 1 || subNavigation[0]?.children
+  const hasSubNav =
+    subNavigation?.items?.length > 1 || subNavigation?.items[0]?.children
 
   const cmsComponents = useCmsComponents({ hasSubNav })
 
   const subNav =
-    subNavigation?.length > 0 ? <SubNav items={subNavigation} /> : null
+    subNavigation?.items?.length > 0 ? (
+      <SubNav items={subNavigation.items} parent={subNavigation.parent} />
+    ) : null
 
   return (
     <>
