@@ -156,9 +156,7 @@ function useCmsComponents({ hasSubNav }) {
       if (isImage(props.url) === true) {
         // return children directly when url is an image
         // console.log('P ELEMENT IS AN IMAGE', props.url)
-        return (
-          <TinaMarkdown {...props} content={props} components={components} />
-        )
+        return <TinaMarkdown {...props} content={props} />
       }
       // if children contains a img tag
       const hasImage =
