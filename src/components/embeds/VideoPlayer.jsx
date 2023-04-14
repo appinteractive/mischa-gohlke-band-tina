@@ -8,8 +8,6 @@ import clsx from 'clsx'
 
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false })
 
-// TODO: Add support and layout for multiple videos
-
 export default function VideoPlayer({ type, hasSubNav, ...props }) {
   const [isPlaying, setIsPlaying] = useState(true)
   const [isInitial, setIsInitial] = useState(true)

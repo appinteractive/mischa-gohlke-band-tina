@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { BlurhashCanvas } from 'react-blurhash'
+import clsx from 'clsx'
 
 export const ResponsiveImage = (props) => {
   let caption = props.caption?.trim()
@@ -14,7 +15,12 @@ export const ResponsiveImage = (props) => {
   const hasInfos = title || caption
 
   return (
-    <figure className="not-prose aspect-h-9 aspect-w-16 relative my-5 flex items-center justify-end overflow-hidden rounded-md">
+    <figure
+      className={clsx(
+        'not-prose aspect-h-9 aspect-w-16 relative my-5 flex items-center justify-end overflow-hidden rounded-md',
+        props.className
+      )}
+    >
       <span>
         {props.blurDataURL && (
           <BlurhashCanvas

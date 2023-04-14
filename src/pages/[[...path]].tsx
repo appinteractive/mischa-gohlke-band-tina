@@ -25,6 +25,9 @@ const ResponsiveImage = dynamic(
   () => import('@/components/embeds/ResponsiveImage'),
   { ssr: false }
 )
+const ContentGallery = dynamic(
+  () => import('@/components/embeds/ContentGallery')
+)
 const SubNav = dynamic(() => import('@/components/layout/SubNav'))
 
 const Page = (props) => {
@@ -185,6 +188,7 @@ function useCmsComponents({ hasSubNav }) {
         )
       }
     }, */
+    ContentGallery: (props) => <ContentGallery {...props} />,
     img: (props) => {
       return <ResponsiveImage {...props} />
     },
