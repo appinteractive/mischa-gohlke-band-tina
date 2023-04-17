@@ -69,7 +69,11 @@ export default function MenuPopover({ label, items, isMultiLevel = false }) {
               )}
             >
               <div className="flex">
-                <div className={isMultiLevel ? `grid grid-cols-2 gap-y-1` : ''}>
+                <div
+                  className={
+                    isMultiLevel ? `grid grid-cols-2 gap-y-1` : 'w-full'
+                  }
+                >
                   <div className={classNames('p-1.5', isMultiLevel && 'pr-0')}>
                     {items.map((item) => {
                       if (
@@ -190,7 +194,7 @@ function itemLevel1({
       key={label}
       onMouseEnter={onMouseEnter}
       className={classNames(
-        'group relative flex items-center gap-x-3  text-gray-800 hover:bg-slate-100 hover:text-indigo-700',
+        'group relative flex items-center gap-x-3 text-gray-800 hover:bg-slate-100 hover:text-indigo-700',
         large ? 'rounded-l-lg p-5' : 'rounded-lg p-4',
         active && 'bg-slate-100 !text-indigo-700'
       )}
