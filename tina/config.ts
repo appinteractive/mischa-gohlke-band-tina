@@ -1,4 +1,4 @@
-import { Field, defineConfig } from 'tinacms'
+import { defineConfig } from 'tinacms'
 import { heroBlock, featureBlock, contentBlock } from './blocks/blocks'
 import { footer } from '../tina/collections/nav-footer'
 import { main } from '../tina/collections/nav-main'
@@ -37,7 +37,29 @@ const menuItem = {
     type: 'string',
     name: 'alias',
     label: 'Alte URL',
-    description: 'Umleitung von alter URL, beginnend mit Slash: /aktuelles/…',
+    description: 'Umleitung von alter URL, beginnend mit Slash',
+    list: true,
+    // ui: {
+    //   validate: (values: string, allValues: any, meta: any, field: any) => {
+    //     console.log(meta)
+    //     return {
+    //       alias: ['Die URL muss mit einem Slash beginnen'],
+    //     }
+    //     /* const errors = null
+    //     if (values?.length > 0) {
+    //       for (const value of values) {
+    //         const hasDomain = ['.de', 'http', 'www.'].includes(value)
+    //         if (value && !value.startsWith('/')) {
+    //           errors.push('Die URL muss mit einem Slash beginnen')
+    //         }
+    //         if (hasDomain) {
+    //           errors.push('URL bitte ohne Domain')
+    //         }
+    //       }
+    //     }
+    //     return errors */
+    //   },
+    // },
   },
   accessible: {
     type: 'string',
@@ -133,20 +155,6 @@ export default defineConfig({
           },
         },
       },
-      /* {
-        name: 'navigation',
-        label: 'Navigation',
-        path: 'config/navigation',
-        format: 'json',
-        templates: [footer, main],
-        ui: {
-          global: true,
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
-        },
-      }, */
       {
         name: 'navMain',
         label: 'Hauptnavigation',
