@@ -4,6 +4,7 @@ import { footer } from '../tina/collections/nav-footer'
 import { main } from '../tina/collections/nav-main'
 import { VideoPlayerTemplate } from '../tina/embeds/video-player'
 import { ContentGalleryTemplate } from './embeds/content-gallery'
+import { ImageGalleryTemplate } from './embeds/image-gallery'
 
 // Your hosting provider likely exposes this as an environment variable
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || 'main'
@@ -105,7 +106,11 @@ export default defineConfig({
                 name: 'body',
                 label: 'Inhalt',
                 isBody: true,
-                templates: [VideoPlayerTemplate, ContentGalleryTemplate],
+                templates: [
+                  VideoPlayerTemplate,
+                  ContentGalleryTemplate,
+                  ImageGalleryTemplate,
+                ],
                 /* templates: [
                   {
                     name: 'img',
