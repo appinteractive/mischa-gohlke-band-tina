@@ -117,13 +117,16 @@ function MobileNavigation({ items }: Props) {
 
               return (
                 <>
-                  <MobileNavLink key={index} href={cleanPath(item.page)}>
+                  <MobileNavLink
+                    key={index.toString()}
+                    href={cleanPath(item.page)}
+                  >
                     {item.title}
                   </MobileNavLink>
                   {item.children?.map((itm, idx) => {
                     return (
                       <MobileNavLink
-                        key={`${index}${idx}`}
+                        key={`${index.toString()}->${idx.toString()}`}
                         href={cleanPath(itm.page)}
                         level={2}
                       >
