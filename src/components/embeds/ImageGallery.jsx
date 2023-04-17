@@ -15,7 +15,7 @@ const ResponsiveImage = dynamic(
  * used for displaying images in a grid
  */
 export default function ImageGallery({ type, hasSubNav, images, ...props }) {
-  const items = images.map((item, index) => {
+  const items = (images ?? []).map((item, index) => {
     const { src, alt, caption, width, height } = item
     return {
       src,
@@ -75,6 +75,7 @@ function ImageThumbnail({
           src={src}
           alt={alt}
           fill
+          draggable={false}
           className="h-full w-full object-cover"
         />
       </Zoom>
@@ -126,7 +127,7 @@ const CustomZoomContent = ({
         {alt && caption && (
           <figcaption className={classCaption}>
             {caption}
-            <cite className="zoom-caption-cite">{alt}</cite>
+            {caption != alt && <cite className="zoom-caption-cite">{alt}</cite>}
           </figcaption>
         )}
       </figure>

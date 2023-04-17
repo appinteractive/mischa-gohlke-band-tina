@@ -167,6 +167,7 @@
             },
             {
               "mainTitle3": "Workshops, Seminare & Vorträge",
+              "mainPage3": "content/pages/aktivitaeten/musikunterricht-workshops-coaching/workshops-seminare-vortraege/allgemeine-infos-workshops-seminare-vortrage.mdx",
               "mainDescription3": "Themen: Inklusiver Musikunterricht, Projekt- & Veranstaltungsmanagement, Inklusion, uvam.",
               "mainShowInMainNavigation3": true,
               "mainChildren3": [
@@ -611,7 +612,7 @@
         },
         {
           "mainTitle2": "Audiovisuelle Impressionen & Medienberichte",
-          "mainPage2": null,
+          "mainPage2": "content/pages/media/videos.mdx",
           "mainChildren2": [
             {
               "mainTitle3": "Videos",

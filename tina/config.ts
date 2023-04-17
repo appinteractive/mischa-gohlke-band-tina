@@ -37,8 +37,8 @@ const menuItem = {
   alias: {
     type: 'string',
     name: 'alias',
-    label: 'Alte URL',
-    description: 'Umleitung von alter URL, beginnend mit Slash',
+    label: 'Alte URL(s)',
+    description: 'Umleitung von alten URLs, beginnend mit Slash',
     list: true,
     // ui: {
     //   validate: (values: string, allValues: any, meta: any, field: any) => {

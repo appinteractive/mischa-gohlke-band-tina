@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+
 const getImageDimensions = (src: string) => {
   return new Promise((resolve, reject) => {
     const img = new Image()
@@ -5,6 +7,18 @@ const getImageDimensions = (src: string) => {
     img.onerror = reject
     img.src = src
   })
+}
+
+const simpleMemoize = (fn) => {
+  let lastArg
+  let lastResult
+  return (arg) => {
+    if (arg !== lastArg) {
+      lastArg = arg
+      lastResult = fn(arg)
+    }
+    return lastResult
+  }
 }
 
 export const ImageGalleryTemplate: any = {
@@ -21,16 +35,21 @@ export const ImageGalleryTemplate: any = {
         min: 3,
       },
       itemProps: (item: any) => {
-        if (item.alt) {
-          return { label: item.alt }
+        item.label = item.label ?? item.alt ?? item.caption ?? item.src
+
+        if (!item.width || !item.height) {
+          getImageDimensions(item.src)
+            .then(({ width, height }) => {
+              item.width = width
+              item.height = height
+            })
+            .catch((err) => {
+              console.log(err)
+              item.label = 'Bild nicht gefunden'
+            })
         }
-        if (item.caption) {
-          return { label: item.caption }
-        }
-        if (item.src) {
-          return { label: item.src.replace('/media', '') }
-        }
-        return { label: '-' }
+
+        return { label: item.label }
       },
       fields: [
         {
