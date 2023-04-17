@@ -71,7 +71,7 @@ export default function MenuPopover({ label, items, isMultiLevel = false }) {
               <div className="flex">
                 <div
                   className={
-                    isMultiLevel ? `grid grid-cols-2 gap-y-1` : 'w-full'
+                    isMultiLevel ? `grid w-full grid-cols-2 gap-y-1` : 'w-full'
                   }
                 >
                   <div className={classNames('p-1.5', isMultiLevel && 'pr-0')}>
@@ -226,7 +226,7 @@ function itemLevel2({ page, label, description, close }) {
   return (
     <div
       key={label}
-      className="text group group relative flex gap-x-3 rounded-lg p-3 px-6 text-gray-700 hover:bg-slate-100"
+      className="text group relative flex w-full gap-x-3 rounded-lg p-3 px-6 text-gray-700 hover:bg-slate-100"
     >
       {/* <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-slate-100 group-hover:bg-white"> */}
       <IconCornerDownRight
