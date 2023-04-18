@@ -278,8 +278,6 @@ export const getStaticProps = async ({ params, ...data }) => {
   res.props.data['subNavigation'] = subNavigation ?? null
   res.props.data['hasSubNav'] = hasSubNav === true
 
-  console.log(JSON.stringify(res.props.data.page, null, 2))
-
   const teamComponentProps = { items: null }
   const hasTeamComponent = res.props.data.page?.body?.children?.some(
     (child) => {

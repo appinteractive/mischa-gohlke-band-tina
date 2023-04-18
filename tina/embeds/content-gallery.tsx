@@ -36,13 +36,6 @@ export const ContentGalleryTemplate: any = {
               field: any
             ) => {
               if (!value) return 'Bitte wähle eine Seite.'
-
-              console.log({
-                value,
-                allValues,
-                meta,
-                field,
-              })
               meta.validating = true
               client.queries
                 .page({ relativePath: value.replace('content/pages/', '') })
