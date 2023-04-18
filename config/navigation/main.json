@@ -1,6 +1,9 @@
 {
   "menu": [
     {
+      "mainTitle1": "Live"
+    },
+    {
       "mainTitle1": "Aktivitäten",
       "mainShowInMainNavigation1": true,
       "isMultiLevel": true,
