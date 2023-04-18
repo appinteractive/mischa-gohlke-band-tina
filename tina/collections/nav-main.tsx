@@ -76,7 +76,7 @@ export const main: any = {
           name: 'isMultiLevel',
           label: 'Großes Menü',
           description:
-            'Sollen die Unterseiten in der Hauptnavigation erscheinen?',
+            'Soll mehr als eine Ebene in der Hauptnavigation angezeigt werden?',
         },
         {
           ...menu,
