@@ -487,6 +487,10 @@
       "isMultiLevel": true,
       "mainChildren1": [
         {
+          "mainTitle2": "Freundeskreis",
+          "mainShowInMainNavigation2": true
+        },
+        {
           "mainTitle2": "Spenden",
           "mainPage2": "content/pages/spenden.mdx",
           "mainShowInMainNavigation2": true
