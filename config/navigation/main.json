@@ -676,7 +676,7 @@
         {
           "mainTitle2": "Zitate",
           "mainPage2": "content/pages/ueber-uns/zitate.mdx",
-          "mainDisabled2": true
+          "mainDisabled2": false
         },
         {
           "mainTitle2": "Kontakt",
