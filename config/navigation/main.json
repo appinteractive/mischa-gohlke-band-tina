@@ -478,7 +478,7 @@
       "mainTitle1": "Live",
       "mainPage1": "content/pages/live.mdx",
       "mainShowInMainNavigation1": true,
-      "isMultiLevel": true
+      "isMultiLevel": false
     },
     {
       "mainTitle1": "Unterstützen",
