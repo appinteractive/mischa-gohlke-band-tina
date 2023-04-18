@@ -25,15 +25,19 @@ export default function ContentGallery({ type, hasSubNav, ...props }) {
           <li key={item.page + item.teaser} className="relative flex flex-col ">
             <Link href={cleanPath(item.page)}>
               <span className="aspect-h-8 aspect-w-16 relative block shrink-0">
-                <Image
-                  src={item.teaser}
-                  alt={item.title}
-                  // set sizes to 100vw when the screen is smaller than 768px and 768px when it's larger
-                  sizes="(max-width: 768px) 100vw, (min-width: 768px) 768"
-                  fill
-                  blurDataURL={props.blurDataURL}
-                  className="prose-no h-full shrink-0 rounded-md bg-black object-cover md:shadow"
-                />
+                {item.teaser ? (
+                  <Image
+                    src={item.teaser}
+                    alt={item.title}
+                    // set sizes to 100vw when the screen is smaller than 768px and 768px when it's larger
+                    sizes="(max-width: 768px) 100vw, (min-width: 768px) 768"
+                    fill
+                    blurDataURL={props.blurDataURL}
+                    className="prose-no h-full shrink-0 rounded-md bg-black object-cover md:shadow"
+                  />
+                ) : (
+                  <div className="prose-no h-full shrink-0 rounded-md bg-black object-cover md:shadow" />
+                )}
               </span>
               <span className="block space-y-2 pb-4 pt-2">
                 <h3 className="font-semibold leading-snug">{item.title}</h3>
