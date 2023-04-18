@@ -642,6 +642,7 @@
         {
           "mainTitle2": "Audiovisuelle Impressionen & Medienberichte",
           "mainPage2": "content/pages/media/videos.mdx",
+          "mainDisabled2": false,
           "mainChildren2": [
             {
               "mainTitle3": "Videos",
@@ -673,7 +674,8 @@
         },
         {
           "mainTitle2": "Zitate",
-          "mainPage2": "content/pages/ueber-uns/zitate.mdx"
+          "mainPage2": "content/pages/ueber-uns/zitate.mdx",
+          "mainDisabled2": true
         },
         {
           "mainTitle2": "Kontakt",
