@@ -508,6 +508,10 @@
       "mainShowInMainNavigation1": true,
       "mainChildren1": [
         {
+          "mainTitle2": "Herleitung",
+          "mainShowInMainNavigation2": true
+        },
+        {
           "mainTitle2": "Mission & Vision",
           "mainPage2": "content/pages/ueber-uns/mission-und-vision.mdx"
         },
