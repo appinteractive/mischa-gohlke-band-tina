@@ -278,8 +278,15 @@ export const getStaticProps = async ({ params, ...data }) => {
   res.props.data['subNavigation'] = subNavigation ?? null
   res.props.data['hasSubNav'] = hasSubNav === true
 
+  console.log(JSON.stringify(res.props.data.page, null, 2))
+
   const teamComponentProps = { items: null }
-  if (currentUrl.includes('das-team') || currentUrl.includes('alle')) {
+  const hasTeamComponent = res.props.data.page?.body?.children?.some(
+    (child) => {
+      return child?.name === 'Team'
+    }
+  )
+  if (hasTeamComponent) {
     teamComponentProps.items = getSubNavigation(
       navigation.main,
       currentUrl,
@@ -314,8 +321,8 @@ export const getStaticProps = async ({ params, ...data }) => {
       variables: { collection: 'page' },
     })
 
-    teamComponentProps.items = teamComponentProps.items.map((area) => {
-      area.items = area.children.map((item) => {
+    teamComponentProps.items = teamComponentProps.items?.map((area) => {
+      area.items = area?.children?.map((item) => {
         // url is the item.url without the preceding slash
         const url = item.url.replace(/^\//, '')
 
