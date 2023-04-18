@@ -489,7 +489,13 @@
         {
           "mainTitle2": "Spenden",
           "mainPage2": "content/pages/spenden.mdx",
-          "mainShowInMainNavigation2": true
+          "mainShowInMainNavigation2": true,
+          "mainChildren2": [
+            {
+              "mainTitle3": "Freundeskreis",
+              "mainShowInMainNavigation3": true
+            }
+          ]
         }
       ]
     },
