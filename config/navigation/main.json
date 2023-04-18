@@ -497,6 +497,7 @@
         },
         {
           "mainTitle2": "Mitmachen",
+          "mainPage2": "content/pages/mitmachen.mdx",
           "mainShowInMainNavigation2": true
         }
       ]
