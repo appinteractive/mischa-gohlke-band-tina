@@ -57,7 +57,7 @@ const Page = (props) => {
   return (
     <>
       <Head>
-        <title>{data.page?.title} | Grenzen sind relativ e.V.</title>
+        <title>{`${data.page?.title} | Grenzen sind relativ e.V.`}</title>
         <meta name="description" content={data.page?.description} />
         <meta
           property="og:title"
