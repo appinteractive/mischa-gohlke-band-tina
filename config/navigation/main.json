@@ -487,7 +487,8 @@
       "isMultiLevel": true,
       "mainChildren1": [
         {
-          "mainTitle2": "Mitmachen",
+          "mainTitle2": "Spenden",
+          "mainPage2": "content/pages/spenden.mdx",
           "mainShowInMainNavigation2": true
         },
         {
@@ -495,8 +496,7 @@
           "mainShowInMainNavigation2": true
         },
         {
-          "mainTitle2": "Spenden",
-          "mainPage2": "content/pages/spenden.mdx",
+          "mainTitle2": "Mitmachen",
           "mainShowInMainNavigation2": true
         }
       ]
