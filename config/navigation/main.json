@@ -487,6 +487,10 @@
       "isMultiLevel": true,
       "mainChildren1": [
         {
+          "mainTitle2": "Mitmachen",
+          "mainShowInMainNavigation2": true
+        },
+        {
           "mainTitle2": "Freundeskreis",
           "mainShowInMainNavigation2": true
         },
