@@ -29,6 +29,7 @@ const ContentGallery = dynamic(
   () => import('@/components/embeds/ContentGallery')
 )
 const ImageGallery = dynamic(() => import('@/components/embeds/ImageGallery'))
+const DonationForm = dynamic(() => import('@/components/embeds/DonationForm'))
 const SubNav = dynamic(() => import('@/components/layout/SubNav'))
 
 const Page = (props) => {
@@ -207,6 +208,7 @@ function useCmsComponents({ hasSubNav }) {
     ImageGallery: (props) => (
       <ImageGallery hasSubNav={hasSubNav} images={props.images} {...props} />
     ),
+    DonationForm: (props) => <DonationForm {...props} />,
     img: (props) => {
       return <ResponsiveImage {...props} />
     },

@@ -1,4 +1,3 @@
-import React from 'react'
 import { getYoutubeVideoId } from '../../src/lib/utils'
 import useImagePreview from '../components/PreviewImage'
 import { VideoPlayButton } from '../../src/components/embeds/VideoPlayer'

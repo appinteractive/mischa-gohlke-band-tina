@@ -4,6 +4,7 @@ import { footer } from '../tina/collections/nav-footer'
 import { main } from '../tina/collections/nav-main'
 import { VideoPlayerTemplate } from '../tina/embeds/video-player'
 import { ContentGalleryTemplate } from './embeds/content-gallery'
+import { DonationFormTemplate } from './embeds/donation-form'
 import { ImageGalleryTemplate } from './embeds/image-gallery'
 import slugify from 'slugify'
 
@@ -111,6 +112,7 @@ export default defineConfig({
                   VideoPlayerTemplate,
                   ContentGalleryTemplate,
                   ImageGalleryTemplate,
+                  DonationFormTemplate,
                 ],
                 /* templates: [
                   {

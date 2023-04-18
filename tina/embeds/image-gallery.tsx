@@ -1,5 +1,3 @@
-import { useMemo } from 'react'
-
 const getImageDimensions = (src: string) => {
   return new Promise((resolve, reject) => {
     const img = new Image()
