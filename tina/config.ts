@@ -5,6 +5,7 @@ import { main } from '../tina/collections/nav-main'
 import { VideoPlayerTemplate } from '../tina/embeds/video-player'
 import { ContentGalleryTemplate } from './embeds/content-gallery'
 import { ImageGalleryTemplate } from './embeds/image-gallery'
+import slugify from 'slugify'
 
 // Your hosting provider likely exposes this as an environment variable
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || 'main'
@@ -157,6 +158,18 @@ export default defineConfig({
         ui: {
           router: ({ document }) => {
             return `/${document._sys.breadcrumbs.join('/')}`
+          },
+          filename: {
+            slugify: (values) => {
+              // Values is an object containing all the values of the form. In this case it is {title?: string, topic?: string}
+              return slugify(values.title ?? '', {
+                // only leave characters that are allowed in a URL, including the slash, question mark, hash, etc.
+                remove: /[*+~.()`´§'"=!?#_/:@]/g,
+                replacement: '-',
+                lower: true,
+                locale: 'de',
+              })
+            },
           },
         },
       },
