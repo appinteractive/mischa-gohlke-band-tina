@@ -493,7 +493,12 @@
           "mainChildren2": [
             {
               "mainTitle3": "Freundeskreis",
-              "mainShowInMainNavigation3": true
+              "mainShowInMainNavigation3": true,
+              "mainChildren3": [
+                {
+                  "mainTitle4": "Mitmachen"
+                }
+              ]
             }
           ]
         }
