@@ -39,7 +39,6 @@ export const uiUseTitle =
   (field: string = 'title'): CallableFunction =>
   (item: any) => {
     const disabled = item.disabled === true
-    console.log('item', item)
     return {
       label: `${item.title ?? '>> Titel fehlt <<'}${
         disabled ? ' (ausgeblendet)' : ''

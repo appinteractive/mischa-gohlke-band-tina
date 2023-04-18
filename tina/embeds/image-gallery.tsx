@@ -42,7 +42,6 @@ export const ImageGalleryTemplate: any = {
               item.height = height
             })
             .catch((err) => {
-              console.log(err)
               item.label = 'Bild nicht gefunden'
             })
         }
@@ -56,7 +55,6 @@ export const ImageGalleryTemplate: any = {
           label: 'Bild',
           ui: {
             validate: (src, allValues, meta, field) => {
-              console.log(src)
               // get index of current image
               const index = allValues.images?.findIndex(
                 (item) => item.src === src
@@ -64,7 +62,6 @@ export const ImageGalleryTemplate: any = {
 
               // get image dimensions of src
               getImageDimensions(src).then(({ width, height }) => {
-                console.log(width, height)
                 allValues.images[index].width = width
                 allValues.images[index].height = height
 
