@@ -61,10 +61,11 @@ export type SubNavigationType = {
  */
 export function getSubNavigation(
   nav: NormalizedNavItem[],
-  url: string
+  url: string,
+  keepChildren = false
 ): SubNavigationType | null {
   for (const item of nav) {
-    const foundNode = findNodeByUrl(item as any, url)
+    const foundNode = findNodeByUrl(item as any, url, null, keepChildren)
     if (foundNode?.nodes) {
       return {
         items: foundNode.nodes,
@@ -73,6 +74,36 @@ export function getSubNavigation(
     }
   }
   return null
+}
+
+type ObjectType = {
+  [key: string]: any
+}
+
+export function deleteUndefinedValues<T extends ObjectType | any[]>(obj: T): T {
+  if (!obj || typeof obj !== 'object') {
+    return
+  }
+
+  if (Array.isArray(obj)) {
+    obj.forEach((val, i) => {
+      if (typeof val === 'undefined') {
+        obj.splice(i, 1)
+      } else {
+        deleteUndefinedValues(val)
+      }
+    })
+  } else {
+    Object.entries(obj).forEach(([key, val]) => {
+      if (typeof val === 'undefined') {
+        delete obj[key]
+      } else {
+        deleteUndefinedValues(val)
+      }
+    })
+  }
+
+  return obj
 }
 
 export interface NavNodeParent {
@@ -116,7 +147,8 @@ export type NavNodesWithParent = {
 export function findNodeByUrl(
   root: NavNode,
   url: string,
-  parent?: NavNode
+  parent?: NavNode,
+  keepChildren?: boolean
 ): NavNodesWithParent | null {
   if (root.url === url) {
     root.active = true
@@ -146,7 +178,7 @@ export function findNodeByUrl(
   if (!root.children) return null
 
   for (const child of root.children) {
-    const foundNode = findNodeByUrl(child, url, { ...root })
+    const foundNode = findNodeByUrl(child, url, { ...root }, keepChildren)
     if (foundNode?.nodes) {
       root.active = true
       return {
@@ -166,7 +198,7 @@ export function findNodeByUrl(
           const item = cleanNode(x)
           return {
             ...item,
-            children: cleanEmptyNodes(item.children),
+            children: cleanEmptyNodes(item.children, keepChildren),
           }
         }),
         parent: {

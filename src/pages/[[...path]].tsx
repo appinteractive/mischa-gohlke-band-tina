@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useTina } from 'tinacms/dist/react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import client from '@/tina/__generated__/client'
-import React, { Suspense, useEffect, useState } from 'react'
+import React from 'react'
 
 import Layout from '@/layouts/default'
 
@@ -10,7 +10,7 @@ import { addBlurHash } from '@/utils/blurhash'
 
 import { isImage } from '@/lib/utils'
 import dynamic from 'next/dynamic'
-import { getSubNavigation } from '@/lib/breadcrumbs'
+import { deleteUndefinedValues, getSubNavigation } from '@/lib/breadcrumbs'
 import { useRouter } from 'next/router'
 import { normalizeNavigation } from '@/lib/nav-model'
 import clsx from 'clsx'
@@ -30,6 +30,7 @@ const ContentGallery = dynamic(
 )
 const ImageGallery = dynamic(() => import('@/components/embeds/ImageGallery'))
 const DonationForm = dynamic(() => import('@/components/embeds/DonationForm'))
+const Team = dynamic(() => import('@/components/embeds/Team'))
 const SubNav = dynamic(() => import('@/components/layout/SubNav'))
 
 const Page = (props) => {
@@ -41,14 +42,16 @@ const Page = (props) => {
 
   const router = useRouter()
   const currentUrl = router.asPath
-  const navigation = normalizeNavigation({ ...props.data.nav })
-  const subNavigation = getSubNavigation(navigation.main, currentUrl)
 
-  // check if subNav has more than one item or if that item has children
-  const hasSubNav =
-    subNavigation?.items?.length > 1 || subNavigation?.items[0]?.children
+  const { teamComponentProps, navigation, subNavigation, hasSubNav } =
+    props.data
+  console.log('teamComponentProps', teamComponentProps)
 
-  const cmsComponents = useCmsComponents({ hasSubNav })
+  const cmsComponents = useCmsComponents({
+    hasSubNav,
+    subNavigation,
+    teamComponentProps,
+  })
 
   const subNav =
     subNavigation?.items?.length > 0 ? (
@@ -159,7 +162,7 @@ const Page = (props) => {
   )
 }
 
-function useCmsComponents({ hasSubNav }) {
+function useCmsComponents({ hasSubNav, subNavigation, teamComponentProps }) {
   return {
     // disable h1 tags as we use the page title for SEO
     // h1: () => <span className="hidden" />,
@@ -209,12 +212,14 @@ function useCmsComponents({ hasSubNav }) {
       <ImageGallery hasSubNav={hasSubNav} images={props.images} {...props} />
     ),
     DonationForm: (props) => <DonationForm {...props} />,
+    Team: (props) => <Team {...props} items={teamComponentProps.items} />,
     img: (props) => {
       return <ResponsiveImage {...props} />
     },
   }
 }
 
+// TODO add paths for aliases too
 const queryByPath = async (relativePath: string): Promise<any> => {
   let page: any
   let query = {}
@@ -239,14 +244,7 @@ const queryByPath = async (relativePath: string): Promise<any> => {
   }
 }
 
-export const getStaticProps = async ({ params }) => {
-  const path = params?.path ?? ['index']
-
-  const [res, resNav] = await Promise.all([
-    queryByPath(path.join('/') + '.mdx'),
-    client.queries.nav(),
-  ])
-
+export const getStaticProps = async ({ params, ...data }) => {
   // TODO: find a way to generate blur hashes on build or on upload
   /* if (
     typeof window === 'undefined' &&
@@ -257,11 +255,91 @@ export const getStaticProps = async ({ params }) => {
     }
   } */
 
+  const path = params?.path ?? ['index']
+  const [res, resNav] = await Promise.all([
+    queryByPath(path.join('/') + '.mdx'),
+    client.queries.nav(),
+  ])
   // add res.nav.data to res.props.data
   res.props.data['nav'] = {
     footer: resNav?.data.navFooterConnection.edges[0]?.node._values,
     main: resNav?.data.navMainConnection.edges[0]?.node._values,
   }
+
+  const currentUrl = '/' + path.join('/').replace('/index', '')
+  console.log(currentUrl)
+  const navigation = normalizeNavigation({ ...res.props.data['nav'] })
+  let subNavigation = deleteUndefinedValues(
+    getSubNavigation(navigation.main, currentUrl)
+  )
+  console.log('subNavigation', subNavigation)
+  // check if subNav has more than one item or if that item has children
+  const hasSubNav =
+    subNavigation?.items?.length > 1 || subNavigation?.items[0]?.children
+
+  res.props.data['navigation'] = navigation
+  res.props.data['subNavigation'] = subNavigation
+  res.props.data['hasSubNav'] = hasSubNav
+
+  const teamComponentProps = { items: null }
+  if (currentUrl.includes('das-team') || currentUrl.includes('alle')) {
+    teamComponentProps.items = getSubNavigation(
+      navigation.main,
+      currentUrl,
+      true
+    ).items
+  }
+  if (teamComponentProps.items?.length) {
+    // get all page details for each team member
+    const allPages = await client.request({
+      query: `#graphql
+      query ($collection: String!) {
+        collection(collection: $collection) {
+          documents(first: -1) {
+            edges {
+              node {
+                ...on Document {
+                  _sys {
+                    breadcrumbs,
+                  }
+                }
+                ...on PageSimple {
+                  title,
+                  description,
+                  teaser,
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+      variables: { collection: 'page' },
+    })
+
+    teamComponentProps.items = teamComponentProps.items.map((area) => {
+      area.items = area.children.map((item) => {
+        // url is the item.url without the preceding slash
+        const url = item.url.replace(/^\//, '')
+
+        const page = allPages.data.collection.documents.edges.find(
+          (page) =>
+            page.node._sys.breadcrumbs
+              ?.filter((x) => x !== 'index')
+              ?.join('/') === url
+        )
+        if (page) {
+          item.description = page.node.description
+          item.teaser = page.node.teaser
+        }
+        return item
+      })
+
+      return area
+    })
+  }
+  res.props.data['teamComponentProps'] =
+    deleteUndefinedValues(teamComponentProps)
 
   return res
 }

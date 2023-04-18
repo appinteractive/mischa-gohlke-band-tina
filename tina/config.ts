@@ -6,6 +6,7 @@ import { VideoPlayerTemplate } from '../tina/embeds/video-player'
 import { ContentGalleryTemplate } from './embeds/content-gallery'
 import { DonationFormTemplate } from './embeds/donation-form'
 import { ImageGalleryTemplate } from './embeds/image-gallery'
+import { TeamTemplate } from './embeds/team'
 import slugify from 'slugify'
 
 // Your hosting provider likely exposes this as an environment variable
@@ -113,6 +114,7 @@ export default defineConfig({
                   ContentGalleryTemplate,
                   ImageGalleryTemplate,
                   DonationFormTemplate,
+                  TeamTemplate,
                 ],
                 /* templates: [
                   {
