@@ -269,17 +269,15 @@ export const getStaticProps = async ({ params, ...data }) => {
   const currentUrl = '/' + path.join('/').replace('/index', '')
   console.log(currentUrl)
   const navigation = normalizeNavigation({ ...res.props.data['nav'] })
-  let subNavigation = deleteUndefinedValues(
-    getSubNavigation(navigation.main, currentUrl)
-  )
-  console.log('subNavigation', subNavigation)
+  const subNavigation =
+    deleteUndefinedValues(getSubNavigation(navigation.main, currentUrl)) ?? null
   // check if subNav has more than one item or if that item has children
   const hasSubNav =
     subNavigation?.items?.length > 1 || subNavigation?.items[0]?.children
 
-  res.props.data['navigation'] = navigation
-  res.props.data['subNavigation'] = subNavigation
-  res.props.data['hasSubNav'] = hasSubNav
+  res.props.data['navigation'] = navigation ?? null
+  res.props.data['subNavigation'] = subNavigation ?? null
+  res.props.data['hasSubNav'] = hasSubNav ?? false
 
   const teamComponentProps = { items: null }
   if (currentUrl.includes('das-team') || currentUrl.includes('alle')) {

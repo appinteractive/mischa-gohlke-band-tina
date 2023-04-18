@@ -82,7 +82,7 @@ type ObjectType = {
 
 export function deleteUndefinedValues<T extends ObjectType | any[]>(obj: T): T {
   if (!obj || typeof obj !== 'object') {
-    return
+    return null
   }
 
   if (Array.isArray(obj)) {
