@@ -481,9 +481,10 @@
       "isMultiLevel": true
     },
     {
-      "mainTitle1": "Mitmachen",
-      "mainPage1": "content/pages/mitmachen.mdx",
-      "mainShowInMainNavigation1": true
+      "mainTitle1": "Unterstützen",
+      "mainPage1": "content/pages/spenden.mdx",
+      "mainShowInMainNavigation1": true,
+      "isMultiLevel": true
     },
     {
       "mainTitle1": "Über uns",
