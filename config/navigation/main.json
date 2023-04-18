@@ -476,6 +476,7 @@
     },
     {
       "mainTitle1": "Live",
+      "mainPage1": "content/pages/Live.mdx",
       "mainShowInMainNavigation1": true,
       "isMultiLevel": true
     },
