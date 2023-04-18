@@ -510,7 +510,7 @@
         {
           "mainTitle2": "Herleitung",
           "mainPage2": "content/pages/herleitung.mdx",
-          "mainShowInMainNavigation2": true
+          "mainShowInMainNavigation2": false
         },
         {
           "mainTitle2": "Mission & Vision",
