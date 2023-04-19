@@ -543,6 +543,10 @@
           "mainShowInMainNavigation2": false,
           "mainChildren2": [
             {
+              "mainTitle3": "Übersicht Grenzen sind relativ e.V - Team",
+              "mainPage3": "content/pages/ueber-uns/das-team/alle.mdx"
+            },
+            {
               "mainTitle3": "Aktionsbüro",
               "mainPage3": "content/pages/ueber-uns/das-team/aktionsbuero/mischa-gohlke.mdx",
               "mainChildren3": [
