@@ -536,6 +536,10 @@
               "mainTitle3": "Aktionsbüro",
               "mainChildren3": [
                 {
+                  "mainTitle4": "Andreas \"Rudi\" Dutschke",
+                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/andreas-rudi-dutschke.mdx"
+                },
+                {
                   "mainTitle4": "Mischa Gohlke",
                   "mainPage4": "content/pages/ueber-uns/das-team/aktionsbuero/mischa-gohlke.mdx"
                 },
