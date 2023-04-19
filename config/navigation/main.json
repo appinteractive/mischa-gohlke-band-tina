@@ -316,7 +316,8 @@
                 },
                 {
                   "mainTitle4": "o-obacht omas gegen rechts",
-                  "mainPage4": "content/pages/o-obacht.mdx"
+                  "mainPage4": "content/pages/o-obacht.mdx",
+                  "mainDisabled4": false
                 },
                 {
                   "mainTitle4": "p- probe",
