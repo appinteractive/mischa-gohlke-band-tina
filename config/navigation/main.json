@@ -519,7 +519,7 @@
         {
           "mainTitle2": "Mission & Vision",
           "mainPage2": "content/pages/ueber-uns/mission-und-vision.mdx",
-          "mainShowInMainNavigation2": true
+          "mainShowInMainNavigation2": false
         },
         {
           "mainTitle2": "Aktionsbüro für eine multipolare Gesellschaftskultur",
