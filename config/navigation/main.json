@@ -308,8 +308,8 @@
               "mainTitle3": "grenzenlos vernetzt von a-z",
               "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/grenzenlos-vernetzt.mdx",
               "mainDescription3": "",
-              "mainDisabled3": true,
-              "mainShowInMainNavigation3": true,
+              "mainDisabled3": false,
+              "mainShowInMainNavigation3": false,
               "mainChildren3": [
                 {
                   "mainTitle4": "Projektinfo",
