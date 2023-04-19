@@ -514,17 +514,17 @@
         {
           "mainTitle2": "Herleitung",
           "mainPage2": "content/pages/ueber-uns/herleitung.mdx",
-          "mainShowInMainNavigation2": false
+          "mainShowInMainNavigation2": true
         },
         {
           "mainTitle2": "Mission & Vision",
           "mainPage2": "content/pages/ueber-uns/mission-und-vision.mdx",
-          "mainShowInMainNavigation2": false
+          "mainShowInMainNavigation2": true
         },
         {
           "mainTitle2": "Aktionsbüro für eine multipolare Gesellschaftskultur",
           "mainPage2": "content/pages/ueber-uns/aktionsbuero.mdx",
-          "mainShowInMainNavigation2": false
+          "mainShowInMainNavigation2": true
         },
         {
           "mainTitle2": "Übersicht Aktivitäten",
@@ -564,37 +564,6 @@
                 {
                   "mainTitle4": "Thorsten Hesse",
                   "mainPage4": "content/pages/ueber-uns/das-team/aktionsbuero/thorsten-hesse.mdx",
-                  "mainDisabled4": true
-                }
-              ]
-            },
-            {
-              "mainTitle3": "Filmproduktion",
-              "mainDisabled3": true,
-              "mainChildren3": [
-                {
-                  "mainTitle4": "Fabian Köhler",
-                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/fabian-koehler.mdx",
-                  "mainDisabled4": true
-                },
-                {
-                  "mainTitle4": "Andreas 'Rudi' Dutschke",
-                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/andreas-rudi-dutschke.mdx",
-                  "mainDisabled4": true
-                },
-                {
-                  "mainTitle4": "Björn Lingner",
-                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/bjoern-lingner.mdx",
-                  "mainDisabled4": true
-                },
-                {
-                  "mainTitle4": "Hervé Dieu",
-                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/herve-dieu.mdx",
-                  "mainDisabled4": true
-                },
-                {
-                  "mainTitle4": "Jannis Raasch",
-                  "mainPage4": "content/pages/ueber-uns/das-team/filmproduktion/jannis-raasch.mdx",
                   "mainDisabled4": true
                 }
               ]
@@ -694,12 +663,12 @@
           "mainTitle2": "Zitate",
           "mainPage2": "content/pages/ueber-uns/zitate.mdx",
           "mainDisabled2": false,
-          "mainShowInMainNavigation2": false
+          "mainShowInMainNavigation2": true
         },
         {
           "mainTitle2": "Kontakt",
           "mainPage2": "content/pages/kontakt.mdx",
-          "mainShowInMainNavigation2": false
+          "mainShowInMainNavigation2": true
         },
         {
           "mainTitle2": "Identität & Positionierung",
