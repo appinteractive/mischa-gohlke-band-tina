@@ -309,7 +309,7 @@
               "mainPage3": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/grenzenlos-vernetzt.mdx",
               "mainDescription3": "",
               "mainDisabled3": false,
-              "mainShowInMainNavigation3": false,
+              "mainShowInMainNavigation3": true,
               "mainChildren3": [
                 {
                   "mainTitle4": "Projektinfo",
