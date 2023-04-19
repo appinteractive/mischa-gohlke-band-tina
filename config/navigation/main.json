@@ -2,6 +2,7 @@
   "menu": [
     {
       "mainTitle1": "Aktivitäten",
+      "mainPage1": "content/pages/aktivitaeten/uebersicht.mdx",
       "mainShowInMainNavigation1": true,
       "isMultiLevel": true,
       "mainChildren1": [
