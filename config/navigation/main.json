@@ -532,6 +532,7 @@
         {
           "mainTitle2": "Das Team",
           "mainPage2": "content/pages/ueber-uns/das-team/alle.mdx",
+          "mainShowInMainNavigation2": true,
           "mainChildren2": [
             {
               "mainTitle3": "Aktionsbüro",
