@@ -524,7 +524,7 @@
         {
           "mainTitle2": "Aktionsbüro für eine multipolare Gesellschaftskultur",
           "mainPage2": "content/pages/ueber-uns/aktionsbuero.mdx",
-          "mainShowInMainNavigation2": true
+          "mainShowInMainNavigation2": false
         },
         {
           "mainTitle2": "Übersicht Aktivitäten",
