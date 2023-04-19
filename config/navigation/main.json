@@ -511,7 +511,7 @@
       "mainChildren1": [
         {
           "mainTitle2": "Herleitung",
-          "mainPage2": "content/pages/herleitung.mdx",
+          "mainPage2": "content/pages/ueber-uns/herleitung.mdx",
           "mainShowInMainNavigation2": false
         },
         {
