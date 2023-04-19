@@ -698,7 +698,8 @@
         },
         {
           "mainTitle2": "Kontakt",
-          "mainPage2": "content/pages/kontakt.mdx"
+          "mainPage2": "content/pages/kontakt.mdx",
+          "mainShowInMainNavigation2": true
         },
         {
           "mainTitle2": "Identität & Positionierung",
