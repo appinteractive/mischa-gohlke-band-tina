@@ -699,7 +699,7 @@
         {
           "mainTitle2": "Kontakt",
           "mainPage2": "content/pages/kontakt.mdx",
-          "mainShowInMainNavigation2": true
+          "mainShowInMainNavigation2": false
         },
         {
           "mainTitle2": "Identität & Positionierung",
