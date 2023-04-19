@@ -693,7 +693,8 @@
         {
           "mainTitle2": "Zitate",
           "mainPage2": "content/pages/ueber-uns/zitate.mdx",
-          "mainDisabled2": false
+          "mainDisabled2": false,
+          "mainShowInMainNavigation2": true
         },
         {
           "mainTitle2": "Kontakt",
