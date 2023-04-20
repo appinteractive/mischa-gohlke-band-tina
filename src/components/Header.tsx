@@ -22,10 +22,11 @@ type Props = {
   items: MainNavItem[]
 }
 
-function MobileNavLink({ href, children, level = 1 }) {
+function MobileNavLink({ href, children, level = 1, key = null }) {
   return (
     <Popover.Button
       as={Link}
+      key={key}
       href={href}
       className={clsx(
         'block w-full p-2',
@@ -102,25 +103,9 @@ function MobileNavigation({ items }: Props) {
               if (item.disabled) return null
               if (item.showInMainNavigation === false) return null
 
-              /* const isMultiLevel =
-                item.children?.length &&
-                item.children.some((item) => {
-                  if (item.children?.length) {
-                    return item.children.some(
-                      (child) =>
-                        child.children?.length &&
-                        child.showInMainNavigation !== false
-                    )
-                  }
-                  return false
-                }) */
-
               return (
-                <>
-                  <MobileNavLink
-                    key={index.toString()}
-                    href={cleanPath(item.page)}
-                  >
+                <div key={index.toString()}>
+                  <MobileNavLink href={cleanPath(item.page)}>
                     {item.title}
                   </MobileNavLink>
                   {item.children?.map((itm, idx) => {
@@ -134,7 +119,7 @@ function MobileNavigation({ items }: Props) {
                       </MobileNavLink>
                     )
                   })}
-                </>
+                </div>
               )
             })}
             {/* <hr className="m-2 border-slate-300/40" />

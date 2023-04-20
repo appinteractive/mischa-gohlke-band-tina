@@ -23,7 +23,11 @@ export default function ContentGallery({ type, hasSubNav, ...props }) {
       <ul className="grid gap-4 md:grid-cols-3">
         {props?.pages?.slice(0, 3)?.map((item) => (
           <li key={item.page + item.teaser} className="relative flex flex-col ">
-            <Link href={cleanPath(item.page)}>
+            <Link
+              href={cleanPath(item.page)}
+              as="a"
+              className="rounded outline-offset-2 outline-slate-900"
+            >
               <span className="aspect-h-8 aspect-w-16 relative block shrink-0">
                 {item.teaser ? (
                   <Image
@@ -56,7 +60,8 @@ export default function ContentGallery({ type, hasSubNav, ...props }) {
           <li key={item.page + item.teaser} className="relative flex flex-col ">
             <Link
               href={cleanPath(item.page)}
-              className="not-prose relative flex h-full space-x-2"
+              as="a"
+              className="not-prose relative flex h-full space-x-2 rounded outline-offset-2 outline-slate-900"
             >
               <span className="relative h-[5rem] min-w-[8rem]">
                 <Image

@@ -16,10 +16,7 @@ import { InformationCircleIcon } from '@heroicons/react/24/solid'
 import { IconCornerDownRight, IconArrowRight } from '@tabler/icons-react'
 import Link from 'next/link'
 import { cleanPath } from '@/lib/utils'
-
-const classNames = (...classes) => {
-  return classes.filter(Boolean).join(' ')
-}
+import clsx from 'clsx'
 
 export default function MenuPopover({ label, items, isMultiLevel = false }) {
   const [activeItem, setActiveItem] = useState(isMultiLevel ? items[0] : null)
@@ -31,14 +28,12 @@ export default function MenuPopover({ label, items, isMultiLevel = false }) {
 
   return (
     <Popover className="relative">
-      <Popover.Button className="inline-flex items-center gap-x-1 px-3 py-3 text-sm font-semibold leading-6 text-slate-700 [&:not(:focus-visible)]:focus:outline-none">
+      <Popover.Button className="inline-flex items-center gap-x-1 rounded-xl px-3 py-3 text-sm font-semibold leading-6 text-slate-700 outline-offset-2 [&:not(:focus-visible)]:focus:outline-none">
         {({ open }) => (
           <>
-            <span className={classNames(open ? 'text-indigo-700' : '')}>
-              {label}
-            </span>
+            <span className={clsx(open && 'text-indigo-700')}>{label}</span>
             <ChevronDownIcon
-              className={classNames('h-5 w-5', open && 'text-indigo-700')}
+              className={clsx('h-5 w-5', open && 'text-indigo-700')}
               aria-hidden="true"
             />
           </>
@@ -63,7 +58,7 @@ export default function MenuPopover({ label, items, isMultiLevel = false }) {
         >
           {({ close }) => (
             <div
-              className={classNames(
+              className={clsx(
                 'w-screen flex-auto overflow-hidden rounded-xl bg-white text-sm leading-6 shadow-xl ring-1 ring-gray-900/5',
                 isMultiLevel ? 'lg:max-w-3xl' : ' max-w-md lg:max-w-xs'
               )}
@@ -74,7 +69,7 @@ export default function MenuPopover({ label, items, isMultiLevel = false }) {
                     isMultiLevel ? `grid w-full grid-cols-2 gap-y-1` : 'w-full'
                   }
                 >
-                  <div className={classNames('p-1.5', isMultiLevel && 'pr-0')}>
+                  <div className={clsx('p-1.5', isMultiLevel && 'pr-0')}>
                     {items.map((item) => {
                       if (
                         item.disabled === true ||
@@ -154,7 +149,7 @@ export default function MenuPopover({ label, items, isMultiLevel = false }) {
                   <Link
                     href="/spenden"
                     onClick={() => close()}
-                    className="flex items-center justify-between px-6 py-4"
+                    className="flex items-center justify-between rounded px-6 py-4 outline-offset-2"
                   >
                     <span className="flex items-center space-x-2">
                       <InformationCircleIcon className="h-5 w-5 text-blue-600" />
@@ -193,7 +188,8 @@ function itemLevel1({
     <div
       key={label}
       onMouseEnter={onMouseEnter}
-      className={classNames(
+      onFocus={onMouseEnter}
+      className={clsx(
         'group relative flex items-center gap-x-3 text-gray-800 hover:bg-slate-100 hover:text-indigo-700',
         large ? 'rounded-l-lg p-5' : 'rounded-lg p-4',
         active && 'bg-slate-100 !text-indigo-700'
@@ -201,23 +197,21 @@ function itemLevel1({
     >
       {showIcon && (
         <IconArrowRight
-          className={classNames(
+          className={clsx(
             'h-4 w-4 shrink-0 opacity-20 transition-opacity duration-75 group-hover:opacity-100',
             active && '!opacity-100'
           )}
           aria-hidden="true"
         />
       )}
-      <div>
-        <Link
-          href={cleanPath(page)}
-          onClick={() => close()}
-          className="font-semibold "
-        >
-          <span className="!line-clamp-2 flex leading-snug">{label}</span>
-          <span className="absolute inset-0" />
-        </Link>
-      </div>
+      <Link
+        href={cleanPath(page)}
+        onClick={() => close()}
+        className="w-full rounded font-semibold outline-offset-8"
+      >
+        <span className="!line-clamp-2 flex leading-snug">{label}</span>
+        <span className="absolute inset-0" />
+      </Link>
     </div>
   )
 }
@@ -234,19 +228,17 @@ function itemLevel2({ page, label, description, close }) {
         aria-hidden="true"
       />
       {/* </div> */}
-      <div className="">
-        <Link
-          href={cleanPath(page)}
-          onClick={() => close()}
-          className="font-semibold group-hover:text-indigo-700"
-        >
-          <span className="!line-clamp-2 flex leading-snug ">{label}</span>
-          <span className="absolute inset-0 z-10" />
-        </Link>
+      <Link
+        href={cleanPath(page)}
+        onClick={() => close()}
+        className="w-full rounded font-semibold outline-offset-8 group-hover:text-indigo-700"
+      >
+        <span className="!line-clamp-2 flex leading-snug ">{label}</span>
+        <span className="absolute inset-0 z-10" />
         <p className="mt-1 flex text-xs font-medium leading-normal opacity-80">
           {description}
         </p>
-      </div>
+      </Link>
     </div>
   )
 }
