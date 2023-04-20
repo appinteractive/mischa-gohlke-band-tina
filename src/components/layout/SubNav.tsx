@@ -34,7 +34,7 @@ export function subNav({ items, parent = null }) {
               <Link
                 href={level1.url}
                 className={clsx([
-                  'flex items-start space-x-2 py-1.5 leading-tight',
+                  'flex items-start space-x-2 rounded py-1.5 leading-tight outline-offset-4',
                   level1.active && '!font-semibold',
                 ])}
               >
@@ -54,7 +54,7 @@ export function subNav({ items, parent = null }) {
                       <Link
                         href={level2.url}
                         className={clsx([
-                          'flex space-x-2 py-1 text-sm leading-tight',
+                          'flex space-x-2 rounded py-1 text-sm leading-tight outline-offset-4',
                           level2.active && '!font-semibold',
                         ])}
                       >

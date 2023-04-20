@@ -25,7 +25,6 @@ export default function ContentGallery({ type, hasSubNav, ...props }) {
           <li key={item.page + item.teaser} className="relative flex flex-col ">
             <Link
               href={cleanPath(item.page)}
-              as="a"
               className="rounded outline-offset-2 outline-slate-900"
             >
               <span className="aspect-h-8 aspect-w-16 relative block shrink-0">
@@ -60,7 +59,6 @@ export default function ContentGallery({ type, hasSubNav, ...props }) {
           <li key={item.page + item.teaser} className="relative flex flex-col ">
             <Link
               href={cleanPath(item.page)}
-              as="a"
               className="not-prose relative flex h-full space-x-2 rounded outline-offset-2 outline-slate-900"
             >
               <span className="relative h-[5rem] min-w-[8rem]">
