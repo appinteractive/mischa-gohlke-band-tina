@@ -5,7 +5,7 @@ function accessibleDeepLink(link) {
       : 'https://leicht.grenzensindrelativ.de'
 
   if (!link?.startsWith('http')) {
-    link = `${baseLink}${link}`
+    link = `${baseLink}${link ?? '/'}`
   }
 
   return link
