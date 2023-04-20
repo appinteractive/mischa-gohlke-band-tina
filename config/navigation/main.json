@@ -488,6 +488,7 @@
     {
       "mainTitle1": "Live",
       "mainPage1": "content/pages/live.mdx",
+      "mainDisabled1": true,
       "mainShowInMainNavigation1": true,
       "isMultiLevel": false
     },
