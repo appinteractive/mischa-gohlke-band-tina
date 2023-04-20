@@ -68,13 +68,29 @@ const Page = (props) => {
       ? baseUrl + data.page.teaser.split('/').map(encodeURIComponent).join('/')
       : data.page.teaser
     : baseUrl + '/media/teaser.jpg'
-  const title = `${data.page?.title} | Grenzen sind relativ e.V.`
+
+  const defaultTitle = 'Grenzen sind relativ e.V.'
+  let title = data.page?.title
+  if (title !== defaultTitle) {
+    title = `${data.page?.title} | ${defaultTitle}`
+  }
+  // TODO: move default title, description, keywords and copyright to CMS
 
   return (
     <>
       <Head>
         <title>{title}</title>
-        <meta name="description" content={data.page?.description} />
+        <meta
+          name="description"
+          content={
+            data.page?.description ??
+            'Aktionsbüro für eine multipolare Gesellschaftskultur. Mit Projekten, Veranstaltungen, Kampagnen, Musikunterricht, Workshops, Beratung und Öffentlichkeitsarbeit & Bewusstseinsbildung bringen wir Menschen verschiedenster Backgrounds zusammen und setzen uns für interdisziplinäre Kultur, gesamtgesellschaftliche Inklusion und gelebten Frieden für alle Menschen auf diesem Planeten ein.'
+          }
+        />
+        <meta
+          name="keywords"
+          content="Kultur, Gesellschaft, Inklusion, Frieden, Projekte, Veranstaltungen, Kampagnen, Musikunterricht für Hörgeschädigte"
+        />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={data.page?.description} />
         <meta property="og:image" content={teaser} />
