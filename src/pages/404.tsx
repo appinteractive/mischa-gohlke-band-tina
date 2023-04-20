@@ -11,51 +11,6 @@ const Error = (props) => {
   const currentUrl = router.asPath
   const navigation = normalizeNavigation({ ...props.data.nav })
 
-  useMemo(() => {
-    // get all the pages from the cms
-    try {
-      client
-        .request({
-          query: `#graphql
-          query ($collection: String!) {
-            collection(collection: $collection) {
-              documents(first: -1) {
-                edges {
-                  node {
-                    ...on Document {
-                      _sys {
-                        breadcrumbs,
-                      }
-                    }
-                    ...on PageSimple {
-                      alias
-                    }
-                  }
-                }
-              }
-            }
-          }
-        `,
-          variables: { collection: 'page' },
-        })
-        .then((response) => {
-          try {
-            // search for the current page in response.data.collection.documents.edges[].node.alias[]
-            const page = response.data.collection.documents.edges.find(
-              (edge) => {
-                const alias = edge.node.alias
-                return alias?.length && alias.includes(currentUrl)
-              }
-            )
-            if (page) {
-              // if the page exists, redirect to the page
-              router.push(page.node._sys.breadcrumbs.join('/'))
-            }
-          } catch (e) {}
-        })
-    } catch (e) {}
-  }, [router, currentUrl])
-
   return (
     <>
       <Layout navigation={navigation}>
