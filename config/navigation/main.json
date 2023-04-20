@@ -503,7 +503,8 @@
         {
           "mainTitle2": "Freundeskreis",
           "mainPage2": "content/pages/unterstuetzen/freundeskreis.mdx",
-          "mainShowInMainNavigation2": true
+          "mainDisabled2": true,
+          "mainShowInMainNavigation2": false
         },
         {
           "mainTitle2": "Mitmachen",
