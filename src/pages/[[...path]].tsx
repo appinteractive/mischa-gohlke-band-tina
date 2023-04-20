@@ -58,12 +58,13 @@ const Page = (props) => {
     ) : null
 
   // TODO: CHANGE THE BASE URL TO THE PRODUCTION URL
-  const baseUrl =
-    process.env.VERCEL_URL ??
-    'https://grenzen-sind-relativ-tina-git-main-appinteractive.vercel.app'
+  const isDev = process.env.NODE_ENV === 'development'
+  const baseUrl = process.env.VERCEL_URL ?? 'http://localhost:3000'
   const teaser = data.page?.teaser
-    ? baseUrl + data.page.teaser.split('/').map(encodeURIComponent).join('/')
-    : '/media/teaser.jpg'
+    ? isDev
+      ? baseUrl + data.page.teaser.split('/').map(encodeURIComponent).join('/')
+      : data.page.teaser
+    : baseUrl + '/media/teaser.jpg'
   const title = `${data.page?.title} | Grenzen sind relativ e.V.`
 
   return (
