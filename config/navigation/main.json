@@ -257,8 +257,9 @@
                   "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/kooperationsprojekte/allgemeine-infos-kooperationsprojekte.mdx"
                 },
                 {
-                  "mainTitle4": "Kultur Digital Barrierefrei - Eine Initiative von handiclapped e.V. und MusicTech Germany",
-                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/kooperationsprojekte/kultur-digital-barrierefrei-eine-initiative-von-handiclapped-e.v.und-musictech-germany.mdx"
+                  "mainTitle4": "Kultur Digital Barrierefrei ",
+                  "mainPage4": "content/pages/aktivitaeten/projekte-und-veranstaltungen/kooperationsprojekte/kultur-digital-barrierefrei-eine-initiative-von-handiclapped-e.v.und-musictech-germany.mdx",
+                  "mainDisabled4": true
                 },
                 {
                   "mainTitle4": "Filmfest Hamburg: Kommunikationskooperation \"Sound of Metal\"",
