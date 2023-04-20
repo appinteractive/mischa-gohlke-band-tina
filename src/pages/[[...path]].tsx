@@ -57,20 +57,23 @@ const Page = (props) => {
       <SubNav items={subNavigation.items} parent={subNavigation.parent} />
     ) : null
 
+  // TODO: CHANGE THE BASE URL TO THE PRODUCTION URL
+  const baseUrl =
+    process.env.VERCEL_URL ??
+    'https://grenzen-sind-relativ-tina-git-main-appinteractive.vercel.app'
+  const teaser = data.page?.teaser
+    ? baseUrl + data.page.teaser.split('/').map(encodeURIComponent).join('/')
+    : '/media/teaser.jpg'
+  const title = `${data.page?.title} | Grenzen sind relativ e.V.`
+
   return (
     <>
       <Head>
-        <title>{`${data.page?.title} | Grenzen sind relativ e.V.`}</title>
+        <title>{title}</title>
         <meta name="description" content={data.page?.description} />
-        <meta
-          property="og:title"
-          content={`${data.page?.title} | Grenzen sind relativ e.V.`}
-        />
+        <meta property="og:title" content={title} />
         <meta property="og:description" content={data.page?.description} />
-        <meta
-          property="og:image"
-          content={data.page?.image?.teaser ?? '/media/teaser.jpg'}
-        />
+        <meta property="og:image" content={teaser} />
         <meta property="og:locale" content="de_DE" />
         <meta property="og:type" content="website" />
         <meta name="robots" content="index, follow" />
