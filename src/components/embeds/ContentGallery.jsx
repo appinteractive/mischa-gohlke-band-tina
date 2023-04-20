@@ -40,8 +40,10 @@ export default function ContentGallery({ type, hasSubNav, ...props }) {
                 )}
               </span>
               <span className="block space-y-2 pb-4 pt-2">
-                <h3 className="font-semibold leading-snug">{item.title}</h3>
-                <p className="line-clamp-3 text-sm leading-normal ">
+                <h3 className="font-semibold leading-snug text-gray-800">
+                  {item.title}
+                </h3>
+                <p className="line-clamp-3 text-sm leading-normal text-gray-600">
                   {item.description}
                 </p>
               </span>
@@ -49,14 +51,14 @@ export default function ContentGallery({ type, hasSubNav, ...props }) {
           </li>
         ))}
       </ul>
-      <ul className=" grid grid-cols-2 gap-4 md:grid-cols-3">
+      <ul className=" grid gap-4 sm:grid-cols-2">
         {props?.pages?.slice(3, 12)?.map((item) => (
           <li key={item.page + item.teaser} className="relative flex flex-col ">
             <Link
               href={cleanPath(item.page)}
-              className="relative flex h-full space-x-2"
+              className="not-prose relative flex h-full space-x-2"
             >
-              <span className="relative w-1/4 shrink-0">
+              <span className="relative h-[5rem] min-w-[8rem]">
                 <Image
                   src={item.teaser}
                   alt={item.title}
@@ -64,16 +66,16 @@ export default function ContentGallery({ type, hasSubNav, ...props }) {
                   sizes="(max-width: 768px) 100vw, (min-width: 768px) 768"
                   fill
                   blurDataURL={props.blurDataURL}
-                  className="prose-no h-full shrink-0 rounded bg-black object-cover md:shadow"
+                  className="prose-no h-full rounded bg-black object-cover md:shadow"
                 />
               </span>
-              <span className="block space-y-2 pb-4">
-                <h3 className="line-clamp-2 text-sm font-semibold leading-tight">
+              <span className="block h-full space-y-2">
+                <h3 className="line-clamp-2 text-sm font-semibold leading-tight text-gray-800">
                   {item.title}
                 </h3>
-                {/* <p className="line-clamp-3 text-base leading-normal ">
+                <p className="line-clamp-2 text-sm leading-normal text-gray-600">
                   {item.description}
-                </p> */}
+                </p>
               </span>
             </Link>
           </li>
