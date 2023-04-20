@@ -541,10 +541,10 @@
         {
           "mainTitle2": "Das Team",
           "mainPage2": "content/pages/ueber-uns/das-team/alle.mdx",
-          "mainShowInMainNavigation2": false,
+          "mainShowInMainNavigation2": true,
           "mainChildren2": [
             {
-              "mainTitle3": "Übersicht Grenzen sind relativ e.V - Team",
+              "mainTitle3": "Übersicht Team",
               "mainPage3": "content/pages/ueber-uns/das-team/alle.mdx"
             },
             {
@@ -566,7 +566,7 @@
                 {
                   "mainTitle4": "Grzegorz Leoniec",
                   "mainPage4": "content/pages/ueber-uns/das-team/aktionsbuero/grzegorz-leoniec.mdx",
-                  "mainDisabled4": false
+                  "mainDisabled4": true
                 },
                 {
                   "mainTitle4": "Andreas \"Rudi\" Dutschke",
