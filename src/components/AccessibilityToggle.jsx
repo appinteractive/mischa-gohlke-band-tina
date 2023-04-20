@@ -49,7 +49,6 @@ export default function AccessibilityToggle({ link }) {
           <br />
           Sprache
         </span>
-        <pre>{link}</pre>
         <pre>{accessibleDeepLink(link)}</pre>
       </a>
     </nav>
