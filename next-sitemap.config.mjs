@@ -1,4 +1,5 @@
-import { readFileSync } from 'fs'
+import { readFileSync, statSync } from 'fs'
+import { join } from 'path'
 
 const cleanPath = (path) => {
   // replace ^content/pages/ and .mdx$
@@ -56,7 +57,6 @@ async function loadMainNavigation() {
   )
   mainNavigation.push(...menu)
   disabledPages.push(...listDisabledPages(mainNavigation))
-  console.log(disabledPages)
 }
 
 /** @type {import('next-sitemap').IConfig} */
@@ -73,12 +73,26 @@ const config = {
       return null
     }
 
+    let lastMod
+
+    // get last modified date from file
+    if (config.autoLastmod) {
+      try {
+        const filePath = join(process.cwd(), 'content', 'pages', path) + '.mdx'
+        const stat = statSync(filePath)
+        lastMod = new Date(stat.mtime).toISOString()
+      } catch (e) {
+        console.warn(`Could not read mtime of file: ${path}`)
+        lastMod = new Date().toISOString()
+      }
+    }
+
     // Use default transformation for all other cases
     return {
       loc: path, // => this will be exported as http(s)://<config.siteUrl>/<path>
       changefreq: config.changefreq,
       priority: config.priority,
-      lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
+      lastmod: lastMod,
       alternateRefs: config.alternateRefs ?? [],
     }
   },
