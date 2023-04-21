@@ -22,10 +22,6 @@ const nextConfig = {
   },
   async rewrites() {
     return [
-      /* {
-        source: "/",
-        destination: "/home",
-      }, */
       {
         source: '/admin',
         destination: '/admin/index.html',
@@ -52,6 +48,7 @@ const nextConfig = {
       }
       return acc
     }, [])
+
     console.log('redirects', redirects)
     return redirects
   },
