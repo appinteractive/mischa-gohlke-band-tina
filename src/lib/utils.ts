@@ -40,8 +40,8 @@ export const uiUseTitle =
   (item: any) => {
     const disabled = item.disabled === true
     return {
-      label: `${item.title ?? '>> Titel fehlt <<'}${
-        disabled ? ' (ausgeblendet)' : ''
+      label: `${item.title ?? '🚨 Titel fehlt'}${
+        disabled ? ' | 🚫 ausgeblendet' : ''
       }`,
       className: clsx(
         'relative group cursor-pointer flex justify-between items-stretch border border-gray-100 -mb-px overflow-visible p-0 text-sm first:rounded-t last:rounded-b',
