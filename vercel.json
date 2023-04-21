@@ -1,6 +1,5 @@
 {
   "trailingSlash": false,
-  "cleanUrls": true,
   "rewrites": [
     {
       "source": "/admin/:path*",
