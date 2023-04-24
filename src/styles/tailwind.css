@@ -46,6 +46,6 @@
 @layer {
   /* fix long headlines by use hyphens */
   .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
-    @apply hyphens-auto;
+    @apply hyphens-auto md:hyphens-manual;
   }
 }
