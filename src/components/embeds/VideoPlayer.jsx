@@ -153,7 +153,7 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
                       >
                         <div className="group relative flex items-center px-3 py-2 pr-4">
                           <div className="-m-1 block flex-1 p-1">
-                            <div className="flex min-w-0 flex-1 items-start space-x-2">
+                            <div className="flex w-full min-w-0 flex-1 items-start space-x-2">
                               <div className="relative m-0 inline-block h-10 w-16 flex-shrink-0 overflow-hidden rounded-sm p-0">
                                 {current?.url === video.url && (
                                   <div className="absolute inset-0 flex items-center justify-center bg-black/70">
@@ -167,17 +167,8 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
                                   alt={video.title}
                                   draggable={false}
                                 />
-                                {/* <span
-                                    className={classNames(
-                                      person.status === 'online'
-                                        ? 'bg-green-400'
-                                        : 'bg-gray-300',
-                                      'absolute right-0 top-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white'
-                                    )}
-                                    aria-hidden="true"
-                                  /> */}
                               </div>
-                              <div>
+                              <div className="w-full">
                                 <p className="line-clamp-2 text-sm font-semibold leading-tight text-gray-900">
                                   {video.title}
                                 </p>
