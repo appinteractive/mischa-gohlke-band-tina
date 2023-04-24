@@ -8,6 +8,7 @@ import { DonationFormTemplate } from './embeds/donation-form'
 import { ImageGalleryTemplate } from './embeds/image-gallery'
 import { TeamTemplate } from './embeds/team'
 import { HeroTemplate } from './embeds/hero'
+import { SocialMediaTemplate } from './embeds/social-media'
 import slugify from 'slugify'
 
 // Your hosting provider likely exposes this as an environment variable
@@ -115,6 +116,7 @@ export default defineConfig({
                   ContentGalleryTemplate,
                   VideoPlayerTemplate,
                   HeroTemplate,
+                  SocialMediaTemplate,
                   DonationFormTemplate,
                   TeamTemplate,
                 ],

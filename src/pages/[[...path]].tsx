@@ -32,6 +32,7 @@ const ResponsiveImage = dynamic(
 const ContentGallery = dynamic(
   () => import('@/components/embeds/ContentGallery')
 )
+const SocialMedia = dynamic(() => import('@/components/embeds/SocialMedia'))
 const ImageGallery = dynamic(() => import('@/components/embeds/ImageGallery'))
 const DonationForm = dynamic(() => import('@/components/embeds/DonationForm'))
 const Team = dynamic(() => import('@/components/embeds/Team'))
@@ -238,6 +239,7 @@ function useCmsComponents({ hasSubNav, subNavigation, teamComponentProps }) {
     DonationForm: (props) => <DonationForm {...props} />,
     Team: (props) => <Team {...props} items={teamComponentProps?.items} />,
     Hero: (props) => <Hero {...props} hasSubNav={hasSubNav} />,
+    SocialMedia: (props) => <SocialMedia {...props} hasSubNav={hasSubNav} />,
     img: (props) => {
       return <ResponsiveImage {...props} />
     },
