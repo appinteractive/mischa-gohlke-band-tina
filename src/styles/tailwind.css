@@ -48,4 +48,7 @@
   .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
     @apply hyphens-auto md:hyphens-manual;
   }
+  .prose a {
+    @apply rounded outline-offset-4;
+  }
 }

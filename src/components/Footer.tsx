@@ -124,7 +124,7 @@ export function Footer({ items }: Props) {
                       <li key={item.title}>
                         <Link
                           href={cleanPath(item.page)}
-                          className="text-sm leading-6 text-gray-600 hover:text-gray-900"
+                          className="hover:text-grounded rounded text-sm leading-6 text-gray-600 outline-offset-4"
                         >
                           {item.title}
                         </Link>
@@ -192,7 +192,7 @@ export function Footer({ items }: Props) {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-gray-500"
+                className="rounded-full text-gray-400 outline-offset-4 hover:text-gray-500"
               >
                 <span className="sr-only">{item.name}</span>
                 <item.icon className="h-6 w-6" aria-hidden="true" />

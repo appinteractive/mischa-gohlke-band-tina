@@ -140,7 +140,11 @@ export function Header({ items }) {
       <Container className="">
         <nav className="relative z-50 flex justify-between">
           <div className="flex items-center md:gap-x-12">
-            <Link href="/" aria-label="Home">
+            <Link
+              href="/"
+              aria-label="Home"
+              className=" rounded outline-offset-8"
+            >
               <Logo className="h-10 w-auto" />
             </Link>
           </div>

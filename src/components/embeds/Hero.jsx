@@ -4,15 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { cleanPath } from '@/lib/utils'
 
-const ContentGallery = dynamic(() =>
-  import('@/components/embeds/ContentGallery')
-)
-
-const ResponsiveImage = dynamic(
-  () => import('@/components/embeds/ResponsiveImage'),
-  { ssr: false }
-)
-
 function defaultText(text, defaultText) {
   return (text ?? '').trim() != '' ? text.trim() : defaultText
 }
@@ -54,7 +45,7 @@ export default function Hero({ type, hasSubNav, ...props }) {
                   </a> */}
             <Link
               href={buttonUrl}
-              className="text-sm font-semibold leading-6 text-gray-900"
+              className="rounded text-sm font-semibold leading-6 text-gray-900 outline-offset-8"
             >
               {buttonLabel} <span aria-hidden="true">→</span>
             </Link>

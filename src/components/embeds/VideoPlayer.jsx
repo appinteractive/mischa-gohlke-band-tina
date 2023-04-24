@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic'
 import { useState, useEffect, Fragment, Suspense } from 'react'
-import VideoPlayerList from './VideoPlayerList'
 import { classNames } from 'tinacms'
 import { Transition } from '@headlessui/react'
 import { PlayCircleIcon } from '@heroicons/react/20/solid'

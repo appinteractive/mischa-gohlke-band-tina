@@ -1,15 +1,9 @@
 import clsx from 'clsx'
-import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { Gallery } from 'react-grid-gallery'
 import { useEffect, useState, useMemo, useLayoutEffect } from 'react'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
-
-const ResponsiveImage = dynamic(
-  () => import('@/components/embeds/ResponsiveImage'),
-  { ssr: false }
-)
 
 /**
  * used for displaying images in a grid
