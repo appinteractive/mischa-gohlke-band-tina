@@ -15,7 +15,7 @@ import { useRouter } from 'next/router'
 import { normalizeNavigation } from '@/lib/nav-model'
 import clsx from 'clsx'
 
-const Hero = dynamic(() => import('@/components/Hero'))
+/* const Hero = dynamic(() => import('@/components/Hero')) */
 const PrimaryFeatures = dynamic(() => import('@/components/PrimaryFeatures'))
 const SecondaryFeatures = dynamic(
   () => import('@/components/SecondaryFeatures')
@@ -23,6 +23,7 @@ const SecondaryFeatures = dynamic(
 const AccessibilityToggle = dynamic(
   () => import('@/components/AccessibilityToggle')
 )
+const Hero = dynamic(() => import('@/components/embeds/Hero'))
 const VideoPlayer = dynamic(() => import('@/components/embeds/VideoPlayer'))
 const ResponsiveImage = dynamic(
   () => import('@/components/embeds/ResponsiveImage'),
@@ -146,12 +147,12 @@ const Page = (props) => {
         {data.page?.blocks?.length > 0 ? (
           data.page.blocks.map(function (block, i) {
             switch (block.__typename) {
-              case 'PageBlocksBlocksHero':
+              /* case 'PageBlocksBlocksHero':
                 return (
                   <React.Fragment key={i + block.__typename}>
                     <Hero headline={block.headline} text={block.text} />
                   </React.Fragment>
-                )
+                ) */
               case 'PageBlocksBlocksContent':
                 return (
                   <React.Fragment key={i + block.__typename}>
@@ -236,6 +237,7 @@ function useCmsComponents({ hasSubNav, subNavigation, teamComponentProps }) {
     ),
     DonationForm: (props) => <DonationForm {...props} />,
     Team: (props) => <Team {...props} items={teamComponentProps?.items} />,
+    Hero: (props) => <Hero {...props} hasSubNav={hasSubNav} />,
     img: (props) => {
       return <ResponsiveImage {...props} />
     },

@@ -43,7 +43,7 @@ export default function ImageGallery({ type, hasSubNav, images, ...props }) {
   return (
     <div
       className={clsx(
-        'not-prose m-0 min-h-fit w-full max-w-7xl space-y-4',
+        'not-prose relative max-w-7xl',
         hasSubNav ? 'xl:-mr-[8vw]' : 'xl:-mx-[10vw]'
       )}
     >

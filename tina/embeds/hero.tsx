@@ -3,10 +3,35 @@ import { wrapFieldsWithMeta } from 'tinacms'
 import { useReferenceSelect } from '../components/ReferenceSelect'
 import client from '../__generated__/client'
 
-export const ContentGalleryTemplate: any = {
-  name: 'ContentGallery',
-  label: 'Verwandte Inhalte',
+export const HeroTemplate: any = {
+  name: 'Hero',
+  label: 'Startseiten-Teaser',
   fields: [
+    {
+      type: 'string',
+      name: 'title',
+      label: 'Überschrift',
+    },
+    {
+      type: 'string',
+      name: 'description',
+      label: 'Einleitung',
+      component: 'textarea',
+    },
+    {
+      type: 'string',
+      name: 'buttonLabel',
+      label: 'Link-Text',
+    },
+    {
+      type: 'reference',
+      name: 'buttonUrl',
+      label: 'Link-Ziel',
+      collections: ['page'],
+      ui: {
+        component: useReferenceSelect,
+      },
+    },
     {
       type: 'object',
       name: 'pages',
@@ -16,7 +41,7 @@ export const ContentGalleryTemplate: any = {
       ui: {
         component: 'group-list',
         min: 3,
-        max: 12,
+        max: 5,
       },
       itemProps: (item: any) => ({
         label: item.title ?? '-',
