@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic'
 import { useState, useEffect, Fragment, Suspense } from 'react'
-import { classNames } from 'tinacms'
 import { Transition } from '@headlessui/react'
 import { PlayCircleIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
@@ -93,17 +92,6 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
           className="pointer-events-none absolute inset-0 overflow-hidden"
           aria-hidden
         >
-          {/* <div
-            className={classNames(
-              'duration-250 absolute inset-0 overflow-hidden rounded-lg bg-black/50 transition-all ease-in-out',
-              isPlaying || isInitial
-                ? 'opacity-0 backdrop-blur-0'
-                : 'opacity-100 backdrop-blur-sm',
-              isInitial || isPlaying
-                ? 'pointer-events-none'
-                : 'pointer-events-auto'
-            )}
-          ></div> */}
           {props?.videos?.length > 1 && (
             <Transition
               show={!isPlaying || isInitial}
@@ -136,7 +124,7 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
                     {...props?.videos.map((video, index) => (
                       <li
                         key={index}
-                        className={classNames(
+                        className={clsx(
                           'cursor-pointer select-none ',
                           current?.url === video.url
                             ? 'bg-slate-50'
