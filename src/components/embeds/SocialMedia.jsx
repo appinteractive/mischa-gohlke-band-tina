@@ -90,7 +90,7 @@ export default function SocialMedia({ type, hasSubNav, ...props }) {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center space-x-2 rounded outline-offset-4 focus-visible:outline-slate-500"
+                className="flex items-center justify-center space-x-2 rounded bg-none p-0 outline-offset-4 focus-visible:outline-slate-500"
               >
                 <link.icon
                   className="h-12 w-12"
