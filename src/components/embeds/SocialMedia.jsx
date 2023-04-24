@@ -83,7 +83,7 @@ export default function SocialMedia({ type, hasSubNav, ...props }) {
         <p className="mx-auto max-w-xl text-lg leading-8 text-gray-600">
           {description}
         </p>
-        <ul className="mt-10 flex flex-col items-center justify-center space-y-6 lg:flex-row lg:space-x-12 lg:space-y-0">
+        <ul className="mt-10 flex flex-row items-center justify-center space-x-6 md:space-x-12">
           {social.map((link) => (
             <li key={link.name}>
               <a
@@ -97,7 +97,9 @@ export default function SocialMedia({ type, hasSubNav, ...props }) {
                   aria-hidden="true"
                   color={link.color}
                 />
-                <span className="font-medium text-gray-800">{link.name}</span>
+                <span className="hidden font-medium text-gray-800 md:block">
+                  {link.name}
+                </span>
               </a>
             </li>
           ))}
