@@ -143,7 +143,8 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
                             ? 'bg-slate-50'
                             : 'hover:bg-slate-100/50'
                         )}
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.preventDefault()
                           setCurrent(video)
                           setTimeout(() => {
                             setLight(null)
@@ -151,34 +152,33 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
                           }, 100)
                         }}
                       >
-                        <div className="group relative flex items-center px-3 py-2 pr-4">
-                          <div className="-m-1 block flex-1 p-1">
-                            <div className="flex w-full min-w-0 flex-1 items-start space-x-2">
-                              <div className="relative m-0 inline-block h-10 w-16 flex-shrink-0 overflow-hidden rounded-sm p-0">
-                                {current?.url === video.url && (
-                                  <div className="absolute inset-0 flex items-center justify-center bg-black/70">
-                                    <PlayCircleIcon className="h-6 w-6 text-white" />
-                                  </div>
-                                )}
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                  className="h-full w-full object-cover"
-                                  src={video.poster}
-                                  alt={video.title}
-                                  draggable={false}
-                                />
+                        <a
+                          href="#"
+                          className="group relative flex w-full min-w-0 items-start space-x-2 p-1 px-3 py-3 pr-4 ring-offset-2 focus-visible:outline-slate-600"
+                        >
+                          <span className="relative m-0 inline-block h-10 w-16 flex-shrink-0 overflow-hidden rounded-sm p-0">
+                            {current?.url === video.url && (
+                              <div className="absolute inset-0 flex items-center justify-center bg-black/70">
+                                <PlayCircleIcon className="h-6 w-6 text-white" />
                               </div>
-                              <div className="w-full">
-                                <p className="line-clamp-2 text-sm font-semibold leading-tight text-gray-900">
-                                  {video.title}
-                                </p>
-                                <p className="pt-1 text-right text-xs text-gray-500">
-                                  {video.duration}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                            )}
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              className="h-full w-full object-cover"
+                              src={video.poster}
+                              alt={video.title}
+                              draggable={false}
+                            />
+                          </span>
+                          <span className="flex w-full flex-col">
+                            <span className="line-clamp-2 text-sm font-semibold leading-tight text-gray-900">
+                              {video.title}
+                            </span>
+                            <span className="pt-1 text-right text-xs text-gray-500">
+                              {video.duration}
+                            </span>
+                          </span>
+                        </a>
                       </li>
                     ))}
                   </ul>
