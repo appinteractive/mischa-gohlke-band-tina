@@ -14,6 +14,7 @@ import { deleteUndefinedValues, getSubNavigation } from '@/lib/breadcrumbs'
 import { useRouter } from 'next/router'
 import { normalizeNavigation } from '@/lib/nav-model'
 import clsx from 'clsx'
+import Link from 'next/link'
 
 /* const Hero = dynamic(() => import('@/components/Hero')) */
 const PrimaryFeatures = dynamic(() => import('@/components/PrimaryFeatures'))
@@ -227,6 +228,38 @@ function useCmsComponents({ hasSubNav, subNavigation, teamComponentProps }) {
         )
       }
     }, */
+    a: (props) => {
+      const href = props.url || props.href
+      const target = href?.startsWith('http') ? '_blank' : '_self'
+      let children = props.children
+
+      // iterate over children and remove http(s):// from links
+      /* if (Array.isArray(children)) {
+        children = children.map((child) => {
+          console.log('child', child)
+          if (child.props?.content) {
+            child.props.content = child.props.content.map((c) => {
+              console.log('c', c)
+              if (c.text) {
+                c.text = c.text.replace(/https?:\/\//, '')
+              }
+              return c
+            })
+          }
+          return child
+        })
+      } */
+
+      if (href) {
+        return (
+          <Link href={href} {...props} target={target}>
+            {children}
+          </Link>
+        )
+      }
+
+      return <>{children}</>
+    },
     ContentGallery: (props) => (
       <ContentGallery hasSubNav={hasSubNav} {...props} />
     ),

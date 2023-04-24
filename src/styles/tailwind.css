@@ -51,4 +51,9 @@
   .prose a {
     @apply rounded outline-offset-4;
   }
+  .prose a[href^="http"]:not([href*="grenzensindrelativ.de"]) {
+    background: url("/external-link.png") no-repeat 100% 0;
+    background-size: 1rem 1rem;
+    padding-right: 1.2rem;
+  }
 }
