@@ -115,19 +115,19 @@ const Page = (props) => {
               {data.post.title}
             </h1> */}
         {/* <ContentSection content={data.post.body}></ContentSection> */}
-        <div className={clsx('prose relative mx-auto')}>
-          {/* <pre>{JSON.stringify(navigation.main, null, 2)}</pre> */}
+        {/* <div className={clsx('prose relative mx-auto')}> */}
+        {/* <pre>{JSON.stringify(navigation.main, null, 2)}</pre> */}
 
-          {/* <pre>
+        {/* <pre>
             {JSON.stringify(
               getSubNavigation(navigation.main, currentUrl),
               null,
               2
             )}
           </pre> */}
-          {/* <pre>{JSON.stringify(subNavigation, null, 2)}</pre> */}
+        {/* <pre>{JSON.stringify(subNavigation, null, 2)}</pre> */}
 
-          {/* <pre>{currentUrl}</pre>
+        {/* <pre>{currentUrl}</pre>
           <pre>
             {JSON.stringify(
               findNavigationItem(currentUrl, navigation.main as any),
@@ -136,15 +136,15 @@ const Page = (props) => {
             )}
           </pre>
           <pre>{JSON.stringify(subNavigation, null, 2)}</pre> */}
-          {/* <pre>
+        {/* <pre>
             {JSON.stringify(
               getParentAndChildren(navigation.main as any, currentUrl),
               null,
               2
             )}
           </pre> */}
-          {/* <pre>{JSON.stringify(navigation, null, 2)}</pre> */}
-        </div>
+        {/* <pre>{JSON.stringify(navigation, null, 2)}</pre> */}
+        {/* </div> */}
         {data.page?.blocks?.length > 0 ? (
           data.page.blocks.map(function (block, i) {
             switch (block.__typename) {
@@ -172,13 +172,10 @@ const Page = (props) => {
           })
         ) : (
           <div className="prose mx-auto max-w-3xl">
-            {/* <h1>{data?.page?.title}</h1> */}
-            <span>
-              <TinaMarkdown
-                content={data?.page?.body}
-                components={cmsComponents}
-              />
-            </span>
+            <TinaMarkdown
+              content={data?.page?.body}
+              components={cmsComponents}
+            />
           </div>
         )}
         <AccessibilityToggle link={data?.page?.accessible} />
