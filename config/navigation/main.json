@@ -250,7 +250,7 @@
               "mainTitle3": "Kooperationsprojekte",
               "mainPage3": "content/pages/aktivitaeten/projekte-und-veranstaltungen/kooperationsprojekte/allgemeine-infos-kooperationsprojekte.mdx",
               "mainDescription3": "Zusammen mit Vereinen, Institutionen, Initiativen, etc.",
-              "mainDisabled3": true,
+              "mainDisabled3": false,
               "mainShowInMainNavigation3": false,
               "mainChildren3": [
                 {
