@@ -41,7 +41,7 @@ export default function Hero({ type, hasSubNav, ...props }) {
               href={buttonUrl}
               className="group inline-flex items-center justify-center rounded-full bg-slate-800 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-700 hover:text-slate-100 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-600 active:bg-slate-800 active:text-slate-100"
             >
-              {buttonLabel} <span aria-hidden="true">→</span>
+              <span>{buttonLabel}</span> <span aria-hidden="true">&nbsp;→</span>
             </Link>
             {/* <Link
               href={buttonUrl}
