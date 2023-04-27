@@ -33,6 +33,11 @@ export const HeroTemplate: any = {
       },
     },
     {
+      type: 'string',
+      name: 'pagesHeadline',
+      label: 'Überschrift Seiten',
+    },
+    {
       type: 'object',
       name: 'pages',
       label: 'Seiten',

@@ -19,6 +19,8 @@ export default function Hero({ type, hasSubNav, ...props }) {
   const buttonUrl =
     props?.buttonUrl?.trim() != '' ? cleanPath(props?.buttonUrl?.trim()) : '/'
 
+  const pagesHeadline = props.pagesHeadline
+
   const featured = pages.length > 0 ? pages[0] : null
 
   return (
@@ -53,6 +55,11 @@ export default function Hero({ type, hasSubNav, ...props }) {
         </div>
         <div className="mt-20 space-y-4 sm:mt-24 lg:mx-0 lg:mt-0">
           <div className="relative flex flex-col">
+            {pagesHeadline && (
+              <h2 className="pb-2 text-2xl font-bold text-black">
+                {pagesHeadline}
+              </h2>
+            )}
             {featured && (
               <Link
                 href={cleanPath(featured.page)}
