@@ -27,7 +27,7 @@ function findById(
   options: ReferenceOption[],
   id: string
 ): ReferenceOption | null {
-  return options.find((option) => option.id === id)
+  return options?.find((option) => option.id === id)
 }
 
 export const useReferenceSelect = wrapFieldsWithMeta(

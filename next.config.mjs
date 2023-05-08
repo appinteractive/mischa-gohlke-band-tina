@@ -49,7 +49,7 @@ const nextConfig = {
       return acc
     }, [])
 
-    console.log('redirects', redirects)
+    // console.log('redirects', redirects)
     return redirects
   },
 }

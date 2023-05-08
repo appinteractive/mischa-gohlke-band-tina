@@ -376,13 +376,12 @@ export const getStaticProps = async ({ params, ...data }) => {
     `,
       variables: { collection: 'page' },
     })
-
     teamComponentProps.items = teamComponentProps.items?.map((area) => {
       area.items = area?.children?.map((item) => {
         // url is the item.url without the preceding slash
         const url = item.url.replace(/^\//, '')
 
-        const page = allPages.data.collection.documents.edges.find(
+        const page = allPages?.data?.collection?.documents?.edges?.find(
           (page) =>
             page.node._sys.breadcrumbs
               ?.filter((x) => x !== 'index')

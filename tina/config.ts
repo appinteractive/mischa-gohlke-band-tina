@@ -96,6 +96,25 @@ export default defineConfig({
         label: 'Seiten',
         path: 'content/pages',
         format: 'mdx',
+        ui: {
+          router: ({ document }) => {
+            return `/${document._sys.breadcrumbs
+              .join('/')
+              .replace('index', '')}`
+          },
+          filename: {
+            slugify: (values) => {
+              // Values is an object containing all the values of the form. In this case it is {title?: string, topic?: string}
+              return slugify(values.title ?? '', {
+                // only leave characters that are allowed in a URL, including the slash, question mark, hash, etc.
+                remove: /[*+~.()`´§'"=!?#_/:@]/g,
+                replacement: '-',
+                lower: true,
+                locale: 'de',
+              })
+            },
+          },
+        },
         templates: [
           {
             name: 'simple',
@@ -163,30 +182,13 @@ export default defineConfig({
             ],
           },
         ],
-        ui: {
-          router: ({ document }) => {
-            return `/${document._sys.breadcrumbs.join('/')}`
-          },
-          filename: {
-            slugify: (values) => {
-              // Values is an object containing all the values of the form. In this case it is {title?: string, topic?: string}
-              return slugify(values.title ?? '', {
-                // only leave characters that are allowed in a URL, including the slash, question mark, hash, etc.
-                remove: /[*+~.()`´§'"=!?#_/:@]/g,
-                replacement: '-',
-                lower: true,
-                locale: 'de',
-              })
-            },
-          },
-        },
       },
       {
         name: 'navMain',
         label: 'Hauptnavigation',
         path: 'config/navigation',
         format: 'json',
-        templates: [main],
+        fields: main.fields,
         match: {
           include: 'main',
         },
@@ -203,7 +205,7 @@ export default defineConfig({
         label: 'Footer',
         path: 'config/navigation',
         format: 'json',
-        templates: [footer],
+        fields: footer.fields,
         match: {
           include: 'footer',
         },

@@ -101,7 +101,7 @@ export const useSelected = (options: ReferenceOption[], id: string) => {
   const [selected, setSelected] = useState<ReferenceOption | undefined>()
 
   useEffect(() => {
-    const selected = options.find((option) => option.id === id)
+    const selected = options?.find((option) => option.id === id)
     setSelected(selected)
   }, [options, id])
 
