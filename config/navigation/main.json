@@ -318,6 +318,11 @@
                   "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/grenzenlos-vernetzt.mdx"
                 },
                 {
+                  "mainTitle4": "n - novum thikwa",
+                  "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/n-novum-thikwa.mdx",
+                  "mainDisabled4": false
+                },
+                {
                   "mainTitle4": "o-obacht omas gegen rechts",
                   "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/o-obacht.mdx",
                   "mainDisabled4": false
@@ -701,6 +706,5 @@
       "mainPage1": "content/pages/spenden.mdx",
       "mainShowInMainNavigation1": false
     }
-  ],
-  "_template": "mainNav"
+  ]
 }
