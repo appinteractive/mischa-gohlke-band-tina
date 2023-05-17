@@ -495,7 +495,13 @@
       "mainPage1": "content/pages/live.mdx",
       "mainDisabled1": false,
       "mainShowInMainNavigation1": false,
-      "isMultiLevel": false
+      "isMultiLevel": false,
+      "mainChildren1": [
+        {
+          "mainTitle2": "Termine",
+          "mainPage2": "content/pages/aktuelle-termine.mdx"
+        }
+      ]
     },
     {
       "mainTitle1": "Unterstützen",
