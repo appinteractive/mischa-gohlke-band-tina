@@ -319,7 +319,8 @@
                 },
                 {
                   "mainTitle4": "m - mamonia",
-                  "mainPage4": "content/pages/m-mamonia.mdx"
+                  "mainPage4": "content/pages/m-mamonia.mdx",
+                  "mainDisabled4": false
                 },
                 {
                   "mainTitle4": "n - novum thikwa",
