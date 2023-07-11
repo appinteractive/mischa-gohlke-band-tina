@@ -314,6 +314,11 @@
               "mainShowInMainNavigation3": true,
               "mainChildren3": [
                 {
+                  "mainTitle4": "L-Looping",
+                  "mainPage4": "content/pages/l-looping.mdx",
+                  "mainDisabled4": false
+                },
+                {
                   "mainTitle4": "Projektinfo",
                   "mainPage4": "content/pages/aktivitaeten/gsr-medienportal/grenzenlos-vernetzt/grenzenlos-vernetzt.mdx"
                 },
