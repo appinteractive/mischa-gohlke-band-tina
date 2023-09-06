@@ -514,24 +514,12 @@
     {
       "mainTitle1": "Unterstützen",
       "mainPage1": "content/pages/spenden.mdx",
-      "mainShowInMainNavigation1": false,
+      "mainShowInMainNavigation1": true,
       "isMultiLevel": false,
       "mainChildren1": [
         {
-          "mainTitle2": "Spenden",
-          "mainPage2": "content/pages/spenden.mdx",
-          "mainShowInMainNavigation2": true
-        },
-        {
-          "mainTitle2": "Freundeskreis",
-          "mainPage2": "content/pages/unterstuetzen/freundeskreis.mdx",
-          "mainDisabled2": false,
-          "mainShowInMainNavigation2": false
-        },
-        {
-          "mainTitle2": "Mitmachen",
-          "mainPage2": "content/pages/mitmachen.mdx",
-          "mainShowInMainNavigation2": true
+          "mainTitle2": "Jetzt spenden",
+          "mainPage2": "content/pages/direkte-spende.mdx"
         }
       ]
     },
