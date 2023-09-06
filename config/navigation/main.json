@@ -520,6 +520,10 @@
         {
           "mainTitle2": "Jetzt spenden",
           "mainPage2": "content/pages/direkte-spende.mdx"
+        },
+        {
+          "mainTitle2": "Mitgliedschaft Freundeskreis",
+          "mainPage2": "content/pages/freundeskreis.mdx"
         }
       ]
     },
