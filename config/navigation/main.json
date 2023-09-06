@@ -524,6 +524,10 @@
         {
           "mainTitle2": "Mitgliedschaft Freundeskreis",
           "mainPage2": "content/pages/freundeskreis.mdx"
+        },
+        {
+          "mainTitle2": "Mitmachen",
+          "mainPage2": "content/pages/mitmachen.mdx"
         }
       ]
     },
