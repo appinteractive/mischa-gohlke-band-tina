@@ -520,27 +520,7 @@
       "mainChildren1": [
         {
           "mainTitle2": "Jetzt spenden",
-          "mainPage2": "content/pages/direkte-spende.mdx",
-          "mainShowInMainNavigation2": true,
-          "mainChildren2": [
-            {
-              "mainTitle3": "Projektspende",
-              "mainPage3": "content/pages/gezielte-projektspende.mdx",
-              "mainShowInMainNavigation3": false
-            },
-            {
-              "mainTitle3": "Förderpatenschaft",
-              "mainPage3": "content/pages/jetzt-foerderpate-werden.mdx"
-            },
-            {
-              "mainTitle3": "Unternehmenspende",
-              "mainPage3": "content/pages/unternehmensspende.mdx"
-            },
-            {
-              "mainTitle3": "Sachspende",
-              "mainPage3": "content/pages/sachspenden.mdx"
-            }
-          ]
+          "mainPage2": "content/pages/direkte-spende.mdx"
         },
         {
           "mainTitle2": "Mitgliedschaft Freundeskreis",
