@@ -530,7 +530,7 @@
             {
               "mainTitle3": "Projektspende",
               "mainPage3": "content/pages/gezielte-projektspende.mdx",
-              "mainShowInMainNavigation3": true
+              "mainShowInMainNavigation3": false
             }
           ]
         },
