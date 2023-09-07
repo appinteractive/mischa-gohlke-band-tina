@@ -516,7 +516,7 @@
       "mainPage1": "content/pages/direkte-spende.mdx",
       "mainDisabled1": false,
       "mainShowInMainNavigation1": true,
-      "isMultiLevel": false,
+      "isMultiLevel": true,
       "mainChildren1": [
         {
           "mainTitle2": "Jetzt spenden",
