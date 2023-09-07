@@ -537,7 +537,8 @@
               "mainPage3": "content/pages/jetzt-foerderpate-werden.mdx"
             },
             {
-              "mainTitle3": "Sachspende"
+              "mainTitle3": "Sachspende",
+              "mainPage3": "content/pages/sachspenden.mdx"
             }
           ]
         },
