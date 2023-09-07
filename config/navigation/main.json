@@ -514,8 +514,9 @@
     {
       "mainTitle1": "Unterstützen",
       "mainPage1": "content/pages/spenden.mdx",
+      "mainDisabled1": false,
       "mainShowInMainNavigation1": true,
-      "isMultiLevel": false,
+      "isMultiLevel": true,
       "mainChildren1": [
         {
           "mainTitle2": "Unterstützen",
