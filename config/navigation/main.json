@@ -531,6 +531,10 @@
               "mainTitle3": "Projektspende",
               "mainPage3": "content/pages/gezielte-projektspende.mdx",
               "mainShowInMainNavigation3": false
+            },
+            {
+              "mainTitle3": "Förderpatenschaft",
+              "mainPage3": "content/pages/jetzt-foerderpate-werden.mdx"
             }
           ]
         },
