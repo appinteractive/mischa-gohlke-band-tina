@@ -529,7 +529,8 @@
           "mainChildren2": [
             {
               "mainTitle3": "Projektspende",
-              "mainPage3": "content/pages/gezielte-projektspende.mdx"
+              "mainPage3": "content/pages/gezielte-projektspende.mdx",
+              "mainShowInMainNavigation3": true
             }
           ]
         },
