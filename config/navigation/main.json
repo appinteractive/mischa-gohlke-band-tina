@@ -524,7 +524,14 @@
         },
         {
           "mainTitle2": "Jetzt spenden",
-          "mainPage2": "content/pages/direkte-spende.mdx"
+          "mainPage2": "content/pages/direkte-spende.mdx",
+          "mainShowInMainNavigation2": true,
+          "mainChildren2": [
+            {
+              "mainTitle3": "Projektspende",
+              "mainPage3": "content/pages/gezielte-projektspende.mdx"
+            }
+          ]
         },
         {
           "mainTitle2": "Mitgliedschaft Freundeskreis",
