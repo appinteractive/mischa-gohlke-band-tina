@@ -519,10 +519,6 @@
       "isMultiLevel": true,
       "mainChildren1": [
         {
-          "mainTitle2": "Unterstützen",
-          "mainPage2": "content/pages/spenden.mdx"
-        },
-        {
           "mainTitle2": "Jetzt spenden",
           "mainPage2": "content/pages/direkte-spende.mdx",
           "mainShowInMainNavigation2": true,
