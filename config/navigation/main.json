@@ -521,7 +521,7 @@
         {
           "mainTitle2": "Jetzt spenden",
           "mainPage2": "content/pages/direkte-spende.mdx",
-          "mainShowInMainNavigation2": true,
+          "mainShowInMainNavigation2": false,
           "mainChildren2": [
             {
               "mainTitle3": "Projektspende",
@@ -536,11 +536,6 @@
             {
               "mainTitle3": "Unternehmenspende",
               "mainPage3": "content/pages/unternehmensspende.mdx",
-              "mainShowInMainNavigation3": true
-            },
-            {
-              "mainTitle3": "Sachspende",
-              "mainPage3": "content/pages/sachspenden.mdx",
               "mainShowInMainNavigation3": true
             }
           ]
