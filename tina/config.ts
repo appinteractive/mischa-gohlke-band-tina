@@ -67,12 +67,6 @@ const menuItem = {
     //   },
     // },
   },
-  accessible: {
-    type: 'string',
-    name: 'accessible',
-    label: 'Leichte Sprache',
-    description: 'URL der Seite in leichter Sprach, beginnend mit Slash',
-  },
 } as any
 
 export default defineConfig({
@@ -125,7 +119,6 @@ export default defineConfig({
               menuItem.description,
               menuItem.teaser,
               menuItem.alias,
-              menuItem.accessible,
               {
                 type: 'rich-text',
                 name: 'body',
@@ -169,7 +162,6 @@ export default defineConfig({
               menuItem.description,
               menuItem.teaser,
               menuItem.alias,
-              menuItem.accessible,
               {
                 type: 'object',
                 list: true,
