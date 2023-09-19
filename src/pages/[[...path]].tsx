@@ -21,9 +21,7 @@ const PrimaryFeatures = dynamic(() => import('@/components/PrimaryFeatures'))
 const SecondaryFeatures = dynamic(
   () => import('@/components/SecondaryFeatures')
 )
-const AccessibilityToggle = dynamic(
-  () => import('@/components/AccessibilityToggle')
-)
+
 const Hero = dynamic(() => import('@/components/embeds/Hero'))
 const VideoPlayer = dynamic(() => import('@/components/embeds/VideoPlayer'))
 const ResponsiveImage = dynamic(
@@ -181,7 +179,6 @@ const Page = (props) => {
             />
           </div>
         )}
-        <AccessibilityToggle link={data?.page?.accessible} />
       </Layout>
     </>
   )
