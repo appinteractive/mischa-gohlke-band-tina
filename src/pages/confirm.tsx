@@ -90,9 +90,7 @@ const Error = () => {
       <h2 className="!text-primary !text-3xl">Ups…</h2>
       <p className="text-secondary text-lg">
         …Houston wir haben ein Problem. Meld dich einfach unter{' '}
-        <a href="mailto:mail@grenzensindrelativ.de">
-          mail@grenzensindrelativ.de
-        </a>
+        <a href="mailto:mail@mischagohlkeband.de">mail@mischagohlkeband.de</a>
       </p>
     </div>
   )

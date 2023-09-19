@@ -135,7 +135,7 @@ export function Footer({ items }: Props) {
                 </div>
               ))}
             </div>
-            <NewsletterForm />
+            {/* <NewsletterForm /> */}
           </div>
         </div>
         <div className="mt-12 border-t border-gray-900/10 py-8 md:flex md:items-center md:justify-between">

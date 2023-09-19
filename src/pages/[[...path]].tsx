@@ -21,7 +21,6 @@ const PrimaryFeatures = dynamic(() => import('@/components/PrimaryFeatures'))
 const SecondaryFeatures = dynamic(
   () => import('@/components/SecondaryFeatures')
 )
-
 const Hero = dynamic(() => import('@/components/embeds/Hero'))
 const VideoPlayer = dynamic(() => import('@/components/embeds/VideoPlayer'))
 const ResponsiveImage = dynamic(
@@ -47,10 +46,8 @@ const Page = (props) => {
   const router = useRouter()
   const currentUrl = router.asPath
 
-  const teamComponentProps = props?.data?.teamComponentProps
-  const navigation = props?.data?.navigation
-  const subNavigation = props?.data?.subNavigation
-  const hasSubNav = props?.data?.hasSubNav
+  const { teamComponentProps, navigation, subNavigation, hasSubNav } =
+    props.data
 
   const cmsComponents = useCmsComponents({
     hasSubNav,
@@ -66,16 +63,16 @@ const Page = (props) => {
   // TODO: CHANGE THE BASE URL TO THE PRODUCTION URL
   const isDev = process.env.NODE_ENV === 'development'
   const baseUrl = process.env.VERCEL_URL ?? 'http://localhost:3000'
-  const teaser = data?.page?.teaser
+  const teaser = data.page?.teaser
     ? isDev
-      ? baseUrl + data?.page.teaser.split('/').map(encodeURIComponent).join('/')
-      : data?.page.teaser
+      ? baseUrl + data.page.teaser.split('/').map(encodeURIComponent).join('/')
+      : data.page.teaser
     : baseUrl + '/media/teaser.jpg'
 
   const defaultTitle = 'Grenzen sind relativ e.V.'
-  let title = data?.page?.title
+  let title = data.page?.title
   if (title !== defaultTitle) {
-    title = `${data?.page?.title} | ${defaultTitle}`
+    title = `${data.page?.title} | ${defaultTitle}`
   }
   // TODO: move default title, description, keywords and copyright to CMS
 
@@ -86,7 +83,7 @@ const Page = (props) => {
         <meta
           name="description"
           content={
-            data?.page?.description ??
+            data.page?.description ??
             'Aktionsbüro für eine multipolare Gesellschaftskultur. Mit Projekten, Veranstaltungen, Kampagnen, Musikunterricht, Workshops, Beratung und Öffentlichkeitsarbeit & Bewusstseinsbildung bringen wir Menschen verschiedenster Backgrounds zusammen und setzen uns für interdisziplinäre Kultur, gesamtgesellschaftliche Inklusion und gelebten Frieden für alle Menschen auf diesem Planeten ein.'
           }
         />
@@ -95,7 +92,7 @@ const Page = (props) => {
           content="Kultur, Gesellschaft, Inklusion, Frieden, Projekte, Veranstaltungen, Kampagnen, Musikunterricht für Hörgeschädigte"
         />
         <meta property="og:title" content={title} />
-        <meta property="og:description" content={data?.page?.description} />
+        <meta property="og:description" content={data.page?.description} />
         <meta property="og:image" content={teaser} />
         <meta property="og:locale" content="de_DE" />
         <meta property="og:type" content="website" />
@@ -108,7 +105,7 @@ const Page = (props) => {
       <Layout navigation={navigation} subNav={hasSubNav ? subNav : null}>
         {/* {data?.page?._sys?.breadcrumbs?.length > 1 && (
           <Breadcrumbs
-            items={data?.page._sys.breadcrumbs}
+            items={data.page._sys.breadcrumbs}
             className="mx-auto max-w-6xl"
           />
         )} */}
@@ -146,8 +143,8 @@ const Page = (props) => {
           </pre> */}
         {/* <pre>{JSON.stringify(navigation, null, 2)}</pre> */}
         {/* </div> */}
-        {data?.page?.blocks?.length > 0 ? (
-          data?.page.blocks.map(function (block, i) {
+        {data.page?.blocks?.length > 0 ? (
+          data.page.blocks.map(function (block, i) {
             switch (block.__typename) {
               /* case 'PageBlocksBlocksHero':
                 return (
@@ -306,7 +303,7 @@ export const getStaticProps = async ({ params, ...data }) => {
     typeof window === 'undefined' &&
     res.props?.data?.page?.body?.children?.length
   ) {
-    for (const node of res.props.data?.page.body.children) {
+    for (const node of res.props.data.page.body.children) {
       await addBlurHash(node)
     }
   } */
@@ -336,7 +333,7 @@ export const getStaticProps = async ({ params, ...data }) => {
   res.props.data['hasSubNav'] = hasSubNav === true
 
   const teamComponentProps = { items: null }
-  const hasTeamComponent = res.props.data?.page?.body?.children?.some(
+  const hasTeamComponent = res.props.data.page?.body?.children?.some(
     (child) => {
       return child?.name === 'Team'
     }
@@ -432,7 +429,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true,
+    fallback: false,
   }
 }
 

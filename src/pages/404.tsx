@@ -34,7 +34,7 @@ const Error = (props) => {
                   <span aria-hidden="true">&larr;</span> zur Startseite
                 </Link>
                 <a
-                  href={`mailto:mail@grenzensindrelativ.de?subject=404 – "${currentUrl}" existiert nicht`}
+                  href={`mailto:mail@mischagohlkeband.de?subject=404 – "${currentUrl}" existiert nicht`}
                   className="text-sm font-semibold text-gray-900"
                 >
                   Sag uns Bescheid <span aria-hidden="true">&rarr;</span>

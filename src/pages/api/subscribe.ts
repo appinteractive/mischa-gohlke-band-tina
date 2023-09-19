@@ -15,7 +15,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     Messages: [
       {
         From: {
-          Email: 'mail@grenzensindrelativ.de',
+          Email: 'mail@mischagohlkeband.de',
           Name: 'Grenzen sind Relativ e.V.',
         },
         To: [
