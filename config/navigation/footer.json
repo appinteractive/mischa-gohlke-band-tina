@@ -1,9 +1,8 @@
 {
-  "_template": "footer",
   "menu": [
     {
-      "title": "Rechtliches",
-      "children": [
+      "footerTitle": "Rechtliches",
+      "footerChildren": [
         {
           "title": "Impressum",
           "page": "content/pages/impressum.mdx"
@@ -19,8 +18,8 @@
       ]
     },
     {
-      "title": "Mischa Gohlke Band",
-      "children": [
+      "footerTitle": "Mischa Gohlke Band",
+      "footerChildren": [
         {
           "title": "Mitmachen",
           "page": "content/pages/mitmachen.mdx"
