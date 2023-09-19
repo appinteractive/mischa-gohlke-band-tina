@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.grenzensindrelativ.de
+Host: https://www.mischagohlkeband.de
 
 # Sitemaps
-Sitemap: https://www.grenzensindrelativ.de/sitemap.xml
+Sitemap: https://www.mischagohlkeband.de/sitemap.xml
