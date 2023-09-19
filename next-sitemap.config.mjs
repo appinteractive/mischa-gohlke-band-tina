@@ -61,7 +61,7 @@ async function loadMainNavigation() {
 
 /** @type {import('next-sitemap').IConfig} */
 const config = {
-  siteUrl: process.env.SITE_URL || 'https://www.grenzensindrelativ.de',
+  siteUrl: process.env.SITE_URL || 'https://www.mischagohlkeband.de',
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   transform: async (config, path) => {
