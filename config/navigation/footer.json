@@ -18,19 +18,11 @@
       ]
     },
     {
-      "footerTitle": "Mischa Gohlke Band",
+      "footerTitle": "Marketing",
       "footerChildren": [
         {
-          "title": "Mitmachen",
+          "title": "Presse-Kit",
           "page": "content/pages/mitmachen.mdx"
-        },
-        {
-          "title": "Spenden",
-          "page": "content/pages/spenden.mdx"
-        },
-        {
-          "title": "Stellenausschreibung",
-          "page": "content/pages/stellenausschreibung.mdx"
         }
       ]
     }
