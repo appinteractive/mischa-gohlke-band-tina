@@ -174,9 +174,9 @@ export function Header({ items }) {
             {/* <div className="hidden md:block">
               <NavLink href="/login">Sign in</NavLink>
             </div> */}
-            <Button className="" href="/spenden" color="blue">
+            {/* <Button className="" href="/spenden" color="blue">
               <span>Spenden</span>
-            </Button>
+            </Button> */}
             <div className="-mr-1 md:hidden">
               <MobileNavigation items={items} />
             </div>
