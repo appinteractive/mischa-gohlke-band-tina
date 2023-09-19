@@ -10,7 +10,7 @@
       "mainPage1": "content/pages/live.mdx",
       "mainDisabled1": false,
       "mainShowInMainNavigation1": true,
-      "isMultiLevel": true
+      "isMultiLevel": false
     },
     {
       "mainTitle1": "Kontakt & Booking",
