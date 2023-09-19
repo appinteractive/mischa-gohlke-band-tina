@@ -77,8 +77,9 @@ const menuItem = {
 
 export default defineConfig({
   branch,
-  clientId: 'fada5bbf-afba-44c3-9820-739cae10698c', // Get this from tina.io
-  token: '1aa7f4492f69a341d7bf6560b3147e48f5204cb4', // Get this from tina.io
+  // Get clientId and token from tina.io
+  clientId: '49f01f57-c610-4ffd-b06e-f001f7d2165e',
+  token: '59324f68be74900428c2aa3e01735ed7a90acfa5',
   build: {
     outputFolder: 'admin',
     publicFolder: 'public',
