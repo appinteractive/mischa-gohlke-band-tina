@@ -1,6 +1,10 @@
 {
   "menu": [
     {
+      "mainTitle1": "MGB",
+      "mainPage1": "content/pages/mgb.mdx"
+    },
+    {
       "mainTitle1": "Videos",
       "mainPage1": "content/pages/videos.mdx",
       "mainShowInMainNavigation1": true
