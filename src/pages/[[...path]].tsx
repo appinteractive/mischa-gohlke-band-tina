@@ -23,6 +23,9 @@ const SecondaryFeatures = dynamic(
 )
 const Hero = dynamic(() => import('@/components/embeds/Hero'))
 const VideoPlayer = dynamic(() => import('@/components/embeds/VideoPlayer'))
+const VideoTeaser = dynamic(() => import('@/components/embeds/VideoTeaser'), {
+  ssr: false,
+})
 const ResponsiveImage = dynamic(
   () => import('@/components/embeds/ResponsiveImage'),
   { ssr: false }
@@ -103,55 +106,9 @@ const Page = (props) => {
         ></meta>
       </Head>
       <Layout navigation={navigation} subNav={hasSubNav ? subNav : null}>
-        {/* {data?.page?._sys?.breadcrumbs?.length > 1 && (
-          <Breadcrumbs
-            items={data.page._sys.breadcrumbs}
-            className="mx-auto max-w-6xl"
-          />
-        )} */}
-        {/* <h1 className="m-8 text-3xl font-extrabold leading-8 tracking-tight text-gray-900 sm:text-4xl">
-              {data.post.title}
-            </h1> */}
-        {/* <ContentSection content={data.post.body}></ContentSection> */}
-        {/* <div className={clsx('prose relative mx-auto')}> */}
-        {/* <pre>{JSON.stringify(navigation.main, null, 2)}</pre> */}
-
-        {/* <pre>
-            {JSON.stringify(
-              getSubNavigation(navigation.main, currentUrl),
-              null,
-              2
-            )}
-          </pre> */}
-        {/* <pre>{JSON.stringify(subNavigation, null, 2)}</pre> */}
-
-        {/* <pre>{currentUrl}</pre>
-          <pre>
-            {JSON.stringify(
-              findNavigationItem(currentUrl, navigation.main as any),
-              null,
-              2
-            )}
-          </pre>
-          <pre>{JSON.stringify(subNavigation, null, 2)}</pre> */}
-        {/* <pre>
-            {JSON.stringify(
-              getParentAndChildren(navigation.main as any, currentUrl),
-              null,
-              2
-            )}
-          </pre> */}
-        {/* <pre>{JSON.stringify(navigation, null, 2)}</pre> */}
-        {/* </div> */}
         {data.page?.blocks?.length > 0 ? (
           data.page.blocks.map(function (block, i) {
             switch (block.__typename) {
-              /* case 'PageBlocksBlocksHero':
-                return (
-                  <React.Fragment key={i + block.__typename}>
-                    <Hero headline={block.headline} text={block.text} />
-                  </React.Fragment>
-                ) */
               case 'PageBlocksBlocksContent':
                 return (
                   <React.Fragment key={i + block.__typename}>
@@ -210,41 +167,12 @@ function useCmsComponents({ hasSubNav, subNavigation, teamComponentProps }) {
       }
     },
     VideoPlayer: (props) => <VideoPlayer hasSubNav={hasSubNav} {...props} />,
-    // stop linking images to themselves
-    /* a: (props) => {
-      // is image check when url includes .jpg, jpeg, .png, .svg, .gif, .webp
-      if (isImage(props.url) === true) {
-        // return children directly when url is an image
-        return <>{props.children}</>
-      } else {
-        return (
-          <a {...props}>
-            {props.children}
-          </a>
-        )
-      }
-    }, */
+    VideoTeaser: (props) => <VideoTeaser hasSubNav={hasSubNav} {...props} />,
+
     a: (props) => {
       const href = props.url || props.href
       const target = href?.startsWith('http') ? '_blank' : '_self'
       let children = props.children
-
-      // iterate over children and remove http(s):// from links
-      /* if (Array.isArray(children)) {
-        children = children.map((child) => {
-          console.log('child', child)
-          if (child.props?.content) {
-            child.props.content = child.props.content.map((c) => {
-              console.log('c', c)
-              if (c.text) {
-                c.text = c.text.replace(/https?:\/\//, '')
-              }
-              return c
-            })
-          }
-          return child
-        })
-      } */
 
       if (href) {
         return (

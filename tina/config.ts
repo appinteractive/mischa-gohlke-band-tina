@@ -2,10 +2,11 @@ import { defineConfig } from 'tinacms'
 import { /* heroBlock,  */ featureBlock, contentBlock } from './blocks/blocks'
 import { footer } from '../tina/collections/nav-footer'
 import { main } from '../tina/collections/nav-main'
-import { VideoPlayerTemplate } from '../tina/embeds/video-player'
+import { VideoPlayerTemplate } from './embeds/video-player'
 import { ContentGalleryTemplate } from './embeds/content-gallery'
 import { DonationFormTemplate } from './embeds/donation-form'
 import { ImageGalleryTemplate } from './embeds/image-gallery'
+import { VideoTeaserTemplate } from './embeds/video-teaser'
 import { TeamTemplate } from './embeds/team'
 import { HeroTemplate } from './embeds/hero'
 import { SocialMediaTemplate } from './embeds/social-media'
@@ -125,6 +126,7 @@ export default defineConfig({
                 label: 'Inhalt',
                 isBody: true,
                 templates: [
+                  VideoTeaserTemplate,
                   ImageGalleryTemplate,
                   ContentGalleryTemplate,
                   VideoPlayerTemplate,

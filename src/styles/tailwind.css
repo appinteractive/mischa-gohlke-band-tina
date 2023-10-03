@@ -4,14 +4,14 @@
 
 @layer {
   #__next {
-    @apply h-full flex flex-col;
+    @apply flex h-full flex-col;
   }
 }
 
 @layer {
   /* fixing the zoom lib */
   .gallery-image > * {
-    @apply h-full
+    @apply h-full;
   }
   .zoom-caption {
     position: absolute;
@@ -38,22 +38,33 @@
     margin-top: 1.5rem;
   }
   .zoom-caption-link {
-     color: #fff;
-     text-underline-offset: 0.5rem;
+    color: #fff;
+    text-underline-offset: 0.5rem;
   }
 }
 
 @layer {
   /* fix long headlines by use hyphens */
-  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
     @apply hyphens-auto md:hyphens-manual;
   }
   .prose a {
     @apply rounded outline-offset-4;
   }
-  .prose a[href^="http"]:not([href*="grenzensindrelativ.de"]) {
-    background: url("/external-link.png") no-repeat 100% 0;
+  .prose a[href^='http']:not([href*='grenzensindrelativ.de']) {
+    background: url('/external-link.png') no-repeat 100% 0;
     background-size: 1rem 1rem;
     padding-right: 1.2rem;
+  }
+}
+
+@layer {
+  .teaser-player-wrapper video {
+    @apply h-full w-full !object-cover;
   }
 }

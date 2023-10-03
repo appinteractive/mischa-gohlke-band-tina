@@ -22,6 +22,59 @@ type Props = {
   items: MainNavItem[]
 }
 
+export function Header({ items }) {
+  return (
+    <header className="z-10 w-screen bg-white py-10">
+      <Container className="">
+        <nav className="relative z-50 flex justify-between">
+          <div className="flex items-center md:gap-x-12">
+            <Link
+              href="/"
+              aria-label="Home"
+              className=" rounded outline-offset-8"
+            >
+              <Logo className="h-10 w-auto" />
+            </Link>
+          </div>
+          <div className="hidden items-center font-semibold text-gray-900 md:flex md:gap-x-2">
+            {items?.map((item) => {
+              if (item.disabled) return null
+              if (item.showInMainNavigation === false) return null
+
+              if (item.children?.length) {
+                return (
+                  <MenuPopover
+                    key={item.title}
+                    label={item.title}
+                    items={item.children ?? []}
+                    isMultiLevel={item.isMultiLevel}
+                  />
+                )
+              }
+              return (
+                <NavLink key={item.title} href={cleanPath(item.page)}>
+                  {item.title}
+                </NavLink>
+              )
+            })}
+          </div>
+          <div className="flex items-center gap-x-5 md:gap-x-8">
+            {/* <div className="hidden md:block">
+              <NavLink href="/login">Sign in</NavLink>
+            </div> */}
+            {/* <Button className="" href="/spenden" color="blue">
+              <span>Spenden</span>
+            </Button> */}
+            <div className="-mr-1 md:hidden">
+              <MobileNavigation items={items} />
+            </div>
+          </div>
+        </nav>
+      </Container>
+    </header>
+  )
+}
+
 function MobileNavLink({ href, children, level = 1, key = null }) {
   return (
     <Popover.Button
@@ -131,58 +184,5 @@ function MobileNavigation({ items }: Props) {
         </Transition.Child>
       </Transition.Root>
     </Popover>
-  )
-}
-
-export function Header({ items }) {
-  return (
-    <header className="py-10">
-      <Container className="">
-        <nav className="relative z-50 flex justify-between">
-          <div className="flex items-center md:gap-x-12">
-            <Link
-              href="/"
-              aria-label="Home"
-              className=" rounded outline-offset-8"
-            >
-              <Logo className="h-10 w-auto" />
-            </Link>
-          </div>
-          <div className="hidden items-center font-semibold text-gray-900 md:flex md:gap-x-2">
-            {items?.map((item) => {
-              if (item.disabled) return null
-              if (item.showInMainNavigation === false) return null
-
-              if (item.children?.length) {
-                return (
-                  <MenuPopover
-                    key={item.title}
-                    label={item.title}
-                    items={item.children ?? []}
-                    isMultiLevel={item.isMultiLevel}
-                  />
-                )
-              }
-              return (
-                <NavLink key={item.title} href={cleanPath(item.page)}>
-                  {item.title}
-                </NavLink>
-              )
-            })}
-          </div>
-          <div className="flex items-center gap-x-5 md:gap-x-8">
-            {/* <div className="hidden md:block">
-              <NavLink href="/login">Sign in</NavLink>
-            </div> */}
-            {/* <Button className="" href="/spenden" color="blue">
-              <span>Spenden</span>
-            </Button> */}
-            <div className="-mr-1 md:hidden">
-              <MobileNavigation items={items} />
-            </div>
-          </div>
-        </nav>
-      </Container>
-    </header>
   )
 }
