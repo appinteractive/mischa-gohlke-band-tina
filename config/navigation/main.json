@@ -1,10 +1,6 @@
 {
   "menu": [
     {
-      "mainTitle1": "MGB",
-      "mainPage1": "content/pages/mgb.mdx"
-    },
-    {
       "mainTitle1": "Videos",
       "mainPage1": "content/pages/videos.mdx",
       "mainShowInMainNavigation1": true
@@ -17,16 +13,16 @@
       "isMultiLevel": false
     },
     {
+      "mainTitle1": "Engagement",
+      "mainPage1": "content/pages/engagement.mdx",
+      "mainShowInMainNavigation1": true
+    },
+    {
       "mainTitle1": "Kontakt & Booking",
       "mainPage1": "content/pages/kontakt.mdx",
       "mainDisabled1": false,
       "mainShowInMainNavigation1": true,
       "isMultiLevel": false
-    },
-    {
-      "mainTitle1": "Engagement",
-      "mainPage1": "content/pages/engagement.mdx",
-      "mainShowInMainNavigation1": true
     }
   ]
 }
