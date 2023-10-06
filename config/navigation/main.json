@@ -5,16 +5,16 @@
       "mainPage1": "content/pages/index.mdx"
     },
     {
-      "mainTitle1": "Videos",
-      "mainPage1": "content/pages/videos.mdx",
-      "mainShowInMainNavigation1": true
-    },
-    {
       "mainTitle1": "Live",
       "mainPage1": "content/pages/live.mdx",
       "mainDisabled1": false,
       "mainShowInMainNavigation1": true,
       "isMultiLevel": false
+    },
+    {
+      "mainTitle1": "Videos",
+      "mainPage1": "content/pages/videos.mdx",
+      "mainShowInMainNavigation1": true
     },
     {
       "mainTitle1": "Engagement",
