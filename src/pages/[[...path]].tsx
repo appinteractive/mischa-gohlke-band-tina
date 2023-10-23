@@ -72,7 +72,7 @@ const Page = (props) => {
       : data.page.teaser
     : baseUrl + '/media/teaser.jpg'
 
-  const defaultTitle = 'Grenzen sind relativ e.V.'
+  const defaultTitle = 'Mischa Gohlke Band'
   let title = data.page?.title
   if (title !== defaultTitle) {
     title = `${data.page?.title} | ${defaultTitle}`
