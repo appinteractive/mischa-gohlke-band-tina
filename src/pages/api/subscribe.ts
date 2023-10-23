@@ -25,7 +25,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         ],
         TemplateID: parseInt(process.env.MJ_SUBSCRIBE_TEMPLATE_ID),
         TemplateLanguage: true,
-        Subject: 'GSR e.V. Newsletter bestätigen',
+        Subject: 'Newsletter bestätigen',
         Variables: {
           confirmation_link: link,
         },
