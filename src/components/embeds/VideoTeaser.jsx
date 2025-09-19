@@ -31,7 +31,7 @@ export default function VideoTeaser({ type, hasSubNav, ...props }) {
         <div className="flex h-full !w-screen opacity-50">
           <ReactPlayer
             className="teaser-player-wrapper h-full"
-            url="/media/video/mgb-teaser-1080p-neu.mp4"
+            url="/media/video/MGB_WebTeaser_neu_Sep2025.mp4"
             playing={true}
             playsinline={true}
             loop={true}
