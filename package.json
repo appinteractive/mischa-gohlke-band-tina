@@ -50,12 +50,15 @@
     "@tailwindcss/typography": "^0.5.9",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "@types/node": "18.19.68",
     "@types/sharp": "^0.31.1",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.2",
     "jest": "^29.5.0",
     "jest-environment-jsdom": "^29.5.0",
     "prettier": "^2.7.1",
-    "prettier-plugin-tailwindcss": "^0.1.13"
-  }
+    "prettier-plugin-tailwindcss": "^0.1.13",
+    "typescript": "5.3.3"
+  },
+  "packageManager": "yarn@4.8.1+sha256.8c8cf7bef23cced7c138d0da3ea72d43d2626727f1ae309edb853c41ab18ef1c"
 }

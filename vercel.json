@@ -1,4 +1,5 @@
 {
   "trailingSlash": false,
-  "cleanUrls": true
+  "cleanUrls": true,
+  "installCommand": "corepack enable && corepack prepare yarn@4.8.1 --activate && yarn install --immutable"
 }
