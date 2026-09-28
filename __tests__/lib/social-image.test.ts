@@ -17,6 +17,7 @@ it('uses a checked-in fallback for absent or unsupported images', () => {
     const url = new URL(socialImageUrl('https://site.example', source))
     expect(url.origin).toBe('https://site.example')
     expect(url.pathname).toBe('/api/assets/social')
+    expect(url.searchParams.get('v')).toBe('2')
     expect(url.searchParams.get('src')).toBe(DEFAULT_SOCIAL_IMAGE)
   }
 })

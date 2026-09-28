@@ -167,3 +167,32 @@ diff --git a/dist/normalizers/o.js b/dist/normalizers/o.js
              break;
          case 'png':
          case 'webp':
+diff --git a/dist/normalizers/resize/index.js b/dist/normalizers/resize/index.js
+--- a/dist/normalizers/resize/index.js
++++ b/dist/normalizers/resize/index.js
+@@ -23,6 +23,7 @@
+     fill: fill_1.default,
+     downfill: downfill_1.default,
+     embed: embed_1.default,
++    social: require("./social").default,
+ };
+ const AVAILABLE_MODES = Object.keys(MODES);
+ const RESIZE_PATTERN = /^(\d+(.\d+)?x\d+(.\d+)?|\d+(.\d+)?x?|x\d+(.\d+)?)$/;
+diff --git a/dist/normalizers/resize/social.js b/dist/normalizers/resize/social.js
+new file mode 100644
+--- /dev/null
++++ b/dist/normalizers/resize/social.js
+@@ -0,0 +1,13 @@
++"use strict";
++Object.defineProperty(exports, "__esModule", { value: true });
++const sharp = require("sharp");
++// Keep the full image sharp over a blurred, edge-to-edge copy of itself.
++const social = ({ image }) => async ({ width, height }) => {
++    const [background, foreground] = await Promise.all([
++        image.clone().flatten({ background: "#ffffff" })
++            .resize(width, height, { fit: "cover" }).blur(30).png().toBuffer(),
++        image.clone().resize(width, height, { fit: "inside" }).png().toBuffer(),
++    ]);
++    return sharp(background).composite([{ input: foreground, gravity: "centre" }]);
++};
++exports.default = social;

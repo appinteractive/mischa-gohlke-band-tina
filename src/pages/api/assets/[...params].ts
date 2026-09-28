@@ -11,7 +11,7 @@ import {
 
 const ONE_DAY = 60 * 60 * 24
 // Fixed canvas preserves the entire teaser, including text and portrait images.
-const SOCIAL_OPERATION = ['rs,s:1200x630,m:embed,b:FFFFFF', 'o:jpeg', 'q:85']
+const SOCIAL_OPERATION = ['rs,s:1200x630,m:social', 'o:jpeg', 'q:85']
 
 function absoluteLocalSource(url: string, req: IncomingMessage): string {
   const deploymentUrl = process.env.VERCEL_URL

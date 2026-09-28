@@ -12,7 +12,7 @@ patchedDependencies:
     hash: f4c1516790cfdc037aa177d743e9228fb86410b5fb37521325fb440e3b5baebc
     path: patches/@tinacms__cli@3.1.0.patch
   caravaggio@3.9.0:
-    hash: f1cc22685bba145d480530b04ed2cf24afbf19cc10380fbcf6e2c317a7f4e807
+    hash: 883df9b731b6abe4d19616b85c428da5a45a48f4fcf1a9169b4d80a7ecae7e83
     path: patches/caravaggio@3.9.0.patch
 
 importers:
@@ -42,7 +42,7 @@ importers:
         version: 2.0.5
       caravaggio:
         specifier: 3.9.0
-        version: 3.9.0(patch_hash=f1cc22685bba145d480530b04ed2cf24afbf19cc10380fbcf6e2c317a7f4e807)
+        version: 3.9.0(patch_hash=883df9b731b6abe4d19616b85c428da5a45a48f4fcf1a9169b4d80a7ecae7e83)
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
@@ -11008,7 +11008,7 @@ snapshots:
 
   caniuse-lite@1.0.30001812: {}
 
-  caravaggio@3.9.0(patch_hash=f1cc22685bba145d480530b04ed2cf24afbf19cc10380fbcf6e2c317a7f4e807):
+  caravaggio@3.9.0(patch_hash=883df9b731b6abe4d19616b85c428da5a45a48f4fcf1a9169b4d80a7ecae7e83):
     dependencies:
       '@vercel/node': 2.15.10
       configuring: 0.3.4

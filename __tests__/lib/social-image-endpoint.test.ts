@@ -60,6 +60,21 @@ beforeAll(async () => {
     )
   )
   sources.set(DEFAULT_SOCIAL_IMAGE, sources.get('/media/panorama.png')!)
+  const checkerboard = Buffer.alloc(400 * 800 * 3)
+  for (let y = 0; y < 800; y++) {
+    for (let x = 0; x < 400; x++) {
+      const value = (Math.floor(x / 8) + Math.floor(y / 8)) % 2 ? 255 : 0
+      checkerboard.fill(value, (y * 400 + x) * 3, (y * 400 + x) * 3 + 3)
+    }
+  }
+  sources.set(
+    '/media/checkerboard.png',
+    await sharp(checkerboard, {
+      raw: { width: 400, height: 800, channels: 3 },
+    })
+      .png()
+      .toBuffer()
+  )
 
   server = createServer((req, res) => {
     const url = new URL(req.url!, origin)
@@ -132,14 +147,32 @@ it.each([
           (y * info.width + x) * info.channels + 3
         )
       )
-    // JPEG chroma subsampling can tint the narrow white border slightly.
-    for (const channel of pixel(0, 0)) expect(channel).toBeGreaterThan(240)
+    // The same red source fills the backdrop, without white side/top padding.
+    expect(pixel(0, 0)[0]).toBeGreaterThan(240)
+    expect(pixel(0, 0)[1]).toBeLessThan(60)
     expect(pixel(600, 315)[0]).toBeGreaterThan(240)
     expect(pixel(600, 315)[1]).toBeLessThan(10)
-    if (name === 'oriented.jpg')
-      expect(pixel(200, 315)).toEqual([255, 255, 255])
   }
 )
+
+it('blurs the covering background while keeping the complete foreground sharp', async () => {
+  const response = await fetch(
+    `${origin}/api/assets/social?src=%2Fmedia%2Fcheckerboard.png`
+  )
+  const output = Buffer.from(await response.arrayBuffer())
+  const backgroundCrop = await sharp(output)
+    .extract({ left: 10, top: 50, width: 300, height: 500 })
+    .toBuffer()
+  const foregroundCrop = await sharp(output)
+    .extract({ left: 460, top: 50, width: 280, height: 500 })
+    .toBuffer()
+  const background = await sharp(backgroundCrop).stats()
+  const foreground = await sharp(foregroundCrop).stats()
+  expect(background.channels[0].mean).toBeGreaterThan(90)
+  expect(background.channels[0].mean).toBeLessThan(170)
+  expect(background.channels[0].stdev).toBeLessThan(15)
+  expect(foreground.channels[0].stdev).toBeGreaterThan(80)
+})
 
 it('flattens transparent pixels onto white instead of black', async () => {
   const response = await fetch(
@@ -178,7 +211,7 @@ it.each([
 
 it('does not expose the new processing operations as a general-purpose route', async () => {
   const response = await fetch(
-    `${origin}/api/assets/rs,s:1200x630,m:embed,b:FFFFFF/o:jpeg/q:85?image=%2Fmedia%2Fportrait.png`
+    `${origin}/api/assets/rs,s:1200x630,m:social/o:jpeg/q:85?image=%2Fmedia%2Fportrait.png`
   )
   expect(response.status).toBe(400)
 })
