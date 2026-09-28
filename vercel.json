@@ -1,5 +1,6 @@
 {
   "trailingSlash": false,
   "cleanUrls": true,
-  "installCommand": "corepack enable && corepack prepare yarn@4.8.1 --activate && yarn install --immutable"
+  "installCommand": "corepack yarn install --immutable",
+  "buildCommand": "node --version && corepack yarn build"
 }

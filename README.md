@@ -4,19 +4,32 @@ Salient is a [Tailwind UI](https://tailwindui.com) site template built using [Ta
 
 ## Getting started
 
-To get started with this template, first install the npm dependencies:
+Use Node.js 24 (see `.nvmrc`) and the Yarn version pinned in `package.json`.
+Install dependencies without changing the lockfile:
 
 ```bash
-npm install
+nvm install
+nvm use
+corepack yarn install --immutable
 ```
 
 Next, run the development server:
 
 ```bash
-npm run dev
+corepack yarn dev
 ```
 
 Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
+
+## Vercel runtime
+
+`engines.node` pins Vercel builds and functions to Node.js 24, overriding the
+dashboard setting. This avoids the [Node.js 20 deprecation on October 1, 2026](https://vercel.com/changelog/node-js-20-is-being-deprecated).
+
+Validate with `corepack yarn test --runInBand` and `corepack yarn build`.
+The build connects to Tina Cloud and needs access to the configured content branch.
+Vercel uses Corepack for the pinned Yarn version and logs `node --version`
+before building; check that a new deployment reports `v24.x` before promotion.
 
 ## Customizing
 
