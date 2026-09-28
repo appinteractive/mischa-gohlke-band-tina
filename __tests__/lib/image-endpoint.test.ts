@@ -55,7 +55,7 @@ it.each(['http://127.0.0.1/private', '//example.com/a.jpg', '/api/subscribe'])(
 
 describe('Tina staging image fallback', () => {
   const staging =
-    'https://assets.tina.io/client/__staging/main/__file/photo.jpg'
+    'https://assets.tina.io/client/__staging/feat/images/__file/photo.jpg'
   const originalFetch = global.fetch
   const transform = jest
     .requireMock('caravaggio')

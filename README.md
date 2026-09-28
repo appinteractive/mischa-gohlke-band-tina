@@ -71,4 +71,4 @@ Tina staging fallbacks, EXIF orientation and metadata stripping still apply.
 OG and Twitter tags share the absolute image URL; OG dimensions/type match the
 output. Previews use their Vercel deployment host; production uses `SITE_URL`
 or the site's canonical domain. Missing/unsupported teasers use the checked-in
-homepage teaser.
+homepage teaser. Deleted local uploads also fall back after a bounded HEAD probe.

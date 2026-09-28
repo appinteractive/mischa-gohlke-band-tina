@@ -4,6 +4,7 @@ import type { AddressInfo } from 'node:net'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import sharp from 'sharp'
 import handler from '@/pages/api/assets/[...params]'
+import { DEFAULT_SOCIAL_IMAGE } from '@/lib/social-image'
 
 let server: Server
 let origin: string
@@ -58,12 +59,18 @@ beforeAll(async () => {
       '<svg xmlns="http://www.w3.org/2000/svg" width="80" height="40"><rect width="80" height="40" fill="red"/></svg>'
     )
   )
+  sources.set(DEFAULT_SOCIAL_IMAGE, sources.get('/media/panorama.png')!)
 
   server = createServer((req, res) => {
     const url = new URL(req.url!, origin)
-    const source = sources.get(url.pathname)
+    const source = sources.get(decodeURIComponent(url.pathname))
     if (source) {
       res.end(source)
+      return
+    }
+    if (url.pathname.startsWith('/media/')) {
+      res.statusCode = 404
+      res.end()
       return
     }
     const request = req as NextApiRequest
@@ -140,6 +147,21 @@ it('flattens transparent pixels onto white instead of black', async () => {
   )
   const stats = await sharp(Buffer.from(await response.arrayBuffer())).stats()
   expect(stats.channels.map((channel) => channel.min)).toEqual([255, 255, 255])
+})
+
+it('uses the default teaser when older content references a missing local upload', async () => {
+  const missing = await fetch(
+    `${origin}/api/assets/social?src=%2Fmedia%2Fdeleted.jpg`
+  )
+  const fallback = await fetch(
+    `${origin}/api/assets/social?src=${encodeURIComponent(
+      DEFAULT_SOCIAL_IMAGE
+    )}`
+  )
+  expect(missing.status).toBe(200)
+  expect(Buffer.from(await missing.arrayBuffer())).toEqual(
+    Buffer.from(await fallback.arrayBuffer())
+  )
 })
 
 it.each([

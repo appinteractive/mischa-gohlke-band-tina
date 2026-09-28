@@ -1,7 +1,8 @@
 const MAX_DIMENSION = 3840
 const OPERATION_PATTERN = /^rs,s:(\d+)x(\d*),m:downfit\/o:webp\/q:(\d+)$/
-const TINA_STAGING_PATH = /\/__staging\/[^/]+\/(?:__file\/)?/
-const TINA_STAGING_ASSET_PATH = /\/__staging\/[^/]+\/(?:__file\/)?(.+)$/
+// Tina 3 can leave slashes in the branch name; __file separates it from the asset.
+const TINA_STAGING_PATH = /\/__staging\/(?:.+?\/__file\/|[^/]+\/)/
+const TINA_STAGING_ASSET_PATH = /\/__staging\/(?:.+?\/__file\/|[^/]+\/)(.+)$/
 const UNSAFE_RAW_PATH_SEGMENT =
   /(?:^|\/)(?:(?:\.|%2e){1,2}|[^/]*(?:\\|%5c|%00)[^/]*)(?:\/|$)/i
 
