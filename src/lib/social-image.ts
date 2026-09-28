@@ -17,7 +17,7 @@ export function socialImageOrigin(): string {
 export function socialImageUrl(origin: string, source?: string | null): string {
   const image = isAllowedImageSource(source) ? source : DEFAULT_SOCIAL_IMAGE
   return new URL(
-    `/api/assets/social?src=${encodeURIComponent(image)}`,
+    `/api/assets/social?v=2&src=${encodeURIComponent(image)}`,
     origin
   ).toString()
 }

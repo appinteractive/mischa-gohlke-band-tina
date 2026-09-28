@@ -65,7 +65,9 @@ for cached pages. Original public media files are unchanged; their source
 metadata is not removed by the transformation endpoint.
 
 Social previews use `/api/assets/social?src=...`: a fixed 1200 × 630 JPEG at
-quality 85, containing the entire teaser on white without cropping or stretching.
+quality 85, with the entire sharp teaser centered over a blurred cover of the same
+image. Only the background is cropped; the foreground retains its full aspect ratio.
+The generated URL includes `v=2` to bypass previously cached white-padded previews.
 The JPEG output patch flattens transparency onto white. Source restrictions,
 Tina staging fallbacks, EXIF orientation and metadata stripping still apply.
 OG and Twitter tags share the absolute image URL; OG dimensions/type match the
