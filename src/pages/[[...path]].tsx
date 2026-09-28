@@ -1,4 +1,10 @@
 import Head from 'next/head'
+import {
+  socialImageOrigin,
+  socialImageUrl,
+  SOCIAL_IMAGE_WIDTH,
+  SOCIAL_IMAGE_HEIGHT,
+} from '@/lib/social-image'
 import { useTina } from 'tinacms/dist/react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import client from '@/tina/__generated__/client'
@@ -63,14 +69,7 @@ const Page = (props) => {
       <SubNav items={subNavigation.items} parent={subNavigation.parent} />
     ) : null
 
-  // TODO: CHANGE THE BASE URL TO THE PRODUCTION URL
-  const isDev = process.env.NODE_ENV === 'development'
-  const baseUrl = process.env.VERCEL_URL ?? 'http://localhost:3000'
-  const teaser = data.page?.teaser
-    ? isDev
-      ? baseUrl + data.page.teaser.split('/').map(encodeURIComponent).join('/')
-      : data.page.teaser
-    : baseUrl + '/media/teaser.jpg'
+  const teaser = socialImageUrl(props.socialImageOrigin, data.page?.teaser)
 
   const defaultTitle = 'Mischa Gohlke Band'
   let title = data.page?.title
@@ -97,6 +96,11 @@ const Page = (props) => {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={data.page?.description} />
         <meta property="og:image" content={teaser} />
+        <meta property="og:image:width" content={String(SOCIAL_IMAGE_WIDTH)} />
+        <meta property="og:image:height" content={String(SOCIAL_IMAGE_HEIGHT)} />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={teaser} />
         <meta property="og:locale" content="de_DE" />
         <meta property="og:type" content="website" />
         <meta name="robots" content="index, follow" />
@@ -327,6 +331,7 @@ export const getStaticProps = async ({ params, ...data }) => {
   res.props.data['teamComponentProps'] =
     deleteUndefinedValues(teamComponentProps)
 
+  res.props.socialImageOrigin = socialImageOrigin()
   return res
 }
 
