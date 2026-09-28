@@ -79,7 +79,8 @@
       "sharp"
     ],
     "patchedDependencies": {
-      "@tinacms/cli@3.1.0": "patches/@tinacms__cli@3.1.0.patch"
+      "@tinacms/cli@3.1.0": "patches/@tinacms__cli@3.1.0.patch",
+      "caravaggio@3.9.0": "patches/caravaggio@3.9.0.patch"
     }
   }
 }

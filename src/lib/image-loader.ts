@@ -4,7 +4,7 @@ import { getTinaStagingFallback } from '@/lib/image-cache'
 const MAX_DIMENSION = 3840
 const SVG_PATH = /\.svg(?:[?#]|$)/i
 
-export interface CaravaggioUrlOptions extends ImageLoaderProps {
+export interface ImageUrlOptions extends ImageLoaderProps {
   height?: number
 }
 
@@ -21,13 +21,13 @@ function assertIntegerInRange(
   }
 }
 
-/** Build a URL for the guarded Caravaggio image endpoint. */
-export function caravaggioUrl({
+/** Build a URL for the guarded image endpoint. */
+export function imageUrl({
   src,
   width,
   height,
   quality = 75,
-}: CaravaggioUrlOptions): string {
+}: ImageUrlOptions): string {
   // A missing Tina preview SVG needs the same canonical fallback as raster
   // media, so route staged SVGs through the guarded endpoint as well.
   if (SVG_PATH.test(src) && !getTinaStagingFallback(src)) return src
@@ -38,11 +38,11 @@ export function caravaggioUrl({
   }
   assertIntegerInRange(quality, 'quality', 1, 100)
 
-  return `/api/assets/rs,s:${width}x${
-    height ?? ''
-  },m:downfit/o:webp/q:${quality}?image=${encodeURIComponent(src)}`
+  return `/api/assets/transform?width=${width}${
+    height === undefined ? '' : `&height=${height}`
+  }&quality=${quality}&src=${encodeURIComponent(src)}`
 }
 
-export default function caravaggioLoader(props: ImageLoaderProps): string {
-  return caravaggioUrl(props)
+export default function imageLoader(props: ImageLoaderProps): string {
+  return imageUrl(props)
 }

@@ -1,13 +1,13 @@
 import Image from 'next/image'
 import { BlurhashCanvas } from 'react-blurhash'
 import clsx from 'clsx'
-import { caravaggioUrl } from '@/lib/caravaggio-loader'
+import { imageUrl } from '@/lib/image-loader'
 
 // The figure below is a fixed 16:9 letterbox with object-contain, so an
 // image can never display taller than width * 9/16 — cap the resize height
 // too, otherwise portrait images are fetched far larger than they render.
 const letterboxLoader = ({ src, width, quality }) =>
-  caravaggioUrl({ src, width, height: Math.round((width * 9) / 16), quality })
+  imageUrl({ src, width, height: Math.round((width * 9) / 16), quality })
 
 // TinaCMS's rich-text editor can corrupt saved image URLs by prepending the
 // mediaRoot path onto an already-absolute URL (e.g. `/mediahttps://...jpg`).

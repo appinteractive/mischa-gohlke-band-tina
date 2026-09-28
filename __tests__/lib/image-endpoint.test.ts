@@ -4,7 +4,7 @@ import handler from '@/pages/api/assets/[...params]'
 
 jest.mock('caravaggio', () => ({
   __esModule: true,
-  default: jest.fn(() => (_req, res) => res.status(200).end('image')),
+  default: jest.fn(() => jest.fn((_req, res) => res.status(200).end('image'))),
 }))
 
 function request(overrides = {}) {
@@ -83,6 +83,7 @@ describe('Tina staging image fallback', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1)
     expect(fetchMock).toHaveBeenCalledWith(staging, {
       method: 'HEAD',
+      headers: { 'user-agent': '' },
       signal: expect.any(AbortSignal),
     })
   })
@@ -105,4 +106,60 @@ describe('Tina staging image fallback', () => {
     )
     expect(fetchMock).toHaveBeenCalledTimes(2)
   })
+})
+
+it('translates neutral public URLs internally and restores the request', async () => {
+  const processor = jest.requireMock('caravaggio').default.mock.results[0].value
+  const originalUrl =
+    '/api/assets/transform?width=320&height=180&quality=85&src=%2Fmedia%2Fphoto.jpg'
+  const originalQuery = {
+    params: ['transform'],
+    width: '320',
+    height: '180',
+    quality: '85',
+    src: '/media/photo.jpg',
+  }
+  const req = {
+    method: 'GET',
+    url: originalUrl,
+    query: originalQuery,
+  } as unknown as NextApiRequest
+  const res = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+    end: jest.fn(),
+  }
+  processor.mockImplementationOnce((request, response) => {
+    expect(request.url).toBe(
+      '/api/assets/rs,s:320x180,m:downfit/o:webp/q:85?image=%2Fmedia%2Fphoto.jpg'
+    )
+    expect(request.query).toEqual({ image: '/media/photo.jpg' })
+    return response.status(200).end('image')
+  })
+  await handler(req, res as unknown as NextApiResponse)
+  expect(req.url).toBe(originalUrl)
+  expect(req.query).toBe(originalQuery)
+})
+
+it.each([undefined, ['320', '640'], '0', '3841', '10/rotate:90'])(
+  'rejects an invalid public width %s',
+  (width) => {
+    expect(
+      request({
+        query: { params: ['transform'], width, src: '/media/photo.jpg' },
+      }).status
+    ).toHaveBeenCalledWith(400)
+  }
+)
+
+it('rejects an external source on the neutral route', () => {
+  expect(
+    request({
+      query: {
+        params: ['transform'],
+        width: '320',
+        src: 'https://example.com/a.jpg',
+      },
+    }).status
+  ).toHaveBeenCalledWith(403)
 })
