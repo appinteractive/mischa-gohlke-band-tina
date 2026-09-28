@@ -155,3 +155,15 @@ index 50c66da977b50c6392715ec61a42b3ca704d2e97..d5008c77dc33dccd59d7199bad1b324e
          const { data, info } = await result.toBuffer({ resolveWithObject: true });
          return {
              data,
+diff --git a/dist/normalizers/o.js b/dist/normalizers/o.js
+--- a/dist/normalizers/o.js
++++ b/dist/normalizers/o.js
+@@ -16,7 +16,7 @@
+     switch (format) {
+         case 'jpg':
+         case 'jpeg':
+-            fn = async ({ image }) => image.jpeg();
++            fn = async ({ image }) => image.flatten({ background: '#ffffff' }).jpeg();
+             break;
+         case 'png':
+         case 'webp':

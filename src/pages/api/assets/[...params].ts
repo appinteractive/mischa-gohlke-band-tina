@@ -9,6 +9,8 @@ import {
 } from '@/lib/image-cache'
 
 const ONE_DAY = 60 * 60 * 24
+// Fixed canvas preserves the entire teaser, including text and portrait images.
+const SOCIAL_OPERATION = ['rs,s:1200x630,m:embed,b:FFFFFF', 'o:jpeg', 'q:85']
 
 function absoluteLocalSource(url: string, req: IncomingMessage): string {
   const deploymentUrl = process.env.VERCEL_URL
@@ -102,9 +104,13 @@ export default async function handler(
   const params = req.query.params
   const isTransform =
     Array.isArray(params) && params.length === 1 && params[0] === 'transform'
+  const isSocial =
+    Array.isArray(params) && params.length === 1 && params[0] === 'social'
   let operation = params
-  const source = isTransform ? req.query.src : req.query.image
-  if (isTransform) {
+  const source = isTransform || isSocial ? req.query.src : req.query.image
+  if (isSocial) {
+    operation = SOCIAL_OPERATION
+  } else if (isTransform) {
     const { width, height = '', quality = '75' } = req.query
     if (
       typeof width !== 'string' ||
@@ -115,7 +121,7 @@ export default async function handler(
     }
     operation = [`rs,s:${width}x${height},m:downfit`, 'o:webp', `q:${quality}`]
   }
-  if (!isAllowedImageOperation(operation)) {
+  if (!isSocial && !isAllowedImageOperation(operation)) {
     return res.status(400).json({ error: 'Invalid image operation' })
   }
   if (!isAllowedImageSource(source)) {

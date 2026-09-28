@@ -63,3 +63,12 @@ metadata after applying EXIF orientation. Recheck the patch when upgrading.
 Public image URLs use neutral transform parameters. Legacy URLs remain valid
 for cached pages. Original public media files are unchanged; their source
 metadata is not removed by the transformation endpoint.
+
+Social previews use `/api/assets/social?src=...`: a fixed 1200 × 630 JPEG at
+quality 85, containing the entire teaser on white without cropping or stretching.
+The JPEG output patch flattens transparency onto white. Source restrictions,
+Tina staging fallbacks, EXIF orientation and metadata stripping still apply.
+OG and Twitter tags share the absolute image URL; OG dimensions/type match the
+output. Previews use their Vercel deployment host; production uses `SITE_URL`
+or the site's canonical domain. Missing/unsupported teasers use the checked-in
+homepage teaser.
