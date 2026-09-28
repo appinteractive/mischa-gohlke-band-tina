@@ -1,0 +1,55 @@
+diff --git a/dist/index.js b/dist/index.js
+index 3c593402172731315672532b8cf7490c40a171a8..e6f31a0061f5a59a0d5c4a74d0ac403bb24aaa31 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -1461,7 +1461,7 @@ import {
+ import { ManyLevelHost } from "many-level";
+ import { MemoryLevel } from "memory-level";
+ import { pipeline } from "readable-stream";
+-var createDBServer = (port) => {
++var createDBServer = async (port) => {
+   const levelHost = new ManyLevelHost(
+     // @ts-ignore
+     new MemoryLevel({
+@@ -1479,7 +1479,13 @@ var createDBServer = (port) => {
+       );
+     }
+   });
+-  dbServer.listen(port, "localhost");
++  await new Promise((resolve, reject) => {
++    dbServer.once("error", reject);
++    dbServer.listen(port, "localhost", () => {
++      dbServer.removeListener("error", reject);
++      resolve();
++    });
++  });
+   return dbServer;
+ };
+ async function createAndInitializeDatabase(configManager, datalayerPort, bridgeOverride) {
+@@ -3278,7 +3284,7 @@ var DevCommand = class extends BaseCommand {
+     logger.info("\u{1F999} TinaCMS Dev Server is initializing...");
+     this.logDeprecationWarnings();
+     this.warnOnVersionSkew(configManager.rootPath);
+-    createDBServer(Number(this.datalayerPort));
++    await createDBServer(Number(this.datalayerPort));
+     let database = null;
+     const dbLock = async (fn) => {
+       return this.indexingLock.acquire("Key", fn);
+@@ -4074,7 +4080,7 @@ ${dangerText(e.message)}`);
+       }
+     }
+     let server;
+-    createDBServer(Number(this.datalayerPort));
++    await createDBServer(Number(this.datalayerPort));
+     const database = await createAndInitializeDatabase(
+       configManager,
+       Number(this.datalayerPort)
+@@ -4875,7 +4881,7 @@ var AuditCommand = class extends Command4 {
+       logger.error(e.message);
+       process.exit(1);
+     }
+-    createDBServer(Number(this.datalayerPort));
++    await createDBServer(Number(this.datalayerPort));
+     const database = await createAndInitializeDatabase(
+       configManager,
+       Number(this.datalayerPort),
