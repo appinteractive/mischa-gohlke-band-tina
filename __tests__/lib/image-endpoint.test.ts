@@ -1,0 +1,108 @@
+/** @jest-environment node */
+import type { NextApiRequest, NextApiResponse } from 'next'
+import handler from '@/pages/api/assets/[...params]'
+
+jest.mock('caravaggio', () => ({
+  __esModule: true,
+  default: jest.fn(() => (_req, res) => res.status(200).end('image')),
+}))
+
+function request(overrides = {}) {
+  const req = {
+    method: 'GET',
+    query: {
+      params: ['rs,s:640x,m:downfit', 'o:webp', 'q:75'],
+      image: '/media/photo.jpg',
+    },
+    ...overrides,
+  } as unknown as NextApiRequest
+  const res = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn().mockReturnThis(),
+    setHeader: jest.fn(),
+    end: jest.fn(),
+  }
+  handler(req, res as unknown as NextApiResponse)
+  return res
+}
+
+it('serves approved transforms', () => {
+  expect(request().status).toHaveBeenCalledWith(200)
+})
+
+it('rejects unsupported HTTP methods', () => {
+  const res = request({ method: 'POST' })
+  expect(res.status).toHaveBeenCalledWith(405)
+  expect(res.setHeader).toHaveBeenCalledWith('Allow', 'GET')
+})
+
+it('rejects unbounded operations', () => {
+  const res = request({
+    query: { params: ['rotate:90'], image: '/media/a.jpg' },
+  })
+  expect(res.status).toHaveBeenCalledWith(400)
+})
+
+it.each(['http://127.0.0.1/private', '//example.com/a.jpg', '/api/subscribe'])(
+  'rejects proxying %s',
+  (image) => {
+    const res = request({
+      query: { params: ['rs,s:640x,m:downfit', 'o:webp', 'q:75'], image },
+    })
+    expect(res.status).toHaveBeenCalledWith(403)
+  }
+)
+
+describe('Tina staging image fallback', () => {
+  const staging =
+    'https://assets.tina.io/client/__staging/main/__file/photo.jpg'
+  const originalFetch = global.fetch
+  const transform = jest
+    .requireMock('caravaggio')
+    .default.mock.calls[0][0].plugins.plugins[0].instance().urlTransform
+  const req = { headers: { host: 'localhost:3105' } }
+
+  beforeEach(() => {
+    jest.replaceProperty(process, 'env', {
+      ...process.env,
+      VERCEL_URL: '',
+      VERCEL_AUTOMATION_BYPASS_SECRET: '',
+    })
+    global.fetch = jest.fn()
+  })
+
+  afterEach(() => {
+    jest.restoreAllMocks()
+    global.fetch = originalFetch
+  })
+
+  it('keeps available staging assets and bounds the probe', async () => {
+    const fetchMock = global.fetch as jest.Mock
+    fetchMock.mockResolvedValue({ ok: true })
+    expect(await transform(staging, req)).toBe(staging)
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+    expect(fetchMock).toHaveBeenCalledWith(staging, {
+      method: 'HEAD',
+      signal: expect.any(AbortSignal),
+    })
+  })
+
+  it('uses checked-in media when the staging asset is missing', async () => {
+    const fetchMock = global.fetch as jest.Mock
+    fetchMock
+      .mockResolvedValueOnce({ ok: false })
+      .mockResolvedValueOnce({ ok: true })
+    expect(await transform(staging, req)).toBe(
+      'http://localhost:3105/media/photo.jpg'
+    )
+  })
+
+  it('uses the canonical Tina asset when both probes fail', async () => {
+    const fetchMock = global.fetch as jest.Mock
+    fetchMock.mockRejectedValue(new Error('Timed out'))
+    expect(await transform(staging, req)).toBe(
+      'https://assets.tina.io/client/photo.jpg'
+    )
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
+})

@@ -4,19 +4,19 @@ Salient is a [Tailwind UI](https://tailwindui.com) site template built using [Ta
 
 ## Getting started
 
-Use Node.js 24 (see `.nvmrc`) and the Yarn version pinned in `package.json`.
+Use Node.js 24 (see `.nvmrc`) and the pnpm version pinned in `package.json`.
 Install dependencies without changing the lockfile:
 
 ```bash
 nvm install
 nvm use
-corepack yarn install --immutable
+corepack pnpm install --frozen-lockfile
 ```
 
 Next, run the development server:
 
 ```bash
-corepack yarn dev
+corepack pnpm dev
 ```
 
 Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
@@ -26,9 +26,10 @@ Finally, open [http://localhost:3000](http://localhost:3000) in your browser to 
 `engines.node` pins Vercel builds and functions to Node.js 24, overriding the
 dashboard setting. This avoids the [Node.js 20 deprecation on October 1, 2026](https://vercel.com/changelog/node-js-20-is-being-deprecated).
 
-Validate with `corepack yarn test --runInBand` and `corepack yarn build`.
-The build connects to Tina Cloud and needs access to the configured content branch.
-Vercel uses Corepack for the pinned Yarn version and logs `node --version`
+Validate with `corepack pnpm test --runInBand` and `corepack pnpm build`.
+`corepack pnpm build:local` generates content locally and keeps the Tina server running during prerendering.
+The production build connects to Tina Cloud and needs access to the configured content branch.
+Vercel uses Corepack for the pinned pnpm version and logs `node --version`
 before building; check that a new deployment reports `v24.x` before promotion.
 
 ## Customizing
@@ -46,3 +47,10 @@ To learn more about the technologies used in this site template, see the followi
 - [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
 - [Next.js](https://nextjs.org/docs) - the official Next.js documentation
 - [Headless UI](https://headlessui.dev) - the official Headless UI documentation
+
+## Tina CLI startup patch
+
+The pinned pnpm patch for `@tinacms/cli@3.1.0` waits for the local content
+server to listen before connecting its database client. Without that wait,
+Tina can hang at "Indexing local files" after a connection-refused race.
+Keep the patch with the lockfile; recheck it when upgrading the CLI.

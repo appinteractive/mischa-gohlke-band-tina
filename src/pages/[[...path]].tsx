@@ -275,8 +275,9 @@ export const getStaticProps = async ({ params, ...data }) => {
   }
   if (teamComponentProps.items?.length) {
     // get all page details for each team member
-    const allPages = await client.request({
-      query: `#graphql
+    const allPages = await client.request(
+      {
+        query: `#graphql
       query ($collection: String!) {
         collection(collection: $collection) {
           documents(first: -1) {
@@ -298,8 +299,10 @@ export const getStaticProps = async ({ params, ...data }) => {
         }
       }
     `,
-      variables: { collection: 'page' },
-    })
+        variables: { collection: 'page' },
+      },
+      {}
+    )
     teamComponentProps.items = teamComponentProps.items?.map((area) => {
       area.items = area?.children?.map((item) => {
         // url is the item.url without the preceding slash
@@ -328,8 +331,9 @@ export const getStaticProps = async ({ params, ...data }) => {
 }
 
 export const getStaticPaths = async () => {
-  const response = await client.request({
-    query: `#graphql
+  const response = await client.request(
+    {
+      query: `#graphql
       query ($collection: String!) {
         collection(collection: $collection) {
           documents(first: -1) {
@@ -346,8 +350,10 @@ export const getStaticPaths = async () => {
         }
       }
     `,
-    variables: { collection: 'page' },
-  })
+      variables: { collection: 'page' },
+    },
+    {}
+  )
 
   const paths = response.data.collection.documents.edges.map((page) => ({
     params: {

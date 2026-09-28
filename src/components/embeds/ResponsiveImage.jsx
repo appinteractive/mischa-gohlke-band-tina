@@ -1,6 +1,22 @@
 import Image from 'next/image'
 import { BlurhashCanvas } from 'react-blurhash'
 import clsx from 'clsx'
+import { caravaggioUrl } from '@/lib/caravaggio-loader'
+
+// The figure below is a fixed 16:9 letterbox with object-contain, so an
+// image can never display taller than width * 9/16 — cap the resize height
+// too, otherwise portrait images are fetched far larger than they render.
+const letterboxLoader = ({ src, width, quality }) =>
+  caravaggioUrl({ src, width, height: Math.round((width * 9) / 16), quality })
+
+// TinaCMS's rich-text editor can corrupt saved image URLs by prepending the
+// mediaRoot path onto an already-absolute URL (e.g. `/mediahttps://...jpg`).
+// Guard against that by keeping only the last absolute URL in the string.
+const normalizeImageUrl = (url) => {
+  if (typeof url !== 'string') return url
+  const lastHttpIndex = url.lastIndexOf('https://')
+  return lastHttpIndex > 0 ? url.slice(lastHttpIndex) : url
+}
 
 export const ResponsiveImage = (props) => {
   let caption = props.caption?.trim()
@@ -32,10 +48,11 @@ export const ResponsiveImage = (props) => {
           />
         )}
         <Image
-          src={props.url}
+          src={normalizeImageUrl(props.url)}
           alt={props.alt}
-          // set sizes to 100vw when the screen is smaller than 768px and 768px when it's larger
-          sizes="(max-width: 768px) 100vw, (min-width: 768px) 768"
+          loader={letterboxLoader}
+          // 100vw below 768px, fixed 768px content width above
+          sizes="(max-width: 768px) 100vw, 768px"
           fill
           blurDataURL={props.blurDataURL}
           className={`prose-no ${
