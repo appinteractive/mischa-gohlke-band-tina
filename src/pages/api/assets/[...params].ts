@@ -1,6 +1,7 @@
 import type { IncomingMessage } from 'http'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import caravaggio from 'caravaggio'
+import { DEFAULT_SOCIAL_IMAGE } from '@/lib/social-image'
 import {
   getTinaStagingFallback,
   getTinaStagingLocalSource,
@@ -107,7 +108,7 @@ export default async function handler(
   const isSocial =
     Array.isArray(params) && params.length === 1 && params[0] === 'social'
   let operation = params
-  const source = isTransform || isSocial ? req.query.src : req.query.image
+  let source = isTransform || isSocial ? req.query.src : req.query.image
   if (isSocial) {
     operation = SOCIAL_OPERATION
   } else if (isTransform) {
@@ -126,6 +127,20 @@ export default async function handler(
   }
   if (!isAllowedImageSource(source)) {
     return res.status(403).json({ error: 'Image source is not allowed' })
+  }
+
+  // Older content can reference deleted local uploads. Keep share previews usable.
+  if (isSocial && source.startsWith('/') && source !== DEFAULT_SOCIAL_IMAGE) {
+    try {
+      const response = await fetch(absoluteLocalSource(source, req), {
+        method: 'HEAD',
+        headers: { 'user-agent': '' },
+        signal: AbortSignal.timeout(5000),
+      })
+      if (!response.ok) source = DEFAULT_SOCIAL_IMAGE
+    } catch {
+      source = DEFAULT_SOCIAL_IMAGE
+    }
   }
 
   // Keep the processing syntax on the server; accept old URLs for cached pages.

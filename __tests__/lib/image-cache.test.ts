@@ -6,6 +6,14 @@ import {
 } from '@/lib/image-cache'
 
 describe('getTinaStagingFallback', () => {
+  it('handles unescaped slashes in Tina 3 branch names', () => {
+    const source =
+      'https://assets.tina.io/client/__staging/feat/images/__file/folder/photo.jpg'
+    expect(getTinaStagingFallback(source)).toBe(
+      'https://assets.tina.io/client/folder/photo.jpg'
+    )
+    expect(getTinaStagingLocalSource(source)).toBe('/media/folder/photo.jpg')
+  })
   it('maps a missing branch asset to its canonical Tina URL', () => {
     expect(
       getTinaStagingFallback(
