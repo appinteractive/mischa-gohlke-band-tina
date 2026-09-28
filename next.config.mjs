@@ -19,7 +19,7 @@ const nextConfig = {
   },
   images: {
     loader: 'custom',
-    loaderFile: './src/lib/caravaggio-loader.ts',
+    loaderFile: './src/lib/image-loader.ts',
   },
   async rewrites() {
     return [

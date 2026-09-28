@@ -1,0 +1,157 @@
+diff --git a/dist/basePlugins/webImageLoader.js b/dist/basePlugins/webImageLoader.js
+index 99d6bce9001a2cc7f85ccaa31ac64e9d4ab1a0c3..2d9a984163176c0e4e695439e82e072f24e8cebf 100644
+--- a/dist/basePlugins/webImageLoader.js
++++ b/dist/basePlugins/webImageLoader.js
+@@ -10,7 +10,7 @@ const webImageLoaderFactory = () => ({ PLUGIN_IGNORE_RESULT }) => {
+             if (url.indexOf('http') !== 0) {
+                 return PLUGIN_IGNORE_RESULT;
+             }
+-            return (0, node_fetch_1.default)(url).then((body) => body.buffer());
++            return (0, node_fetch_1.default)(url, { headers: { "user-agent": "" } }).then((body) => body.buffer());
+         },
+     };
+ };
+diff --git a/dist/middlewares/errorHandler.js b/dist/middlewares/errorHandler.js
+index 55bfe776d1a20a07a4d13c015003a02aa3d67594..db5ff6d160e0aa8c3f347045f49c4478e678fef9 100644
+--- a/dist/middlewares/errorHandler.js
++++ b/dist/middlewares/errorHandler.js
+@@ -1,113 +1,19 @@
+ "use strict";
+ Object.defineProperty(exports, "__esModule", { value: true });
+ const micro_1 = require("micro");
+-const misc_1 = require("../utils/misc");
+-const UNKNOWN_ERROR_MESSAGE = 'An unknown error happened :(';
+-const buildHtmlError = (err, res) => {
+-    res.setHeader('Content-Type', 'text/html; charset=UTF-8');
+-    return `
+-<!doctype html>
+-<html class="no-js" lang="">
+-  <head>
+-    <meta charset="utf-8">
+-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+-    <title>Error - Caravaggio</title>
+-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+-    <style>
+-      body {
+-        /*background-color: #4ABDAC;*/
+-        background: rgb(34,193,195);
+-        background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(37,194,63,1) 100%);
+-        margin: 0;
+-        height: 100vh;
+-      }
+-      
+-      /*Typography*/
+-      h1 { font-family: 'Droid sans', sans; font-weight: 400; font-style: italic; line-height: 44px;}
+-      p { font-family: 'Droid Sans', sans-serif; font-size: 15px; font-weight: 400; line-height: 24px; margin: 0 0 14px; }
+-      a { text-decoration: none; border-bottom: 1px solid #4c3a07; color: inherit; }
+-      a:hover { color: #fff; background: #4ABDAC; }
+-      /*/Typography*/
+-
+-      #container {
+-        display: flex;
+-        justify-content: center;
+-        align-items: center;
+-        height: 100%;
+-      }
+-
+-      #error {
+-        display:flex; 
+-        flex-direction: horizontal;
+-        justify-content: flex-start;
+-        align-items:center;
+-        /* background-color: #FF7964;  */
+-        min-width: 30%; 
+-        padding: 1em; 
+-        margin: 0 auto;
+-        border-radius: 5px;
+-        color: rgba(255,255,255,0.8);
+-      }
+-
+-      #logo {
+-        margin-right: 1em;
+-      }
+-    </style>
+-  </head>
+-  <body style="background-color: #4ABDAC;">
+-    <div id="container">
+-      <div id="error">
+-        <div id="logo">
+-          <img src="//res.cloudinary.com/ramiel/image/upload/v1519252402/caravaggio-logo-error_jvq4fg.png" alt="caravaggio distorted logo"/>
+-        </div>
+-        <div>
+-          <h1>Error</h1>
+-          <p>${err.message || UNKNOWN_ERROR_MESSAGE}
+-            <br />See <a target="_blank" href="${(0, misc_1.buildDocumentationLink)(err.docUri)}">${(0, misc_1.buildDocumentationLink)(err.docUri)}</a>
+-          </p>
+-        </div>
+-      </div>
+-    </div>
+-  </body>
+-</html>
+-`;
+-};
+-const buildJsonError = (err, res) => {
+-    res.setHeader('Content-Type', 'application/json');
+-    return {
+-        statusCode: err.statusCode,
+-        error: err.message || UNKNOWN_ERROR_MESSAGE,
+-        see: (0, misc_1.buildDocumentationLink)(err.docUri),
+-    };
+-};
+-const buildErrorText = (err, res) => {
+-    res.setHeader('Content-Type', 'text/plain; charset=UTF-8');
+-    return `${err.message || UNKNOWN_ERROR_MESSAGE}
+-  See ${(0, misc_1.buildDocumentationLink)(err.docUri)}`;
+-};
+-const errorHandler = (context) => {
+-    const { config, logger } = context;
+-    let build;
+-    switch (config.errors) {
+-        case 'html':
+-            build = buildHtmlError;
+-            break;
+-        case 'json':
+-            build = buildJsonError;
+-            break;
+-        default:
+-            build = buildErrorText;
+-            break;
++const errorHandler = ({ logger }) => (fn) => async (req, res) => {
++    try {
++        return await fn(req, res);
++    } catch (err) {
++        const status = Number.isInteger(err.statusCode) && err.statusCode >= 400 && err.statusCode <= 599 ? err.statusCode : 500;
++        // Do not expose backend names, documentation, source URLs or credentials.
++        logger.error({ statusCode: status }, "Image processing failed");
++        res.removeHeader("Server");
++        res.removeHeader("X-Powered-By");
++        res.setHeader("Content-Type", "application/json; charset=utf-8");
++        res.setHeader("Cache-Control", "no-store");
++        res.setHeader("X-Content-Type-Options", "nosniff");
++        return (0, micro_1.send)(res, status, { error: "Image unavailable" });
+     }
+-    return (fn) => async (req, res) => {
+-        try {
+-            return await fn(req, res);
+-        }
+-        catch (err) {
+-            logger.error(err);
+-            logger.error(`Previous error caused by "${req.headers.host || 'no referrer'}"`);
+-            return (0, micro_1.send)(res, err.statusCode || 500, build(err, res));
+-        }
+-    };
+ };
+ exports.default = errorHandler;
+diff --git a/dist/pipeline/index.js b/dist/pipeline/index.js
+index 50c66da977b50c6392715ec61a42b3ca704d2e97..d5008c77dc33dccd59d7199bad1b324efb7f80df 100644
+--- a/dist/pipeline/index.js
++++ b/dist/pipeline/index.js
+@@ -39,7 +39,7 @@ const pipelineCreator = (context) => {
+             }
+             const prevStepImage = await acc;
+             return op({ image: prevStepImage, otherOps: operations, req });
+-        }, Promise.resolve(image.keepMetadata()));
++        }, Promise.resolve(image.rotate()));
+         const { data, info } = await result.toBuffer({ resolveWithObject: true });
+         return {
+             data,

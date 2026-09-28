@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import Image from 'next/image'
-import caravaggioLoader from '@/lib/caravaggio-loader'
+import imageLoader from '@/lib/image-loader'
 import { Gallery } from 'react-grid-gallery'
 import { useEffect, useState, useMemo, useLayoutEffect } from 'react'
 import Zoom from 'react-medium-image-zoom'
@@ -62,7 +62,7 @@ function ImageThumbnail({
         {...props}
         zoomImg={{
           alt: alt,
-          src: caravaggioLoader({ src, width: 1920, quality: 85 }),
+          src: imageLoader({ src, width: 1920, quality: 85 }),
         }}
         ZoomContent={(data) => CustomZoomContent({ ...data, alt, caption })}
       >

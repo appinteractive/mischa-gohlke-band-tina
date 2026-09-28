@@ -54,3 +54,12 @@ The pinned pnpm patch for `@tinacms/cli@3.1.0` waits for the local content
 server to listen before connecting its database client. Without that wait,
 Tina can hang at "Indexing local files" after a connection-refused race.
 Keep the patch with the lockfile; recheck it when upgrading the CLI.
+
+## Image response hardening
+
+The pinned `caravaggio@3.9.0` patch returns generic, non-cacheable errors,
+removes identifying outbound User-Agent values, and strips processed-image
+metadata after applying EXIF orientation. Recheck the patch when upgrading.
+Public image URLs use neutral transform parameters. Legacy URLs remain valid
+for cached pages. Original public media files are unchanged; their source
+metadata is not removed by the transformation endpoint.

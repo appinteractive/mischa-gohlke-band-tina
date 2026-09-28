@@ -41,6 +41,7 @@ const imageSourcePlugin = () => ({
       try {
         const response = await fetch(url, {
           method: 'HEAD',
+          headers: { 'user-agent': '' },
           signal: AbortSignal.timeout(5000),
         })
         if (response.ok) return url
@@ -54,6 +55,7 @@ const imageSourcePlugin = () => ({
         try {
           const response = await fetch(localFallback, {
             method: 'HEAD',
+            headers: { 'user-agent': '' },
             signal: AbortSignal.timeout(5000),
           })
           if (response.ok) return localFallback
@@ -88,21 +90,51 @@ const imageHandler = caravaggio({
   },
 })
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   if (req.method !== 'GET') {
     res.setHeader('Allow', 'GET')
     return res.status(405).json({ error: 'Method not allowed' })
   }
 
-  if (!isAllowedImageOperation(req.query.params)) {
+  const params = req.query.params
+  const isTransform =
+    Array.isArray(params) && params.length === 1 && params[0] === 'transform'
+  let operation = params
+  const source = isTransform ? req.query.src : req.query.image
+  if (isTransform) {
+    const { width, height = '', quality = '75' } = req.query
+    if (
+      typeof width !== 'string' ||
+      typeof height !== 'string' ||
+      typeof quality !== 'string'
+    ) {
+      return res.status(400).json({ error: 'Invalid image operation' })
+    }
+    operation = [`rs,s:${width}x${height},m:downfit`, 'o:webp', `q:${quality}`]
+  }
+  if (!isAllowedImageOperation(operation)) {
     return res.status(400).json({ error: 'Invalid image operation' })
   }
-
-  if (!isAllowedImageSource(req.query.image)) {
+  if (!isAllowedImageSource(source)) {
     return res.status(403).json({ error: 'Image source is not allowed' })
   }
 
-  return imageHandler(req, res)
+  // Keep the processing syntax on the server; accept old URLs for cached pages.
+  const originalUrl = req.url
+  const originalQuery = req.query
+  req.url = `/api/assets/${
+    Array.isArray(operation) ? operation.join('/') : operation
+  }?image=${encodeURIComponent(source)}`
+  req.query = { image: source }
+  try {
+    return await imageHandler(req, res)
+  } finally {
+    req.url = originalUrl
+    req.query = originalQuery
+  }
 }
 
 export const config = {
