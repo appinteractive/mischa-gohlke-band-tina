@@ -112,15 +112,21 @@ export default async function handler(
   if (isSocial) {
     operation = SOCIAL_OPERATION
   } else if (isTransform) {
-    const { width, height = '', quality = '75' } = req.query
+    const { width, height = '', quality = '75', fit } = req.query
     if (
       typeof width !== 'string' ||
       typeof height !== 'string' ||
-      typeof quality !== 'string'
+      typeof quality !== 'string' ||
+      (fit !== undefined && fit !== 'cover') ||
+      (fit === 'cover' && height === '')
     ) {
       return res.status(400).json({ error: 'Invalid image operation' })
     }
-    operation = [`rs,s:${width}x${height},m:downfit`, 'o:webp', `q:${quality}`]
+    operation = [
+      `rs,s:${width}x${height},m:${fit === 'cover' ? 'fill' : 'downfit'}`,
+      'o:webp',
+      `q:${quality}`,
+    ]
   }
   if (!isSocial && !isAllowedImageOperation(operation)) {
     return res.status(400).json({ error: 'Invalid image operation' })

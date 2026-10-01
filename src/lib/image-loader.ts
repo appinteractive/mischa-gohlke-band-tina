@@ -6,6 +6,7 @@ const SVG_PATH = /\.svg(?:[?#]|$)/i
 
 export interface ImageUrlOptions extends ImageLoaderProps {
   height?: number
+  fit?: 'cover'
 }
 
 function assertIntegerInRange(
@@ -26,6 +27,7 @@ export function imageUrl({
   src,
   width,
   height,
+  fit,
   quality = 75,
 }: ImageUrlOptions): string {
   // A missing Tina preview SVG needs the same canonical fallback as raster
@@ -37,10 +39,28 @@ export function imageUrl({
     assertIntegerInRange(height, 'height', 1, MAX_DIMENSION)
   }
   assertIntegerInRange(quality, 'quality', 1, 100)
+  if (fit !== undefined && (fit !== 'cover' || height === undefined)) {
+    throw new RangeError('cover requires a bounded height')
+  }
 
   return `/api/assets/transform?width=${width}${
     height === undefined ? '' : `&height=${height}`
-  }&quality=${quality}&src=${encodeURIComponent(src)}`
+  }&quality=${quality}${fit ? '&fit=cover' : ''}&src=${encodeURIComponent(src)}`
+}
+
+/** Match an existing object-cover box without changing srcset width descriptors. */
+export function croppedLoader(ratio: number) {
+  if (!Number.isFinite(ratio) || ratio <= 0) {
+    throw new RangeError('ratio must be a positive finite number')
+  }
+  return ({ src, width, quality }: ImageLoaderProps): string =>
+    imageUrl({
+      src,
+      width,
+      height: Math.max(1, Math.round(width / ratio)),
+      quality,
+      fit: 'cover',
+    })
 }
 
 export default function imageLoader(props: ImageLoaderProps): string {

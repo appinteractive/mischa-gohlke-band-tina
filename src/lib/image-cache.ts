@@ -1,5 +1,5 @@
 const MAX_DIMENSION = 3840
-const OPERATION_PATTERN = /^rs,s:(\d+)x(\d*),m:downfit\/o:webp\/q:(\d+)$/
+const OPERATION_PATTERN = /^rs,s:(\d+)x(\d*),m:(downfit|fill)\/o:webp\/q:(\d+)$/
 // Tina 3 can leave slashes in the branch name; __file separates it from the asset.
 const TINA_STAGING_PATH = /\/__staging\/(?:.+?\/__file\/|[^/]+\/)/
 const TINA_STAGING_ASSET_PATH = /\/__staging\/(?:.+?\/__file\/|[^/]+\/)(.+)$/
@@ -73,11 +73,13 @@ export function isAllowedImageOperation(
 
   const width = Number(match[1])
   const height = match[2] === '' ? undefined : Number(match[2])
-  const quality = Number(match[3])
+  const mode = match[3]
+  const quality = Number(match[4])
 
   return (
     width >= 1 &&
     width <= MAX_DIMENSION &&
+    (mode !== 'fill' || height !== undefined) &&
     (height === undefined || (height >= 1 && height <= MAX_DIMENSION)) &&
     quality >= 1 &&
     quality <= 100
