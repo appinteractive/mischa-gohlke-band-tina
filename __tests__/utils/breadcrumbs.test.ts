@@ -1,4 +1,4 @@
-import { NavNode, getSubNavigation } from '@/lib/breadcrumb'
+import { NavNode, getSubNavigation } from '@/lib/breadcrumbs'
 import { describe, it, expect, test } from '@jest/globals'
 
 const nestedTree: NavNode[] = [

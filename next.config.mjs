@@ -18,7 +18,8 @@ const nextConfig = {
     scrollRestoration: true,
   },
   images: {
-    domains: ['assets.tina.io'],
+    loader: 'custom',
+    loaderFile: './src/lib/image-loader.ts',
   },
   async rewrites() {
     return [

@@ -4,19 +4,19 @@ Salient is a [Tailwind UI](https://tailwindui.com) site template built using [Ta
 
 ## Getting started
 
-Use Node.js 24 (see `.nvmrc`) and the Yarn version pinned in `package.json`.
+Use Node.js 24 (see `.nvmrc`) and the pnpm version pinned in `package.json`.
 Install dependencies without changing the lockfile:
 
 ```bash
 nvm install
 nvm use
-corepack yarn install --immutable
+corepack pnpm install --frozen-lockfile
 ```
 
 Next, run the development server:
 
 ```bash
-corepack yarn dev
+corepack pnpm dev
 ```
 
 Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
@@ -26,9 +26,10 @@ Finally, open [http://localhost:3000](http://localhost:3000) in your browser to 
 `engines.node` pins Vercel builds and functions to Node.js 24, overriding the
 dashboard setting. This avoids the [Node.js 20 deprecation on October 1, 2026](https://vercel.com/changelog/node-js-20-is-being-deprecated).
 
-Validate with `corepack yarn test --runInBand` and `corepack yarn build`.
-The build connects to Tina Cloud and needs access to the configured content branch.
-Vercel uses Corepack for the pinned Yarn version and logs `node --version`
+Validate with `corepack pnpm test --runInBand` and `corepack pnpm build`.
+`corepack pnpm build:local` generates content locally and keeps the Tina server running during prerendering.
+The production build connects to Tina Cloud and needs access to the configured content branch.
+Vercel uses Corepack for the pinned pnpm version and logs `node --version`
 before building; check that a new deployment reports `v24.x` before promotion.
 
 ## Customizing
@@ -46,3 +47,30 @@ To learn more about the technologies used in this site template, see the followi
 - [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
 - [Next.js](https://nextjs.org/docs) - the official Next.js documentation
 - [Headless UI](https://headlessui.dev) - the official Headless UI documentation
+
+## Tina CLI startup patch
+
+The pinned pnpm patch for `@tinacms/cli@3.1.0` waits for the local content
+server to listen before connecting its database client. Without that wait,
+Tina can hang at "Indexing local files" after a connection-refused race.
+Keep the patch with the lockfile; recheck it when upgrading the CLI.
+
+## Image response hardening
+
+The pinned `caravaggio@3.9.0` patch returns generic, non-cacheable errors,
+removes identifying outbound User-Agent values, and strips processed-image
+metadata after applying EXIF orientation. Recheck the patch when upgrading.
+Public image URLs use neutral transform parameters. Legacy URLs remain valid
+for cached pages. Original public media files are unchanged; their source
+metadata is not removed by the transformation endpoint.
+
+Social previews use `/api/assets/social?src=...`: a fixed 1200 × 630 JPEG at
+quality 85, with the entire sharp teaser centered over a blurred cover of the same
+image. Only the background is cropped; the foreground retains its full aspect ratio.
+The generated URL includes `v=2` to bypass previously cached white-padded previews.
+The JPEG output patch flattens transparency onto white. Source restrictions,
+Tina staging fallbacks, EXIF orientation and metadata stripping still apply.
+OG and Twitter tags share the absolute image URL; OG dimensions/type match the
+output. Previews use their Vercel deployment host; production uses `SITE_URL`
+or the site's canonical domain. Missing/unsupported teasers use the checked-in
+homepage teaser. Deleted local uploads also fall back after a bounded HEAD probe.

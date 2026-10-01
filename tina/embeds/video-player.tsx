@@ -1,7 +1,41 @@
+import React from 'react'
 import { getYoutubeVideoId } from '../../src/lib/utils'
-import useImagePreview from '../components/PreviewImage'
-import { VideoPlayButton } from '../../src/components/embeds/VideoPlayer'
+import PreviewImage from '../components/PreviewImage'
 import { wrapFieldsWithMeta } from 'tinacms'
+
+const VideoPlayIcon = () => {
+  return (
+    <div
+      className="group relative flex h-full w-full items-center justify-center bg-black/60 bg-center transition-colors duration-75 ease-in-out hover:bg-black/70"
+      aria-hidden="true"
+    >
+      <span className="flex items-center justify-center drop-shadow-lg transition-transform duration-75 ease-in-out group-hover:scale-105">
+        <svg
+          viewBox="0 0 24 24"
+          className="absolute z-10 size-12"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="12" cy="12" r="12" fill="#ffffff" />
+        </svg>
+        <svg
+          className="z-10 size-20 text-red-800 group-hover:size-24"
+          aria-hidden="true"
+          focusable="false"
+          data-prefix="fab"
+          role="img"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 576 512"
+        >
+          <path
+            fill="currentColor"
+            d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"
+          ></path>
+        </svg>
+      </span>
+    </div>
+  )
+}
 
 export const VideoPlayerTemplate: any = {
   name: 'VideoPlayer',
@@ -47,26 +81,43 @@ export const VideoPlayerTemplate: any = {
               // NOTE: add support for other video providers?
               const ytVideoId = getYoutubeVideoId(value)
               if (ytVideoId) {
+                const index = parseInt(field.name.split('.')[1])
+                const videos = allValues?.videos
+                if (!Array.isArray(videos)) return
+                const video = videos[index]
+                if (!video) return
                 meta.validating = true
-                fetch(`/api/yt?videoId=${ytVideoId}`).then(async (response) => {
-                  const data: any = await response.json()
+                fetch(`/api/yt?videoId=${ytVideoId}`)
+                  .then(async (response) => {
+                    if (!response.ok)
+                      throw new Error('Video metadata request failed')
+                    const data = await response.json()
+                    if (
+                      typeof data?.thumbnailUrl !== 'string' ||
+                      typeof data?.duration !== 'string' ||
+                      typeof data?.title !== 'string'
+                    ) {
+                      throw new Error('Invalid video metadata')
+                    }
+                    // Do not apply a response to a removed/reordered or edited video.
+                    if (
+                      allValues.videos[index] !== video ||
+                      getYoutubeVideoId(video.url) !== ytVideoId
+                    )
+                      return
 
-                  // get index of field string ('videos.0.url' = 0)
-                  const index = parseInt(field.name.split('.')[1])
-
-                  allValues.videos[index].poster = data.thumbnailUrl
-                  allValues.videos[index].duration = data.duration
-
-                  // only set title if it's not already set
-                  if (!allValues.videos[index].title) {
-                    allValues.videos[index].title = data.title
-                  }
-
-                  // stop validation and trigger re-render
-                  allValues.videos = [...allValues.videos]
-                  meta.validating = false
-                  meta.blur()
-                })
+                    video.poster = data.thumbnailUrl
+                    video.duration = data.duration
+                    if (!video.title) video.title = data.title
+                    allValues.videos = [...allValues.videos]
+                  })
+                  .catch(() => {
+                    // The URL remains valid; preserve manually supplied metadata.
+                  })
+                  .finally(() => {
+                    meta.validating = false
+                    meta.blur()
+                  })
               } else {
                 return 'Bitte gebe eine gültige YouTube URL ein.'
               }
@@ -89,9 +140,9 @@ export const VideoPlayerTemplate: any = {
             component: wrapFieldsWithMeta((data) => {
               return (
                 <div className="relative overflow-hidden rounded-md bg-black">
-                  {useImagePreview(data)}
+                  <PreviewImage input={data.input} />
                   <div className="pointer-events-none absolute inset-0 bg-black/50">
-                    <VideoPlayButton />
+                    <VideoPlayIcon />
                   </div>
                 </div>
               )

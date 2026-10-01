@@ -17,7 +17,7 @@
     "paths": {
       "@/*": ["./src/*", "./*"]
     },
-    "types": ["next", "next/types/global", "node", "sharp"]
+    "types": ["next", "node", "jest"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.mjs"],
   "exclude": ["node_modules"]
