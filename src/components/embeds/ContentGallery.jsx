@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import { croppedLoader } from '@/lib/image-loader'
 import Link from 'next/link'
 import { cleanPath } from '@/lib/utils'
 
@@ -13,6 +14,11 @@ const ResponsiveImage = dynamic(
  * used for displaying related content
  */
 export default function ContentGallery({ type, hasSubNav, ...props }) {
+  // Three columns start at md; the grid widens into the margins only at xl.
+  const imageSizes = hasSubNav
+    ? '(min-width: 1280px) min(416px, calc((736px + 8vw) / 3)), (min-width: 768px) min(245.34px, calc((100vw - 320px) / 3)), calc(100vw - 48px)'
+    : '(min-width: 1280px) min(416px, calc((736px + 20vw) / 3)), (min-width: 768px) min(245.34px, calc((100vw - 80px) / 3)), calc(100vw - 48px)'
+
   return (
     <div
       className={clsx(
@@ -32,8 +38,8 @@ export default function ContentGallery({ type, hasSubNav, ...props }) {
                   <Image
                     src={item.teaser}
                     alt={item.title}
-                    // set sizes to 100vw when the screen is smaller than 768px and 768px when it's larger
-                    sizes="(max-width: 768px) 100vw, (min-width: 768px) 768"
+                    sizes={imageSizes}
+                    loader={croppedLoader(2)}
                     fill
                     blurDataURL={props.blurDataURL}
                     className="prose-no h-full shrink-0 rounded-md bg-black object-cover md:shadow"
@@ -65,8 +71,8 @@ export default function ContentGallery({ type, hasSubNav, ...props }) {
                 <Image
                   src={item.teaser}
                   alt={item.title}
-                  // set sizes to 100vw when the screen is smaller than 768px and 768px when it's larger
-                  sizes="(max-width: 768px) 100vw, (min-width: 768px) 768"
+                  sizes="128px"
+                  loader={croppedLoader(8 / 5)}
                   fill
                   blurDataURL={props.blurDataURL}
                   className="prose-no h-full rounded bg-black object-cover md:shadow"

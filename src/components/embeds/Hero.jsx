@@ -1,8 +1,17 @@
 import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import { croppedLoader } from '@/lib/image-loader'
 import Link from 'next/link'
 import { cleanPath } from '@/lib/utils'
+
+// Prose is capped at 768px; the sidebar takes 240px plus 48px page padding.
+// At lg the negative margins widen the two-column grid (24px gap).
+function getImageSizes(hasSubNav) {
+  return hasSubNav
+    ? '(min-width: 1024px) min(628px, calc((min(768px, calc(100vw - 288px)) + 8vw - 24px) / 2)), (min-width: 768px) min(768px, calc(100vw - 288px)), calc(100vw - 48px)'
+    : '(min-width: 1024px) min(628px, calc(10vw + 372px)), min(768px, calc(100vw - 48px))'
+}
 
 function defaultText(text, defaultText) {
   return (text ?? '').trim() != '' ? text.trim() : defaultText
@@ -70,8 +79,8 @@ export default function Hero({ type, hasSubNav, ...props }) {
                     <Image
                       src={featured.teaser}
                       alt={featured.title}
-                      // set sizes to 100vw when the screen is smaller than 768px and 768px when it's larger
-                      sizes="(max-width: 768px) 100vw, (min-width: 768px) 768"
+                      sizes={getImageSizes(hasSubNav)}
+                      loader={croppedLoader(2)}
                       fill
                       blurDataURL={props.blurDataURL}
                       className="prose-no h-full shrink-0 rounded-md bg-black object-cover md:shadow"
@@ -108,8 +117,8 @@ export default function Hero({ type, hasSubNav, ...props }) {
                     <Image
                       src={item.teaser}
                       alt={item.title}
-                      // set sizes to 100vw when the screen is smaller than 768px and 768px when it's larger
-                      sizes="(max-width: 768px) 100vw, (min-width: 768px) 768"
+                      sizes="80px"
+                      loader={croppedLoader(5 / 4)}
                       fill
                       blurDataURL={props.blurDataURL}
                       className="prose-no h-full rounded bg-black object-cover md:shadow"
