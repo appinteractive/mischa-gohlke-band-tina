@@ -9,11 +9,7 @@ import Link from 'next/link'
 export function subNav({ items, parent = null }) {
   return (
     <aside className="mb-12 min-w-[15rem] rounded border bg-slate-100 px-6 py-4 md:h-full md:w-64 md:border-transparent md:bg-transparent md:p-6 md:pl-0 md:pr-6 md:pt-0 lg:w-72">
-      <nav
-        className="top-20 pb-12 md:sticky"
-        aria-label="Unternavigation"
-        role="menu"
-      >
+      <nav className="top-20 pb-12 md:sticky" aria-label="Unternavigation">
         <ul className="prose-a:font-normal prose-a:no-underline">
           {/* {parent?.title && (
             <li className="-ml-1.5 pb-3">

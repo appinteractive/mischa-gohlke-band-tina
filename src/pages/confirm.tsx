@@ -11,56 +11,59 @@ const Confirm = ({ ...props }) => {
   const query = router.asPath.split('?')[1] // get the query string from the URL
   const { email, hash } = querystring.parse(query) // parse the query string
 
-  const [mounted, setMounted] = useState(false)
   const [hasError, setHasError] = useState(false)
   const [sending, setSending] = useState(false)
   const [success, setSuccess] = useState(false)
 
   const navigation = normalizeNavigation({ ...props.data.nav })
 
-  useEffect(() => {
-    if (mounted || sending) return
-    setMounted(true)
+  const { isReady, replace } = router
 
-    if (!email || !hash) {
+  useEffect(() => {
+    if (!isReady) return
+
+    const controller = new AbortController()
+    setSuccess(false)
+    setHasError(false)
+
+    if (
+      typeof email !== 'string' ||
+      !email ||
+      typeof hash !== 'string' ||
+      !hash
+    ) {
       setHasError(true)
       setSending(false)
-      setSuccess(false)
       return
     }
 
-    const onError = (err) => {
-      console.error(err)
-      setHasError(true)
-      setSending(false)
-      setSuccess(false)
-    }
-
-    const url = `/api/confirm?email=${email}&hash=${hash}`
+    const parameters = new URLSearchParams({ email, hash })
     setSending(true)
-    fetch(url)
+    fetch(`/api/confirm?${parameters}`, { signal: controller.signal })
       .then(async (res) => {
-        const { body } = await res.json()
-        const { error, message } = body
-
-        if (error) {
-          onError(message)
-          return
+        if (!res.ok) throw new Error('Confirmation request failed')
+        const data = await res.json()
+        if (controller.signal.aborted) return
+        if (data?.body?.error || data?.body?.success !== true) {
+          throw new Error('Confirmation was not accepted')
         }
 
         setSending(false)
         setSuccess(true)
         setHasError(false)
 
-        // replace the current URL with the success page
-        router.replace(window.location.toString(), '/success', {
-          shallow: true,
-        })
+        // Navigate only after the confirmation endpoint accepted this request.
+        void replace('/success')
       })
-      .catch((err) => {
-        onError(err)
+      .catch(() => {
+        if (controller.signal.aborted) return
+        setHasError(true)
+        setSending(false)
+        setSuccess(false)
       })
-  }, [mounted, email, hash, sending, router])
+
+    return () => controller.abort()
+  }, [email, hash, isReady, replace])
 
   return (
     <Layout navigation={navigation}>
@@ -68,7 +71,7 @@ const Confirm = ({ ...props }) => {
         <div className="min-h-full grow px-4 pb-32 pt-16">
           {success && <Success />}
           {sending && <Loading />}
-          {hasError && <Error />}
+          {hasError && <ConfirmationError />}
         </div>
       </div>
     </Layout>
@@ -84,7 +87,7 @@ const Loading = () => {
   )
 }
 
-const Error = () => {
+const ConfirmationError = () => {
   return (
     <div className="prose prose-green mx-auto text-center leading-6">
       <h2 className="!text-primary !text-3xl">Ups…</h2>

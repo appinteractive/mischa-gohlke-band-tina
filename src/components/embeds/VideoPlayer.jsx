@@ -74,24 +74,18 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div
-              className="absolute inset-0 overflow-hidden rounded-lg backdrop-blur-sm"
-              onClick={() => {
-                setTimeout(() => {
+            <div className="absolute inset-0 overflow-hidden rounded-lg backdrop-blur-sm">
+              <VideoPlayButton
+                onClick={() => {
                   setLight(null)
                   setIsPlaying(true)
-                }, 100)
-              }}
-            >
-              <VideoPlayButton className="h-full w-full" />
+                }}
+              />
             </div>
           </Transition.Child>
         </Transition>
 
-        <div
-          className="pointer-events-none absolute inset-0 overflow-hidden"
-          aria-hidden
-        >
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {props?.videos?.length > 1 && (
             <Transition
               show={!isPlaying || isInitial}
@@ -121,27 +115,27 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
                     role="list"
                     className="flex-1 divide-y divide-slate-300 overflow-y-auto overflow-x-hidden border-b border-slate-300"
                   >
-                    {...props?.videos.map((video, index) => (
+                    {props.videos.map((video) => (
                       <li
-                        key={index}
+                        key={video.url}
                         className={clsx(
                           'cursor-pointer select-none ',
                           current?.url === video.url
                             ? 'bg-slate-50'
                             : 'hover:bg-slate-100/50'
                         )}
-                        onClick={(e) => {
-                          e.preventDefault()
-                          setCurrent(video)
-                          setTimeout(() => {
+                      >
+                        <button
+                          type="button"
+                          aria-current={
+                            current?.url === video.url ? 'true' : undefined
+                          }
+                          onClick={() => {
+                            setCurrent(video)
                             setLight(null)
                             setIsPlaying(true)
-                          }, 100)
-                        }}
-                      >
-                        <a
-                          href="#"
-                          className="group relative flex w-full min-w-0 items-start space-x-2 p-1 px-3 py-3 pr-4 ring-offset-2 focus-visible:outline-slate-600"
+                          }}
+                          className="group relative flex w-full min-w-0 items-start space-x-2 p-1 px-3 py-3 pr-4 text-left ring-offset-2 focus-visible:outline-slate-600"
                         >
                           <span className="relative m-0 inline-block h-10 w-16 flex-shrink-0 overflow-hidden rounded-sm p-0">
                             {current?.url === video.url && (
@@ -165,7 +159,7 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
                               {video.duration}
                             </span>
                           </span>
-                        </a>
+                        </button>
                       </li>
                     ))}
                   </ul>
@@ -179,13 +173,15 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
   )
 }
 
-export const VideoPlayButton = () => {
+export const VideoPlayButton = ({ onClick }) => {
   return (
     <button
-      className="group relative flex h-full w-full items-center justify-center bg-black/60 bg-center transition-all duration-75 ease-in-out hover:bg-black/70"
+      className="group relative flex h-full w-full items-center justify-center bg-black/60 bg-center transition-colors duration-75 ease-in-out hover:bg-black/70"
       type="button"
+      aria-label="Video abspielen"
+      onClick={onClick}
     >
-      <span className="flex items-center justify-center drop-shadow-lg transition-all duration-75 ease-in-out group-hover:scale-105">
+      <span className="flex items-center justify-center drop-shadow-lg transition-transform duration-75 ease-in-out group-hover:scale-105">
         <svg
           viewBox="0 0 24 24"
           className="absolute z-10 h-12 w-12"

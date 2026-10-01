@@ -26,6 +26,7 @@ const config = {
     '^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|bmp|svg)$/i': `<rootDir>/__mocks__/fileMock.js`,
 
     // Handle module aliases
+    '^@/tina/(.*)$': '<rootDir>/tina/$1',
     '^@/(.*)$': '<rootDir>/src/$1',
   },
 }
