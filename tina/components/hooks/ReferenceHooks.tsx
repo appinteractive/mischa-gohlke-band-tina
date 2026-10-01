@@ -98,22 +98,13 @@ export const useReference = (cms: TinaCMS, collection: string) => {
 }
 
 export const useSelected = (options: ReferenceOption[], id: string) => {
-  const [selected, setSelected] = useState<ReferenceOption | undefined>()
-
-  useEffect(() => {
-    const selected = options?.find((option) => option.id === id)
-    setSelected(selected)
-  }, [options, id])
-
-  return selected
+  return options?.find((option) => option.id === id)
 }
 
 export const useFilteredOptions = (
   options: ReferenceOption[],
   search: string
 ) => {
-  const [filteredOptions, setFilteredOptions] = useState<ReferenceOption[]>([])
-
   // setup fuse search
   const fuse = useMemo(
     () =>
@@ -134,36 +125,22 @@ export const useFilteredOptions = (
     [options]
   )
 
-  const [stats, setStats] = useState<{
-    total: number
-    filtered: number
-    isReduced: boolean
-  }>({
-    total: options.length,
-    filtered: filteredOptions.length,
-    isReduced: false,
-  })
+  const filteredOptions = useMemo(
+    () =>
+      search.trim()
+        ? fuse.search(search).map((result) => result.item)
+        : options,
+    [options, search, fuse]
+  )
 
-  useEffect(() => {
-    if (search && search.trim().length > 0) {
-      const results = fuse.search(search)
-      setFilteredOptions(results.map((result) => result.item))
-      setStats({
-        total: options.length,
-        filtered: results.length,
-        isReduced: results.length < options.length,
-      })
-    } else {
-      setFilteredOptions(options)
-      setStats({
-        total: options.length,
-        filtered: options.length,
-        isReduced: false,
-      })
-    }
-  }, [options, search, fuse])
-
-  return { filteredOptions, filteredStats: stats }
+  return {
+    filteredOptions,
+    filteredStats: {
+      total: options.length,
+      filtered: filteredOptions.length,
+      isReduced: filteredOptions.length < options.length,
+    },
+  }
 }
 
 export const useIsMounted = () => {
