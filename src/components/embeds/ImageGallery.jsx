@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import Image from 'next/image'
 import imageLoader from '@/lib/image-loader'
 import { Gallery } from 'react-grid-gallery'
-import { useEffect, useState, useMemo, useLayoutEffect } from 'react'
+import { useEffect, useState, useLayoutEffect } from 'react'
 import Zoom from 'react-medium-image-zoom'
 import 'react-medium-image-zoom/dist/styles.css'
 
@@ -32,7 +32,10 @@ export default function ImageGallery({ type, hasSubNav, images, ...props }) {
       timer = setTimeout(() => setWidth(window.innerWidth), 100)
     }
     window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
+    return () => {
+      clearTimeout(timer)
+      window.removeEventListener('resize', handleResize)
+    }
   }, [])
 
   return (
@@ -64,7 +67,9 @@ function ImageThumbnail({
           alt: alt,
           src: imageLoader({ src, width: 1920, quality: 85 }),
         }}
-        ZoomContent={(data) => CustomZoomContent({ ...data, alt, caption })}
+        ZoomContent={(data) => (
+          <CustomZoomContent {...data} alt={alt} caption={caption} />
+        )}
       >
         <Image
           src={src}
@@ -93,18 +98,32 @@ const CustomZoomContent = ({
   const imgWidth = imgProps?.width
   const imgHeight = imgProps?.height
 
-  const classCaption = useMemo(() => {
-    const hasWidthHeight = imgWidth && imgHeight
-    const imgRatioLargerThanWindow =
-      imgWidth / imgHeight > window.innerWidth / window.innerHeight
+  const [viewportRatio, setViewportRatio] = useState(null)
+  const hasWidthHeight =
+    Number.isFinite(imgWidth) &&
+    imgWidth > 0 &&
+    Number.isFinite(imgHeight) &&
+    imgHeight > 0
+  const imgRatioLargerThanWindow =
+    hasWidthHeight &&
+    viewportRatio !== null &&
+    imgWidth / imgHeight > viewportRatio
+  const classCaption = clsx({
+    'zoom-caption': true,
+    'zoom-caption--loaded': isLoaded,
+    'zoom-caption--bottom':
+      hasWidthHeight && viewportRatio !== null && imgRatioLargerThanWindow,
+    'zoom-caption--left':
+      hasWidthHeight && viewportRatio !== null && !imgRatioLargerThanWindow,
+  })
 
-    return clsx({
-      'zoom-caption': true,
-      'zoom-caption--loaded': isLoaded,
-      'zoom-caption--bottom': hasWidthHeight && imgRatioLargerThanWindow,
-      'zoom-caption--left': hasWidthHeight && !imgRatioLargerThanWindow,
-    })
-  }, [imgWidth, imgHeight, isLoaded])
+  useEffect(() => {
+    const updateViewport = () =>
+      setViewportRatio(window.innerWidth / window.innerHeight)
+    updateViewport()
+    window.addEventListener('resize', updateViewport)
+    return () => window.removeEventListener('resize', updateViewport)
+  }, [])
 
   useLayoutEffect(() => {
     if (modalState === 'LOADED') {
