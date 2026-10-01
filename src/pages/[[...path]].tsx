@@ -33,8 +33,7 @@ const VideoTeaser = dynamic(() => import('@/components/embeds/VideoTeaser'), {
   ssr: false,
 })
 const ResponsiveImage = dynamic(
-  () => import('@/components/embeds/ResponsiveImage'),
-  { ssr: false }
+  () => import('@/components/embeds/ResponsiveImage')
 )
 const ContentGallery = dynamic(
   () => import('@/components/embeds/ContentGallery')
