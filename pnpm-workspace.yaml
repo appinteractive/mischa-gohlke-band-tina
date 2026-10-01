@@ -1,0 +1,5 @@
+# Let new releases age for seven days before future dependency updates.
+minimumReleaseAge: 10080
+# Reject weakened provenance and non-registry transitive dependencies.
+trustPolicy: no-downgrade
+blockExoticSubdeps: true
