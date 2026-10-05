@@ -50,6 +50,12 @@ still need review. It does not impose semantic-only colors or validate every
 possible computed class. The typography marker `not-prose` is intentionally
 allowed because it is used by exclusion selectors rather than generated CSS.
 
+Production and local builds add sRGB color fallbacks and generate
+`public/legacy-styles.css`. Only browsers missing `CSSLayerBlockRule` load this
+flattened stylesheet; current browsers retain native layers. Run
+`pnpm build:legacy-css` to regenerate it independently. The generated file is
+ignored by Git and must be included in build/deployment output.
+
 ## License
 
 This site template is a commercial product and is licensed under the [Tailwind UI license](https://tailwindui.com/license).

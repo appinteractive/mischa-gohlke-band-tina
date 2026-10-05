@@ -7,14 +7,15 @@
   },
   "scripts": {
     "dev": "tinacms dev -c \"next dev\"",
-    "build": "NODE_ENV=production tinacms build && NODE_ENV=production next build",
+    "build": "node scripts/build-legacy-css.mjs && NODE_ENV=production tinacms build && NODE_ENV=production next build",
     "postbuild": "next-sitemap --config next-sitemap.config.mjs",
     "start": "next start",
     "test": "jest",
     "test:watch": "jest --watch",
     "lint": "eslint src",
     "typecheck": "tsc --noEmit",
-    "build:local": "NODE_ENV=production tinacms build --local --skip-cloud-checks --port 19880 --datalayer-port 19881 -c \"next build\""
+    "build:local": "node scripts/build-legacy-css.mjs && NODE_ENV=production tinacms build --local --skip-cloud-checks --port 19880 --datalayer-port 19881 -c \"next build\"",
+    "build:legacy-css": "node scripts/build-legacy-css.mjs"
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {

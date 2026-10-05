@@ -39,3 +39,4 @@ node_modules
 
 .yarn
 .pnpm-debug.log*
+/public/legacy-styles.css
