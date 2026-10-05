@@ -33,7 +33,7 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
         hasSubNav ? 'xl:-mr-[8vw]' : 'xl:-mx-[10vw]'
       )}
     >
-      <div className="aspect-h-9 aspect-w-16 w-full">
+      <div className="aspect-w-16 w-full aspect-h-9">
         {current?.url && (
           <ReactPlayer
             className="h-full w-full overflow-hidden rounded-lg bg-black"
@@ -74,7 +74,7 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="absolute inset-0 overflow-hidden rounded-lg backdrop-blur-sm">
+            <div className="absolute inset-0 overflow-hidden rounded-lg backdrop-blur-xs">
               <VideoPlayButton
                 onClick={() => {
                   setLight(null)
@@ -102,9 +102,9 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <div className="pointer-events-auto absolute left-auto right-0 top-0 h-full overflow-y-auto rounded-r-md bg-slate-200 shadow-lg sm:w-[300px]">
-                  <div className="border-b border-slate-300 px-3 pb-3 pt-4">
-                    <h3 className="text-base font-semibold leading-6 text-gray-900">
+                <div className="pointer-events-auto absolute top-0 right-0 left-auto h-full overflow-y-auto rounded-r-md bg-slate-200 shadow-lg sm:w-[300px]">
+                  <div className="border-b border-slate-300 px-3 pt-4 pb-3">
+                    <h3 className="text-base leading-6 font-semibold text-gray-900">
                       Playlist{' '}
                       <span className="text-xs font-normal text-slate-500">
                         {props.videos.length} videos
@@ -113,13 +113,13 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
                   </div>
                   <ul
                     role="list"
-                    className="flex-1 divide-y divide-slate-300 overflow-y-auto overflow-x-hidden border-b border-slate-300"
+                    className="flex-1 divide-y divide-slate-300 overflow-x-hidden overflow-y-auto border-b border-slate-300"
                   >
                     {props.videos.map((video) => (
                       <li
                         key={video.url}
                         className={clsx(
-                          'cursor-pointer select-none ',
+                          'cursor-pointer select-none',
                           current?.url === video.url
                             ? 'bg-slate-50'
                             : 'hover:bg-slate-100/50'
@@ -135,9 +135,9 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
                             setLight(null)
                             setIsPlaying(true)
                           }}
-                          className="group relative flex w-full min-w-0 items-start space-x-2 p-1 px-3 py-3 pr-4 text-left ring-offset-2 focus-visible:outline-slate-600"
+                          className="group relative flex w-full min-w-0 items-start gap-x-2 p-1 px-3 py-3 pr-4 text-left ring-offset-2 focus-visible:outline-slate-600"
                         >
-                          <span className="relative m-0 inline-block h-10 w-16 flex-shrink-0 overflow-hidden rounded-sm p-0">
+                          <span className="relative m-0 inline-block h-10 w-16 shrink-0 overflow-hidden rounded-xs p-0">
                             {current?.url === video.url && (
                               <div className="absolute inset-0 flex items-center justify-center bg-black/70">
                                 <PlayCircleIcon className="h-6 w-6 text-white" />
@@ -152,7 +152,7 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
                             />
                           </span>
                           <span className="flex w-full flex-col">
-                            <span className="line-clamp-2 text-sm font-semibold leading-tight text-gray-900">
+                            <span className="line-clamp-2 text-sm leading-tight font-semibold text-gray-900">
                               {video.title}
                             </span>
                             <span className="pt-1 text-right text-xs text-gray-500">

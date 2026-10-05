@@ -8,14 +8,14 @@ import Link from 'next/link'
 
 export function subNav({ items, parent = null }) {
   return (
-    <aside className="mb-12 min-w-[15rem] rounded border bg-slate-100 px-6 py-4 md:h-full md:w-64 md:border-transparent md:bg-transparent md:p-6 md:pl-0 md:pr-6 md:pt-0 lg:w-72">
+    <aside className="min-w-[15rem] rounded-sm border bg-slate-100 px-6 py-4 md:h-full md:w-64 md:border-transparent md:bg-transparent md:p-6 md:pt-0 md:pr-6 md:pl-0 lg:w-72">
       <nav className="top-20 pb-12 md:sticky" aria-label="Unternavigation">
         <ul className="prose-a:font-normal prose-a:no-underline">
           {/* {parent?.title && (
             <li className="-ml-1.5 pb-3">
               <Link
                 href={parent.url}
-                className="flex items-start space-x-1.5 py-1.5 !font-bold leading-tight"
+                className="flex items-start space-x-1.5 py-1.5 font-bold! leading-tight"
               >
                 <IconArrowLeft
                   aria-hidden="true"
@@ -30,8 +30,8 @@ export function subNav({ items, parent = null }) {
               <Link
                 href={level1.url}
                 className={clsx([
-                  'flex items-start space-x-2 rounded py-1.5 leading-tight outline-offset-4',
-                  level1.active && '!font-semibold',
+                  'flex items-start space-x-2 rounded-sm py-1.5 leading-tight outline-offset-4',
+                  level1.active && 'font-semibold!',
                 ])}
               >
                 <IconArrowRight
@@ -50,8 +50,8 @@ export function subNav({ items, parent = null }) {
                       <Link
                         href={level2.url}
                         className={clsx([
-                          'flex space-x-2 rounded py-1 text-sm leading-tight outline-offset-4',
-                          level2.active && '!font-semibold',
+                          'flex space-x-2 rounded-sm py-1 text-sm leading-tight outline-offset-4',
+                          level2.active && 'font-semibold!',
                         ])}
                       >
                         <IconCornerDownRight

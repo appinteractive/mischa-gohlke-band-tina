@@ -19,8 +19,8 @@ export default function VideoTeaser({ type, hasSubNav, ...props }) {
 
   return createPortal(
     <div className="relative h-[25rem]">
-      <div className="absolute left-0 right-0 top-0 flex h-full max-h-[400px] w-full items-center justify-center bg-black bg-black">
-        <div className="flex h-full !w-screen opacity-50">
+      <div className="absolute top-0 right-0 left-0 flex h-full max-h-[400px] w-full items-center justify-center bg-black">
+        <div className="flex h-full w-screen! opacity-50">
           <ReactPlayer
             className="teaser-player-wrapper h-full"
             url="/media/video/MGB_WebTeaser_neu_Sep2025.mp4"

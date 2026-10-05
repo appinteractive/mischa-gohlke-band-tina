@@ -68,7 +68,7 @@ const Confirm = ({ ...props }) => {
   return (
     <Layout navigation={navigation}>
       <div className="min-h-full">
-        <div className="min-h-full grow px-4 pb-32 pt-16">
+        <div className="min-h-full grow px-4 pt-16 pb-32">
           {success && <Success />}
           {sending && <Loading />}
           {hasError && <ConfirmationError />}
@@ -80,18 +80,18 @@ const Confirm = ({ ...props }) => {
 
 const Loading = () => {
   return (
-    <div className="prose mx-auto text-center leading-6">
-      <h2 className="!text-primary !text-3xl">Einen kleinen Moment…</h2>
-      <p className="text-secondary">…Dein Link wird überprüft.</p>
+    <div className="mx-auto prose text-center leading-6">
+      <h2 className="text-3xl!">Einen kleinen Moment…</h2>
+      <p>…Dein Link wird überprüft.</p>
     </div>
   )
 }
 
 const ConfirmationError = () => {
   return (
-    <div className="prose prose-green mx-auto text-center leading-6">
-      <h2 className="!text-primary !text-3xl">Ups…</h2>
-      <p className="text-secondary text-lg">
+    <div className="mx-auto prose text-center leading-6 prose-green">
+      <h2 className="text-3xl!">Ups…</h2>
+      <p className="text-lg">
         …Houston wir haben ein Problem. Meld dich einfach unter{' '}
         <a href="mailto:mail@mischagohlkeband.de">mail@mischagohlkeband.de</a>
       </p>

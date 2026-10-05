@@ -21,8 +21,8 @@ export default function Layout({
       <div id="video-teaser-container" />
       <main
         className={clsx(
-          'relative mx-auto w-full max-w-7xl grow flex-row-reverse items-start space-y-24 px-6 pb-12 pt-10 md:flex md:space-y-0 md:py-20 lg:pb-32',
-          subNav ? 'has-subnav justify-end' : 'justify-center'
+          'relative mx-auto w-full max-w-7xl grow flex-row-reverse items-start space-y-24 px-6 pt-10 pb-12 md:flex md:space-y-0 md:py-20 lg:pb-32',
+          subNav ? 'justify-end' : 'justify-center'
         )}
       >
         <section className="w-full">{children}</section>

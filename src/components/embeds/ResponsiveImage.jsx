@@ -33,7 +33,7 @@ export const ResponsiveImage = (props) => {
   return (
     <figure
       className={clsx(
-        'not-prose aspect-h-9 aspect-w-16 relative my-5 flex items-center justify-end overflow-hidden rounded-md',
+        'not-prose aspect-w-16 relative my-5 flex items-center justify-end overflow-hidden rounded-md aspect-h-9',
         props.className
       )}
     >
@@ -44,7 +44,7 @@ export const ResponsiveImage = (props) => {
             punch={1}
             width={768}
             height={432}
-            className="absolute inset-0 left-0 top-0 !h-full !w-full"
+            className="absolute inset-0 top-0 left-0 h-full! w-full!"
           />
         )}
         <Image
@@ -55,14 +55,14 @@ export const ResponsiveImage = (props) => {
           sizes="(max-width: 768px) 100vw, 768px"
           fill
           blurDataURL={props.blurDataURL}
-          className={`prose-no ${
+          className={`not-prose ${
             props.blurDataURL ? 'bg-transparent' : 'bg-black'
           } object-contain`}
         />
       </span>
       {hasInfos && (
-        <figcaption className="absolute flex w-full flex-col !justify-end !place-self-end !self-end !justify-self-end">
-          <span className="flex flex-col bg-gray-900/70 p-4 px-5 leading-5 backdrop-blur-sm">
+        <figcaption className="absolute flex w-full flex-col justify-end! place-self-end! self-end! justify-self-end!">
+          <span className="flex flex-col bg-gray-900/70 p-4 px-5 leading-5 backdrop-blur-xs">
             <span className="font-semibold text-white">{title}</span>
             {caption && (
               <span className="text-sm text-gray-200">{caption}</span>

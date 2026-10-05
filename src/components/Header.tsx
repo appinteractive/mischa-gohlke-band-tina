@@ -31,7 +31,7 @@ export function Header({ items }) {
             <Link
               href="/"
               aria-label="Home"
-              className=" rounded outline-offset-8"
+              className="rounded-sm outline-offset-8"
             >
               <Logo className="h-10 w-auto" />
             </Link>
@@ -122,7 +122,7 @@ function MobileNavigation({ items }: Props) {
   return (
     <Popover>
       <Popover.Button
-        className="relative z-10 flex h-8 w-8 items-center justify-center [&:not(:focus-visible)]:focus:outline-none"
+        className="relative z-10 flex h-8 w-8 items-center justify-center [&:not(:focus-visible)]:focus:outline-hidden"
         aria-label="Toggle Navigation"
       >
         {({ open }) => <MobileNavIcon open={open} />}
@@ -137,7 +137,7 @@ function MobileNavigation({ items }: Props) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Popover.Overlay className="fixed inset-0 bg-slate-700/50 backdrop-blur-sm" />
+          <Popover.Overlay className="fixed inset-0 bg-slate-700/50 backdrop-blur-xs" />
         </Transition.Child>
         <Transition.Child
           as={Fragment}

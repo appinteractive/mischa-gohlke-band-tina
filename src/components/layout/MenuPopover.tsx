@@ -28,7 +28,7 @@ export default function MenuPopover({ label, items, isMultiLevel = false }) {
 
   return (
     <Popover className="relative">
-      <Popover.Button className="inline-flex items-center gap-x-1 rounded-xl px-3 py-3 text-sm font-semibold leading-6 text-slate-700 outline-offset-2 [&:not(:focus-visible)]:focus:outline-none">
+      <Popover.Button className="inline-flex items-center gap-x-1 rounded-xl px-3 py-3 text-sm leading-6 font-semibold text-slate-700 outline-offset-2 [&:not(:focus-visible)]:focus:outline-hidden">
         {({ open }) => (
           <>
             <span className={clsx(open && 'text-indigo-700')}>{label}</span>
@@ -52,7 +52,7 @@ export default function MenuPopover({ label, items, isMultiLevel = false }) {
         <Popover.Panel
           className={`absolute left-1/2 z-10 mt-2 flex w-screen max-w-max px-4 drop-shadow-xl ${
             isMultiLevel
-              ? '!fixed !left-0 lg:!absolute lg:-translate-x-1/3'
+              ? 'fixed! left-0! lg:absolute! lg:-translate-x-1/3'
               : 'max-w-xs -translate-x-1/2'
           }`}
         >
@@ -60,7 +60,7 @@ export default function MenuPopover({ label, items, isMultiLevel = false }) {
             <div
               className={clsx(
                 'w-screen flex-auto overflow-hidden rounded-xl bg-white text-sm leading-6 shadow-xl ring-1 ring-gray-900/5',
-                isMultiLevel ? 'lg:max-w-3xl' : ' max-w-md lg:max-w-xs'
+                isMultiLevel ? 'lg:max-w-3xl' : 'max-w-md lg:max-w-xs'
               )}
             >
               <div className="flex">
@@ -149,11 +149,11 @@ export default function MenuPopover({ label, items, isMultiLevel = false }) {
                   <Link
                     href="/spenden"
                     onClick={() => close()}
-                    className="flex items-center justify-between rounded px-6 py-4 outline-offset-2"
+                    className="flex items-center justify-between rounded-sm px-6 py-4 outline-offset-2"
                   >
                     <span className="flex items-center space-x-2">
                       <InformationCircleIcon className="h-5 w-5 text-blue-600" />
-                      <p className="text-sm font-medium leading-6 text-gray-600">
+                      <p className="text-sm leading-6 font-medium text-gray-600">
                         Wir sind ein gemeinnütziger Verein.
                       </p>
                     </span>
@@ -192,14 +192,14 @@ function itemLevel1({
       className={clsx(
         'group relative flex items-center gap-x-3 text-gray-800 hover:bg-slate-100 hover:text-indigo-700',
         large ? 'rounded-l-lg p-5' : 'rounded-lg p-4',
-        active && 'bg-slate-100 !text-indigo-700'
+        active && 'bg-slate-100 text-indigo-700!'
       )}
     >
       {showIcon && (
         <IconArrowRight
           className={clsx(
             'h-4 w-4 shrink-0 opacity-20 transition-opacity duration-75 group-hover:opacity-100',
-            active && '!opacity-100'
+            active && 'opacity-100!'
           )}
           aria-hidden="true"
         />
@@ -207,9 +207,9 @@ function itemLevel1({
       <Link
         href={cleanPath(page)}
         onClick={() => close()}
-        className="w-full rounded font-semibold outline-offset-8"
+        className="w-full rounded-sm font-semibold outline-offset-8"
       >
-        <span className="!line-clamp-2 flex leading-snug">{label}</span>
+        <span className="line-clamp-2! flex leading-snug">{label}</span>
         <span className="absolute inset-0" />
       </Link>
     </div>
@@ -220,7 +220,7 @@ function itemLevel2({ page, label, description, close }) {
   return (
     <div
       key={label}
-      className="text group relative flex w-full gap-x-3 rounded-lg p-3 px-6 text-gray-700 hover:bg-slate-100"
+      className="group relative flex w-full gap-x-3 rounded-lg p-3 px-6 text-gray-700 hover:bg-slate-100"
     >
       {/* <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-slate-100 group-hover:bg-white"> */}
       <IconCornerDownRight
@@ -231,11 +231,11 @@ function itemLevel2({ page, label, description, close }) {
       <Link
         href={cleanPath(page)}
         onClick={() => close()}
-        className="w-full rounded font-semibold outline-offset-8 group-hover:text-indigo-700"
+        className="w-full rounded-sm font-semibold outline-offset-8 group-hover:text-indigo-700"
       >
-        <span className="!line-clamp-2 flex leading-snug ">{label}</span>
+        <span className="line-clamp-2! flex leading-snug">{label}</span>
         <span className="absolute inset-0 z-10" />
-        <p className="mt-1 flex text-xs font-medium leading-normal opacity-80">
+        <p className="mt-1 flex text-xs leading-normal font-medium opacity-80">
           {description}
         </p>
       </Link>

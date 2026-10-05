@@ -36,6 +36,20 @@ before building; check that a new deployment reports `v24.x` before promotion.
 
 You can start editing this template by modifying the files in the `/src` folder. The site will auto-update as you edit these files.
 
+## Styling and linting
+
+Tailwind 4 uses the theme and plugin declarations in `src/styles/tailwind.css`.
+Prettier reads that stylesheet to sort utility classes. Run `pnpm lint` for
+ESLint 9, preserving Next's core-web-vitals rules and validating utility classes
+with `@shadcn/lint`. The shared Button owns its appearance: use its variant/color
+props, and reserve call-site `className` for layout. Appearance overrides and
+dynamically assembled Button classes produce warnings.
+
+The class validator is a spelling/theme aid; color names and dynamic classes
+still need review. It does not impose semantic-only colors or validate every
+possible computed class. The typography marker `not-prose` is intentionally
+allowed because it is used by exclusion selectors rather than generated CSS.
+
 ## License
 
 This site template is a commercial product and is licensed under the [Tailwind UI license](https://tailwindui.com/license).

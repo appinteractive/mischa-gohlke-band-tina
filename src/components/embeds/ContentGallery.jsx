@@ -28,12 +28,12 @@ export default function ContentGallery({ type, hasSubNav, ...props }) {
     >
       <ul className="grid gap-4 md:grid-cols-3">
         {props?.pages?.slice(0, 3)?.map((item) => (
-          <li key={item.page + item.teaser} className="relative flex flex-col ">
+          <li key={item.page + item.teaser} className="relative flex flex-col">
             <Link
               href={cleanPath(item.page)}
-              className="rounded outline-offset-2 outline-slate-900"
+              className="rounded-sm outline-offset-2 outline-slate-900"
             >
-              <span className="aspect-h-8 aspect-w-16 relative block shrink-0">
+              <span className="aspect-w-16 relative block shrink-0 aspect-h-8">
                 {item.teaser ? (
                   <Image
                     src={item.teaser}
@@ -42,14 +42,14 @@ export default function ContentGallery({ type, hasSubNav, ...props }) {
                     loader={croppedLoader(2)}
                     fill
                     blurDataURL={props.blurDataURL}
-                    className="prose-no h-full shrink-0 rounded-md bg-black object-cover md:shadow"
+                    className="not-prose h-full shrink-0 rounded-md bg-black object-cover md:shadow-sm"
                   />
                 ) : (
-                  <div className="prose-no h-full shrink-0 rounded-md bg-black object-cover md:shadow" />
+                  <div className="not-prose h-full shrink-0 rounded-md bg-black object-cover md:shadow-sm" />
                 )}
               </span>
-              <span className="block space-y-2 pb-4 pt-2">
-                <h3 className="font-semibold leading-snug text-gray-800">
+              <span className="block space-y-2 pt-2 pb-4">
+                <h3 className="leading-snug font-semibold text-gray-800">
                   {item.title}
                 </h3>
                 <p className="line-clamp-3 text-sm leading-normal text-gray-600">
@@ -60,12 +60,12 @@ export default function ContentGallery({ type, hasSubNav, ...props }) {
           </li>
         ))}
       </ul>
-      <ul className=" grid gap-4 sm:grid-cols-2">
+      <ul className="grid gap-4 sm:grid-cols-2">
         {props?.pages?.slice(3, 12)?.map((item) => (
-          <li key={item.page + item.teaser} className="relative flex flex-col ">
+          <li key={item.page + item.teaser} className="relative flex flex-col">
             <Link
               href={cleanPath(item.page)}
-              className="not-prose relative flex h-full space-x-2 rounded outline-offset-2 outline-slate-900"
+              className="not-prose relative flex h-full space-x-2 rounded-sm outline-offset-2 outline-slate-900"
             >
               <span className="relative h-[5rem] min-w-[8rem]">
                 <Image
@@ -75,11 +75,11 @@ export default function ContentGallery({ type, hasSubNav, ...props }) {
                   loader={croppedLoader(8 / 5)}
                   fill
                   blurDataURL={props.blurDataURL}
-                  className="prose-no h-full rounded bg-black object-cover md:shadow"
+                  className="not-prose h-full rounded-sm bg-black object-cover md:shadow-sm"
                 />
               </span>
               <span className="block h-full space-y-2">
-                <h3 className="line-clamp-2 text-sm font-semibold leading-tight text-gray-800">
+                <h3 className="line-clamp-2 text-sm leading-tight font-semibold text-gray-800">
                   {item.title}
                 </h3>
                 <p className="line-clamp-2 text-sm leading-normal text-gray-600">
