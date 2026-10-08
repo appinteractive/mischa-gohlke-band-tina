@@ -3,3 +3,8 @@ minimumReleaseAge: 10080
 # Reject weakened provenance and non-registry transitive dependencies.
 trustPolicy: no-downgrade
 blockExoticSubdeps: true
+# Vetted maintenance releases without provenance that newer majors have.
+# Keep this list version-exact; re-review before adding entries.
+trustPolicyExclude:
+  - tailwind-merge@2.6.1
+  - semver@6.3.1
