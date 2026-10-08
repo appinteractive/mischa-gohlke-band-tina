@@ -103,3 +103,30 @@ it.each([{}, { videos: [] }])(
     expect(meta.validating).toBe(false)
   }
 )
+
+it('updates nested rich-text video rows and ignores incomplete rows', async () => {
+  request.mockResolvedValue({
+    ok: true,
+    json: async () => ({
+      thumbnailUrl: '/new.jpg',
+      duration: '3:00',
+      title: 'Fetched title',
+    }),
+  })
+  const children = [{ videos: [video] }]
+  const originalVideos = children[0].videos
+  const nested = { body: { children } }
+  validate(url, nested, meta, { name: 'body.children.0.videos.0.url' })
+  await waitFor(() => expect(meta.blur).toHaveBeenCalled())
+  expect(video.poster).toBe('/new.jpg')
+  expect(video.duration).toBe('3:00')
+  expect(video.title).toBe('Custom title')
+  // The array reference is replaced so the form re-renders.
+  expect(nested.body.children[0].videos).not.toBe(originalVideos)
+  expect(nested.body.children[0].videos[0]).toBe(video)
+  request.mockClear()
+  expect(() =>
+    validate(url, {}, meta, { name: 'body.children.0.videos.0.url' })
+  ).not.toThrow()
+  expect(request).not.toHaveBeenCalled()
+})

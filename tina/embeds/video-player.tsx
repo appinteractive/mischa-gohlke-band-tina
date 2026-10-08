@@ -81,9 +81,21 @@ export const VideoPlayerTemplate: any = {
               // NOTE: add support for other video providers?
               const ytVideoId = getYoutubeVideoId(value)
               if (ytVideoId) {
-                const index = parseInt(field.name.split('.')[1])
-                const videos = allValues?.videos
+                // field.name can be deeply nested in rich-text embeds
+                // e.g. "body.children.3.videos.0.url"
+                const parts = field.name.split('.')
+                const index = parseInt(parts[parts.length - 2])
+                if (isNaN(index)) return
+
+                // navigate allValues to find the videos array
+                let videos: any = allValues
+                for (const part of parts.slice(0, -2)) {
+                  if (videos == null) return
+                  const idx = parseInt(part)
+                  videos = videos[isNaN(idx) ? part : idx]
+                }
                 if (!Array.isArray(videos)) return
+
                 const video = videos[index]
                 if (!video) return
                 meta.validating = true
@@ -101,7 +113,7 @@ export const VideoPlayerTemplate: any = {
                     }
                     // Do not apply a response to a removed/reordered or edited video.
                     if (
-                      allValues.videos[index] !== video ||
+                      videos[index] !== video ||
                       getYoutubeVideoId(video.url) !== ytVideoId
                     )
                       return
@@ -109,7 +121,15 @@ export const VideoPlayerTemplate: any = {
                     video.poster = data.thumbnailUrl
                     video.duration = data.duration
                     if (!video.title) video.title = data.title
-                    allValues.videos = [...allValues.videos]
+                    // trigger re-render by replacing the array reference
+                    let parent: any = allValues
+                    for (const part of parts.slice(0, -3)) {
+                      if (parent == null) return
+                      const idx = parseInt(part)
+                      parent = parent[isNaN(idx) ? part : idx]
+                    }
+                    if (parent == null) return
+                    parent[parts[parts.length - 3]] = [...videos]
                   })
                   .catch(() => {
                     // The URL remains valid; preserve manually supplied metadata.
