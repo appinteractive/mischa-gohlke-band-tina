@@ -1,6 +1,6 @@
 import type { IncomingMessage } from 'http'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import caravaggio from 'caravaggio'
+import caravaggio, { type Config } from 'caravaggio'
 import { DEFAULT_SOCIAL_IMAGE } from '@/lib/social-image'
 import {
   getTinaStagingFallback,
@@ -74,7 +74,7 @@ const imageSourcePlugin = () => ({
   },
 })
 
-const imageHandler = caravaggio({
+const imageConfig = {
   logger: {
     options: {
       level: 'error',
@@ -91,6 +91,14 @@ const imageHandler = caravaggio({
       },
     ],
   },
+} satisfies Config
+
+const imageHandler = caravaggio(imageConfig)
+
+// Substitute images must not be pinned by browsers or CDNs.
+const fallbackImageHandler = caravaggio({
+  ...imageConfig,
+  browserCache: 'no-store',
 })
 
 export default async function handler(
@@ -135,17 +143,22 @@ export default async function handler(
     return res.status(403).json({ error: 'Image source is not allowed' })
   }
 
-  // Older content can reference deleted local uploads. Keep share previews usable.
+  // Older content can reference deleted local uploads. Keep share previews usable,
+  // but never cache the substitute: the check may have failed only temporarily.
+  let handler = imageHandler
   if (isSocial && source.startsWith('/') && source !== DEFAULT_SOCIAL_IMAGE) {
+    let available = false
     try {
       const response = await fetch(absoluteLocalSource(source, req), {
         method: 'HEAD',
         headers: { 'user-agent': '' },
         signal: AbortSignal.timeout(5000),
       })
-      if (!response.ok) source = DEFAULT_SOCIAL_IMAGE
-    } catch {
+      available = response.ok
+    } catch {}
+    if (!available) {
       source = DEFAULT_SOCIAL_IMAGE
+      handler = fallbackImageHandler
     }
   }
 
@@ -157,7 +170,7 @@ export default async function handler(
   }?image=${encodeURIComponent(source)}`
   req.query = { image: source }
   try {
-    return await imageHandler(req, res)
+    return await handler(req, res)
   } finally {
     req.url = originalUrl
     req.query = originalQuery

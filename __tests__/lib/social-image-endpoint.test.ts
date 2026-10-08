@@ -192,6 +192,8 @@ it('uses the default teaser when older content references a missing local upload
     )}`
   )
   expect(missing.status).toBe(200)
+  // The local check can fail transiently; a CDN must not pin the substitute.
+  expect(missing.headers.get('cache-control')).toBe('no-store')
   expect(Buffer.from(await missing.arrayBuffer())).toEqual(
     Buffer.from(await fallback.arrayBuffer())
   )
