@@ -97,7 +97,7 @@ export default function SocialMedia({ type, hasSubNav, ...props }) {
                   aria-hidden="true"
                   color={link.color}
                 />
-                <span className="hidden font-medium text-gray-800 md:block">
+                <span className="sr-only font-medium text-gray-800 md:not-sr-only md:block">
                   {link.name}
                 </span>
               </a>
