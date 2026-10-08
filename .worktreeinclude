@@ -1,0 +1,5 @@
+# Gitignored local files copied into new worktrees (super.engineering, Claude Code).
+# Only files that are gitignored are copied; secrets stay out of git.
+.env
+.env.local
+.claude/settings.local.json
