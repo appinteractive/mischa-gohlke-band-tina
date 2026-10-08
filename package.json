@@ -32,7 +32,6 @@
     "gray-matter": "^4.0.3",
     "hash.js": "^1.1.7",
     "image-size": "^1.0.2",
-    "jsdom": "^21.1.1",
     "next": "15.5.26",
     "next-sitemap": "^4.0.7",
     "node-mailjet": "^3.3.7",
