@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { normalizeNavigation } from '@/lib/nav-model'
@@ -66,15 +67,21 @@ const Confirm = ({ ...props }) => {
   }, [email, hash, isReady, replace])
 
   return (
-    <Layout navigation={navigation}>
-      <div className="min-h-full">
-        <div className="min-h-full grow px-4 pt-16 pb-32">
-          {success && <Success />}
-          {sending && <Loading />}
-          {hasError && <ConfirmationError />}
+    <>
+      <Head>
+        <title>Newsletter-Anmeldung bestätigen | Mischa Gohlke Band</title>
+        <meta name="robots" content="noindex, follow" />
+      </Head>
+      <Layout navigation={navigation}>
+        <div className="min-h-full">
+          <div className="min-h-full grow px-4 pt-16 pb-32">
+            {success && <Success />}
+            {sending && <Loading />}
+            {hasError && <ConfirmationError />}
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   )
 }
 

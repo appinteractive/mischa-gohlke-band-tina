@@ -94,3 +94,24 @@ OG and Twitter tags share the absolute image URL; OG dimensions/type match the
 output. Previews use their Vercel deployment host; production uses `SITE_URL`
 or the site's canonical domain. Missing/unsupported teasers use the checked-in
 homepage teaser. Deleted local uploads also fall back after a bounded HEAD probe.
+
+## Search metadata
+
+`build` and `build:local` run `next-sitemap` after a successful Next build
+(pnpm skips `post*` lifecycle scripts). The sitemap
+contains public canonical routes, excludes newsletter utilities and all
+configured redirect sources (including `/index`), and omits unreliable
+filesystem modification dates. Navigation visibility does not define indexing.
+
+Both Tina page templates expose **Platzhalter / unfertige Seite**
+(`isPlaceholder`). Enable this for empty or unfinished pages: they remain
+reachable, emit `noindex, follow`, and are excluded from the sitemap using the
+prerendered CMS snapshot. Existing pages without the flag remain indexable.
+`robots.txt` keeps crawling allowed (including `/api/assets/`, which serves page
+and share images) so search engines can read `noindex`; other `/api/` routes
+and `/admin/` are disallowed. Preview restrictions take precedence.
+
+Set `SITE_URL` to the stable public site URL. Canonicals and `og:url` use that
+origin, even in Vercel previews; preview social images use the preview host.
+Vercel previews emit `noindex, nofollow` in metadata and `X-Robots-Tag` headers.
+The newsletter utility pages and the 404 page use `noindex`.

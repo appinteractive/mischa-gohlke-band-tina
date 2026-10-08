@@ -21,6 +21,16 @@ const nextConfig = {
     loader: 'custom',
     loaderFile: './src/lib/image-loader.ts',
   },
+  async headers() {
+    return process.env.VERCEL_ENV === 'preview'
+      ? [
+          {
+            source: '/:path*',
+            headers: [{ key: 'X-Robots-Tag', value: 'noindex, nofollow' }],
+          },
+        ]
+      : []
+  },
   async rewrites() {
     return [
       {
@@ -51,7 +61,10 @@ const nextConfig = {
     }, [])
 
     // console.log('redirects', redirects)
-    return redirects
+    return [
+      { source: '/index', destination: '/', permanent: true },
+      ...redirects.filter((redirect) => redirect.source !== '/index'),
+    ]
   },
 }
 

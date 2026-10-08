@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import client from '@/tina/__generated__/client'
 
 import Layout from '@/layouts/default'
@@ -13,6 +14,10 @@ const Error = (props) => {
 
   return (
     <>
+      <Head>
+        <title>Seite nicht gefunden | Mischa Gohlke Band</title>
+        <meta name="robots" content="noindex, follow" />
+      </Head>
       <Layout navigation={navigation}>
         <div className="mx-auto prose max-w-3xl prose-a:no-underline">
           <div className="grid min-h-full place-items-center px-6 py-16 sm:py-24 lg:px-8">

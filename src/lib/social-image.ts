@@ -1,3 +1,4 @@
+import { siteOrigin } from '@/lib/site-url.mjs'
 import { isAllowedImageSource } from '@/lib/image-cache'
 
 export const SOCIAL_IMAGE_WIDTH = 1200
@@ -10,7 +11,7 @@ export function socialImageOrigin(): string {
   const origin =
     process.env.VERCEL_ENV === 'preview' && deployment
       ? `https://${deployment}`
-      : process.env.SITE_URL || 'https://www.mischagohlkeband.de'
+      : siteOrigin()
   return new URL(origin).origin
 }
 

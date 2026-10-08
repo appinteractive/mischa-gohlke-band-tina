@@ -1,4 +1,6 @@
 import Head from 'next/head'
+import { canonicalUrl, siteOrigin } from '@/lib/site-url.mjs'
+import { pageMetadata, pageRobots } from '@/lib/page-metadata'
 import {
   socialImageOrigin,
   socialImageUrl,
@@ -70,39 +72,40 @@ const Page = (props) => {
 
   const teaser = socialImageUrl(props.socialImageOrigin, data.page?.teaser)
 
-  const defaultTitle = 'Mischa Gohlke Band'
-  let title = data.page?.title
-  if (title !== defaultTitle) {
-    title = `${data.page?.title} | ${defaultTitle}`
-  }
+  const { title, description } = pageMetadata(
+    data.page?.title,
+    data.page?.description
+  )
   // TODO: move default title, description, keywords and copyright to CMS
 
   return (
     <>
       <Head>
         <title>{title}</title>
-        <meta
-          name="description"
-          content={
-            data.page?.description ??
-            'Aktionsbüro für eine multipolare Gesellschaftskultur. Mit Projekten, Veranstaltungen, Kampagnen, Musikunterricht, Workshops, Beratung und Öffentlichkeitsarbeit & Bewusstseinsbildung bringen wir Menschen verschiedenster Backgrounds zusammen und setzen uns für interdisziplinäre Kultur, gesamtgesellschaftliche Inklusion und gelebten Frieden für alle Menschen auf diesem Planeten ein.'
-          }
-        />
+        <meta name="description" content={description} />
+        <link rel="canonical" href={props.canonicalUrl} />
+        <meta property="og:url" content={props.canonicalUrl} />
         <meta
           name="keywords"
           content="Kultur, Gesellschaft, Inklusion, Frieden, Projekte, Veranstaltungen, Kampagnen, Musikunterricht für Hörgeschädigte"
         />
         <meta property="og:title" content={title} />
-        <meta property="og:description" content={data.page?.description} />
+        <meta property="og:description" content={description} />
         <meta property="og:image" content={teaser} />
         <meta property="og:image:width" content={String(SOCIAL_IMAGE_WIDTH)} />
-        <meta property="og:image:height" content={String(SOCIAL_IMAGE_HEIGHT)} />
+        <meta
+          property="og:image:height"
+          content={String(SOCIAL_IMAGE_HEIGHT)}
+        />
         <meta property="og:image:type" content="image/jpeg" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={teaser} />
         <meta property="og:locale" content="de_DE" />
         <meta property="og:type" content="website" />
-        <meta name="robots" content="index, follow" />
+        <meta
+          name="robots"
+          content={pageRobots(data.page?.isPlaceholder, props.isPreview)}
+        />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0"
@@ -129,7 +132,7 @@ const Page = (props) => {
             }
           })
         ) : (
-          <div className="prose mx-auto max-w-3xl">
+          <div className="mx-auto prose max-w-3xl">
             <TinaMarkdown
               content={data?.page?.body}
               components={cmsComponents}
@@ -331,6 +334,8 @@ export const getStaticProps = async ({ params, ...data }) => {
     deleteUndefinedValues(teamComponentProps)
 
   res.props.socialImageOrigin = socialImageOrigin()
+  res.props.canonicalUrl = canonicalUrl(siteOrigin(), '/' + path.join('/'))
+  res.props.isPreview = process.env.VERCEL_ENV === 'preview'
   return res
 }
 

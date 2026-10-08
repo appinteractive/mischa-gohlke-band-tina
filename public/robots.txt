@@ -1,6 +1,9 @@
 # *
 User-agent: *
 Allow: /
+Allow: /api/assets/
+Disallow: /api/
+Disallow: /admin/
 
 # Host
 Host: https://www.mischagohlkeband.de

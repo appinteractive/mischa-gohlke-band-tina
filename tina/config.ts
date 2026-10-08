@@ -34,6 +34,13 @@ const menuItem = {
     },
     // required: true,
   },
+  isPlaceholder: {
+    type: 'boolean',
+    name: 'isPlaceholder',
+    label: 'Platzhalter / unfertige Seite',
+    description:
+      'Aktivierte Seiten bleiben erreichbar, werden aber nicht indexiert und nicht in der Sitemap aufgeführt. Nach Fertigstellung deaktivieren und erneut veröffentlichen.',
+  },
   teaser: {
     type: 'image',
     name: 'teaser',
@@ -118,6 +125,7 @@ export default defineConfig({
             fields: [
               menuItem.title,
               menuItem.description,
+              menuItem.isPlaceholder,
               menuItem.teaser,
               menuItem.alias,
               {
@@ -162,6 +170,7 @@ export default defineConfig({
             fields: [
               menuItem.title,
               menuItem.description,
+              menuItem.isPlaceholder,
               menuItem.teaser,
               menuItem.alias,
               {
