@@ -36,7 +36,7 @@ export default function NewsletterForm() {
 
   return (
     <div className="sm:max-w-md">
-      <h3 className="text-sm font-semibold leading-6 text-gray-900">
+      <h3 className="text-sm leading-6 font-semibold text-gray-900">
         Anmeldung zum Newsletter
       </h3>
       <p
@@ -59,15 +59,15 @@ export default function NewsletterForm() {
           autoComplete="email"
           aria-label="E-Mail für Newsletter-Anmeldung"
           required
-          className="!w-full min-w-0 appearance-none rounded-md border-0 bg-white px-3 py-1.5 text-base text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 disabled:opacity-50 sm:w-64 sm:text-sm sm:leading-6"
+          className="w-full! min-w-0 appearance-none rounded-md border-0 bg-white px-3 py-1.5 text-base text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-2 focus:ring-blue-600 focus:ring-inset disabled:opacity-50 sm:w-64 sm:text-sm sm:leading-6"
           placeholder="Deine E-Mail Adresse"
           disabled={loading || success}
         />
-        <div className="mt-4 sm:ml-4 sm:mt-0 sm:flex-shrink-0">
+        <div className="mt-4 sm:mt-0 sm:ml-4 sm:shrink-0">
           <button
             disabled={loading || success}
             type="submit"
-            className="flex w-full items-center justify-center rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:bg-slate-400"
+            className="flex w-full items-center justify-center rounded-md bg-slate-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-slate-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 focus-visible:outline-solid disabled:bg-slate-400"
           >
             <span className={clsx(loading && 'opacity-0')}>Anmelden</span>
             {loading && (
@@ -85,7 +85,7 @@ export default function NewsletterForm() {
                   strokeWidth="4"
                 />
                 <path
-                  className="opacity-75" // eslint-disable-next-line
+                  className="opacity-75"
                   fill="currentColor"
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
                 />
@@ -96,14 +96,14 @@ export default function NewsletterForm() {
       </form>
       {error && (
         <div className="mt-4">
-          <p className="text-sm font-medium leading-5 text-red-600">
+          <p className="text-sm leading-5 font-medium text-red-600">
             Es ist ein Fehler aufgetreten. Bitte versuche es später erneut.
           </p>
         </div>
       )}
       {success && (
         <div className="mt-4">
-          <p className="text-sm font-medium leading-5 text-gray-600">
+          <p className="text-sm leading-5 font-medium text-gray-600">
             Vielen Dank für deine Anmeldung. Du erhältst in Kürze eine E-Mail
             mit einem Bestätigungslink.
           </p>

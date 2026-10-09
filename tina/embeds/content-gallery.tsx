@@ -1,4 +1,4 @@
-import useImagePreview from '../components/PreviewImage'
+import PreviewImage from '../components/PreviewImage'
 import { wrapFieldsWithMeta } from 'tinacms'
 import { useReferenceSelect } from '../components/ReferenceSelect'
 import client from '../__generated__/client'
@@ -87,7 +87,7 @@ export const ContentGalleryTemplate: any = {
             component: wrapFieldsWithMeta((data) => {
               return (
                 <div className="relative overflow-hidden rounded-md bg-black">
-                  {useImagePreview(data)}
+                  <PreviewImage input={data.input} />
                 </div>
               )
             }),

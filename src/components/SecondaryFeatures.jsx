@@ -135,8 +135,8 @@ function FeaturesMobile() {
         <div key={feature.name}>
           <Feature feature={feature} className="mx-auto max-w-2xl" isActive />
           <div className="relative mt-10 pb-10">
-            <div className="absolute -inset-x-4 bottom-0 top-8 bg-slate-200 sm:-inset-x-6" />
-            <div className="relative mx-auto w-[52.75rem] overflow-hidden rounded-xl bg-white shadow-lg shadow-slate-900/5 ring-1 ring-slate-500/10">
+            <div className="absolute -inset-x-4 top-8 bottom-0 bg-slate-200 sm:-inset-x-6" />
+            <div className="relative mx-auto w-[52.75rem] overflow-hidden rounded-xl bg-white shadow-lg ring-1 shadow-slate-900/5 ring-slate-500/10">
               <Image
                 className="w-full"
                 src={feature.image}
@@ -163,7 +163,7 @@ function FeaturesDesktop() {
                 feature={{
                   ...feature,
                   name: (
-                    <Tab className="[&:not(:focus-visible)]:focus:outline-none">
+                    <Tab className="[&:not(:focus-visible)]:focus:outline-hidden">
                       <span className="absolute inset-0" />
                       {feature.name}
                     </Tab>
@@ -181,13 +181,13 @@ function FeaturesDesktop() {
                   static
                   key={feature.name}
                   className={clsx(
-                    'px-5 transition duration-500 ease-in-out [&:not(:focus-visible)]:focus:outline-none',
+                    'px-5 transition duration-500 ease-in-out [&:not(:focus-visible)]:focus:outline-hidden',
                     featureIndex !== selectedIndex && 'opacity-60'
                   )}
                   style={{ transform: `translateX(-${selectedIndex * 100}%)` }}
                   aria-hidden={featureIndex !== selectedIndex}
                 >
-                  <div className="w-[52.75rem] overflow-hidden rounded-xl bg-white shadow-lg shadow-slate-900/5 ring-1 ring-slate-500/10">
+                  <div className="w-[52.75rem] overflow-hidden rounded-xl bg-white shadow-lg ring-1 shadow-slate-900/5 ring-slate-500/10">
                     <Image
                       className="w-full"
                       src={feature.image}
@@ -198,7 +198,7 @@ function FeaturesDesktop() {
                 </Tab.Panel>
               ))}
             </div>
-            <div className="pointer-events-none absolute inset-0 rounded-4xl ring-1 ring-inset ring-slate-900/10" />
+            <div className="pointer-events-none absolute inset-0 rounded-4xl ring-1 ring-slate-900/10 ring-inset" />
           </Tab.Panels>
         </>
       )}
@@ -211,7 +211,7 @@ export default function SecondaryFeatures() {
     <section
       id="secondary-features"
       aria-label="Features for simplifying everyday business tasks"
-      className="pb-14 pt-20 sm:pb-20 sm:pt-32 lg:pb-32"
+      className="pt-20 pb-14 sm:pt-32 sm:pb-20 lg:pb-32"
     >
       <Container>
         <div className="mx-auto max-w-2xl md:text-center">

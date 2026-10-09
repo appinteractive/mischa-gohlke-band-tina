@@ -44,9 +44,9 @@ export const uiUseTitle =
         disabled ? ' | 🚫 ausgeblendet' : ''
       }`,
       className: clsx(
-        'relative group cursor-pointer flex justify-between items-stretch border border-gray-100 -mb-px overflow-visible p-0 text-sm first:rounded-t last:rounded-b',
+        'relative group cursor-pointer flex justify-between items-stretch border border-gray-100 -mb-px overflow-visible p-0 text-sm first:rounded-t-sm last:rounded-b-sm',
         disabled
-          ? 'disabled-item text-gray-300 bg-gray-50'
+          ? 'text-gray-300 bg-gray-50'
           : 'font-normal text-gray-600 bg-white'
       ),
     }

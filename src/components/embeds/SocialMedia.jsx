@@ -90,14 +90,14 @@ export default function SocialMedia({ type, hasSubNav, ...props }) {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center space-x-2 rounded bg-none p-0 outline-offset-4 focus-visible:outline-slate-500"
+                className="flex items-center justify-center space-x-2 rounded-sm bg-none p-0 outline-offset-4 focus-visible:outline-slate-500"
               >
                 <link.icon
                   className="h-12 w-12"
                   aria-hidden="true"
                   color={link.color}
                 />
-                <span className="hidden font-medium text-gray-800 md:block">
+                <span className="sr-only font-medium text-gray-800 md:not-sr-only md:block">
                   {link.name}
                 </span>
               </a>

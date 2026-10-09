@@ -111,13 +111,13 @@ export function Footer({ items }: Props) {
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-20 lg:px-8 lg:pt-20">
+      <div className="mx-auto max-w-7xl px-6 pt-16 pb-8 sm:pt-20 lg:px-8 lg:pt-20">
         <div className="xl:grid xl:grid-cols-2 xl:gap-8">
-          <div className="grid gap-8 gap-x-24 space-y-5 md:grid-cols-2 md:space-y-0 xl:col-span-2">
+          <div className="grid gap-8 space-y-5 gap-x-24 md:grid-cols-2 md:space-y-0 xl:col-span-2">
             <div className="grid gap-12 sm:grid-cols-2 md:gap-8">
               {items.map((category) => (
                 <div key={category.title}>
-                  <h3 className="text-sm font-semibold leading-6 text-gray-900">
+                  <h3 className="text-sm leading-6 font-semibold text-gray-900">
                     {category.title}
                   </h3>
                   <ul role="list" className="mt-6 space-y-2">
@@ -125,7 +125,7 @@ export function Footer({ items }: Props) {
                       <li key={item.title}>
                         <Link
                           href={cleanPath(item.page)}
-                          className="hover:text-grounded rounded text-sm leading-6 text-gray-600 outline-offset-4"
+                          className="rounded-sm text-sm leading-6 text-gray-600 outline-offset-4"
                         >
                           {item.title}
                         </Link>
