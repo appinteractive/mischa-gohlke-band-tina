@@ -247,6 +247,10 @@ export const getStaticProps = async ({ params, ...data }) => {
     queryByPath(path.join('/') + '.mdx'),
     client.queries.nav(),
   ])
+  // A path rendered on demand without a Tina page: a real 404, checked again
+  // after a minute in case the page is created in Tina meanwhile.
+  if (!res.props.data?.page) return { notFound: true, revalidate: 60 }
+
   // add res.nav.data to res.props.data
   res.props.data['nav'] = {
     footer: resNav?.data.navFooterConnection.edges[0]?.node._values,
@@ -372,7 +376,9 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    // Pages created in Tina after the last build render on their first
+    // request instead of answering 404 until the next deploy.
+    fallback: 'blocking',
   }
 }
 
