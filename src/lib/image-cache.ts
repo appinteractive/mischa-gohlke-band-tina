@@ -24,6 +24,35 @@ function tinaAssetUrl(source: string): URL | undefined {
   }
 }
 
+const YOUTUBE_THUMBNAIL_HOSTS = new Set(['i.ytimg.com', 'img.youtube.com'])
+const YOUTUBE_THUMBNAIL_PATH =
+  /^\/vi\/[\w-]{11}\/(?:maxresdefault|sddefault|hqdefault|mqdefault|default)\.jpg$/
+
+/**
+ * A YouTube video's still image, without the signing query that copies from
+ * YouTube carry; nothing else on those hosts is allowed.
+ */
+export function youtubeThumbnailUrl(source: string): URL | undefined {
+  try {
+    const url = new URL(source)
+    if (
+      url.protocol === 'https:' &&
+      YOUTUBE_THUMBNAIL_HOSTS.has(url.hostname) &&
+      url.port === '' &&
+      url.username === '' &&
+      url.password === '' &&
+      YOUTUBE_THUMBNAIL_PATH.test(url.pathname)
+    ) {
+      url.search = ''
+      url.hash = ''
+      return url
+    }
+  } catch {
+    // Not a URL.
+  }
+  return undefined
+}
+
 /** Tina's asset host answers any query string with 404; drop cache busters. */
 export function withoutTinaQuery(source: string): string {
   const url = tinaAssetUrl(source)
@@ -114,5 +143,8 @@ export function isAllowedImageSource(source: unknown): source is string {
     }
   }
 
-  return tinaAssetUrl(source) !== undefined
+  return (
+    tinaAssetUrl(source) !== undefined ||
+    youtubeThumbnailUrl(source) !== undefined
+  )
 }

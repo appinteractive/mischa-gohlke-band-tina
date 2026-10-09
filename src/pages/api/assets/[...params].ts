@@ -8,6 +8,7 @@ import {
   isAllowedImageOperation,
   isAllowedImageSource,
   withoutTinaQuery,
+  youtubeThumbnailUrl,
 } from '@/lib/image-cache'
 
 const ONE_DAY = 60 * 60 * 24
@@ -64,6 +65,14 @@ async function servesImage(url: string, method: 'HEAD' | 'GET') {
 const imageSourcePlugin = () => ({
   urlTransform: async (source: string, req: IncomingMessage) => {
     if (!source.startsWith('/')) {
+      const youtube = youtubeThumbnailUrl(source)?.toString()
+      if (youtube) {
+        // Not every video has a maxres still; hqdefault always exists.
+        return youtube.endsWith('/maxresdefault.jpg') &&
+          !(await servesImage(youtube, 'GET'))
+          ? youtube.replace(/\/maxresdefault\.jpg$/, '/hqdefault.jpg')
+          : youtube
+      }
       const url = withoutTinaQuery(source)
       const canonicalFallback = getTinaStagingFallback(url)
       if (!canonicalFallback) return url
@@ -90,7 +99,7 @@ const imageConfig = {
     },
   },
   basePath: '/api/assets',
-  whitelist: ['assets.tina.io$'],
+  whitelist: ['assets.tina.io$', 'i.ytimg.com$', 'img.youtube.com$'],
   browserCache: `s-maxage=${ONE_DAY * 30}, max-age=${ONE_DAY}`,
   plugins: {
     plugins: [

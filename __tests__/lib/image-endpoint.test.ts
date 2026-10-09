@@ -136,6 +136,20 @@ describe('Tina staging image fallback', () => {
     expect(fetchMock).toHaveBeenCalledTimes(2)
   })
 
+  it('falls back to hqdefault when a video has no maxres still', async () => {
+    const fetchMock = global.fetch as jest.Mock
+    const maxres = 'https://i.ytimg.com/vi/VKxCBFXKZOY/maxresdefault.jpg'
+    fetchMock.mockResolvedValueOnce(missing)
+    expect(await transform(maxres, req)).toBe(
+      'https://i.ytimg.com/vi/VKxCBFXKZOY/hqdefault.jpg'
+    )
+    fetchMock.mockResolvedValueOnce(image)
+    expect(await transform(maxres, req)).toBe(maxres)
+    const hq = 'https://i.ytimg.com/vi/VKxCBFXKZOY/hqdefault.jpg'
+    expect(await transform(`${hq}?sqp=signed&rs=x`, req)).toBe(hq)
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
+
   it('drops query strings Tina would reject', async () => {
     const fetchMock = global.fetch as jest.Mock
     expect(

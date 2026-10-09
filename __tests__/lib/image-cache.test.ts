@@ -1,4 +1,5 @@
 import {
+  youtubeThumbnailUrl,
   getTinaStagingFallback,
   withoutTinaQuery,
   getTinaStagingLocalSource,
@@ -135,5 +136,39 @@ describe('withoutTinaQuery', () => {
     expect(withoutTinaQuery('https://example.com/a.jpg?v=2')).toBe(
       'https://example.com/a.jpg?v=2'
     )
+  })
+})
+
+describe('youtubeThumbnailUrl', () => {
+  it.each([
+    'https://i.ytimg.com/vi/VKxCBFXKZOY/maxresdefault.jpg',
+    'https://img.youtube.com/vi/BrCz50_iWmM/hqdefault.jpg',
+    'https://i.ytimg.com/vi/n0pbOe_PszU/mqdefault.jpg',
+  ])('allows the video still %s', (source) => {
+    expect(youtubeThumbnailUrl(source)?.href).toBe(source)
+    expect(isAllowedImageSource(source)).toBe(true)
+  })
+
+  it('drops the signing query of stills copied from YouTube', () => {
+    const copied =
+      'https://i.ytimg.com/vi/yFZDaG7jpKk/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB&rs=AOn4CLCuDPQJ'
+    expect(youtubeThumbnailUrl(copied)?.href).toBe(
+      'https://i.ytimg.com/vi/yFZDaG7jpKk/maxresdefault.jpg'
+    )
+    expect(isAllowedImageSource(copied)).toBe(true)
+  })
+
+  it.each([
+    'http://i.ytimg.com/vi/VKxCBFXKZOY/maxresdefault.jpg',
+    'https://i.ytimg.com:8443/vi/VKxCBFXKZOY/maxresdefault.jpg',
+    'https://i.ytimg.com/vi/short/maxresdefault.jpg',
+    'https://i.ytimg.com/vi/VKxCBFXKZOY/other.jpg',
+    'https://i.ytimg.com/vi/VKxCBFXKZOY/../../generate_204',
+    'https://i.ytimg.com/an_webp/VKxCBFXKZOY/mqdefault_6s.webp',
+    'https://youtube.com/vi/VKxCBFXKZOY/maxresdefault.jpg',
+    'https://evil.ytimg.com.example/vi/VKxCBFXKZOY/maxresdefault.jpg',
+  ])('rejects %s', (source) => {
+    expect(youtubeThumbnailUrl(source)).toBeUndefined()
+    expect(isAllowedImageSource(source)).toBe(false)
   })
 })
