@@ -11,6 +11,7 @@ import { TeamTemplate } from './embeds/team'
 import { HeroTemplate } from './embeds/hero'
 import { SocialMediaTemplate } from './embeds/social-media'
 import slugify from 'slugify'
+import { validateAliases } from '../src/lib/redirect-aliases.mjs'
 
 // Your hosting provider likely exposes this as an environment variable
 const branch = process.env.HEAD || process.env.VERCEL_GIT_COMMIT_REF || 'main'
@@ -51,29 +52,11 @@ const menuItem = {
     type: 'string',
     name: 'alias',
     label: 'Alte URL(s)',
-    description: 'Umleitung von alten URLs, beginnend mit Slash',
+    description:
+      'Umleitung von alten URLs dieser Website, z. B. /alte-seite. Vollständige Adressen dieser Website werden automatisch gekürzt.',
     list: true,
-    // ui: {
-    //   validate: (values: string, allValues: any, meta: any, field: any) => {
-    //     console.log(meta)
-    //     return {
-    //       alias: ['Die URL muss mit einem Slash beginnen'],
-    //     }
-    //     /* const errors = null
-    //     if (values?.length > 0) {
-    //       for (const value of values) {
-    //         const hasDomain = ['.de', 'http', 'www.'].includes(value)
-    //         if (value && !value.startsWith('/')) {
-    //           errors.push('Die URL muss mit einem Slash beginnen')
-    //         }
-    //         if (hasDomain) {
-    //           errors.push('URL bitte ohne Domain')
-    //         }
-    //       }
-    //     }
-    //     return errors */
-    //   },
-    // },
+    // Invalid redirects used to fail the whole production build.
+    ui: { validate: validateAliases },
   },
 } as any
 
