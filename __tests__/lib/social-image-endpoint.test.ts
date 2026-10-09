@@ -80,7 +80,23 @@ beforeAll(async () => {
     const url = new URL(req.url!, origin)
     const source = sources.get(decodeURIComponent(url.pathname))
     if (source) {
+      // Static hosting labels media by extension; the endpoint relies on it.
+      const extension = url.pathname.split('.').pop()
+      res.setHeader(
+        'Content-Type',
+        extension === 'svg'
+          ? 'image/svg+xml'
+          : extension === 'png'
+            ? 'image/png'
+            : 'image/jpeg'
+      )
       res.end(source)
+      return
+    }
+    if (url.pathname === '/media/html-page.jpg') {
+      // Hosts can answer a missing file with an HTML page and status 200.
+      res.setHeader('Content-Type', 'text/html')
+      res.end('<!doctype html><title>Not found</title>')
       return
     }
     if (url.pathname.startsWith('/media/')) {
@@ -182,22 +198,25 @@ it('flattens transparent pixels onto white instead of black', async () => {
   expect(stats.channels.map((channel) => channel.min)).toEqual([255, 255, 255])
 })
 
-it('uses the default teaser when older content references a missing local upload', async () => {
-  const missing = await fetch(
-    `${origin}/api/assets/social?src=%2Fmedia%2Fdeleted.jpg`
-  )
-  const fallback = await fetch(
-    `${origin}/api/assets/social?src=${encodeURIComponent(
-      DEFAULT_SOCIAL_IMAGE
-    )}`
-  )
-  expect(missing.status).toBe(200)
-  // The local check can fail transiently; a CDN must not pin the substitute.
-  expect(missing.headers.get('cache-control')).toBe('no-store')
-  expect(Buffer.from(await missing.arrayBuffer())).toEqual(
-    Buffer.from(await fallback.arrayBuffer())
-  )
-})
+it.each(['deleted.jpg', 'html-page.jpg'])(
+  'uses the default teaser when older content references a missing local upload: %s',
+  async (name) => {
+    const missing = await fetch(
+      `${origin}/api/assets/social?src=%2Fmedia%2F${name}`
+    )
+    const fallback = await fetch(
+      `${origin}/api/assets/social?src=${encodeURIComponent(
+        DEFAULT_SOCIAL_IMAGE
+      )}`
+    )
+    expect(missing.status).toBe(200)
+    // The local check can fail transiently; a CDN must not pin the substitute.
+    expect(missing.headers.get('cache-control')).toBe('no-store')
+    expect(Buffer.from(await missing.arrayBuffer())).toEqual(
+      Buffer.from(await fallback.arrayBuffer())
+    )
+  }
+)
 
 it.each([
   'https://example.com/private',

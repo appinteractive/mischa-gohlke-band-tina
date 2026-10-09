@@ -76,25 +76,54 @@ describe('Tina staging image fallback', () => {
     global.fetch = originalFetch
   })
 
-  it('keeps available staging assets and bounds the probe', async () => {
+  // Tina answers HEAD with 404 for staged files it serves; missing media can
+  // come back as an HTML page. Only image responses count as available.
+  const image = {
+    ok: true,
+    headers: new Headers({ 'content-type': 'image/jpeg' }),
+  }
+  const html = {
+    ok: true,
+    headers: new Headers({ 'content-type': 'text/html' }),
+  }
+  const missing = {
+    ok: false,
+    headers: new Headers({ 'content-type': 'text/html' }),
+  }
+
+  it('probes staged Tina assets with a bounded one-byte GET', async () => {
     const fetchMock = global.fetch as jest.Mock
-    fetchMock.mockResolvedValue({ ok: true })
+    fetchMock.mockResolvedValue(image)
     expect(await transform(staging, req)).toBe(staging)
     expect(fetchMock).toHaveBeenCalledTimes(1)
     expect(fetchMock).toHaveBeenCalledWith(staging, {
-      method: 'HEAD',
-      headers: { 'user-agent': '' },
+      method: 'GET',
+      headers: { 'user-agent': '', range: 'bytes=0-0' },
       signal: expect.any(AbortSignal),
     })
   })
 
   it('uses checked-in media when the staging asset is missing', async () => {
     const fetchMock = global.fetch as jest.Mock
-    fetchMock
-      .mockResolvedValueOnce({ ok: false })
-      .mockResolvedValueOnce({ ok: true })
+    fetchMock.mockResolvedValueOnce(missing).mockResolvedValueOnce(image)
     expect(await transform(staging, req)).toBe(
       'http://localhost:3105/media/photo.jpg'
+    )
+    expect(fetchMock).toHaveBeenLastCalledWith(
+      'http://localhost:3105/media/photo.jpg',
+      {
+        method: 'HEAD',
+        headers: { 'user-agent': '' },
+        signal: expect.any(AbortSignal),
+      }
+    )
+  })
+
+  it('does not accept an HTML page as checked-in media', async () => {
+    const fetchMock = global.fetch as jest.Mock
+    fetchMock.mockResolvedValueOnce(missing).mockResolvedValueOnce(html)
+    expect(await transform(staging, req)).toBe(
+      'https://assets.tina.io/client/photo.jpg'
     )
   })
 
@@ -105,6 +134,16 @@ describe('Tina staging image fallback', () => {
       'https://assets.tina.io/client/photo.jpg'
     )
     expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
+
+  it('drops query strings Tina would reject', async () => {
+    const fetchMock = global.fetch as jest.Mock
+    expect(
+      await transform('https://assets.tina.io/client/photo.jpg?v=2#x', req)
+    ).toBe('https://assets.tina.io/client/photo.jpg')
+    fetchMock.mockResolvedValue(image)
+    expect(await transform(`${staging}?v=2`, req)).toBe(staging)
+    expect(fetchMock).toHaveBeenCalledWith(staging, expect.anything())
   })
 })
 

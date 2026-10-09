@@ -24,6 +24,15 @@ function tinaAssetUrl(source: string): URL | undefined {
   }
 }
 
+/** Tina's asset host answers any query string with 404; drop cache busters. */
+export function withoutTinaQuery(source: string): string {
+  const url = tinaAssetUrl(source)
+  if (!url) return source
+  url.search = ''
+  url.hash = ''
+  return url.toString()
+}
+
 export function getTinaStagingFallback(source: string): string | undefined {
   const url = tinaAssetUrl(source)
   if (!url || !TINA_STAGING_PATH.test(url.pathname)) return undefined

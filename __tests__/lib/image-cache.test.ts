@@ -1,5 +1,6 @@
 import {
   getTinaStagingFallback,
+  withoutTinaQuery,
   getTinaStagingLocalSource,
   isAllowedImageOperation,
   isAllowedImageSource,
@@ -122,5 +123,17 @@ describe('isAllowedImageSource', () => {
     'https://example.com/photo.jpg',
   ])('rejects an unapproved image source', (source) => {
     expect(isAllowedImageSource(source)).toBe(false)
+  })
+})
+
+describe('withoutTinaQuery', () => {
+  it('removes query strings and fragments from Tina assets only', () => {
+    expect(
+      withoutTinaQuery('https://assets.tina.io/client/a%20b.jpg?v=2#top')
+    ).toBe('https://assets.tina.io/client/a%20b.jpg')
+    expect(withoutTinaQuery('/media/a.jpg?v=2')).toBe('/media/a.jpg?v=2')
+    expect(withoutTinaQuery('https://example.com/a.jpg?v=2')).toBe(
+      'https://example.com/a.jpg?v=2'
+    )
   })
 })

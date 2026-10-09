@@ -7,6 +7,7 @@ import {
   getTinaStagingLocalSource,
   isAllowedImageOperation,
   isAllowedImageSource,
+  withoutTinaQuery,
 } from '@/lib/image-cache'
 
 const ONE_DAY = 60 * 60 * 24
@@ -35,42 +36,50 @@ function absoluteLocalSource(url: string, req: IncomingMessage): string {
   return absolute.toString()
 }
 
+/**
+ * Whether `url` serves an image. A missing file can be answered with an HTML
+ * page, so only image responses count. Tina's asset host answers HEAD with 404
+ * for staged files it does serve; probe it with a one-byte GET instead.
+ */
+async function servesImage(url: string, method: 'HEAD' | 'GET') {
+  try {
+    const response = await fetch(url, {
+      method,
+      headers:
+        method === 'GET'
+          ? { 'user-agent': '', range: 'bytes=0-0' }
+          : { 'user-agent': '' },
+      signal: AbortSignal.timeout(5000),
+    })
+    await response.body?.cancel()
+    return (
+      response.ok &&
+      Boolean(response.headers.get('content-type')?.startsWith('image/'))
+    )
+  } catch {
+    return false
+  }
+}
+
 const imageSourcePlugin = () => ({
-  urlTransform: async (url: string, req: IncomingMessage) => {
-    if (!url.startsWith('/')) {
+  urlTransform: async (source: string, req: IncomingMessage) => {
+    if (!source.startsWith('/')) {
+      const url = withoutTinaQuery(source)
       const canonicalFallback = getTinaStagingFallback(url)
       if (!canonicalFallback) return url
 
-      try {
-        const response = await fetch(url, {
-          method: 'HEAD',
-          headers: { 'user-agent': '' },
-          signal: AbortSignal.timeout(5000),
-        })
-        if (response.ok) return url
-      } catch {
-        // Continue through the local and canonical fallbacks.
-      }
+      if (await servesImage(url, 'GET')) return url
 
       const localSource = getTinaStagingLocalSource(url)
       if (localSource) {
         const localFallback = absoluteLocalSource(localSource, req)
-        try {
-          const response = await fetch(localFallback, {
-            method: 'HEAD',
-            headers: { 'user-agent': '' },
-            signal: AbortSignal.timeout(5000),
-          })
-          if (response.ok) return localFallback
-        } catch {
-          // Let the canonical Tina URL handle non-local assets.
-        }
+        if (await servesImage(localFallback, 'HEAD')) return localFallback
       }
 
       return canonicalFallback
     }
 
-    return absoluteLocalSource(url, req)
+    return absoluteLocalSource(source, req)
   },
 })
 
@@ -147,16 +156,7 @@ export default async function handler(
   // but never cache the substitute: the check may have failed only temporarily.
   let handler = imageHandler
   if (isSocial && source.startsWith('/') && source !== DEFAULT_SOCIAL_IMAGE) {
-    let available = false
-    try {
-      const response = await fetch(absoluteLocalSource(source, req), {
-        method: 'HEAD',
-        headers: { 'user-agent': '' },
-        signal: AbortSignal.timeout(5000),
-      })
-      available = response.ok
-    } catch {}
-    if (!available) {
+    if (!(await servesImage(absoluteLocalSource(source, req), 'HEAD'))) {
       source = DEFAULT_SOCIAL_IMAGE
       handler = fallbackImageHandler
     }
