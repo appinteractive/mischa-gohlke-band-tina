@@ -111,7 +111,13 @@ const Page = (props) => {
           content="width=device-width, initial-scale=1.0"
         ></meta>
       </Head>
-      <Layout navigation={navigation} subNav={hasSubNav ? subNav : null}>
+      <Layout
+        navigation={navigation}
+        subNav={hasSubNav ? subNav : null}
+        hasVideoTeaser={data.page?.body?.children?.some(
+          (child) => child?.name === 'VideoTeaser'
+        )}
+      >
         {data.page?.blocks?.length > 0 ? (
           data.page.blocks.map(function (block, i) {
             switch (block.__typename) {
