@@ -181,4 +181,7 @@ export const config = {
   api: {
     responseLimit: false,
   },
+  // Source probes and downloads are each bounded to 5 s, then Sharp resizes;
+  // the project's 5 s function default would cut off share images.
+  maxDuration: 30,
 }

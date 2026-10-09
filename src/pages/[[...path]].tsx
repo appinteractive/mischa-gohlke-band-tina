@@ -231,6 +231,10 @@ const queryByPath = async (relativePath: string): Promise<any> => {
   }
 }
 
+// Pages created after the build render on demand with Tina queries; allow
+// more than the project's 5 s function default for a slow Tina response.
+export const config = { maxDuration: 30 }
+
 export const getStaticProps = async ({ params, ...data }) => {
   // TODO: find a way to generate blur hashes on build or on upload
   /* if (
