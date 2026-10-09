@@ -13,8 +13,10 @@ jest.mock(
         <div
           data-testid="player"
           data-url={props.url}
-          data-light={props.light ?? ''}
-        />
+          data-light={props.light ? 'shown' : ''}
+        >
+          {React.isValidElement(props.light) ? props.light : null}
+        </div>
       )
     }
 )
@@ -73,4 +75,39 @@ test('teaser mounts into its designated container', () => {
   expect(target.querySelector('[data-testid="player"]')).not.toBeNull()
   unmount()
   target.remove()
+})
+
+test('video stills load cropped to their displayed size through the image API', () => {
+  const poster = (id) => `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`
+  render(
+    <VideoPlayer
+      videos={[
+        { url: 'one', title: 'One', poster: poster('VKxCBFXKZOY') },
+        { url: 'two', title: 'Two', poster: poster('BrCz50_iWmM') },
+      ]}
+    />
+  )
+  const images = screen
+    .getByTestId('player')
+    .parentElement.parentElement.querySelectorAll('img')
+  expect(images.length).toBeGreaterThanOrEqual(3)
+  for (const image of images) {
+    // Never YouTube's full 1280px still; always the sized, cropped variant.
+    expect(image.getAttribute('src')).toMatch(/^\/api\/assets\/transform\?/)
+    expect(image.getAttribute('srcset')).not.toContain('ytimg.com/vi/')
+    expect(image.getAttribute('src')).toContain('fit=cover')
+  }
+  const [still, ...thumbnails] = images
+  expect(still.getAttribute('sizes')).toContain('100vw')
+  // The selected entry's play icon stays painted above its thumbnail.
+  const selected = screen.getByRole('button', { name: /One/ })
+  const icon = selected.querySelector('svg')
+  expect(
+    selected.querySelector('img').compareDocumentPosition(icon) &
+      Node.DOCUMENT_POSITION_FOLLOWING
+  ).toBeTruthy()
+  for (const thumbnail of thumbnails) {
+    expect(thumbnail.getAttribute('sizes')).toBe('64px')
+    expect(thumbnail.getAttribute('srcset')).toContain('width=128&height=80')
+  }
 })

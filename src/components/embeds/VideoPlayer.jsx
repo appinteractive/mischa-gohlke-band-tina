@@ -1,10 +1,15 @@
 import dynamic from 'next/dynamic'
+import Image from 'next/image'
+import { croppedLoader } from '@/lib/image-loader'
 import { useState, useEffect, Fragment, Suspense } from 'react'
 import { Transition } from '@headlessui/react'
 import { PlayCircleIcon } from '@heroicons/react/20/solid'
 import clsx from 'clsx'
 
 const ReactPlayer = dynamic(() => import('react-player'), { ssr: false })
+// Crop YouTube stills to the visible boxes; hqdefault's black bars disappear.
+const posterLoader = croppedLoader(16 / 9)
+const thumbnailLoader = croppedLoader(16 / 10)
 
 export default function VideoPlayer({ type, hasSubNav, ...props }) {
   const [isPlaying, setIsPlaying] = useState(true)
@@ -38,7 +43,21 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
           <ReactPlayer
             className="h-full w-full overflow-hidden rounded-lg bg-black"
             url={current.url}
-            light={light}
+            // A sized image instead of YouTube's full 1280px still.
+            light={
+              light ? (
+                <span className="relative block h-full w-full">
+                  <Image
+                    src={light}
+                    alt=""
+                    loader={posterLoader}
+                    fill
+                    sizes="(min-width: 1280px) 1024px, (min-width: 768px) 768px, 100vw"
+                    className="object-cover"
+                  />
+                </span>
+              ) : null
+            }
             playing={isPlaying}
             onPause={async () => {
               // wait for 100 milliseconds to see if the video is seeking
@@ -138,18 +157,22 @@ export default function VideoPlayer({ type, hasSubNav, ...props }) {
                           className="group relative flex w-full min-w-0 items-start gap-x-2 p-1 px-3 py-3 pr-4 text-left ring-offset-2 focus-visible:outline-slate-600"
                         >
                           <span className="relative m-0 inline-block h-10 w-16 shrink-0 overflow-hidden rounded-xs p-0">
+                            {video.poster && (
+                              <Image
+                                className="object-cover"
+                                src={video.poster}
+                                alt={video.title}
+                                loader={thumbnailLoader}
+                                fill
+                                sizes="64px"
+                                draggable={false}
+                              />
+                            )}
                             {current?.url === video.url && (
                               <div className="absolute inset-0 flex items-center justify-center bg-black/70">
                                 <PlayCircleIcon className="h-6 w-6 text-white" />
                               </div>
                             )}
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              className="h-full w-full object-cover"
-                              src={video.poster}
-                              alt={video.title}
-                              draggable={false}
-                            />
                           </span>
                           <span className="flex w-full flex-col">
                             <span className="line-clamp-2 text-sm leading-tight font-semibold text-gray-900">
