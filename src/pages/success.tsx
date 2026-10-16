@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import Layout from '@/layouts/default'
 import { normalizeNavigation } from '@/lib/nav-model'
 import client from '@/tina/__generated__/client'
@@ -6,24 +7,28 @@ const Page = (props) => {
   const navigation = normalizeNavigation({ ...props.data.nav })
 
   return (
-    <Layout navigation={navigation}>
-      <div className="min-h-full">
-        <div className="min-h-full grow px-4 pb-32 pt-16">
-          <Success />
+    <>
+      <Head>
+        <title>Newsletter-Anmeldung bestätigt | Mischa Gohlke Band</title>
+        <meta name="robots" content="noindex, follow" />
+      </Head>
+      <Layout navigation={navigation}>
+        <div className="min-h-full">
+          <div className="min-h-full grow px-4 pt-16 pb-32">
+            <Success />
+          </div>
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   )
 }
 
 export const Success = ({ ...props }) => {
   return (
-    <div className="prose prose-green mx-auto text-center leading-6">
-      <h2 className="!text-primary !text-3xl">Glückwunsch</h2>
-      <h3 className="!text-primary">Du stehst nun auf der Liste!</h3>
-      <p className="text-secondary">
-        Halt die Ohren steif, Du wirst bald von uns hören 🚀
-      </p>
+    <div className="mx-auto prose text-center leading-6 prose-green">
+      <h2 className="text-3xl!">Glückwunsch</h2>
+      <h3>Du stehst nun auf der Liste!</h3>
+      <p>Halt die Ohren steif, Du wirst bald von uns hören 🚀</p>
     </div>
   )
 }

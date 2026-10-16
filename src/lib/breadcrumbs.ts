@@ -159,7 +159,7 @@ export function findNodeByUrl(
             ...cleanNode(root),
             active: true,
             children: root.children?.map((x) => {
-              return { ...cleanNode(x), active: x.url === url ?? undefined }
+              return { ...cleanNode(x), active: x.url === url }
             }),
           },
         ],
@@ -190,7 +190,7 @@ export function findNodeByUrl(
               /* cleanEmptyNodes( */
               children: x.children?.map(
                 (y) => {
-                  return { ...cleanNode(y), active: y.url === url ?? undefined }
+                  return { ...cleanNode(y), active: y.url === url }
                 } /* ) */
               ),
             })

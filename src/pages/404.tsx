@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import client from '@/tina/__generated__/client'
 
 import Layout from '@/layouts/default'
@@ -13,8 +14,12 @@ const Error = (props) => {
 
   return (
     <>
+      <Head>
+        <title>Seite nicht gefunden | Mischa Gohlke Band</title>
+        <meta name="robots" content="noindex, follow" />
+      </Head>
       <Layout navigation={navigation}>
-        <div className="prose mx-auto max-w-3xl prose-a:no-underline">
+        <div className="mx-auto prose max-w-3xl prose-a:no-underline">
           <div className="grid min-h-full place-items-center px-6 py-16 sm:py-24 lg:px-8">
             <div className="text-center">
               <p className="text-base font-semibold text-indigo-500">
@@ -29,7 +34,7 @@ const Error = (props) => {
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <Link
                   href="/"
-                  className="rounded-full bg-indigo-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  className="rounded-full bg-indigo-500 px-5 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 focus-visible:outline-solid"
                 >
                   <span aria-hidden="true">&larr;</span> zur Startseite
                 </Link>

@@ -34,3 +34,9 @@ yarn-error.log*
 node_modules
 
 .env
+.caravaggio
+*.tsbuildinfo
+
+.yarn
+.pnpm-debug.log*
+/public/legacy-styles.css

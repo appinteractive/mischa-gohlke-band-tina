@@ -1,6 +1,6 @@
 {
   "trailingSlash": false,
   "cleanUrls": true,
-  "installCommand": "corepack yarn install --immutable",
-  "buildCommand": "node --version && corepack yarn build"
+  "installCommand": "corepack pnpm install --frozen-lockfile",
+  "buildCommand": "node --version && corepack pnpm build"
 }

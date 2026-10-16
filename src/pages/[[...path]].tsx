@@ -1,4 +1,12 @@
 import Head from 'next/head'
+import { canonicalUrl, siteOrigin } from '@/lib/site-url.mjs'
+import { pageMetadata, pageRobots } from '@/lib/page-metadata'
+import {
+  socialImageOrigin,
+  socialImageUrl,
+  SOCIAL_IMAGE_WIDTH,
+  SOCIAL_IMAGE_HEIGHT,
+} from '@/lib/social-image'
 import { useTina } from 'tinacms/dist/react'
 import { TinaMarkdown } from 'tinacms/dist/rich-text'
 import client from '@/tina/__generated__/client'
@@ -27,8 +35,7 @@ const VideoTeaser = dynamic(() => import('@/components/embeds/VideoTeaser'), {
   ssr: false,
 })
 const ResponsiveImage = dynamic(
-  () => import('@/components/embeds/ResponsiveImage'),
-  { ssr: false }
+  () => import('@/components/embeds/ResponsiveImage')
 )
 const ContentGallery = dynamic(
   () => import('@/components/embeds/ContentGallery')
@@ -63,49 +70,54 @@ const Page = (props) => {
       <SubNav items={subNavigation.items} parent={subNavigation.parent} />
     ) : null
 
-  // TODO: CHANGE THE BASE URL TO THE PRODUCTION URL
-  const isDev = process.env.NODE_ENV === 'development'
-  const baseUrl = process.env.VERCEL_URL ?? 'http://localhost:3000'
-  const teaser = data.page?.teaser
-    ? isDev
-      ? baseUrl + data.page.teaser.split('/').map(encodeURIComponent).join('/')
-      : data.page.teaser
-    : baseUrl + '/media/teaser.jpg'
+  const teaser = socialImageUrl(props.socialImageOrigin, data.page?.teaser)
 
-  const defaultTitle = 'Mischa Gohlke Band'
-  let title = data.page?.title
-  if (title !== defaultTitle) {
-    title = `${data.page?.title} | ${defaultTitle}`
-  }
+  const { title, description } = pageMetadata(
+    data.page?.title,
+    data.page?.description
+  )
   // TODO: move default title, description, keywords and copyright to CMS
 
   return (
     <>
       <Head>
         <title>{title}</title>
-        <meta
-          name="description"
-          content={
-            data.page?.description ??
-            'Aktionsbüro für eine multipolare Gesellschaftskultur. Mit Projekten, Veranstaltungen, Kampagnen, Musikunterricht, Workshops, Beratung und Öffentlichkeitsarbeit & Bewusstseinsbildung bringen wir Menschen verschiedenster Backgrounds zusammen und setzen uns für interdisziplinäre Kultur, gesamtgesellschaftliche Inklusion und gelebten Frieden für alle Menschen auf diesem Planeten ein.'
-          }
-        />
+        <meta name="description" content={description} />
+        <link rel="canonical" href={props.canonicalUrl} />
+        <meta property="og:url" content={props.canonicalUrl} />
         <meta
           name="keywords"
           content="Kultur, Gesellschaft, Inklusion, Frieden, Projekte, Veranstaltungen, Kampagnen, Musikunterricht für Hörgeschädigte"
         />
         <meta property="og:title" content={title} />
-        <meta property="og:description" content={data.page?.description} />
+        <meta property="og:description" content={description} />
         <meta property="og:image" content={teaser} />
+        <meta property="og:image:width" content={String(SOCIAL_IMAGE_WIDTH)} />
+        <meta
+          property="og:image:height"
+          content={String(SOCIAL_IMAGE_HEIGHT)}
+        />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={teaser} />
         <meta property="og:locale" content="de_DE" />
         <meta property="og:type" content="website" />
-        <meta name="robots" content="index, follow" />
+        <meta
+          name="robots"
+          content={pageRobots(data.page?.isPlaceholder, props.isPreview)}
+        />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0"
         ></meta>
       </Head>
-      <Layout navigation={navigation} subNav={hasSubNav ? subNav : null}>
+      <Layout
+        navigation={navigation}
+        subNav={hasSubNav ? subNav : null}
+        hasVideoTeaser={data.page?.body?.children?.some(
+          (child) => child?.name === 'VideoTeaser'
+        )}
+      >
         {data.page?.blocks?.length > 0 ? (
           data.page.blocks.map(function (block, i) {
             switch (block.__typename) {
@@ -126,7 +138,7 @@ const Page = (props) => {
             }
           })
         ) : (
-          <div className="prose mx-auto max-w-3xl">
+          <div className="mx-auto prose max-w-3xl">
             <TinaMarkdown
               content={data?.page?.body}
               components={cmsComponents}
@@ -225,6 +237,10 @@ const queryByPath = async (relativePath: string): Promise<any> => {
   }
 }
 
+// Pages created after the build render on demand with Tina queries; allow
+// more than the project's 5 s function default for a slow Tina response.
+export const config = { maxDuration: 30 }
+
 export const getStaticProps = async ({ params, ...data }) => {
   // TODO: find a way to generate blur hashes on build or on upload
   /* if (
@@ -241,6 +257,10 @@ export const getStaticProps = async ({ params, ...data }) => {
     queryByPath(path.join('/') + '.mdx'),
     client.queries.nav(),
   ])
+  // A path rendered on demand without a Tina page: a real 404, checked again
+  // after a minute in case the page is created in Tina meanwhile.
+  if (!res.props.data?.page) return { notFound: true, revalidate: 60 }
+
   // add res.nav.data to res.props.data
   res.props.data['nav'] = {
     footer: resNav?.data.navFooterConnection.edges[0]?.node._values,
@@ -275,8 +295,9 @@ export const getStaticProps = async ({ params, ...data }) => {
   }
   if (teamComponentProps.items?.length) {
     // get all page details for each team member
-    const allPages = await client.request({
-      query: `#graphql
+    const allPages = await client.request(
+      {
+        query: `#graphql
       query ($collection: String!) {
         collection(collection: $collection) {
           documents(first: -1) {
@@ -298,8 +319,10 @@ export const getStaticProps = async ({ params, ...data }) => {
         }
       }
     `,
-      variables: { collection: 'page' },
-    })
+        variables: { collection: 'page' },
+      },
+      {}
+    )
     teamComponentProps.items = teamComponentProps.items?.map((area) => {
       area.items = area?.children?.map((item) => {
         // url is the item.url without the preceding slash
@@ -324,12 +347,16 @@ export const getStaticProps = async ({ params, ...data }) => {
   res.props.data['teamComponentProps'] =
     deleteUndefinedValues(teamComponentProps)
 
+  res.props.socialImageOrigin = socialImageOrigin()
+  res.props.canonicalUrl = canonicalUrl(siteOrigin(), '/' + path.join('/'))
+  res.props.isPreview = process.env.VERCEL_ENV === 'preview'
   return res
 }
 
 export const getStaticPaths = async () => {
-  const response = await client.request({
-    query: `#graphql
+  const response = await client.request(
+    {
+      query: `#graphql
       query ($collection: String!) {
         collection(collection: $collection) {
           documents(first: -1) {
@@ -346,8 +373,10 @@ export const getStaticPaths = async () => {
         }
       }
     `,
-    variables: { collection: 'page' },
-  })
+      variables: { collection: 'page' },
+    },
+    {}
+  )
 
   const paths = response.data.collection.documents.edges.map((page) => ({
     params: {
@@ -357,7 +386,9 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    // Pages created in Tina after the last build render on their first
+    // request instead of answering 404 until the next deploy.
+    fallback: 'blocking',
   }
 }
 

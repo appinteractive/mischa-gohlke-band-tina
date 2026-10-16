@@ -1,50 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { classNames, wrapFieldsWithMeta } from 'tinacms'
+import React, { useState } from 'react'
 
-const useImagePreview = ({ field, input, meta }) => {
-  // add loading and error state
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
-
-  const isImage = (url: string) => {
-    if (!url) return false
-    return url.match(/\.(jpeg|jpg|gif|png)$/) != null
-  }
-
-  // set error state if validation fails
-  useEffect(() => {
-    if (!isImage(input.value)) {
-      setError(true)
-      setLoading(false)
-    } else {
-      setError(false)
-      setLoading(true)
-    }
-  }, [input.value])
-
-  const onLoaded = () => {
-    setError(false)
-    setLoading(false)
-  }
-  const onError = () => {
-    setError(true)
-    setLoading(false)
-  }
+function ImagePreview({ src }: { src: string }) {
+  const [status, setStatus] = useState<'loading' | 'loaded' | 'error'>(
+    'loading'
+  )
 
   return (
     <>
-      <img
-        className={classNames(
-          'h-auto w-full',
-          loading || error ? 'hidden' : ''
-        )}
-        src={input.value}
-        alt="Videovorschau"
-        draggable={false}
-        onError={onError}
-        onLoad={onLoaded}
-      />
-      {(loading || error) && (
+      {src && (
+        <img
+          className={`h-auto w-full${status === 'loaded' ? '' : ' hidden'}`}
+          src={src}
+          alt="Videovorschau"
+          draggable={false}
+          onError={() => setStatus('error')}
+          onLoad={() => setStatus('loaded')}
+        />
+      )}
+      {status !== 'loaded' && (
         <div className="aspect-h-9 aspect-w-16 h-full w-full bg-black">
           &nbsp;
         </div>
@@ -53,4 +26,7 @@ const useImagePreview = ({ field, input, meta }) => {
   )
 }
 
-export default useImagePreview
+export default function PreviewImage({ input }: { input: { value?: string } }) {
+  const src = input.value ?? ''
+  return <ImagePreview key={src} src={src} />
+}

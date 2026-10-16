@@ -31,7 +31,7 @@ export function Header({ items }) {
             <Link
               href="/"
               aria-label="Home"
-              className=" rounded outline-offset-8"
+              className="rounded-sm outline-offset-8"
             >
               <Logo className="h-10 w-auto" />
             </Link>
@@ -122,7 +122,7 @@ function MobileNavigation({ items }: Props) {
   return (
     <Popover>
       <Popover.Button
-        className="relative z-10 flex h-8 w-8 items-center justify-center [&:not(:focus-visible)]:focus:outline-none"
+        className="relative z-10 flex h-8 w-8 items-center justify-center [&:not(:focus-visible)]:focus:outline-hidden"
         aria-label="Toggle Navigation"
       >
         {({ open }) => <MobileNavIcon open={open} />}
@@ -137,7 +137,7 @@ function MobileNavigation({ items }: Props) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Popover.Overlay className="fixed inset-0 bg-slate-700/50 backdrop-blur-sm" />
+          <Popover.Overlay className="fixed inset-0 bg-slate-700/50 backdrop-blur-xs" />
         </Transition.Child>
         <Transition.Child
           as={Fragment}
@@ -152,19 +152,19 @@ function MobileNavigation({ items }: Props) {
             as="div"
             className="absolute inset-x-0 top-full mt-4 flex origin-top flex-col rounded-lg bg-white p-4 text-lg tracking-tight text-slate-900 shadow-xl ring-1 ring-slate-900/5"
           >
-            {items.map((item, index) => {
+            {items.map((item) => {
               if (item.disabled) return null
               if (item.showInMainNavigation === false) return null
 
               return (
-                <div key={index.toString()}>
+                <div key={item.page}>
                   <MobileNavLink href={cleanPath(item.page)}>
                     {item.title}
                   </MobileNavLink>
-                  {item.children?.map((itm, idx) => {
+                  {item.children?.map((itm) => {
                     return (
                       <MobileNavLink
-                        key={`${index.toString()}->${idx.toString()}`}
+                        key={itm.page}
                         href={cleanPath(itm.page)}
                         level={2}
                       >
