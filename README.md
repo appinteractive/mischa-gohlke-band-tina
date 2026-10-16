@@ -115,3 +115,12 @@ Set `SITE_URL` to the stable public site URL. Canonicals and `og:url` use that
 origin, even in Vercel previews; preview social images use the preview host.
 Vercel previews emit `noindex, nofollow` in metadata and `X-Robots-Tag` headers.
 The newsletter utility pages and the 404 page use `noindex`.
+
+## Tina Cloud content readiness
+
+Production builds wait up to ten minutes for collection queries to include all
+checked-in pages and both navigation files before Next.js prerenders pages.
+Tina Cloud can report indexing complete while its collections are still partial
+after a schema upgrade. A timeout lists the missing documents and stops the build
+instead of publishing an incomplete site. The check bypasses Tina client caching.
+`pnpm test` includes the readiness regression tests.
