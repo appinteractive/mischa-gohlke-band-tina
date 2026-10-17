@@ -7,9 +7,9 @@
   },
   "scripts": {
     "dev": "tinacms dev -c \"next dev\"",
-    "build": "node scripts/build-legacy-css.mjs && NODE_ENV=production tinacms build && NODE_ENV=production next build && next-sitemap --config next-sitemap.config.mjs",
+    "build": "node scripts/build-legacy-css.mjs && NODE_ENV=production tinacms build && node scripts/wait-for-tina-content.mjs && NODE_ENV=production next build && next-sitemap --config next-sitemap.config.mjs",
     "start": "next start",
-    "test": "jest",
+    "test": "node --test scripts/wait-for-tina-content.test.mjs && jest",
     "test:watch": "jest --watch",
     "lint": "eslint src",
     "typecheck": "tsc --noEmit",
